@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Properties — Diaspora to Home | Ghana Real Estate Investment</title>
+    <meta name="description" content="Browse verified property listings across Ghana. Villas, apartments, townhouses, land and commercial properties in Accra, Kumasi, Tema, Cape Coast and Takoradi.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --success-green: #22C55E;
+            --danger-red: #EF4444;
+            --gold-accent: #D4AF37;
+            --beige-light: #FAF8F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            transition: box-shadow 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .nav-logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--purple-accent) !important;
+            color: var(--white) !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 4px;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--navy-dark);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy-dark);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--purple-accent);
+        }
+
+        .mobile-menu .mobile-cta {
+            background: var(--purple-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: var(--navy-dark);
+            padding: 140px 1.5rem 60px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.5px;
+        }
+
+        .hero-stat strong {
+            color: var(--purple-accent);
+            font-weight: 800;
+        }
+
+        /* ==================== STICKY FILTER BAR ==================== */
+        .filter-bar {
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            background: var(--white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 1rem 1.5rem;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-row select {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-dark);
+            padding: 0.6rem 2rem 0.6rem 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: var(--white);
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            min-width: 140px;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-row select:focus {
+            outline: none;
+            border-color: var(--purple-accent);
+        }
+
+        .filter-clear {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0.6rem 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .filter-clear:hover {
+            color: var(--navy-dark);
+        }
+
+        .filter-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.75rem;
+        }
+
+        .results-count {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .results-count strong {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .view-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: var(--white);
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn.active {
+            background: var(--navy-dark);
+            border-color: var(--navy-dark);
+            color: var(--white);
+        }
+
+        .view-btn:hover:not(.active) {
+            border-color: var(--purple-accent);
+            color: var(--purple-accent);
+        }
+
+        .mobile-filter-toggle {
+            display: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            background: none;
+            border: 2px solid var(--navy-dark);
+            border-radius: 4px;
+            padding: 0.6rem 1.25rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .mobile-filter-toggle:hover {
+            background: var(--navy-dark);
+            color: var(--white);
+        }
+
+        .mobile-filter-toggle svg {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        /* ==================== PROPERTIES SECTIONS ==================== */
+        .properties-section {
+            padding: 4rem 1.5rem;
+            background: var(--white);
+        }
+
+        .properties-section.featured-section {
+            padding-bottom: 1rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 2rem;
+        }
+
+        /* ==================== PROPERTY CARDS ==================== */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+
+        .property-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .property-card.hidden {
+            display: none;
+        }
+
+        .card-image {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .card-image-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--white);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        .card-badge.available {
+            background: var(--success-green);
+        }
+
+        .card-badge.under-offer {
+            background: var(--gold-accent);
+        }
+
+        .card-badge.sold {
+            background: var(--danger-red);
+        }
+
+        .card-featured-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--white);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            background: var(--purple-accent);
+        }
+
+        .card-badge.has-featured {
+            top: 42px;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .favorite-btn:hover {
+            background: var(--white);
+            transform: scale(1.1);
+        }
+
+        .favorite-btn.favorited {
+            color: var(--danger-red);
+        }
+
+        .card-info {
+            padding: 1.25rem;
+        }
+
+        .card-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-location {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .card-specs {
+            display: flex;
+            gap: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-light);
+            padding-top: 0.75rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .spec-icon {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Featured cards slightly larger images */
+        .featured-grid .property-card .card-image {
+            height: 260px;
+        }
+
+        /* ==================== LIST VIEW ==================== */
+        .properties-grid.list-view {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .properties-grid.list-view .property-card {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .properties-grid.list-view .card-image {
+            width: 300px;
+            min-width: 300px;
+            height: auto;
+            min-height: 220px;
+        }
+
+        .properties-grid.list-view .card-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* ==================== LOCATION HIGHLIGHTS ==================== */
+        .locations-section {
+            background: var(--beige);
+            padding: 5rem 1.5rem;
+        }
+
+        .locations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .location-card {
+            position: relative;
+            height: 240px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-card-bg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease;
+        }
+
+        .location-card:hover .location-card-bg {
+            transform: scale(1.05);
+        }
+
+        .location-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(35, 27, 79, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.25rem;
+        }
+
+        .location-card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .location-card-count {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            background: var(--navy-dark);
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            background: var(--purple-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            background: transparent;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            border: 2px solid var(--white);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-ghost:hover {
+            background: var(--white);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--navy-dark);
+            padding: 4rem 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--purple-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .filter-row {
+                flex-wrap: wrap;
+            }
+
+            .filter-row select {
+                min-width: calc(50% - 0.5rem);
+                flex: 1 1 calc(50% - 0.5rem);
+            }
+
+            .properties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .properties-grid.list-view {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid.list-view .card-image {
+                width: 250px;
+                min-width: 250px;
+            }
+
+            .locations-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-logo img {
+                height: 45px;
+            }
+
+            .hero {
+                padding: 120px 1.5rem 40px;
+            }
+
+            .filter-bar {
+                top: 70px;
+            }
+
+            .filter-row {
+                display: none;
+            }
+
+            .filter-row.mobile-visible {
+                display: flex;
+                margin-top: 0.75rem;
+            }
+
+            .mobile-filter-toggle {
+                display: block;
+            }
+
+            .filter-row select {
+                min-width: 100%;
+                flex: 1 1 100%;
+            }
+
+            .properties-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid.list-view .property-card {
+                flex-direction: column;
+            }
+
+            .properties-grid.list-view .card-image {
+                width: 100%;
+                min-width: 100%;
+                height: 240px;
+                min-height: 240px;
+            }
+
+            .properties-section {
+                padding: 3rem 1.25rem;
+            }
+
+            .properties-section.featured-section {
+                padding-bottom: 0.5rem;
+            }
+
+            .locations-section {
+                padding: 3rem 1.25rem;
+            }
+
+            .locations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-section {
+                padding: 3rem 1.25rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-stats {
+                gap: 0.75rem;
+            }
+
+            .hero-stat {
+                font-size: 12px;
+                padding: 0.5rem 1rem;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-meta {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../about/">About</a></li>
+                <li><a href="../properties/" class="active">Properties</a></li>
+                <li><a href="../services/">Services</a></li>
+                <li><a href="../resources/">Resources</a></li>
+                <li><a href="../contact/">Contact</a></li>
+                <li><a href="../book-a-call/" class="nav-cta">Book a Call</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../about/">About</a>
+        <a href="../properties/">Properties</a>
+        <a href="../services/">Services</a>
+        <a href="../resources/">Resources</a>
+        <a href="../contact/">Contact</a>
+        <a href="../book-a-call/" class="mobile-cta">Book a Call</a>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">Our Properties</h1>
+            <p class="hero-subtitle">Explore our carefully curated and fully verified property listings across Ghana's most sought-after locations.</p>
+            <div class="hero-stats">
+                <span class="hero-stat"><strong>56+</strong>&nbsp; Properties</span>
+                <span class="hero-stat"><strong>5</strong>&nbsp; Locations</span>
+                <span class="hero-stat"><strong>100%</strong>&nbsp; Verified</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STICKY FILTER BAR ==================== -->
+    <div class="filter-bar" id="filterBar">
+        <div class="filter-container">
+            <button class="mobile-filter-toggle" id="mobileFilterToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                Filters
+            </button>
+            <div class="filter-row" id="filterRow">
+                <select id="filterLocation">
+                    <option value="">All Locations</option>
+                    <option value="accra">Accra</option>
+                    <option value="kumasi">Kumasi</option>
+                    <option value="tema">Tema</option>
+                    <option value="cape-coast">Cape Coast</option>
+                    <option value="takoradi">Takoradi</option>
+                </select>
+                <select id="filterPrice">
+                    <option value="">All Prices</option>
+                    <option value="under100k">Under $100k</option>
+                    <option value="100k-250k">$100k - $250k</option>
+                    <option value="250k-500k">$250k - $500k</option>
+                    <option value="500k-1m">$500k - $1M</option>
+                    <option value="1m-plus">$1M+</option>
+                </select>
+                <select id="filterType">
+                    <option value="">All Types</option>
+                    <option value="villa">Villa</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="townhouse">Townhouse</option>
+                    <option value="land">Land</option>
+                    <option value="commercial">Commercial</option>
+                </select>
+                <select id="filterBedrooms">
+                    <option value="">Any Beds</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+                </select>
+                <select id="sortBy">
+                    <option value="newest">Newest</option>
+                    <option value="price-low">Price: Low-High</option>
+                    <option value="price-high">Price: High-Low</option>
+                    <option value="featured">Featured</option>
+                </select>
+                <button class="filter-clear" id="clearAll">Clear All</button>
+            </div>
+            <div class="filter-meta">
+                <p class="results-count" id="resultsCount">Showing <strong>12</strong> of <strong>12</strong> properties</p>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridViewBtn" title="Grid view">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+                    </button>
+                    <button class="view-btn" id="listViewBtn" title="List view">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="4" rx="1"/><rect x="1" y="7" width="14" height="4" rx="1"/><rect x="1" y="13" width="14" height="2" rx="1"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FEATURED PROPERTIES ==================== -->
+    <section class="properties-section featured-section">
+        <div class="section-container">
+            <p class="section-label">Featured</p>
+            <h2 class="section-title">Handpicked Properties</h2>
+            <div class="properties-grid featured-grid" id="featuredGrid">
+
+                <!-- Featured 1: Modern Villa with Pool -->
+                <div class="property-card" data-location="accra" data-price="250k-500k" data-type="villa" data-bedrooms="4" data-featured="true" data-price-num="285000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #7170B4, #3D325F);">Property Image</div>
+                        <span class="card-featured-badge">Featured</span>
+                        <span class="card-badge available has-featured">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$285,000</p>
+                        <p class="card-location">East Legon, Accra</p>
+                        <h3 class="card-title">Modern Villa with Pool</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 4 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 3,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured 2: Penthouse Suite -->
+                <div class="property-card" data-location="accra" data-price="500k-1m" data-type="apartment" data-bedrooms="3" data-featured="true" data-price-num="550000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #231B4F, #7170B4);">Property Image</div>
+                        <span class="card-featured-badge">Featured</span>
+                        <span class="card-badge available has-featured">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$550,000</p>
+                        <p class="card-location">Cantonments, Accra</p>
+                        <h3 class="card-title">Penthouse Suite</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 3 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 2,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured 3: 5-Bed Executive Residence -->
+                <div class="property-card" data-location="kumasi" data-price="250k-500k" data-type="villa" data-bedrooms="5" data-featured="true" data-price-num="450000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #3D325F, #D4AF37);">Property Image</div>
+                        <span class="card-featured-badge">Featured</span>
+                        <span class="card-badge available has-featured">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$450,000</p>
+                        <p class="card-location">Kumasi</p>
+                        <h3 class="card-title">5-Bed Executive Residence</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 5 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 4 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 4,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ALL PROPERTIES GRID ==================== -->
+    <section class="properties-section">
+        <div class="section-container">
+            <p class="section-label">Browse</p>
+            <h2 class="section-title">All Properties</h2>
+            <div class="properties-grid" id="propertiesGrid">
+
+                <!-- 1. Modern Villa with Pool -->
+                <div class="property-card" data-location="accra" data-price="250k-500k" data-type="villa" data-bedrooms="4" data-featured="true" data-price-num="285000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #7170B4, #3D325F);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$285,000</p>
+                        <p class="card-location">East Legon, Accra</p>
+                        <h3 class="card-title">Modern Villa with Pool</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 4 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 3,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Luxury 2-Bed Apartment -->
+                <div class="property-card" data-location="accra" data-price="100k-250k" data-type="apartment" data-bedrooms="2" data-featured="false" data-price-num="180000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #3D325F, #7170B4);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$180,000</p>
+                        <p class="card-location">Airport Residential, Accra</p>
+                        <h3 class="card-title">Luxury 2-Bed Apartment</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 2 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 2 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 1,500 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 5-Bed Executive Residence -->
+                <div class="property-card" data-location="kumasi" data-price="250k-500k" data-type="villa" data-bedrooms="5" data-featured="true" data-price-num="450000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #3D325F, #D4AF37);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$450,000</p>
+                        <p class="card-location">Kumasi</p>
+                        <h3 class="card-title">5-Bed Executive Residence</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 5 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 4 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 4,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Beachfront Townhouse -->
+                <div class="property-card" data-location="cape-coast" data-price="250k-500k" data-type="townhouse" data-bedrooms="3" data-featured="false" data-price-num="320000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #22C55E, #231B4F);">Property Image</div>
+                        <span class="card-badge under-offer">Under Offer</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$320,000</p>
+                        <p class="card-location">Cape Coast</p>
+                        <h3 class="card-title">Beachfront Townhouse</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 3 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 2,400 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Investment Apartment -->
+                <div class="property-card" data-location="tema" data-price="under100k" data-type="apartment" data-bedrooms="1" data-featured="false" data-price-num="95000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #F5F1ED, #7170B4);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$95,000</p>
+                        <p class="card-location">Tema</p>
+                        <h3 class="card-title">Investment Apartment</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 1 Bed</span>
+                            <span><span class="spec-icon">&#9687;</span> 1 Bath</span>
+                            <span><span class="spec-icon">&#11036;</span> 800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Family Home with Garden -->
+                <div class="property-card" data-location="takoradi" data-price="100k-250k" data-type="villa" data-bedrooms="4" data-featured="false" data-price-num="210000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #D4AF37, #3D325F);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$210,000</p>
+                        <p class="card-location">Takoradi</p>
+                        <h3 class="card-title">Family Home with Garden</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 4 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 3,000 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Penthouse Suite -->
+                <div class="property-card" data-location="accra" data-price="500k-1m" data-type="apartment" data-bedrooms="3" data-featured="true" data-price-num="550000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #231B4F, #7170B4);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$550,000</p>
+                        <p class="card-location">Cantonments, Accra</p>
+                        <h3 class="card-title">Penthouse Suite</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 3 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 3 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 2,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Development Land Plot -->
+                <div class="property-card" data-location="accra" data-price="100k-250k" data-type="land" data-bedrooms="0" data-featured="false" data-price-num="150000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #8B7355, #4A5D3A);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$150,000</p>
+                        <p class="card-location">East Legon, Accra</p>
+                        <h3 class="card-title">Development Land Plot</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#11036;</span> 5,000 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Commercial Office Space -->
+                <div class="property-card" data-location="accra" data-price="250k-500k" data-type="commercial" data-bedrooms="0" data-featured="false" data-price-num="380000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #4A5568, #2D3748);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$380,000</p>
+                        <p class="card-location">Airport City, Accra</p>
+                        <h3 class="card-title">Commercial Office Space</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9687;</span> 2 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 3,500 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. 3-Bed Modern Townhouse -->
+                <div class="property-card" data-location="kumasi" data-price="100k-250k" data-type="townhouse" data-bedrooms="3" data-featured="false" data-price-num="175000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #7170B4, #D4AF37);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$175,000</p>
+                        <p class="card-location">Kumasi</p>
+                        <h3 class="card-title">3-Bed Modern Townhouse</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 3 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 2 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 1,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Luxury Lakeside Villa -->
+                <div class="property-card" data-location="akosombo" data-price="250k-500k" data-type="villa" data-bedrooms="4" data-featured="false" data-price-num="420000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #2563EB, #1E40AF);">Property Image</div>
+                        <span class="card-badge sold">Sold</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$420,000</p>
+                        <p class="card-location">Akosombo</p>
+                        <h3 class="card-title">Luxury Lakeside Villa</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 4 Beds</span>
+                            <span><span class="spec-icon">&#9687;</span> 4 Baths</span>
+                            <span><span class="spec-icon">&#11036;</span> 4,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Studio Investment Unit -->
+                <div class="property-card" data-location="accra" data-price="under100k" data-type="apartment" data-bedrooms="1" data-featured="false" data-price-num="75000">
+                    <div class="card-image">
+                        <div class="card-image-bg" style="background: linear-gradient(135deg, #EC4899, #7170B4);">Property Image</div>
+                        <span class="card-badge available">Available</span>
+                        <button class="favorite-btn" aria-label="Add to favorites">&#9825;</button>
+                    </div>
+                    <div class="card-info">
+                        <p class="card-price">$75,000</p>
+                        <p class="card-location">Osu, Accra</p>
+                        <h3 class="card-title">Studio Investment Unit</h3>
+                        <div class="card-specs">
+                            <span><span class="spec-icon">&#9872;</span> 1 Bed</span>
+                            <span><span class="spec-icon">&#9687;</span> 1 Bath</span>
+                            <span><span class="spec-icon">&#11036;</span> 550 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LOCATION HIGHLIGHTS ==================== -->
+    <section class="locations-section">
+        <div class="locations-container">
+            <p class="section-label">Locations</p>
+            <h2 class="section-title">Explore by Location</h2>
+            <div class="locations-grid">
+                <div class="location-card" onclick="filterByLocation('accra')">
+                    <div class="location-card-bg" style="background: linear-gradient(135deg, #7170B4, #231B4F);"></div>
+                    <div class="location-card-overlay">
+                        <h3 class="location-card-name">Accra</h3>
+                        <p class="location-card-count">32 Properties</p>
+                    </div>
+                </div>
+                <div class="location-card" onclick="filterByLocation('kumasi')">
+                    <div class="location-card-bg" style="background: linear-gradient(135deg, #D4AF37, #3D325F);"></div>
+                    <div class="location-card-overlay">
+                        <h3 class="location-card-name">Kumasi</h3>
+                        <p class="location-card-count">8 Properties</p>
+                    </div>
+                </div>
+                <div class="location-card" onclick="filterByLocation('tema')">
+                    <div class="location-card-bg" style="background: linear-gradient(135deg, #22C55E, #231B4F);"></div>
+                    <div class="location-card-overlay">
+                        <h3 class="location-card-name">Tema</h3>
+                        <p class="location-card-count">6 Properties</p>
+                    </div>
+                </div>
+                <div class="location-card" onclick="filterByLocation('cape-coast')">
+                    <div class="location-card-bg" style="background: linear-gradient(135deg, #2563EB, #7170B4);"></div>
+                    <div class="location-card-overlay">
+                        <h3 class="location-card-name">Cape Coast</h3>
+                        <p class="location-card-count">5 Properties</p>
+                    </div>
+                </div>
+                <div class="location-card" onclick="filterByLocation('takoradi')">
+                    <div class="location-card-bg" style="background: linear-gradient(135deg, #EC4899, #3D325F);"></div>
+                    <div class="location-card-overlay">
+                        <h3 class="location-card-name">Takoradi</h3>
+                        <p class="location-card-count">5 Properties</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">Don't See What You're Looking For?</h2>
+            <p class="cta-subtitle">We have access to exclusive off-market listings and can source properties tailored to your exact requirements. Get in touch and let us find your perfect investment.</p>
+            <div class="cta-buttons">
+                <a href="../contact/" class="btn-primary">Contact Us</a>
+                <a href="../book-a-call/" class="btn-ghost">Book a Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+                    <p>Helping diaspora investors navigate property purchases in Ghana with confidence, transparency, and expert local knowledge.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about/">About</a></li>
+                        <li><a href="../properties/">Properties</a></li>
+                        <li><a href="../services/">Services</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../contact/">Contact</a></li>
+                        <li><a href="../book-a-call/">Book a Call</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../services/">Discovery Call</a></li>
+                        <li><a href="../services/">Consultation</a></li>
+                        <li><a href="../services/">Site Visit</a></li>
+                        <li><a href="../services/">Full Package</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a></li>
+                        <li><a href="tel:+44000000000">+44 (0) 000 000 000</a></li>
+                        <li><span style="color: rgba(255,255,255,0.6); font-size: 14px;">Mon-Fri: 9am - 6pm GMT</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 Diaspora to Home. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram">&#9775;</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="mailto:info@diasporatohome.com" aria-label="Email">&#9993;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== NAVIGATION SCROLL SHADOW ====================
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ==================== MOBILE MENU TOGGLE ====================
+        var hamburger = document.getElementById('hamburger');
+        var mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ==================== MOBILE FILTER PANEL ====================
+        var mobileFilterToggle = document.getElementById('mobileFilterToggle');
+        var filterRow = document.getElementById('filterRow');
+        var filterIconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:0.5rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>';
+
+        mobileFilterToggle.addEventListener('click', function() {
+            filterRow.classList.toggle('mobile-visible');
+            if (filterRow.classList.contains('mobile-visible')) {
+                mobileFilterToggle.innerHTML = filterIconSVG + ' Hide Filters';
+            } else {
+                mobileFilterToggle.innerHTML = filterIconSVG + ' Filters';
+            }
+        });
+
+        // ==================== FILTERING ====================
+        var filterLocation = document.getElementById('filterLocation');
+        var filterPrice = document.getElementById('filterPrice');
+        var filterType = document.getElementById('filterType');
+        var filterBedrooms = document.getElementById('filterBedrooms');
+        var sortBy = document.getElementById('sortBy');
+        var clearAll = document.getElementById('clearAll');
+        var resultsCount = document.getElementById('resultsCount');
+        var propertiesGrid = document.getElementById('propertiesGrid');
+        var allCards = propertiesGrid.querySelectorAll('.property-card');
+        var totalProperties = allCards.length;
+
+        function applyFilters() {
+            var locVal = filterLocation.value;
+            var priceVal = filterPrice.value;
+            var typeVal = filterType.value;
+            var bedsVal = filterBedrooms.value;
+            var visibleCount = 0;
+
+            allCards.forEach(function(card) {
+                var show = true;
+
+                if (locVal && card.getAttribute('data-location') !== locVal) {
+                    show = false;
+                }
+                if (priceVal && card.getAttribute('data-price') !== priceVal) {
+                    show = false;
+                }
+                if (typeVal && card.getAttribute('data-type') !== typeVal) {
+                    show = false;
+                }
+                if (bedsVal) {
+                    var cardBeds = parseInt(card.getAttribute('data-bedrooms'), 10);
+                    var minBeds = parseInt(bedsVal, 10);
+                    if (cardBeds < minBeds) {
+                        show = false;
+                    }
+                }
+
+                if (show) {
+                    card.classList.remove('hidden');
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+
+            resultsCount.innerHTML = 'Showing <strong>' + visibleCount + '</strong> of <strong>' + totalProperties + '</strong> properties';
+
+            applySorting();
+        }
+
+        function applySorting() {
+            var sortVal = sortBy.value;
+            var cardsArray = Array.from(allCards).filter(function(card) {
+                return !card.classList.contains('hidden');
+            });
+
+            if (sortVal === 'price-low') {
+                cardsArray.sort(function(a, b) {
+                    return parseInt(a.getAttribute('data-price-num'), 10) - parseInt(b.getAttribute('data-price-num'), 10);
+                });
+            } else if (sortVal === 'price-high') {
+                cardsArray.sort(function(a, b) {
+                    return parseInt(b.getAttribute('data-price-num'), 10) - parseInt(a.getAttribute('data-price-num'), 10);
+                });
+            } else if (sortVal === 'featured') {
+                cardsArray.sort(function(a, b) {
+                    var aF = a.getAttribute('data-featured') === 'true' ? 0 : 1;
+                    var bF = b.getAttribute('data-featured') === 'true' ? 0 : 1;
+                    return aF - bF;
+                });
+            }
+            // 'newest' keeps original DOM order, no reordering needed
+
+            var hiddenCards = Array.from(allCards).filter(function(card) {
+                return card.classList.contains('hidden');
+            });
+
+            cardsArray.forEach(function(card) {
+                propertiesGrid.appendChild(card);
+            });
+            hiddenCards.forEach(function(card) {
+                propertiesGrid.appendChild(card);
+            });
+        }
+
+        filterLocation.addEventListener('change', applyFilters);
+        filterPrice.addEventListener('change', applyFilters);
+        filterType.addEventListener('change', applyFilters);
+        filterBedrooms.addEventListener('change', applyFilters);
+        sortBy.addEventListener('change', applyFilters);
+
+        // ==================== CLEAR ALL ====================
+        clearAll.addEventListener('click', function() {
+            filterLocation.value = '';
+            filterPrice.value = '';
+            filterType.value = '';
+            filterBedrooms.value = '';
+            sortBy.value = 'newest';
+            applyFilters();
+        });
+
+        // ==================== FAVORITE TOGGLE ====================
+        document.querySelectorAll('.favorite-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                btn.classList.toggle('favorited');
+                if (btn.classList.contains('favorited')) {
+                    btn.innerHTML = '&#9829;';
+                } else {
+                    btn.innerHTML = '&#9825;';
+                }
+            });
+        });
+
+        // ==================== GRID/LIST VIEW TOGGLE ====================
+        var gridViewBtn = document.getElementById('gridViewBtn');
+        var listViewBtn = document.getElementById('listViewBtn');
+
+        gridViewBtn.addEventListener('click', function() {
+            propertiesGrid.classList.remove('list-view');
+            gridViewBtn.classList.add('active');
+            listViewBtn.classList.remove('active');
+        });
+
+        listViewBtn.addEventListener('click', function() {
+            propertiesGrid.classList.add('list-view');
+            listViewBtn.classList.add('active');
+            gridViewBtn.classList.remove('active');
+        });
+
+        // ==================== LOCATION CARD FILTER ====================
+        function filterByLocation(location) {
+            filterLocation.value = location;
+            applyFilters();
+            document.getElementById('propertiesGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
