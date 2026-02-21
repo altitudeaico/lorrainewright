@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services — Diaspora to Home | Ghana Real Estate Investment Support</title>
+    <meta name="description" content="From free discovery calls to full investment packages, Diaspora to Home offers tailored services for diaspora investors looking to purchase property in Ghana.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --success-green: #22C55E;
+            --danger-red: #EF4444;
+            --gold-accent: #D4AF37;
+            --beige-light: #FAF8F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            transition: box-shadow 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .nav-logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--purple-accent) !important;
+            color: var(--white) !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 4px;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--navy-dark);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy-dark);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--purple-accent);
+        }
+
+        .mobile-menu .mobile-cta {
+            background: var(--purple-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        /* ==================== SHARED STYLES ==================== */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 640px;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--navy-dark);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--navy-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ghost:hover {
+            background: var(--white);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            background: var(--navy-dark);
+            padding: 160px 1.5rem 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 0.6rem 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero-badge-icon {
+            font-size: 16px;
+        }
+
+        /* ==================== SERVICE PACKAGES ==================== */
+        .service-packages {
+            background: var(--beige);
+            padding: 6rem 1.5rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .package-card.popular {
+            border-top: 4px solid var(--purple-accent);
+        }
+
+        .package-card.premium {
+            border-top: 4px solid var(--gold-accent);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: -1px;
+            right: 1.25rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 0 0 6px 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .package-badge.popular-badge {
+            background: var(--purple-accent);
+        }
+
+        .package-badge.premium-badge {
+            background: var(--gold-accent);
+        }
+
+        .package-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--beige);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .package-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .package-duration {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .package-features {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .package-features li {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-check {
+            color: var(--success-green);
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .package-card .btn-primary {
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* ==================== HOW IT WORKS ==================== */
+        .how-it-works {
+            background: var(--white);
+            padding: 6rem 1.5rem;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: calc(12.5% + 1rem);
+            right: calc(12.5% + 1rem);
+            height: 2px;
+            background: var(--purple-accent);
+            opacity: 0.3;
+        }
+
+        .timeline-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .step-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 240px;
+            margin: 0 auto;
+        }
+
+        /* ==================== COMPARISON TABLE ==================== */
+        .comparison-section {
+            background: var(--beige);
+            padding: 6rem 1.5rem;
+        }
+
+        .comparison-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead th {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1.25rem 1rem;
+            color: var(--navy-dark);
+            background: var(--beige-light);
+            border-bottom: 2px solid var(--beige);
+        }
+
+        .comparison-table thead th:first-child {
+            text-align: left;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table thead th.popular-col {
+            background: var(--purple-accent);
+            color: var(--white);
+        }
+
+        .comparison-table thead th.premium-col {
+            background: var(--gold-accent);
+            color: var(--white);
+        }
+
+        .comparison-table tbody td {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-dark);
+        }
+
+        .comparison-table tbody td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: var(--navy-dark);
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: var(--beige-light);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody td.popular-col {
+            background: rgba(113, 112, 180, 0.04);
+        }
+
+        .comparison-table tbody tr:nth-child(even) td.popular-col {
+            background: rgba(113, 112, 180, 0.08);
+        }
+
+        .comparison-table tbody td.premium-col {
+            background: rgba(212, 175, 55, 0.04);
+        }
+
+        .comparison-table tbody tr:nth-child(even) td.premium-col {
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        .check-yes {
+            color: var(--success-green);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .check-no {
+            color: #ccc;
+            font-size: 18px;
+        }
+
+        /* ==================== WHY CHOOSE ME ==================== */
+        .why-choose {
+            background: var(--navy-dark);
+            padding: 6rem 1.5rem;
+        }
+
+        .why-choose .section-label {
+            color: var(--purple-accent);
+        }
+
+        .why-choose .section-title {
+            color: var(--white);
+        }
+
+        .why-choose .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.35s ease;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(113, 112, 180, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 1.25rem;
+        }
+
+        .benefit-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+        }
+
+        .benefit-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+        }
+
+        /* ==================== FAQ ==================== */
+        .faq-section {
+            background: var(--white);
+            padding: 6rem 1.5rem;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            transition: color 0.3s ease;
+            gap: 1rem;
+        }
+
+        .faq-question:hover {
+            color: var(--purple-accent);
+        }
+
+        .faq-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--purple-accent);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--purple-accent);
+            color: var(--white);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-inner {
+            padding-bottom: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ==================== FINAL CTA ==================== */
+        .final-cta {
+            background: var(--navy-dark);
+            padding: 6rem 1.5rem;
+            text-align: center;
+        }
+
+        .final-cta .section-label {
+            color: var(--purple-accent);
+        }
+
+        .final-cta .section-title {
+            color: var(--white);
+            max-width: 700px;
+            margin: 0 auto 1rem;
+        }
+
+        .final-cta .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--navy-dark);
+            padding: 4rem 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--purple-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem 2rem;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-logo img {
+                height: 45px;
+            }
+
+            .hero {
+                padding: 140px 1.25rem 60px;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-packages,
+            .how-it-works,
+            .comparison-section,
+            .why-choose,
+            .faq-section,
+            .final-cta {
+                padding: 4rem 1.25rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .faq-question {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .comparison-table {
+                min-width: 600px;
+            }
+
+            .package-price {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/about">About</a></li>
+                <li><a href="/properties">Properties</a></li>
+                <li><a href="/services" class="active">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/book-a-call" class="nav-cta">Book a Call</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/about">About</a>
+        <a href="/properties">Properties</a>
+        <a href="/services">Services</a>
+        <a href="/resources">Resources</a>
+        <a href="/contact">Contact</a>
+        <a href="/book-a-call" class="mobile-cta">Book a Call</a>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-label">What We Offer</p>
+            <h1 class="hero-title">Our Services</h1>
+            <p class="hero-subtitle">Tailored support for every stage of your Ghana property investment journey, from your first question to key collection and beyond.</p>
+            <div class="hero-badges">
+                <span class="hero-badge">
+                    <span class="hero-badge-icon">&#9989;</span>
+                    Verified Properties
+                </span>
+                <span class="hero-badge">
+                    <span class="hero-badge-icon">&#127941;</span>
+                    MBE-Recognised Expert
+                </span>
+                <span class="hero-badge">
+                    <span class="hero-badge-icon">&#127758;</span>
+                    Diaspora-First Approach
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICE PACKAGES ==================== -->
+    <section class="service-packages">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Service Tiers</p>
+                <h2 class="section-title">Choose the Right Package for You</h2>
+                <p class="section-subtitle">Whether you are just starting to explore or ready to invest, we have a service tier tailored to your needs.</p>
+            </div>
+            <div class="packages-grid">
+                <!-- Discovery Call -->
+                <div class="package-card">
+                    <div class="package-icon">&#128172;</div>
+                    <h3 class="package-name">Free Discovery Call</h3>
+                    <p class="package-price">FREE</p>
+                    <p class="package-duration">30 Minutes</p>
+                    <ul class="package-features">
+                        <li><span class="feature-check">&#10003;</span> Initial consultation</li>
+                        <li><span class="feature-check">&#10003;</span> Investment goals discussion</li>
+                        <li><span class="feature-check">&#10003;</span> Market overview</li>
+                        <li><span class="feature-check">&#10003;</span> Q&amp;A session</li>
+                        <li><span class="feature-check">&#10003;</span> No obligation</li>
+                    </ul>
+                    <a href="/book-a-call" class="btn-primary">Book Free Call</a>
+                </div>
+
+                <!-- Property Consultation -->
+                <div class="package-card popular">
+                    <span class="package-badge popular-badge">Most Popular</span>
+                    <div class="package-icon">&#127960;</div>
+                    <h3 class="package-name">Property Consultation</h3>
+                    <p class="package-price">Custom Quote</p>
+                    <p class="package-duration">Tailored to Your Needs</p>
+                    <ul class="package-features">
+                        <li><span class="feature-check">&#10003;</span> Personalised property search</li>
+                        <li><span class="feature-check">&#10003;</span> Market analysis</li>
+                        <li><span class="feature-check">&#10003;</span> Legal compliance check</li>
+                        <li><span class="feature-check">&#10003;</span> Property evaluation reports</li>
+                        <li><span class="feature-check">&#10003;</span> Budget planning</li>
+                    </ul>
+                    <a href="/contact" class="btn-primary">Get Started</a>
+                </div>
+
+                <!-- Site Visit Coordination -->
+                <div class="package-card">
+                    <div class="package-icon">&#9992;&#65039;</div>
+                    <h3 class="package-name">Site Visit Coordination</h3>
+                    <p class="package-price">Custom Quote</p>
+                    <p class="package-duration">Planned Around You</p>
+                    <ul class="package-features">
+                        <li><span class="feature-check">&#10003;</span> Itinerary planning</li>
+                        <li><span class="feature-check">&#10003;</span> Property tours</li>
+                        <li><span class="feature-check">&#10003;</span> Legal professional meetings</li>
+                        <li><span class="feature-check">&#10003;</span> Area orientations</li>
+                        <li><span class="feature-check">&#10003;</span> Transportation arrangement</li>
+                    </ul>
+                    <a href="/contact" class="btn-primary">Plan Visit</a>
+                </div>
+
+                <!-- Full Investment Package -->
+                <div class="package-card premium">
+                    <span class="package-badge premium-badge">Premium</span>
+                    <div class="package-icon">&#11088;</div>
+                    <h3 class="package-name">Full Investment Package</h3>
+                    <p class="package-price">Custom Quote</p>
+                    <p class="package-duration">End-to-End Support</p>
+                    <ul class="package-features">
+                        <li><span class="feature-check">&#10003;</span> Everything in all plans</li>
+                        <li><span class="feature-check">&#10003;</span> End-to-end management</li>
+                        <li><span class="feature-check">&#10003;</span> Negotiation support</li>
+                        <li><span class="feature-check">&#10003;</span> Legal documentation</li>
+                        <li><span class="feature-check">&#10003;</span> Post-purchase support</li>
+                        <li><span class="feature-check">&#10003;</span> Ongoing relationship</li>
+                    </ul>
+                    <a href="/contact" class="btn-primary">Inquire Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">The Process</p>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">A straightforward four-step process designed to take you from enquiry to ownership with confidence.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Discovery Call</h3>
+                    <p class="step-desc">Share your goals and we'll outline how we can help with your Ghana property investment.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Property Matching</h3>
+                    <p class="step-desc">We identify properties matching your criteria, budget, and investment objectives.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Evaluation &amp; Visit</h3>
+                    <p class="step-desc">Detailed evaluation, legal checks, and optional site visits to see properties first-hand.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Completion</h3>
+                    <p class="step-desc">Guided through purchase, the legal process, and handover so nothing is left to chance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMPARISON TABLE ==================== -->
+    <section class="comparison-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Compare Plans</p>
+                <h2 class="section-title">Feature Comparison</h2>
+                <p class="section-subtitle">See exactly what is included in each service tier at a glance.</p>
+            </div>
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Discovery Call</th>
+                            <th class="popular-col">Consultation</th>
+                            <th>Site Visit</th>
+                            <th class="premium-col">Full Package</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Initial Consultation</td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="popular-col"><span class="check-yes">&#10003;</span></td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Property Search</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-yes">&#10003;</span></td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Market Analysis</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-yes">&#10003;</span></td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Legal Review</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-yes">&#10003;</span></td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Site Visit Planning</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-no">&mdash;</span></td>
+                            <td><span class="check-yes">&#10003;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Negotiation Support</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-no">&mdash;</span></td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Documentation</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-no">&mdash;</span></td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                        <tr>
+                            <td>Post-Purchase Support</td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="popular-col"><span class="check-no">&mdash;</span></td>
+                            <td><span class="check-no">&mdash;</span></td>
+                            <td class="premium-col"><span class="check-yes">&#10003;</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY CHOOSE ME ==================== -->
+    <section class="why-choose">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Why Diaspora to Home</p>
+                <h2 class="section-title">Why Choose Me</h2>
+                <p class="section-subtitle">Decades of experience, trusted credentials, and a genuine commitment to your success.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#127942;</div>
+                    <h3>MBE-Recognised Expert</h3>
+                    <p>Awarded an MBE for services to business and community, a mark of trust recognised by the Crown.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128737;</div>
+                    <h3>Verified Properties Only</h3>
+                    <p>Every property we recommend has been personally vetted for quality, legality, and genuine investment potential.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#127758;</div>
+                    <h3>Diaspora-First Approach</h3>
+                    <p>As a diaspora investor myself, I understand the unique challenges and concerns of investing from abroad.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#9878;&#65039;</div>
+                    <h3>Legal Protection</h3>
+                    <p>We ensure full legal due diligence on every transaction, connecting you with verified legal professionals.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#128200;</div>
+                    <h3>Data-Driven Insights</h3>
+                    <p>Market analysis and property evaluations grounded in real data, not speculation or hype.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">&#129309;</div>
+                    <h3>Ongoing Relationship</h3>
+                    <p>Our support does not end at purchase. We are here for property management guidance and future investments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="faq-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Common Questions</p>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Got questions? We have answers. Here are the most common things our clients ask.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item active">
+                    <button class="faq-question">
+                        <span>How much do your services cost?</span>
+                        <span class="faq-icon">&minus;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Our discovery calls are completely free with no obligation. For our other service tiers &mdash; Property Consultation, Site Visit Coordination, and the Full Investment Package &mdash; pricing is customised based on your specific requirements, investment scope, and property preferences. We will provide a transparent quote after understanding your needs during the initial call.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I have to visit Ghana in person?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            No, many of our clients invest remotely and we fully support that process. We provide detailed property evaluations, video walkthroughs, and handle on-the-ground inspections on your behalf. That said, site visits are recommended when possible as there is nothing quite like seeing a property and its neighbourhood first-hand. Our Site Visit Coordination service makes it easy if you do choose to visit.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>I'm not ready to invest yet. Can I still contact you?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Absolutely. We are happy to have a conversation at any stage of your journey. Many clients start with a free discovery call months or even years before they are ready to invest. We also offer free educational resources, market reports, and guides to help you build your knowledge and confidence over time.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you help with financing?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            While we do not provide financial services directly, we can connect you with trusted financial advisors and guide you through mortgage options available for diaspora investors. Budget planning is a core part of our Property Consultation service, and we will help ensure you have a clear financial picture before making any commitments.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long does the process take?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            The timeline varies depending on the property type, your service tier, and the complexity of the transaction. A straightforward purchase can complete in as little as 3 months, while more complex investments or custom builds may take up to 12 months. We will give you a realistic timeline during your consultation and keep you updated at every stage.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is this suitable for first-time investors?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Yes, many of our clients are first-time investors in Ghana property. Our services are specifically designed to guide you through every step, explaining the process in plain language and ensuring you feel confident and informed at every stage. The Free Discovery Call is a great place to start if you are new to Ghana real estate investment.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What locations do you cover?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            We cover all major investment locations across Ghana, including Accra, Kumasi, Tema, Cape Coast, Takoradi, and surrounding areas. Each region offers different opportunities, from urban residential properties in Accra to emerging developments in Kumasi and coastal retreats in Cape Coast. We will help you identify the best location based on your investment goals.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FINAL CTA ==================== -->
+    <section class="final-cta">
+        <div class="section-container">
+            <p class="section-label">Get Started</p>
+            <h2 class="section-title">Not Sure Which Service Is Right for You?</h2>
+            <p class="section-subtitle">Book a free, no-obligation discovery call and we will help you find the perfect path forward.</p>
+            <div class="cta-buttons">
+                <a href="/book-a-call" class="btn-primary">Book a Free Call</a>
+                <a href="/contact" class="btn-ghost">Send a Message</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+                    <p>Helping diaspora investors navigate property purchases in Ghana with confidence, transparency, and expert local knowledge.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/properties">Properties</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/resources">Resources</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/book-a-call">Book a Call</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Discovery Call</a></li>
+                        <li><a href="/services">Consultation</a></li>
+                        <li><a href="/services">Site Visit</a></li>
+                        <li><a href="/services">Full Package</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a></li>
+                        <li><a href="tel:+44000000000">+44 (0) 000 000 000</a></li>
+                        <li><span style="color: rgba(255,255,255,0.6); font-size: 14px;">Mon-Fri: 9am - 6pm GMT</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 Diaspora to Home. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram">&#9775;</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="mailto:info@diasporatohome.com" aria-label="Email">&#9993;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', function() {
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                faqItems.forEach(function(otherItem) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-icon').textContent = '+';
+                });
+
+                // Toggle clicked item
+                if (!isActive) {
+                    item.classList.add('active');
+                    item.querySelector('.faq-icon').textContent = '\u2212';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

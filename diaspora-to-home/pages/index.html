@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaspora to Home — Your Trusted Guide to Ghana Real Estate Investment</title>
+    <meta name="description" content="Lorraine Wright MBE helps diaspora investors navigate property purchases in Ghana. 17+ years experience, 50+ properties, trusted guidance.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- TODO: Add GA4 tracking code -->
+    <style>
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --success-green: #22C55E;
+            --danger-red: #EF4444;
+            --gold-accent: #D4AF37;
+            --beige-light: #FAF8F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            transition: box-shadow 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .nav-logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy-dark);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--purple-accent) !important;
+            color: var(--white) !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 4px;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--navy-dark);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy-dark);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--purple-accent);
+        }
+
+        .mobile-menu .mobile-cta {
+            background: var(--purple-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-fallback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--beige);
+            z-index: 0;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, var(--navy-dark) 0%, var(--navy-dark) 25%, rgba(61,50,95,0.85) 40%, rgba(113,112,180,0.4) 60%, rgba(245,241,237,0.2) 75%, transparent 90%);
+            z-index: 2;
+        }
+
+        .hero-lorraine {
+            position: absolute;
+            bottom: 0;
+            left: 8%;
+            height: 85%;
+            max-height: 750px;
+            z-index: 3;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 4;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            margin-left: 45%;
+            color: var(--white);
+        }
+
+        .hero-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            color: var(--white);
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .hero-cta:hover {
+            background: var(--white);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        /* ==================== TRUST BAR ==================== */
+        .trust-bar {
+            background: var(--white);
+            padding: 4rem 1.5rem;
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--beige-light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .trust-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .trust-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--navy-dark);
+        }
+
+        .trust-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* ==================== ABOUT PREVIEW ==================== */
+        .about-preview {
+            background: var(--beige);
+            padding: 6rem 1.5rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 640px;
+            line-height: 1.7;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--navy-dark), var(--purple-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--navy-dark);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--navy-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ghost:hover {
+            background: var(--white);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== FEATURED PROPERTIES ==================== */
+        .featured-properties {
+            background: var(--white);
+            padding: 6rem 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .property-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .property-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .property-info {
+            padding: 1.5rem;
+        }
+
+        .property-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .property-location {
+            font-size: 13px;
+            color: var(--purple-accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .property-specs {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 13px;
+            color: var(--text-light);
+            padding-top: 0.75rem;
+            border-top: 1px solid #eee;
+        }
+
+        .property-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ==================== SERVICES OVERVIEW ==================== */
+        .services-overview {
+            background: var(--beige);
+            padding: 6rem 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--beige);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 24px;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ==================== TESTIMONIALS ==================== */
+        .testimonials {
+            background: var(--white);
+            padding: 6rem 1.5rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--beige-light);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 60px;
+            color: var(--purple-accent);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--purple-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--navy-dark);
+        }
+
+        .testimonial-location {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* ==================== RESOURCES PREVIEW ==================== */
+        .resources-preview {
+            background: var(--beige);
+            padding: 6rem 1.5rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .resource-content {
+            padding: 1.5rem;
+        }
+
+        .resource-category {
+            display: inline-block;
+            background: rgba(113, 112, 180, 0.1);
+            color: var(--purple-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-content p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--purple-accent);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--navy-dark);
+        }
+
+        /* ==================== FINAL CTA ==================== */
+        .final-cta {
+            background: var(--navy-dark);
+            padding: 6rem 1.5rem;
+            text-align: center;
+        }
+
+        .final-cta .section-label {
+            color: var(--purple-accent);
+        }
+
+        .final-cta .section-title {
+            color: var(--white);
+            max-width: 700px;
+            margin: 0 auto 1rem;
+        }
+
+        .final-cta .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--navy-dark);
+            padding: 4rem 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--purple-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-lorraine {
+                left: 5%;
+                height: 70%;
+            }
+
+            .hero-text {
+                margin-left: 35%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-logo img {
+                height: 45px;
+            }
+
+            .hero {
+                min-height: 100vh;
+                align-items: stretch;
+            }
+
+            .hero-gradient {
+                background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-dark) 20%, rgba(61,50,95,0.85) 40%, rgba(113,112,180,0.4) 60%, rgba(245,241,237,0.4) 80%, var(--beige) 100%);
+            }
+
+            .hero-lorraine {
+                position: relative;
+                left: auto;
+                bottom: auto;
+                height: auto;
+                max-height: none;
+                width: 80%;
+                margin: 100px auto 0;
+                display: block;
+                filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            }
+
+            .hero-content {
+                padding: 2rem 1.25rem 3rem;
+            }
+
+            .hero-text {
+                margin-left: 0;
+                max-width: 100%;
+                color: var(--navy-dark);
+            }
+
+            .hero-title {
+                color: var(--navy-dark);
+            }
+
+            .hero-subtitle {
+                color: var(--text-light);
+            }
+
+            .trust-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .properties-grid,
+            .services-grid,
+            .testimonials-grid,
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-preview,
+            .featured-properties,
+            .services-overview,
+            .testimonials,
+            .resources-preview,
+            .final-cta {
+                padding: 4rem 1.25rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-lorraine {
+                width: 90%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/about">About</a></li>
+                <li><a href="/properties">Properties</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/book-a-call" class="nav-cta">Book a Call</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/about">About</a>
+        <a href="/properties">Properties</a>
+        <a href="/services">Services</a>
+        <a href="/resources">Resources</a>
+        <a href="/contact">Contact</a>
+        <a href="/book-a-call" class="mobile-cta">Book a Call</a>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-fallback-bg"></div>
+        <!-- TODO: Replace with actual video URL -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="" type="video/mp4">
+            <!-- TODO: Add Ghana luxury property video source -->
+        </video>
+        <div class="hero-gradient"></div>
+        <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/69781d3ba87beb2aa5274e02.png" alt="Lorraine Wright MBE" class="hero-lorraine">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-label">Ghana Real Estate Investment</p>
+                <h1 class="hero-title">Your Trusted Guide to Ghana Real Estate Investment</h1>
+                <p class="hero-subtitle">Helping diaspora investors navigate property purchases in Ghana with confidence, transparency, and expert local knowledge.</p>
+                <a href="/book-a-call" class="hero-cta">Book a Free Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRUST BAR ==================== -->
+    <section class="trust-bar">
+        <div class="trust-container">
+            <div class="trust-badge">
+                <div class="trust-icon">&#127941;</div>
+                <div class="trust-text">
+                    <h4>MBE Award</h4>
+                    <p>Recognised by the Crown</p>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">&#127891;</div>
+                <div class="trust-text">
+                    <h4>Oxford MBA</h4>
+                    <p>Sa&iuml;d Business School</p>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">&#128197;</div>
+                <div class="trust-text">
+                    <h4>17+ Years</h4>
+                    <p>Property Experience</p>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">&#127968;</div>
+                <div class="trust-text">
+                    <h4>50+ Properties</h4>
+                    <p>Successfully Delivered</p>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">&#11088;</div>
+                <div class="trust-text">
+                    <h4>HSBC Top 25</h4>
+                    <p>Entrepreneur Award</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT PREVIEW ==================== -->
+    <section class="about-preview">
+        <div class="section-container">
+            <p class="section-label">About Lorraine</p>
+            <h2 class="section-title">I've Walked the Path You're Considering</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <!-- TODO: Replace with actual professional photo of Lorraine -->
+                    <div class="about-image-placeholder">
+                        Professional photo of Lorraine Wright MBE
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Your Diaspora Investment Partner</h3>
+                    <p>As a diaspora investor myself, I understand the unique challenges of investing in Ghana from abroad. The excitement, the uncertainty, the need for someone you can truly trust on the ground.</p>
+                    <p>With an MBE for services to business and community, an Oxford MBA, and over 17 years of hands-on property experience, I bridge the gap between your ambitions and Ghana's thriving real estate market.</p>
+                    <a href="/about" class="btn-primary">Read My Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURED PROPERTIES ==================== -->
+    <section class="featured-properties">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Featured Properties</p>
+                <h2 class="section-title">Handpicked Investment Opportunities</h2>
+                <p class="section-subtitle">Each property is personally vetted for quality, legal compliance, and investment potential.</p>
+            </div>
+            <div class="properties-grid">
+                <!-- Property Card 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <!-- TODO: Replace with actual property image -->
+                        <div class="property-image-placeholder" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            Property Image
+                        </div>
+                        <span class="property-badge">Featured</span>
+                    </div>
+                    <div class="property-info">
+                        <p class="property-price">$285,000</p>
+                        <p class="property-location">East Legon, Accra</p>
+                        <h3 class="property-title">Modern Villa with Pool</h3>
+                        <div class="property-specs">
+                            <span>&#128716; 4 Beds</span>
+                            <span>&#128703; 3 Baths</span>
+                            <span>&#128207; 3,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property Card 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <!-- TODO: Replace with actual property image -->
+                        <div class="property-image-placeholder" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            Property Image
+                        </div>
+                        <span class="property-badge">Featured</span>
+                    </div>
+                    <div class="property-info">
+                        <p class="property-price">$180,000</p>
+                        <p class="property-location">Airport Residential, Accra</p>
+                        <h3 class="property-title">Luxury 2-Bed Apartment</h3>
+                        <div class="property-specs">
+                            <span>&#128716; 2 Beds</span>
+                            <span>&#128703; 2 Baths</span>
+                            <span>&#128207; 1,500 sqft</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property Card 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <!-- TODO: Replace with actual property image -->
+                        <div class="property-image-placeholder" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            Property Image
+                        </div>
+                        <span class="property-badge">Featured</span>
+                    </div>
+                    <div class="property-info">
+                        <p class="property-price">$450,000</p>
+                        <p class="property-location">Kumasi, Ashanti Region</p>
+                        <h3 class="property-title">5-Bed Executive Residence</h3>
+                        <div class="property-specs">
+                            <span>&#128716; 5 Beds</span>
+                            <span>&#128703; 4 Baths</span>
+                            <span>&#128207; 4,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/properties" class="btn-primary">View All Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES OVERVIEW ==================== -->
+    <section class="services-overview">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Our Services</p>
+                <h2 class="section-title">Tailored Support at Every Stage</h2>
+                <p class="section-subtitle">From your first question to key collection, we provide expert guidance throughout your investment journey.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#128172;</div>
+                    <h3>Free Discovery Call</h3>
+                    <p>A no-obligation 30-minute call to discuss your investment goals and how we can help.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#127968;</div>
+                    <h3>Property Consultation</h3>
+                    <p>Personalised property search and evaluation based on your specific requirements and budget.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#9992;&#65039;</div>
+                    <h3>Site Visit Coordination</h3>
+                    <p>We organise your Ghana visit — property tours, legal meetings, and area orientations.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#11088;</div>
+                    <h3>Full Investment Package</h3>
+                    <p>End-to-end support from property selection through purchase completion and beyond.</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/services" class="btn-primary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Testimonials</p>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <p class="section-subtitle">Real stories from diaspora investors who trusted us with their Ghana property journey.</p>
+            </div>
+            <div class="testimonials-grid">
+                <!-- TODO: Replace with actual client testimonials -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Lorraine made the entire process so seamless. As someone living in London, I was nervous about investing in Ghana, but her expertise and transparency put me completely at ease.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AK</div>
+                        <div>
+                            <p class="testimonial-name">Ama K.</p>
+                            <p class="testimonial-location">London, UK</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The site visit was incredibly well organised. Lorraine personally accompanied us to every property and connected us with verified lawyers. Worth every penny.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">KO</div>
+                        <div>
+                            <p class="testimonial-name">Kwame O.</p>
+                            <p class="testimonial-location">Toronto, Canada</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I'd been scammed before trying to buy property in Ghana. Lorraine restored my faith in the process. Her MBE and Oxford credentials aren't just titles — she lives up to them.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">EN</div>
+                        <div>
+                            <p class="testimonial-name">Efua N.</p>
+                            <p class="testimonial-location">New York, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== RESOURCES PREVIEW ==================== -->
+    <section class="resources-preview">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">Resources</p>
+                <h2 class="section-title">Free Resources to Guide Your Journey</h2>
+                <p class="section-subtitle">Expert insights, market reports, and practical guides — all free.</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-image" style="background: linear-gradient(135deg, var(--navy-dark), var(--purple-accent));">
+                        <!-- TODO: Replace with actual resource image -->
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Guide</span>
+                        <h3>Ghana Property Investment 101</h3>
+                        <p>Everything you need to know before making your first property investment in Ghana.</p>
+                        <a href="/resources" class="resource-link">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-image" style="background: linear-gradient(135deg, var(--purple-accent), #667eea);">
+                        <!-- TODO: Replace with actual resource image -->
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Market Report</span>
+                        <h3>2025 Ghana Real Estate Outlook</h3>
+                        <p>Key trends, pricing data, and investment hotspots for the year ahead.</p>
+                        <a href="/resources" class="resource-link">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-image" style="background: linear-gradient(135deg, #667eea, var(--navy-dark));">
+                        <!-- TODO: Replace with actual resource image -->
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Article</span>
+                        <h3>Avoiding Scams: A Diaspora Guide</h3>
+                        <p>How to protect yourself from common property scams when investing from abroad.</p>
+                        <a href="/resources" class="resource-link">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FINAL CTA ==================== -->
+    <section class="final-cta">
+        <div class="section-container">
+            <p class="section-label">Get Started</p>
+            <h2 class="section-title">Ready to Start Your Ghana Property Journey?</h2>
+            <p class="section-subtitle">Book a free discovery call or browse our verified property listings today.</p>
+            <div class="cta-buttons">
+                <a href="/book-a-call" class="btn-primary">Book a Free Call</a>
+                <a href="/contact" class="btn-ghost">Send a Message</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home">
+                    <p>Helping diaspora investors navigate property purchases in Ghana with confidence, transparency, and expert local knowledge.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/properties">Properties</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/resources">Resources</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/book-a-call">Book a Call</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Discovery Call</a></li>
+                        <li><a href="/services">Consultation</a></li>
+                        <li><a href="/services">Site Visit</a></li>
+                        <li><a href="/services">Full Package</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a></li>
+                        <!-- TODO: Add actual phone number -->
+                        <li><a href="tel:+44000000000">+44 (0) 000 000 000</a></li>
+                        <li><span style="color: rgba(255,255,255,0.6); font-size: 14px;">Mon-Fri: 9am - 6pm GMT</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 Diaspora to Home. All rights reserved.</p>
+                <div class="footer-socials">
+                    <!-- TODO: Replace with actual social media URLs -->
+                    <a href="#" aria-label="Instagram">&#9775;</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="mailto:info@diasporatohome.com" aria-label="Email">&#9993;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>

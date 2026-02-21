@@ -1,0 +1,51 @@
+/* ============================================
+   DIASPORA TO HOME — DESIGN SYSTEM TOKENS
+   Reference file. Copy these variables into
+   each page's :root {} block.
+   ============================================ */
+
+:root {
+    /* === BRAND COLORS === */
+    --navy-dark: #231B4F;        /* Primary brand — hero bg, headers, footer */
+    --navy-medium: #3D325F;      /* Secondary navy — gradient transitions */
+    --purple-accent: #7170B4;    /* CTA buttons, highlights, links, badges */
+    --beige: #F5F1ED;            /* Section backgrounds, right-side hero */
+    --white: #FFFFFF;            /* Clean sections, card backgrounds */
+    --text-dark: #1a1a1a;        /* Primary body text */
+    --text-light: #666666;       /* Secondary/muted text */
+
+    /* === EXTENDED PALETTE === */
+    --success-green: #22C55E;    /* Success states, available badges */
+    --danger-red: #EF4444;       /* Favorited hearts, sold badges */
+    --gold-accent: #D4AF37;      /* Premium badges */
+    --beige-light: #FAF8F5;      /* Lighter beige variant */
+
+    /* === TYPOGRAPHY === */
+    /* Headings: Playfair Display, serif, weight 700 */
+    /* Body: Montserrat, sans-serif, weight 400/600/700 */
+    /* Brand font (reference only — Orkney): Montserrat is closest Google Font match */
+
+    /* === FONT IMPORT (include in each page <head>) === */
+    /* <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet"> */
+
+    /* === SPACING === */
+    /* Section padding: 6rem 1.5rem (desktop), 4rem 1.25rem (mobile) */
+    /* Container max-width: 1200px, centered */
+    /* Card border-radius: 10px */
+    /* Button border-radius: 4px */
+
+    /* === SHADOWS === */
+    /* Cards: 0 4px 20px rgba(0, 0, 0, 0.08) */
+    /* Cards hover: 0 8px 28px rgba(0, 0, 0, 0.1) */
+    /* Buttons: 0 4px 12px rgba(113, 112, 180, 0.3) */
+    /* Buttons hover: 0 6px 20px rgba(113, 112, 180, 0.4) */
+
+    /* === TRANSITIONS === */
+    /* Default: all 0.3s ease */
+    /* Cards: all 0.35s ease */
+
+    /* === BREAKPOINTS === */
+    /* Tablet: max-width 968px */
+    /* Mobile: max-width 600px */
+    /* Small mobile: max-width 480px */
+}
