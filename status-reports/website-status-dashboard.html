@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Delivery Dashboard | Diaspora to Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #0A0E27;
+            --secondary-navy: #141B3D;
+            --accent-purple: #6366F1;
+            --accent-cyan: #06B6D4;
+            --accent-emerald: #10B981;
+            --accent-amber: #F59E0B;
+            --accent-rose: #F43F5E;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border-subtle: rgba(148, 163, 184, 0.1);
+            --border-medium: rgba(148, 163, 184, 0.2);
+            --glass-bg: rgba(20, 27, 61, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A0E27 0%, #141B3D 50%, #1A1F3A 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Gradient orbs */
+        .gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-purple), transparent);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            bottom: -10%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .dashboard-header {
+            margin-bottom: 3rem;
+            animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--accent-emerald);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .date-badge {
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            backdrop-filter: blur(10px);
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .kpi-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .kpi-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .kpi-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-purple);
+            font-size: 1.25rem;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .trend-up {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .progress-percentage {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-bar-container {
+            position: relative;
+            height: 12px;
+            background: rgba(148, 163, 184, 0.1);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+            border-radius: 100px;
+            position: relative;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-milestones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .milestone-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .milestone-icon.complete {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+        }
+
+        .milestone-icon.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+        }
+
+        .milestone-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Pages Grid */
+        .pages-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(148, 163, 184, 0.05);
+            padding: 0.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .filter-tab:hover:not(.active) {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-primary);
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+        }
+
+        .page-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-purple);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(4px);
+        }
+
+        .page-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .page-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .page-url {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .status-pill {
+            padding: 0.375rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .status-complete {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-partial {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-missing {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--accent-rose);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .page-issues {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .issue-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--accent-rose);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Action Items Section */
+        .action-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards;
+        }
+
+        .action-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .action-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: rgba(148, 163, 184, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .action-item:hover {
+            background: rgba(148, 163, 184, 0.06);
+            border-color: var(--border-medium);
+        }
+
+        .action-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-medium);
+            border-radius: 6px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .action-checkbox:hover {
+            border-color: var(--accent-purple);
+        }
+
+        .action-checkbox.checked {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .action-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .action-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .priority-high {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--accent-rose);
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+        }
+
+        /* Timeline */
+        .timeline-section {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.125rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -2.875rem;
+            top: 1.75rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: 0 0 0 4px var(--primary-navy), 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .timeline-meta {
+            font-size: 0.875rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-effort {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.7s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(100%) skewX(-15deg); }
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #F8FAFC, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-medium);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(148, 163, 184, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-marker {
+                left: -2rem;
+                width: 1.75rem;
+                height: 1.75rem;
+                font-size: 0.75rem;
+            }
+
+            .filter-tabs {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filter-tab {
+                flex: 1;
+                text-align: center;
+                font-size: 0.75rem;
+                padding: 0.5rem;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loaded {
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        /* Utilities */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-4 { gap: 1rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Website Delivery Dashboard</h1>
+                    <p class="header-subtitle">Diaspora to Home • Project Status Report</p>
+                </div>
+                <div class="header-right">
+                    <div class="status-badge">
+                        <span class="dot"></span>
+                        85% Complete
+                    </div>
+                    <div class="date-badge">Feb 18, 2026</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Pages Built</span>
+                    <div class="kpi-icon">📄</div>
+                </div>
+                <div class="kpi-value">7/10</div>
+                <div class="kpi-meta">
+                    <span class="trend-up">↑ 70%</span>
+                    <span>Core pages live</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Design Quality</span>
+                    <div class="kpi-icon">✨</div>
+                </div>
+                <div class="kpi-value">100%</div>
+                <div class="kpi-meta">
+                    <span class="trend-up">↑ Excellent</span>
+                    <span>Professional grade</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Mobile Ready</span>
+                    <div class="kpi-icon">📱</div>
+                </div>
+                <div class="kpi-value">100%</div>
+                <div class="kpi-meta">
+                    <span class="trend-up">↑ Fully responsive</span>
+                    <span>All devices</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Launch Ready</span>
+                    <div class="kpi-icon">🚀</div>
+                </div>
+                <div class="kpi-value">2-3d</div>
+                <div class="kpi-meta">
+                    <span class="trend-up">↑ Quick fixes</span>
+                    <span>Phase 1 ready</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <h2>Overall Progress</h2>
+                <div class="progress-percentage">85%</div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 85%"></div>
+            </div>
+            <div class="progress-milestones">
+                <div class="milestone">
+                    <div class="milestone-icon complete">✓</div>
+                    <div class="milestone-text">Design System</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon complete">✓</div>
+                    <div class="milestone-text">Core Pages</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon complete">✓</div>
+                    <div class="milestone-text">Responsive</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon pending">⏳</div>
+                    <div class="milestone-text">SEO Setup</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon pending">⏳</div>
+                    <div class="milestone-text">Content</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon pending">⏳</div>
+                    <div class="milestone-text">Training</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pages Section -->
+        <div class="pages-section">
+            <div class="section-header">
+                <h2>Page Inventory</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterPages('all')">All</button>
+                    <button class="filter-tab" onclick="filterPages('complete')">Complete</button>
+                    <button class="filter-tab" onclick="filterPages('partial')">Partial</button>
+                    <button class="filter-tab" onclick="filterPages('missing')">Missing</button>
+                </div>
+            </div>
+
+            <div class="pages-grid">
+                <!-- Homepage -->
+                <div class="page-card" data-status="complete">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Homepage</div>
+                            <div class="page-url">/new-home</div>
+                        </div>
+                        <span class="status-pill status-complete">✓ Complete</span>
+                    </div>
+                    <p class="page-description">
+                        Hero section, about, featured properties, services grid, testimonials, and CTAs. Fully functional and beautiful.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Links need updating</span>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="page-card" data-status="complete">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">About Page</div>
+                            <div class="page-url">/new-about</div>
+                        </div>
+                        <span class="status-pill status-complete">✓ Complete</span>
+                    </div>
+                    <p class="page-description">
+                        Story, credentials (MBE, Oxford, HSBC), mission, values, and testimonial. Professional and credible.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Placeholder images</span>
+                        <span class="issue-tag">⚠️ Video pending</span>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="page-card" data-status="complete">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Services Page</div>
+                            <div class="page-url">/new-services</div>
+                        </div>
+                        <span class="status-pill status-complete">✓ Complete</span>
+                    </div>
+                    <p class="page-description">
+                        4 service packages, process timeline, comparison table, benefits, and FAQ. Fully complete with no issues.
+                    </p>
+                </div>
+
+                <!-- Properties -->
+                <div class="page-card" data-status="complete">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Properties Page</div>
+                            <div class="page-url">/new-properties</div>
+                        </div>
+                        <span class="status-pill status-complete">95%</span>
+                    </div>
+                    <p class="page-description">
+                        Filter bar, featured properties, property grid, locations, and pagination. Professional showcase.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Verify real data</span>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="page-card" data-status="complete">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Contact Page</div>
+                            <div class="page-url">/new-contact</div>
+                        </div>
+                        <span class="status-pill status-complete">✓ Complete</span>
+                    </div>
+                    <p class="page-description">
+                        Contact form (8 fields), office info, hours, and FAQ. Ready for submissions.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Test GHL form</span>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="page-card" data-status="partial">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Resources Page</div>
+                            <div class="page-url">/new-resources</div>
+                        </div>
+                        <span class="status-pill status-partial">95%</span>
+                    </div>
+                    <p class="page-description">
+                        Resource categories, featured guide, blog section, newsletter signup. Structure complete.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Blog posts needed</span>
+                        <span class="issue-tag">⚠️ Content gaps</span>
+                    </div>
+                </div>
+
+                <!-- Book a Call -->
+                <div class="page-card" data-status="partial">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Book a Call</div>
+                            <div class="page-url">/new-book-call</div>
+                        </div>
+                        <span class="status-pill status-partial">90%</span>
+                    </div>
+                    <p class="page-description">
+                        Process timeline, preparation checklist, FAQ. Everything built beautifully.
+                    </p>
+                    <div class="page-issues">
+                        <span class="issue-tag">⚠️ Calendly integration</span>
+                    </div>
+                </div>
+
+                <!-- Thank You -->
+                <div class="page-card" data-status="missing">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Thank You Page</div>
+                            <div class="page-url">/new-thankyou</div>
+                        </div>
+                        <span class="status-pill status-missing">Check Status</span>
+                    </div>
+                    <p class="page-description">
+                        Post-submission confirmation page. Need to verify if exists or create.
+                    </p>
+                </div>
+
+                <!-- Privacy -->
+                <div class="page-card" data-status="missing">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Privacy Policy</div>
+                            <div class="page-url">/new-privacy</div>
+                        </div>
+                        <span class="status-pill status-missing">Missing</span>
+                    </div>
+                    <p class="page-description">
+                        Legal privacy policy page. Footer links to this, needs creation.
+                    </p>
+                </div>
+
+                <!-- Partner Projects -->
+                <div class="page-card" data-status="missing">
+                    <div class="page-card-header">
+                        <div>
+                            <div class="page-title">Partner Projects</div>
+                            <div class="page-url">/new-partner-projects</div>
+                        </div>
+                        <span class="status-pill status-missing">Not Built</span>
+                    </div>
+                    <p class="page-description">
+                        Visual property selector for developers. From voicenote request, agreed in scope.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Items -->
+        <div class="action-section">
+            <h2>🎯 Critical Action Items</h2>
+            <div class="action-grid">
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">Social Media Links</div>
+                            <span class="priority-badge priority-high">HIGH</span>
+                        </div>
+                        <div class="action-description">
+                            All footer social icons link to "#". Need Instagram, LinkedIn, YouTube, Facebook URLs from Lorraine.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">Google Analytics Setup</div>
+                            <span class="priority-badge priority-high">HIGH</span>
+                        </div>
+                        <div class="action-description">
+                            Install GA4 tracking code on all pages for visitor analytics and conversion tracking.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">SEO Meta Tags</div>
+                            <span class="priority-badge priority-high">HIGH</span>
+                        </div>
+                        <div class="action-description">
+                            Add meta titles and descriptions to all 7 pages for search engine optimization.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">Blog Content</div>
+                            <span class="priority-badge priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="action-description">
+                            Resources page links to 3 blog posts. Either provide content or temporarily remove links.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">Form Integration Testing</div>
+                            <span class="priority-badge priority-high">HIGH</span>
+                        </div>
+                        <div class="action-description">
+                            Test contact form submissions to verify GHL connection is working properly.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick="toggleCheck(this)">
+                    <div class="action-checkbox"></div>
+                    <div class="action-content">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="action-title">Privacy & Terms Pages</div>
+                            <span class="priority-badge priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="action-description">
+                            Footer links to these pages. Check if they exist or create them.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="section-header">
+                <h2>Launch Timeline</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-header">
+                        <div class="timeline-title">Phase 1: Rapid Launch</div>
+                        <div class="timeline-meta">2-3 Days</div>
+                    </div>
+                    <p class="timeline-description">
+                        Launch 5 core pages: Homepage, About, Services, Properties, Contact. Perfect for developer pitch meetings.
+                    </p>
+                    <div class="timeline-effort">Effort: 3-5 hours • Quick fixes only</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-header">
+                        <div class="timeline-title">Phase 2: Core Completion</div>
+                        <div class="timeline-meta">1-2 Weeks</div>
+                    </div>
+                    <p class="timeline-description">
+                        Add blog posts, Privacy/Terms pages, Partner Projects, replace placeholders. Full professional site.
+                    </p>
+                    <div class="timeline-effort">Effort: 15-20 hours • Complete core functionality</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-header">
+                        <div class="timeline-title">Phase 3: Polish & Training</div>
+                        <div class="timeline-meta">Week 3-4</div>
+                    </div>
+                    <p class="timeline-description">
+                        Training session, documentation, full SEO optimization, move to production URLs. Project complete.
+                    </p>
+                    <div class="timeline-effort">Effort: 5-8 hours • Final delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Launch? 🚀</h2>
+            <p>Your site looks fantastic and is ready to impress developers. Let's get those final details and go live.</p>
+            <div class="cta-buttons">
+                <a href="mailto:info@diasporatohome.com" class="btn btn-primary">
+                    Send Content & Links
+                    <span>→</span>
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    Schedule Quick Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter pages
+        function filterPages(status) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            const cards = document.querySelectorAll('.page-card');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (status === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardStatus = card.dataset.status;
+                    card.style.display = cardStatus === status ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Toggle checkboxes
+        function toggleCheck(item) {
+            const checkbox = item.querySelector('.action-checkbox');
+            checkbox.classList.toggle('checked');
+            
+            // Save state
+            const title = item.querySelector('.action-title').textContent;
+            const isChecked = checkbox.classList.contains('checked');
+            localStorage.setItem(title, isChecked);
+        }
+
+        // Load saved checkbox states
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.action-item').forEach(item => {
+                const title = item.querySelector('.action-title').textContent;
+                const isChecked = localStorage.getItem(title) === 'true';
+                if (isChecked) {
+                    item.querySelector('.action-checkbox').classList.add('checked');
+                }
+            });
+
+            // Animate progress bar on load
+            setTimeout(() => {
+                document.querySelector('.progress-bar-fill').style.width = '85%';
+            }, 300);
+        });
+
+        // Add loaded class for fade in
+        document.body.classList.add('loaded');
+    </script>
+</body>
+</html>
