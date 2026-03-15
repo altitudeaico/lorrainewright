@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Diaspora to Home - Ghana Property Investment</title>
+    <meta name="description" content="Get in touch with Lorraine Wright MBE about Ghana property investment. Send a message or book a free consultation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --gold-accent: #C4A265;
+            --success-green: #2E7D32;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0.5rem 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+        }
+
+        .logo-image {
+            height: 55px;
+            width: auto;
+        }
+
+        .hero-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .search-icon {
+            color: var(--navy-dark);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .search-icon:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--navy-dark);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-cta {
+            background: var(--purple-accent);
+            color: var(--white) !important;
+            padding: 0.8rem 2rem !important;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding-bottom: 0.8rem !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 2px;
+            background: var(--navy-dark);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(35, 27, 79, 0.98);
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 3rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--purple-accent);
+            transform: translateX(10px);
+        }
+
+        .mobile-nav-contact {
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .mobile-nav-contact:hover {
+            background: var(--navy-dark);
+            transform: translateX(0) translateY(-2px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            background: var(--navy-dark);
+            padding: 160px 40px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(113, 112, 180, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(196, 162, 101, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(113, 112, 180, 0.2);
+            color: var(--purple-accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(113, 112, 180, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: var(--purple-accent);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--purple-accent);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(113, 112, 180, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           CONTACT METHODS GRID
+           ============================================ */
+        .contact-methods {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .contact-methods-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 38px;
+            color: var(--navy-dark);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .method-card {
+            background: var(--white);
+            border: 1px solid rgba(35, 27, 79, 0.08);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple-accent), var(--gold-accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(35, 27, 79, 0.1);
+            border-color: transparent;
+        }
+
+        .method-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .method-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: rgba(113, 112, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .method-card:hover .method-icon {
+            background: var(--purple-accent);
+            transform: scale(1.05);
+        }
+
+        .method-card:hover .method-icon svg {
+            stroke: var(--white);
+        }
+
+        .method-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--purple-accent);
+            stroke-width: 2;
+            fill: none;
+            transition: stroke 0.3s ease;
+        }
+
+        .method-card h3 {
+            font-size: 22px;
+            color: var(--navy-dark);
+            margin-bottom: 10px;
+        }
+
+        .method-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .method-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s ease;
+        }
+
+        .method-link:hover {
+            gap: 10px;
+        }
+
+        /* ============================================
+           CONTACT FORM SECTION
+           ============================================ */
+        .contact-form-section {
+            padding: 100px 40px;
+            background: var(--beige);
+            position: relative;
+        }
+
+        .contact-form-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .form-intro h2 {
+            font-size: 38px;
+            color: var(--navy-dark);
+            margin-bottom: 20px;
+        }
+
+        .form-intro p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .trust-indicators {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 10px;
+            background: rgba(113, 112, 180, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trust-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--purple-accent);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .trust-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 3px;
+        }
+
+        .trust-text p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .response-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            background: rgba(113, 112, 180, 0.08);
+            border-radius: 10px;
+            border-left: 3px solid var(--purple-accent);
+        }
+
+        .response-note p {
+            font-size: 13px;
+            color: var(--navy-medium);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 44px;
+            box-shadow: 0 20px 60px rgba(35, 27, 79, 0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group label .required {
+            color: #c0392b;
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid rgba(35, 27, 79, 0.12);
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: var(--white);
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--purple-accent);
+            box-shadow: 0 0 0 4px rgba(113, 112, 180, 0.12);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+        }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            margin-top: 2px;
+            accent-color: var(--purple-accent);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .checkbox-group label a {
+            color: var(--purple-accent);
+            font-weight: 600;
+        }
+
+        .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--navy-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--purple-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(113, 112, 180, 0.3);
+        }
+
+        .btn-submit svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Success Message */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(46, 125, 50, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--success-green);
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .form-success h3 {
+            font-size: 24px;
+            color: var(--navy-dark);
+            margin-bottom: 12px;
+        }
+
+        .form-success p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           CONTACT INFO SECTION
+           ============================================ */
+        .contact-info-section {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .contact-info-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .info-block {
+            padding: 36px;
+            background: var(--beige);
+            border-radius: 16px;
+        }
+
+        .info-block h3 {
+            font-size: 24px;
+            color: var(--navy-dark);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(35, 27, 79, 0.08);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            background: rgba(113, 112, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--purple-accent);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .info-detail h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 4px;
+        }
+
+        .info-detail p,
+        .info-detail a {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .info-detail a:hover {
+            color: var(--purple-accent);
+        }
+
+        .office-hours {
+            margin-top: 8px;
+        }
+
+        .office-hours li {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-light);
+            padding: 6px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(35, 27, 79, 0.05);
+        }
+
+        .office-hours li:last-child {
+            border-bottom: none;
+        }
+
+        .office-hours li span:last-child {
+            font-weight: 600;
+            color: var(--navy-dark);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(113, 112, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--purple-accent);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--purple-accent);
+            transition: fill 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: var(--white);
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            padding: 100px 40px;
+            background: var(--beige);
+        }
+
+        .faq-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px rgba(35, 27, 79, 0.06);
+        }
+
+        .faq-question {
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            gap: 16px;
+            user-select: none;
+        }
+
+        .faq-question h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            flex: 1;
+        }
+
+        .faq-toggle {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: rgba(113, 112, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-toggle svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--purple-accent);
+            stroke-width: 2.5;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--purple-accent);
+        }
+
+        .faq-item.active .faq-toggle svg {
+            stroke: var(--white);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 28px 22px;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--navy-dark);
+            padding: 80px 40px 30px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--purple-accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-social a svg {
+            width: 16px;
+            height: 16px;
+            fill: rgba(255, 255, 255, 0.7);
+            transition: fill 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            fill: var(--white);
+        }
+
+        .footer-col h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+            padding-left: 6px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================
+           CHATBOT WIDGET
+           ============================================ */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            padding: 10px 18px 10px 10px;
+            border-radius: 50px;
+            box-shadow: 0 6px 30px rgba(35, 27, 79, 0.15);
+            cursor: pointer;
+            z-index: 900;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(35, 27, 79, 0.2);
+        }
+
+        .chatbot-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .chatbot-status {
+            position: absolute;
+            bottom: 10px;
+            left: 42px;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        .chatbot-text {
+            line-height: 1.3;
+        }
+
+        .chatbot-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy-dark);
+        }
+
+        .chatbot-subtitle {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* ============================================
+           RESPONSIVE - TABLET
+           ============================================ */
+        @media (max-width: 968px) {
+            .top-nav-bar {
+                padding: 1rem 1.5rem !important;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-nav {
+                gap: 1rem !important;
+            }
+
+            .search-icon {
+                font-size: 20px !important;
+                color: var(--navy-dark) !important;
+            }
+
+            .logo-image {
+                height: 55px !important;
+            }
+
+            .hero {
+                padding: 130px 24px 70px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-methods {
+                padding: 70px 24px;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .contact-form-section {
+                padding: 70px 24px;
+            }
+
+            .contact-form-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-intro h2 {
+                font-size: 30px;
+            }
+
+            .contact-form {
+                padding: 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .contact-info-section {
+                padding: 70px 24px;
+            }
+
+            .contact-info-inner {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .faq-section {
+                padding: 70px 24px;
+            }
+
+            .footer {
+                padding: 60px 24px 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE - MOBILE
+           ============================================ */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .method-card {
+                padding: 28px 24px;
+            }
+
+            .contact-form {
+                padding: 24px 20px;
+            }
+
+            .info-block {
+                padding: 28px 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .chatbot-widget {
+                bottom: 16px;
+                left: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- White Navigation Bar - Fixed at Top -->
+    <nav class="top-nav-bar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+            </div>
+
+            <!-- Navigation -->
+            <div class="hero-nav">
+                <!-- Desktop Navigation Links -->
+                <div class="nav-links">
+                    <a href="/new-about">About</a>
+                    <a href="/new-properties">Properties</a>
+                    <a href="/new-services">Services</a>
+                    <a href="/new-resources">Resources</a>
+                    <a href="/new-contact" class="nav-cta">Contact Lorraine</a>
+                </div>
+
+                <div class="search-icon">🔍</div>
+
+                <!-- Mobile Menu Button -->
+                <div class="menu-button">
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close">&times;</button>
+            <nav class="mobile-nav-links">
+                <a href="/new-home" class="mobile-nav-link">Home</a>
+                <a href="/new-about" class="mobile-nav-link">About</a>
+                <a href="/new-services" class="mobile-nav-link">Services</a>
+                <a href="/new-properties" class="mobile-nav-link">Properties</a>
+                <a href="/new-resources" class="mobile-nav-link">Resources</a>
+                <a href="/new-contact" class="mobile-nav-link mobile-nav-contact">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-badge animate-in">Get in Touch</div>
+            <h1 class="animate-in delay-1">Let's Discuss Your <span>Ghana Investment</span></h1>
+            <p class="animate-in delay-2">Send us a message or book a consultation. We respond within 24 hours to every enquiry.</p>
+            <div class="hero-buttons animate-in delay-3">
+                <a href="#contact-form" class="btn-primary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Send a Message
+                </a>
+                <a href="#" class="btn-secondary" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Book a Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT METHODS
+         ============================================ -->
+    <section class="contact-methods">
+        <div class="contact-methods-inner">
+            <div class="section-label">How to Reach Us</div>
+            <h2 class="section-title">Choose Your Preferred Method</h2>
+            <p class="section-subtitle">Whether you prefer a quick email or a scheduled video consultation — we're here for you.</p>
+
+            <div class="methods-grid">
+                <!-- Email -->
+                <div class="method-card animate-in">
+                    <div class="method-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>Send us a detailed enquiry and we'll respond within 24 hours with personalised guidance.</p>
+                    <a href="mailto:info@diasporatohome.com" class="method-link">info@diasporatohome.com →</a>
+                </div>
+
+                <!-- Book Consultation -->
+                <div class="method-card animate-in delay-1">
+                    <div class="method-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <h3>Book a Consultation</h3>
+                    <p>Schedule a free 30-minute video consultation with Lorraine to discuss your investment goals.</p>
+                    <a href="#" class="method-link" target="_blank" rel="noopener">Schedule on Calendly →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT FORM SECTION
+         ============================================ -->
+    <section class="contact-form-section" id="contact-form">
+        <div class="contact-form-inner">
+            <!-- Left: Intro -->
+            <div class="form-intro">
+                <div class="section-label" style="text-align:left;">Send Us a Message</div>
+                <h2>Tell Us About Your Investment Goals</h2>
+                <p>Complete the form and our team will get back to you within 24 hours with tailored advice for your Ghana property investment journey.</p>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <div class="trust-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="trust-text">
+                            <h4>Your Data Is Safe</h4>
+                            <p>All information is encrypted and kept strictly confidential.</p>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div class="trust-text">
+                            <h4>24-Hour Response</h4>
+                            <p>We respond to every enquiry within one business day.</p>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <div class="trust-text">
+                            <h4>Personalised Advice</h4>
+                            <p>No generic answers — you'll get guidance tailored to your situation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="response-note">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--purple-accent)" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <p><strong>Prefer a consultation?</strong> Book a free 30-minute video session instead — <a href="#" style="color:var(--purple-accent);font-weight:600;">Schedule here</a></p>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="contact-form" id="contactFormContainer">
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" name="full_name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="required">*</span></label>
+                            <input type="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Investment Budget <span class="required">*</span></label>
+                            <select name="budget" required>
+                                <option value="" disabled selected>Select your budget</option>
+                                <option value="under-100k">Under $100,000</option>
+                                <option value="100k-250k">$100,000 – $250,000</option>
+                                <option value="250k-500k">$250,000 – $500,000</option>
+                                <option value="500k-1m">$500,000 – $1,000,000</option>
+                                <option value="over-1m">Over $1,000,000</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Investment Timeline <span class="required">*</span></label>
+                            <select name="timeline" required>
+                                <option value="" disabled selected>When are you looking to invest?</option>
+                                <option value="0-3-months">0–3 months</option>
+                                <option value="3-6-months">3–6 months</option>
+                                <option value="6-12-months">6–12 months</option>
+                                <option value="12-plus">12+ months</option>
+                                <option value="researching">Just researching</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Message <span class="required">*</span></label>
+                        <textarea name="message" rows="6" placeholder="Tell us about your investment goals, questions, or how we can help..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How Did You Hear About Us?</label>
+                        <select name="referral">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="google">Google Search</option>
+                            <option value="social-media">Social Media</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="referral">Friend or Family Referral</option>
+                            <option value="event">Event or Conference</option>
+                            <option value="podcast">Podcast</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">I agree to the <a href="#">Privacy Policy</a> and consent to Diaspora to Home contacting me about my enquiry. <span class="required">*</span></label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        Send Your Message
+                        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+
+                <!-- Success State -->
+                <div class="form-success" id="formSuccess">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h3>Message Sent Successfully!</h3>
+                    <p>Thank you for reaching out. We'll review your enquiry and get back to you within 24 hours. In the meantime, feel free to <a href="#" style="color:var(--purple-accent);font-weight:600;">book a consultation</a> for a more in-depth discussion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT INFO SECTION
+         ============================================ -->
+    <section class="contact-info-section">
+        <div class="contact-info-inner">
+            <!-- Contact Details -->
+            <div class="info-block">
+                <h3>Contact Details</h3>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>Email</h4>
+                        <a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>UK Office</h4>
+                        <p>London, United Kingdom</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>Ghana Office</h4>
+                        <p>Accra, Ghana</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Office Hours -->
+            <div class="info-block">
+                <h3>Office Hours</h3>
+                <p style="font-size:14px;color:var(--text-light);margin-bottom:20px;line-height:1.7;">We operate across UK and Ghana time zones to serve our diaspora clients around the world.</p>
+
+                <ul class="office-hours">
+                    <li><span>Monday – Friday</span><span>9:00 AM – 6:00 PM GMT</span></li>
+                    <li><span>Saturday</span><span>10:00 AM – 2:00 PM GMT</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                </ul>
+
+                <div style="margin-top:28px;padding:20px;background:rgba(113,112,180,0.08);border-radius:12px;">
+                    <h4 style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--navy-dark);margin-bottom:8px;">Ghana Time Zone</h4>
+                    <p style="font-size:13px;color:var(--text-light);line-height:1.6;">Ghana operates on GMT (UTC+0) year-round. This is the same as UK time during winter and one hour behind during British Summer Time.</p>
+                </div>
+
+                <div style="margin-top:20px;padding:20px;background:rgba(196,162,101,0.08);border-radius:12px;">
+                    <h4 style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--navy-dark);margin-bottom:8px;">Response Time</h4>
+                    <p style="font-size:13px;color:var(--text-light);line-height:1.6;">All enquiries receive a response within 24 hours. Need to speak sooner? Book a free consultation via our calendar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ SECTION
+         ============================================ -->
+    <section class="faq-section">
+        <div class="faq-inner">
+            <div class="section-label">Common Questions</div>
+            <h2 class="section-title" style="margin-bottom:48px;">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Is it safe to invest in Ghana property from abroad?</h4>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes, absolutely. Ghana has one of the most stable political environments in Africa and a growing economy. With proper due diligence and an experienced partner like Lorraine Wright MBE, investing from abroad is both safe and straightforward. We handle the entire process from legal verification to property management.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>What is the minimum investment amount?</h4>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Investment opportunities start from under $100,000, with a range of options for different budgets. During your consultation, we'll discuss your financial goals and recommend properties that match your budget and expected returns.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Do I need to visit Ghana before investing?</h4>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">While we recommend visiting when possible, it's not required. We provide detailed virtual tours, drone footage, and comprehensive documentation for every property. Many of our clients complete their first investment entirely remotely before visiting on their own schedule.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>How long does the purchasing process take?</h4>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">The typical purchasing process takes 4–8 weeks from initial agreement to completion, depending on the type of property and any legal requirements. We guide you through every step, from due diligence and contract negotiation to final transfer of ownership.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>What ongoing support do you provide after purchase?</h4>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">We offer comprehensive post-purchase support including property management, tenant sourcing, rental collection, maintenance coordination, and regular property reports. Our goal is to make your investment truly hands-off while maximising your returns.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" style="height:40px;margin-bottom:16px;filter:brightness(0) invert(1);">
+                    <p>Guiding diaspora investors to ideal real estate investments in Ghana. Led by Lorraine Wright MBE — Oxford MBA, 17+ years of experience.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <a href="/new-services">Investment Advisory</a>
+                    <a href="/new-services">Property Sourcing</a>
+                    <a href="/new-services">Due Diligence</a>
+                    <a href="/new-services">Property Management</a>
+                    <a href="/new-services">Legal Support</a>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="/new-resources">Free Guides</a>
+                    <a href="/new-resources">Market Insights</a>
+                    <a href="/new-resources">Blog</a>
+                    <a href="/new-resources">FAQs</a>
+                    <a href="/new-resources">Webinars</a>
+                </div>
+
+                <!-- Connect -->
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="/new-about">About Lorraine</a>
+                    <a href="/new-contact">Contact Us</a>
+                    <a href="#">Book a Consultation</a>
+                    <a href="/new-properties">View Properties</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Diaspora to Home. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         CHATBOT WIDGET
+         ============================================ -->
+    <div class="chatbot-widget">
+        <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/6977bf68f62bb7297e93744a.jpg" alt="Lorraine" class="chatbot-avatar">
+        <div class="chatbot-status"></div>
+        <div class="chatbot-text">
+            <div class="chatbot-title">Need assistance?</div>
+            <div class="chatbot-subtitle">Tap to chat</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // Mobile Menu Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.menu-button');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const closeButton = document.querySelector('.mobile-menu-close');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            // Open mobile menu
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Close mobile menu
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close menu when clicking on a link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close menu when clicking outside
+            mobileMenuOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // FAQ Accordion
+        function toggleFaq(el) {
+            const item = el.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const isActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+                faq.querySelector('.faq-answer').style.maxHeight = null;
+            });
+
+            // Open clicked if not already active
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        }
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Basic validation
+            const required = contactForm.querySelectorAll('[required]');
+            let valid = true;
+
+            required.forEach(field => {
+                if (field.type === 'checkbox' && !field.checked) {
+                    valid = false;
+                    field.closest('.checkbox-group').style.outline = '2px solid #c0392b';
+                    field.closest('.checkbox-group').style.outlineOffset = '4px';
+                    field.closest('.checkbox-group').style.borderRadius = '4px';
+                } else if (!field.value.trim()) {
+                    valid = false;
+                    field.style.borderColor = '#c0392b';
+                } else {
+                    field.style.borderColor = '';
+                    if (field.type === 'checkbox') {
+                        field.closest('.checkbox-group').style.outline = '';
+                    }
+                }
+            });
+
+            // Email validation
+            const email = contactForm.querySelector('[type="email"]');
+            if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                valid = false;
+                email.style.borderColor = '#c0392b';
+            }
+
+            if (!valid) return;
+
+            // Collect form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            console.log('Form submission:', data);
+
+            // TODO: Replace with GHL webhook POST
+            // fetch('YOUR_GHL_WEBHOOK_URL', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+
+            // Show success
+            contactForm.style.display = 'none';
+            formSuccess.classList.add('show');
+        });
+
+        // Clear validation on input
+        document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea').forEach(field => {
+            field.addEventListener('input', () => {
+                field.style.borderColor = '';
+            });
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
