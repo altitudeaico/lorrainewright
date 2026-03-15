@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Free Discovery Call | Diaspora to Home</title>
+    <meta name="description" content="Book your free 30-minute discovery call with Lorraine Wright MBE to discuss Ghana property investment opportunities. No obligation, expert guidance.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS VARIABLES - BRAND DESIGN SYSTEM
+        ======================================== */
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+        }
+
+        /* ========================================
+           RESET & BASE
+        ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ========================================
+           SECTION LABELS & TITLES (Global)
+        ======================================== */
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto 1rem;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           NAVIGATION
+        ======================================== */
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--navy-dark);
+            padding: 0.75rem 0;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .top-nav-bar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+        }
+
+        .hero-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links .nav-cta {
+            background: var(--purple-accent);
+            color: #fff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: #5f5ea0;
+            transform: translateY(-1px);
+        }
+
+        .search-icon {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-icon:hover {
+            color: #fff;
+        }
+
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-line {
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ========================================
+           MOBILE MENU OVERLAY
+        ======================================== */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy-dark);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-link {
+            color: white;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--purple-accent);
+        }
+
+        .mobile-nav-contact {
+            margin-top: 1rem;
+            background: var(--purple-accent);
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .booking-hero {
+            background: linear-gradient(135deg, #231B4F 0%, #3D325F 50%, #2a2060 100%);
+            padding: 10rem 2rem 6rem;
+            margin-top: 65px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(113, 112, 180, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .booking-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(113, 112, 180, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .booking-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .booking-hero .section-label {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .call-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .benefit-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .benefit-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .benefit-text strong {
+            color: white;
+            font-size: 16px;
+        }
+
+        .benefit-text span {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+        }
+
+        .scroll-hint {
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ========================================
+           WHAT TO EXPECT SECTION
+        ======================================== */
+        .what-to-expect-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .what-to-expect-section .section-label,
+        .what-to-expect-section .section-title {
+            text-align: center;
+        }
+
+        .what-to-expect-section .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .expect-layout {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            gap: 4rem;
+        }
+
+        .column-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--navy-dark);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--beige);
+        }
+
+        /* Timeline */
+        .agenda-timeline {
+            position: relative;
+            padding-left: 0;
+        }
+
+        .agenda-timeline::before {
+            content: '';
+            position: absolute;
+            left: 42px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--purple-accent), rgba(113, 112, 180, 0.2));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 6.5rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .time-label {
+            background: var(--purple-accent);
+            color: white;
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--navy-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Benefits List (right column) */
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .list-icon {
+            width: 26px;
+            height: 26px;
+            background: var(--purple-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .list-content strong {
+            display: block;
+            color: var(--navy-dark);
+            margin-bottom: 0.2rem;
+            font-size: 15px;
+        }
+
+        .list-content p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .call-method {
+            background: var(--beige);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .call-method h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+            font-size: 16px;
+        }
+
+        .call-method p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           CALENDLY SECTION
+        ======================================== */
+        .calendly-section {
+            padding: 6rem 2rem;
+            background: var(--beige);
+        }
+
+        .calendly-section .section-label,
+        .calendly-section .section-title {
+            text-align: center;
+        }
+
+        .calendly-section .section-subtitle {
+            text-align: center;
+        }
+
+        .calendly-wrapper {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .calendly-placeholder {
+            max-width: 700px;
+            margin: 3rem auto;
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .placeholder-icon {
+            font-size: 56px;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .placeholder-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-content p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .placeholder-content .placeholder-cta {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .placeholder-content .placeholder-cta:hover {
+            background: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           PREPARATION SECTION
+        ======================================== */
+        .preparation-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .preparation-section .section-label,
+        .preparation-section .section-title {
+            text-align: center;
+        }
+
+        .preparation-section .section-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .prep-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .prep-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--navy-dark);
+            margin-bottom: 2rem;
+        }
+
+        .heading-icon {
+            font-size: 28px;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .checklist-item:hover {
+            background: var(--beige);
+            border-color: rgba(113, 112, 180, 0.15);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.3s ease;
+            margin-top: 2px;
+        }
+
+        .checklist-item input:checked + .checkbox-custom {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+        }
+
+        .checklist-item input:checked + .checkbox-custom::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .checklist-item.checked .checklist-text strong {
+            color: var(--purple-accent);
+        }
+
+        .checklist-text {
+            flex: 1;
+        }
+
+        .checklist-text strong {
+            display: block;
+            color: var(--navy-dark);
+            margin-bottom: 0.2rem;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .checklist-text small {
+            color: var(--text-light);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Questions List */
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .question-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--beige);
+            border-radius: 8px;
+            border-left: 4px solid var(--purple-accent);
+            align-items: center;
+        }
+
+        .question-number {
+            width: 32px;
+            height: 32px;
+            background: var(--purple-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .question-text {
+            flex: 1;
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .questions-note {
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: rgba(113, 112, 180, 0.08);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--navy-dark);
+            line-height: 1.6;
+        }
+
+        /* Download CTA */
+        .download-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--beige);
+            border-radius: 8px;
+        }
+
+        .download-cta p {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            font-size: 15px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            background: var(--purple-accent);
+            color: white;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           FAQ SECTION
+        ======================================== */
+        .booking-faq-section {
+            padding: 6rem 2rem;
+            background: var(--beige);
+        }
+
+        .booking-faq-section .section-label,
+        .booking-faq-section .section-title {
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .faq-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            color: var(--navy-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .more-questions {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .more-questions p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-link {
+            color: var(--purple-accent);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--navy-dark);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .site-footer {
+            background: var(--navy-dark);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 4rem 0 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 280px;
+        }
+
+        .footer-heading {
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-contact li {
+            list-style: none;
+            margin-bottom: 0.6rem;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-contact a {
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: white;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--purple-accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-top: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: white;
+        }
+
+        .footer-separator {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+        }
+
+        /* ========================================
+           RESPONSIVE - TABLET
+        ======================================== */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .search-icon {
+                display: none;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .booking-hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .call-benefits {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-width: 400px;
+            }
+
+            .expect-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .prep-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ========================================
+           RESPONSIVE - MOBILE
+        ======================================== */
+        @media (max-width: 600px) {
+            .booking-hero {
+                padding: 7rem 1.25rem 3.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .timeline-item {
+                padding-left: 5.5rem;
+            }
+
+            .calendly-placeholder {
+                padding: 3rem 1.5rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+        }
+
+        /* ========================================
+           ANIMATIONS
+        ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================= -->
+<nav class="top-nav-bar">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="/new-home">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+            </a>
+        </div>
+        <div class="hero-nav">
+            <div class="nav-links">
+                <a href="/new-about">About</a>
+                <a href="/new-properties">Properties</a>
+                <a href="/new-services">Services</a>
+                <a href="/new-resources">Resources</a>
+                <a href="/new-contact" class="nav-cta">Contact Lorraine</a>
+            </div>
+            <div class="search-icon">🔍</div>
+            <div class="menu-button" onclick="toggleMobileMenu()">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-content">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <nav class="mobile-nav-links">
+            <a href="/new-home" class="mobile-nav-link">Home</a>
+            <a href="/new-about" class="mobile-nav-link">About</a>
+            <a href="/new-services" class="mobile-nav-link">Services</a>
+            <a href="/new-properties" class="mobile-nav-link">Properties</a>
+            <a href="/new-resources" class="mobile-nav-link">Resources</a>
+            <a href="/new-contact" class="mobile-nav-link mobile-nav-contact">Contact</a>
+        </nav>
+    </div>
+</div>
+
+<!-- ============================================
+     HERO SECTION
+============================================= -->
+<section class="booking-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="section-label">FREE CONSULTATION</div>
+            <h1 class="hero-title">
+                Book Your Free<br>
+                <span style="color: #7170B4;">Discovery Call</span>
+            </h1>
+            <p class="hero-subtitle">
+                Let's discuss your Ghana property investment goals in a relaxed, 
+                no-pressure 30-minute conversation.
+            </p>
+
+            <div class="call-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <strong>100% Free</strong>
+                        <span>No obligation or hidden fees</span>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <strong>30 Minutes</strong>
+                        <span>Focused, value-packed conversation</span>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <strong>Expert Guidance</strong>
+                        <span>Direct access to Lorraine Wright MBE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <p>👇 Select your preferred time below</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     WHAT TO EXPECT
+============================================= -->
+<section class="what-to-expect-section">
+    <div class="container">
+        <div class="section-label">WHAT TO EXPECT</div>
+        <h2 class="section-title">How the Call Works</h2>
+        <p class="section-subtitle">
+            A structured yet relaxed conversation designed to understand your 
+            goals and provide immediate value.
+        </p>
+
+        <div class="expect-layout fade-in">
+            <!-- Left: Call Agenda -->
+            <div class="agenda-column">
+                <h3 class="column-title">Call Agenda (30 min)</h3>
+                <div class="agenda-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <span class="time-label">0-5 min</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Introduction &amp; Goal Setting</h4>
+                            <p>Quick introductions and overview of what you'd like to achieve.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <span class="time-label">5-15 min</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Your Investment Vision</h4>
+                            <p>Discuss your budget, timeline, preferred locations, and investment goals.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <span class="time-label">15-25 min</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Market Insights &amp; Options</h4>
+                            <p>I'll share current market conditions, suitable properties, and recommendations.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <span class="time-label">25-30 min</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Next Steps &amp; Q&amp;A</h4>
+                            <p>Outline potential next steps and answer your remaining questions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: What You'll Get -->
+            <div class="details-column">
+                <h3 class="column-title">What You'll Get</h3>
+                <ul class="benefits-list">
+                    <li>
+                        <span class="list-icon">✓</span>
+                        <div class="list-content">
+                            <strong>Honest Assessment</strong>
+                            <p>Clear, realistic evaluation of your investment potential</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="list-icon">✓</span>
+                        <div class="list-content">
+                            <strong>Market Insights</strong>
+                            <p>Current Ghana property trends and opportunities</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="list-icon">✓</span>
+                        <div class="list-content">
+                            <strong>Personalized Recommendations</strong>
+                            <p>Tailored suggestions based on your specific goals</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="list-icon">✓</span>
+                        <div class="list-content">
+                            <strong>Resource Referrals</strong>
+                            <p>Helpful guides, articles, and next-step resources</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="list-icon">✓</span>
+                        <div class="list-content">
+                            <strong>No Pressure Sales</strong>
+                            <p>This is a discovery call, not a sales pitch</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="call-method">
+                    <h4>How We'll Connect</h4>
+                    <p>📞 <strong>Phone or Video:</strong> Your choice! I'll send a Zoom link 
+                    and phone number. Use whichever you prefer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     CALENDLY SECTION
+============================================= -->
+<section class="calendly-section">
+    <div class="container">
+        <div class="section-label">SCHEDULE YOUR CALL</div>
+        <h2 class="section-title">Choose Your Preferred Time</h2>
+        <p class="section-subtitle">
+            Select a date and time that works for you. I'll send a confirmation 
+            email with all the details.
+        </p>
+
+        <!-- Calendly Placeholder (replace with live embed when Calendly is set up) -->
+        <div class="calendly-placeholder fade-in">
+            <div class="placeholder-content">
+                <span class="placeholder-icon">📅</span>
+                <h3>Calendly Booking Coming Soon</h3>
+                <p>
+                    The online booking calendar is being set up. In the meantime, 
+                    please contact me directly to schedule your free discovery call.
+                </p>
+                <a href="/new-contact" class="placeholder-cta">Contact Lorraine to Book →</a>
+            </div>
+        </div>
+
+        <!-- 
+        ============================================
+        LIVE CALENDLY EMBED - Uncomment when ready:
+        ============================================
+        <div class="calendly-wrapper">
+            <div 
+                class="calendly-inline-widget" 
+                data-url="https://calendly.com/your-calendly-username/30min" 
+                style="min-width:320px;height:700px;">
+            </div>
+        </div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        -->
+    </div>
+</section>
+
+<!-- ============================================
+     PREPARATION CHECKLIST
+============================================= -->
+<section class="preparation-section">
+    <div class="container">
+        <div class="section-label">BEFORE THE CALL</div>
+        <h2 class="section-title">How to Prepare</h2>
+        <p class="section-subtitle">
+            Get the most out of our conversation by having these details ready.
+        </p>
+
+        <div class="prep-grid fade-in">
+            <!-- Left: Essential Info -->
+            <div class="prep-column">
+                <h3 class="prep-heading">
+                    <span class="heading-icon">📋</span>
+                    Essential Information
+                </h3>
+                <div class="checklist">
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checklist-text">
+                            <strong>Investment Budget</strong>
+                            <small>Have a rough range in mind (e.g., $100k–$250k)</small>
+                        </span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checklist-text">
+                            <strong>Timeline</strong>
+                            <small>When do you plan to invest? (e.g., 3–6 months)</small>
+                        </span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checklist-text">
+                            <strong>Preferred Locations</strong>
+                            <small>Which cities interest you? (Accra, Kumasi, etc.)</small>
+                        </span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checklist-text">
+                            <strong>Property Type</strong>
+                            <small>Villa, apartment, land, or still deciding?</small>
+                        </span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checklist-text">
+                            <strong>Investment Purpose</strong>
+                            <small>Personal use, rental income, or resale?</small>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Right: Questions to Consider -->
+            <div class="prep-column">
+                <h3 class="prep-heading">
+                    <span class="heading-icon">❓</span>
+                    Questions to Consider
+                </h3>
+                <div class="questions-list">
+                    <div class="question-item">
+                        <div class="question-number">1</div>
+                        <div class="question-text">What are the typical costs beyond the property price?</div>
+                    </div>
+                    <div class="question-item">
+                        <div class="question-number">2</div>
+                        <div class="question-text">How does the legal process work for diaspora investors?</div>
+                    </div>
+                    <div class="question-item">
+                        <div class="question-number">3</div>
+                        <div class="question-text">What are the payment terms typically offered?</div>
+                    </div>
+                    <div class="question-item">
+                        <div class="question-number">4</div>
+                        <div class="question-text">How do you verify developer legitimacy?</div>
+                    </div>
+                    <div class="question-item">
+                        <div class="question-number">5</div>
+                        <div class="question-text">What ROI can I expect from rental properties?</div>
+                    </div>
+                </div>
+                <p class="questions-note">
+                    <strong>Don't worry if you don't have all the answers!</strong> 
+                    The call is designed to help you clarify these details.
+                </p>
+            </div>
+        </div>
+
+        <div class="download-cta fade-in">
+            <p>Want to save this checklist?</p>
+            <a href="/choose-free-guide" class="download-btn">Download Pre-Call Guide PDF →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     FAQ SECTION
+============================================= -->
+<section class="booking-faq-section">
+    <div class="container">
+        <div class="section-label">FREQUENTLY ASKED</div>
+        <h2 class="section-title">Quick Answers</h2>
+
+        <div class="faq-grid fade-in">
+            <div class="faq-item">
+                <h3 class="faq-question">Is the call really free?</h3>
+                <p class="faq-answer">
+                    Yes! The 30-minute discovery call is completely free with no 
+                    strings attached. It's my way of helping you make an informed 
+                    decision about Ghana property investment.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">What if I'm not ready to invest?</h3>
+                <p class="faq-answer">
+                    That's perfectly fine! Many people book a call while still in 
+                    the research phase. I'm here to provide guidance whether you're 
+                    ready to invest tomorrow or in 12 months.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Can I reschedule if needed?</h3>
+                <p class="faq-answer">
+                    Absolutely. Life happens! You can reschedule or cancel up to 24 
+                    hours before the call using the link in your confirmation email.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Will you pressure me to buy?</h3>
+                <p class="faq-answer">
+                    Never. This is a discovery call, not a sales pitch. My goal is 
+                    to understand your needs and provide honest guidance—whether that 
+                    means working together or pointing you in another direction.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">What happens after the call?</h3>
+                <p class="faq-answer">
+                    I'll send you a summary email with key takeaways, recommended 
+                    resources, and suggested next steps. You decide if and when 
+                    you'd like to move forward.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Do you call internationally?</h3>
+                <p class="faq-answer">
+                    Yes! I regularly speak with diaspora investors in the UK, US, 
+                    Canada, and beyond. We can connect via Zoom, WhatsApp, or 
+                    regular phone—whatever works best for you.
+                </p>
+            </div>
+        </div>
+
+        <div class="more-questions">
+            <p>Have another question?</p>
+            <a href="/new-contact" class="contact-link">Send me a message →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================= -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-column footer-brand">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="footer-logo">
+                <p class="footer-tagline">
+                    Your trusted partner for Ghana real estate investment
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/new-home">Home</a></li>
+                    <li><a href="/new-about">About Lorraine</a></li>
+                    <li><a href="/new-services">Services</a></li>
+                    <li><a href="/new-properties">Properties</a></li>
+                    <li><a href="/new-resources">Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/choose-free-guide">Free Investment Guide</a></li>
+                    <li><a href="/new-resource-blog">Blog</a></li>
+                    <li><a href="/new-book-call">Book a Call</a></li>
+                    <li><a href="/new-contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Contact</h4>
+                <ul class="footer-contact">
+                    <li><a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a></li>
+                    <li>London, United Kingdom</li>
+                    <li>Accra, Ghana</li>
+                </ul>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">💼</a>
+                    <a href="#" class="social-icon" aria-label="YouTube">🎥</a>
+                    <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="/new-privacy">Privacy Policy</a>
+                <span class="footer-separator">|</span>
+                <a href="/new-terms">Terms &amp; Conditions</a>
+            </div>
+            <p class="footer-copyright">© 2026 Diaspora to Home. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.top-nav-bar');
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Checklist interaction - visual feedback
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            this.closest('.checklist-item').classList.toggle('checked', this.checked);
+        });
+    });
+
+    // Scroll fade-in animation
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
