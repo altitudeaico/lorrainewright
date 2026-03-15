@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Diaspora to Home DEMO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3d325f;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #ffffff;
+            --green: #22c55e;
+            --red: #ef4444;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+        }
+
+        .demo-banner a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Navigation Bar */
+        .top-nav-bar {
+            position: fixed;
+            top: 42px;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0.5rem 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 55px;
+            width: auto;
+        }
+
+        .hero-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--navy-dark);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--purple-accent);
+        }
+
+        .nav-cta {
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.4);
+        }
+
+        /* Main Content */
+        body {
+            background: var(--beige);
+            padding-top: 150px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--purple-accent);
+            margin-bottom: 40px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--purple-accent);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Pending Submissions */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--navy-dark);
+        }
+
+        .pending-list {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .pending-item {
+            padding: 25px;
+            border-bottom: 1px solid var(--beige);
+            display: grid;
+            grid-template-columns: 150px 1fr auto;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .pending-item:last-child {
+            border-bottom: none;
+        }
+
+        .pending-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .pending-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 8px;
+        }
+
+        .pending-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .pending-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-approve {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #16a34a;
+        }
+
+        .btn-reject {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: var(--navy-dark);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--navy-dark);
+            color: var(--white);
+            padding: 60px 40px 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-section a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pending-item {
+                grid-template-columns: 1fr;
+            }
+
+            .pending-actions {
+                justify-content: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        🎬 ADMIN DEMO - Approve/reject seller submissions | <a href="demo-properties.html">View Public Listings</a> | <a href="../new-home.html">Back to Main Site</a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="top-nav-bar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../new-home.html">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+                </a>
+            </div>
+
+            <div class="hero-nav">
+                <div class="nav-links">
+                    <a href="../new-about.html">About</a>
+                    <a href="demo-properties.html">Properties</a>
+                    <a href="../new-services.html">Services</a>
+                    <a href="../new-resources.html">Resources</a>
+                    <a href="../new-contact.html" class="nav-cta">Contact Lorraine</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">Admin Dashboard</h1>
+        <p class="page-subtitle">Manage property listings and seller submissions</p>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Approved Listings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Pending Approval</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$1,338K</div>
+                <div class="stat-label">Total Listing Value</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$297</div>
+                <div class="stat-label">Listing Fees Collected</div>
+            </div>
+        </div>
+
+        <!-- Pending Submissions -->
+        <div class="section-header">
+            <h2 class="section-title">Pending Submissions (3)</h2>
+        </div>
+
+        <div class="pending-list" id="pending-list">
+            <!-- Pending items loaded by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="../new-about.html">Our Story</a>
+                <a href="../new-about.html">Why Choose Us</a>
+                <a href="../new-contact.html">Contact</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="../new-book-call.html">Consultation</a>
+                <a href="../new-services.html">Due Diligence</a>
+                <a href="../new-resources.html">Courses</a>
+                <a href="demo-properties.html">Listings</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="../choose-free-guide.html">Free Guide</a>
+                <a href="../new-resources.html">Blog</a>
+                <a href="../new-resources.html">Market Insights</a>
+                <a href="../new-resources.html">eBooks</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="https://instagram.com/lorrainehwright" target="_blank">Instagram</a>
+                <a href="https://uk.linkedin.com/in/lorrainehwright" target="_blank">LinkedIn</a>
+                <a href="../new-contact.html">Email</a>
+                <a href="../new-book-call.html">Book Call</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Diaspora to Home by Lorraine Wright MBE. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">DEMO VERSION - Built by Altitude AI Co</p>
+        </div>
+    </footer>
+
+    <script>
+        var pendingSubmissions = [
+            {id: 1, title: 'New Development in Tema', location: 'Tema Community 25', price: 150000, seller_name: 'Michael Adjei', seller_email: 'michael.adjei@example.com', seller_phone: '+233 24 111 2222', featured_image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800'},
+            {id: 2, title: 'Apartment Complex in Dansoman', location: 'Dansoman Estates', price: 220000, seller_name: 'Beatrice Appiah', seller_email: 'beatrice.appiah@example.com', seller_phone: '+233 26 333 4444', featured_image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800'},
+            {id: 3, title: 'Residential Land in Oyarifa', location: 'Oyarifa, near Adenta', price: 38000, seller_name: 'Patricia Mends', seller_email: 'patricia.mends@example.com', seller_phone: '+233 27 555 6666', featured_image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'}
+        ];
+
+        function displayPending() {
+            var container = document.getElementById('pending-list');
+            
+            if (pendingSubmissions.length === 0) {
+                container.innerHTML = '<div class="empty-state"><h3>No pending submissions</h3><p>All submissions have been reviewed!</p></div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            pendingSubmissions.forEach(function(item) {
+                var div = document.createElement('div');
+                div.className = 'pending-item';
+                div.innerHTML = 
+                    '<img src="' + item.featured_image + '" alt="' + item.title + '" class="pending-image">' +
+                    '<div class="pending-info">' +
+                        '<h3>' + item.title + '</h3>' +
+                        '<p><strong>Location:</strong> ' + item.location + '</p>' +
+                        '<p><strong>Price:</strong> $' + item.price.toLocaleString() + '</p>' +
+                        '<p><strong>Seller:</strong> ' + item.seller_name + ' (' + item.seller_email + ')</p>' +
+                        '<p><strong>Phone:</strong> ' + item.seller_phone + '</p>' +
+                    '</div>' +
+                    '<div class="pending-actions">' +
+                        '<button class="btn btn-approve" onclick="approveProperty(' + item.id + ')">✓ Approve</button>' +
+                        '<button class="btn btn-reject" onclick="rejectProperty(' + item.id + ')">✕ Reject</button>' +
+                    '</div>';
+                container.appendChild(div);
+            });
+        }
+
+        function approveProperty(id) {
+            if (confirm('Approve this property listing?')) {
+                pendingSubmissions = pendingSubmissions.filter(function(item) { return item.id !== id; });
+                displayPending();
+                updateStats();
+                alert('Property approved! It will now appear on the public listings page.');
+            }
+        }
+
+        function rejectProperty(id) {
+            if (confirm('Reject this property listing?')) {
+                pendingSubmissions = pendingSubmissions.filter(function(item) { return item.id !== id; });
+                displayPending();
+                updateStats();
+                alert('Property rejected. Seller will be notified.');
+            }
+        }
+
+        function updateStats() {
+            var pendingCount = document.querySelector('.stats-grid .stat-card:nth-child(2) .stat-value');
+            pendingCount.textContent = pendingSubmissions.length;
+        }
+
+        displayPending();
+    </script>
+</body>
+</html>
