@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Lorraine Wright MBE | Diaspora to Home</title>
+    <meta name="description" content="Meet Lorraine Wright MBE — Oxford MBA, HSBC Top 25 Entrepreneur, and your trusted partner for Ghana real estate investment.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; background: var(--white); }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-accent); margin-bottom: 1rem; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 42px; font-weight: 700; color: var(--navy-dark); line-height: 1.2; margin-bottom: 1rem; }
+        .section-subtitle { font-size: 17px; color: var(--text-light); line-height: 1.7; max-width: 650px; }
+
+        /* NAV */
+        .top-nav-bar { position: fixed; top: 0; left: 0; width: 100%; background: var(--white); padding: 0.5rem 3rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; opacity: 0; animation: fadeInDown 0.8s ease-out 0.2s forwards; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-container { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo-image { height: 55px; width: auto; }
+        .hero-nav { display: flex; gap: 2rem; align-items: center; }
+        .nav-links { display: flex; gap: 3rem; align-items: center; }
+        .nav-links a { color: var(--navy-dark); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s ease; position: relative; padding-bottom: 0.3rem; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--purple-accent); transition: width 0.3s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--purple-accent); }
+        .nav-cta { background: var(--purple-accent) !important; color: var(--white) !important; padding: 0.8rem 2rem !important; border-radius: 4px !important; font-family: 'Montserrat', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; transition: all 0.3s ease !important; padding-bottom: 0.8rem !important; }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--navy-medium) !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(113,112,180,0.4); }
+        .search-icon { color: var(--navy-dark); font-size: 22px; cursor: pointer; transition: color 0.3s ease; }
+        .search-icon:hover { color: var(--purple-accent); }
+        .menu-button { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .menu-line { width: 30px; height: 2px; background: var(--navy-dark); }
+
+        /* MOBILE MENU */
+        .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(35,27,79,0.98); z-index: 9999; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-menu-overlay.active { display: flex; opacity: 1; }
+        .mobile-menu-content { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; position: relative; }
+        .mobile-menu-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: var(--white); font-size: 3rem; cursor: pointer; line-height: 1; padding: 0; width: 50px; height: 50px; }
+        .mobile-nav-links { display: flex; flex-direction: column; gap: 2rem; align-items: center; width: 100%; }
+        .mobile-nav-link { color: var(--white); text-decoration: none; font-size: 1.5rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease; padding: 0.5rem 1rem; }
+        .mobile-nav-link:hover { color: var(--purple-accent); transform: translateX(10px); }
+        .mobile-nav-contact { background: var(--purple-accent); color: var(--white); padding: 1rem 2.5rem; border-radius: 4px; margin-top: 1rem; }
+        .mobile-nav-contact:hover { background: var(--navy-dark); transform: translateX(0) translateY(-2px); }
+
+        /* HERO */
+        .about-hero { padding: 10rem 0 6rem; background: var(--white); }
+        .hero-layout { display: grid; grid-template-columns: 40% 1fr; gap: 4rem; align-items: center; }
+        .hero-image-column { position: relative; }
+        .hero-image { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 16px 48px rgba(35,27,79,0.18); aspect-ratio: 3/4; object-fit: cover; background: linear-gradient(135deg, var(--navy-dark), var(--purple-accent)); }
+        .credential-badges { display: flex; gap: 0.5rem; margin-top: -2.5rem; position: relative; z-index: 10; flex-wrap: wrap; }
+        .badge { background: white; padding: 0.5rem 1rem; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 0.5rem; font-size: 12px; font-weight: 700; color: var(--navy-dark); }
+        .badge svg { width: 16px; height: 16px; stroke: var(--purple-accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .hero-content-column .section-label { margin-bottom: 0.75rem; }
+        .hero-title { font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 700; color: var(--navy-dark); line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero-intro { font-size: 17px; color: var(--text-light); line-height: 1.8; margin-bottom: 2rem; }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2.5rem; padding: 1.5rem 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); }
+        .stat-number { font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 700; color: var(--purple-accent); line-height: 1; }
+        .stat-label { font-size: 13px; color: var(--text-light); margin-top: 0.35rem; font-weight: 600; letter-spacing: 0.5px; }
+        .hero-ctas { display: flex; gap: 1rem; }
+
+        /* BUTTONS */
+        .cta-button-primary, .cta-button-secondary { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 600; padding: 0.9rem 2rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: inline-block; text-align: center; border: none; }
+        .cta-button-primary { background: var(--purple-accent); color: white; }
+        .cta-button-primary:hover { background: var(--navy-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(35,27,79,0.25); }
+        .cta-button-secondary { background: transparent; color: var(--navy-dark); border: 2px solid var(--navy-dark); }
+        .cta-button-secondary:hover { background: var(--navy-dark); color: white; transform: translateY(-2px); }
+
+        /* STORY */
+        .story-section { padding: 6rem 0; background: var(--beige); }
+        .story-wrapper { max-width: 780px; margin: 0 auto; }
+        .story-content { margin-top: 2.5rem; }
+        .story-paragraph { font-size: 17px; line-height: 1.85; color: var(--text-dark); margin-bottom: 1.5rem; }
+        .story-paragraph strong { color: var(--navy-dark); }
+        .story-paragraph.highlight { background: rgba(113,112,180,0.08); padding: 1.5rem 2rem; border-left: 4px solid var(--purple-accent); border-radius: 0 8px 8px 0; margin: 2rem 0; }
+        .story-quote { margin: 3rem 0 0; padding: 2.5rem; background: white; border-left: 4px solid var(--purple-accent); border-radius: 0 12px 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .story-quote p { font-style: italic; font-size: 19px; line-height: 1.7; color: var(--navy-dark); }
+        .story-quote cite { display: block; margin-top: 1.25rem; font-style: normal; font-weight: 700; font-size: 15px; color: var(--purple-accent); }
+
+        /* CREDENTIALS */
+        .credentials-section { padding: 6rem 0; background: var(--white); }
+        .credentials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem; margin-top: 3rem; }
+        .credential-card { background: white; padding: 2.25rem 1.75rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); text-align: center; transition: all 0.35s ease; }
+        .credential-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(35,27,79,0.1); border-color: rgba(113,112,180,0.2); }
+        .credential-icon { margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-left: auto; margin-right: auto; background: rgba(113,112,180,0.08); border-radius: 16px; }
+        .credential-icon svg { width: 32px; height: 32px; stroke: var(--purple-accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .credential-title { font-family: 'Montserrat', sans-serif; font-size: 19px; color: var(--navy-dark); margin-bottom: 0.4rem; line-height: 1.3; }
+        .credential-year { font-size: 13px; color: var(--purple-accent); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; }
+        .credential-description { font-size: 14px; color: var(--text-light); line-height: 1.65; }
+        .badge-image { max-width: 100px; margin: 1.25rem auto 0; opacity: 0.65; transition: opacity 0.3s; }
+        .credential-card:hover .badge-image { opacity: 1; }
+        .credential-stats { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .mini-stat { background: rgba(113,112,180,0.08); padding: 0.4rem 0.75rem; border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--purple-accent); }
+
+        /* MISSION */
+        .mission-section { padding: 6rem 0; background: var(--navy-dark); position: relative; overflow: hidden; }
+        .mission-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(113,112,180,0.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+        .mission-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; position: relative; z-index: 1; }
+        .mission-text { color: rgba(255,255,255,0.8); font-size: 16px; line-height: 1.85; margin-bottom: 1.25rem; }
+        .values-heading { font-family: 'Montserrat', sans-serif; font-size: 24px; color: white; margin-bottom: 2rem; }
+        .value-item { display: flex; gap: 1.25rem; margin-bottom: 2rem; }
+        .value-icon { width: 36px; height: 36px; min-width: 36px; background: var(--purple-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .value-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .value-title { color: white; font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 0.35rem; }
+        .value-description { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.65; }
+
+        /* VIDEO */
+        .video-section { padding: 6rem 0; background: var(--beige); text-align: center; }
+        .video-section .section-subtitle { margin: 0 auto; }
+        .video-wrapper { max-width: 860px; margin: 3rem auto 0; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 12px 40px rgba(35,27,79,0.15); background: var(--navy-dark); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); gap: 1rem; }
+        .placeholder-play { width: 80px; height: 80px; background: var(--purple-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; box-shadow: 0 8px 32px rgba(113,112,180,0.4); cursor: pointer; transition: transform 0.3s ease; }
+        .placeholder-play:hover { transform: scale(1.08); }
+        .placeholder-text { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.8); }
+
+        /* RECOGNITION */
+        .recognition-section { padding: 6rem 0; background: var(--white); text-align: center; }
+        .media-logos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; margin: 3rem 0; align-items: center; }
+        .media-logo { display: flex; align-items: center; justify-content: center; padding: 1.25rem; }
+        .logo-img { max-width: 140px; height: auto; filter: grayscale(100%); opacity: 0.5; transition: all 0.35s ease; }
+        .logo-img:hover { filter: grayscale(0%); opacity: 1; }
+        .testimonial-highlight { max-width: 700px; margin: 3rem auto 0; background: var(--beige); padding: 3rem; border-radius: 16px; text-align: left; }
+        .stars { font-size: 22px; margin-bottom: 1rem; letter-spacing: 2px; }
+        .testimonial-text { font-size: 17px; line-height: 1.8; color: var(--text-dark); margin-bottom: 1.75rem; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .author-image { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--purple-accent); }
+        .author-name { font-weight: 700; color: var(--navy-dark); font-size: 15px; }
+        .author-location { font-size: 13px; color: var(--text-light); margin-top: 2px; }
+
+        /* CTA */
+        .about-cta-section { background: linear-gradient(135deg, #7170B4 0%, #231B4F 100%); padding: 6rem 2rem; text-align: center; color: white; }
+        .cta-title { font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; color: white; }
+        .cta-subtitle-text { font-size: 17px; margin-bottom: 2.5rem; opacity: 0.9; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
+        .cta-button-white { background: white !important; color: var(--navy-dark) !important; border: none !important; }
+        .cta-button-white:hover { background: var(--beige) !important; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .cta-button-outline { background: transparent !important; color: white !important; border: 2px solid rgba(255,255,255,0.6) !important; }
+        .cta-button-outline:hover { background: rgba(255,255,255,0.1) !important; border-color: white !important; transform: translateY(-2px); }
+        .cta-note { font-size: 14px; opacity: 0.75; }
+
+        /* FOOTER */
+        .site-footer { background: var(--navy-dark); padding: 5rem 0 0; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
+        .footer-logo { height: 36px; width: auto; margin-bottom: 1.25rem; filter: brightness(0) invert(1); }
+        .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 280px; }
+        .footer-heading { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: white; margin-bottom: 1.25rem; letter-spacing: 1px; text-transform: uppercase; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.25s ease; }
+        .footer-links a:hover { color: var(--purple-accent); }
+        .footer-contact { list-style: none; }
+        .footer-contact li { margin-bottom: 0.75rem; font-size: 14px; color: rgba(255,255,255,0.6); }
+        .footer-contact a { color: rgba(255,255,255,0.6); transition: color 0.25s ease; }
+        .footer-contact a:hover { color: var(--purple-accent); }
+        .footer-socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .social-icon { font-size: 18px; color: rgba(255,255,255,0.5); transition: all 0.3s ease; display: inline-block; }
+        .social-icon:hover { color: var(--purple-accent); transform: translateY(-2px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 1.75rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .footer-legal a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.25s; }
+        .footer-legal a:hover { color: var(--purple-accent); }
+        .footer-separator { margin: 0 0.75rem; color: rgba(255,255,255,0.25); }
+        .footer-copyright { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+        /* CHATBOT */
+        .chatbot-widget { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 900; display: flex; align-items: center; gap: 0.75rem; background: white; padding: 0.6rem 1.2rem 0.6rem 0.6rem; border-radius: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); cursor: pointer; transition: all 0.3s ease; }
+        .chatbot-widget:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.16); }
+        .chatbot-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+        .chatbot-status { position: absolute; bottom: 8px; left: 40px; width: 10px; height: 10px; background: #22c55e; border-radius: 50%; border: 2px solid white; }
+        .chatbot-title { font-size: 13px; font-weight: 700; color: var(--navy-dark); }
+        .chatbot-subtitle { font-size: 11px; color: var(--text-light); }
+
+        /* ANIMATIONS */
+        .animate-on-scroll { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .menu-button { display: flex; }
+            .menu-line { background: var(--navy-dark); }
+            .nav-links { display: none; }
+            .search-icon { display: none; }
+            .top-nav-bar { padding: 1rem 1.5rem !important; }
+            .logo-image { height: 55px !important; }
+            .about-hero { padding: 7rem 0 4rem; }
+            .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-image-column { max-width: 400px; margin: 0 auto; }
+            .hero-title { font-size: 34px; }
+            .hero-stats { gap: 1rem; }
+            .stat-number { font-size: 32px; }
+            .hero-ctas { flex-direction: column; }
+            .credentials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+            .mission-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .media-logos { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+            .cta-title { font-size: 34px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-button-primary, .cta-button-secondary { width: 100%; max-width: 320px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .section-title { font-size: 34px; }
+        }
+        @media (max-width: 640px) {
+            .container { padding: 0 1.25rem; }
+            .about-hero { padding: 6.5rem 0 3rem; }
+            .hero-title { font-size: 28px; }
+            .stat-number { font-size: 28px; }
+            .story-section, .credentials-section, .mission-section, .video-section, .recognition-section { padding: 4rem 0; }
+            .credentials-grid { grid-template-columns: 1fr; }
+            .media-logos { grid-template-columns: repeat(2, 1fr); }
+            .section-title, .cta-title { font-size: 28px; }
+            .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+            .testimonial-highlight { padding: 2rem 1.5rem; }
+            .story-quote { padding: 1.5rem; }
+            .story-quote p { font-size: 17px; }
+            .about-cta-section, .mission-section { padding: 4rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="top-nav-bar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/new-home"><img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image"></a>
+            </div>
+            <div class="hero-nav">
+                <div class="nav-links">
+                    <a href="/new-about" class="active">About</a>
+                    <a href="/new-properties">Properties</a>
+                    <a href="/new-services">Services</a>
+                    <a href="/new-resources">Resources</a>
+                    <a href="/new-contact" class="nav-cta">Contact Lorraine</a>
+                </div>
+                <div class="search-icon"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+                <div class="menu-button">
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close">&times;</button>
+            <nav class="mobile-nav-links">
+                <a href="/new-home" class="mobile-nav-link">Home</a>
+                <a href="/new-about" class="mobile-nav-link">About</a>
+                <a href="/new-services" class="mobile-nav-link">Services</a>
+                <a href="/new-properties" class="mobile-nav-link">Properties</a>
+                <a href="/new-resources" class="mobile-nav-link">Resources</a>
+                <a href="/new-contact" class="mobile-nav-link mobile-nav-contact">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-layout">
+                <div class="hero-image-column animate-on-scroll">
+                    <img src="https://assets.cdn.filesafe.space/MUCiWTChkVoaPw8fdKXQ/media/6977bf68b600b153f63e7c0a.jpg" alt="Lorraine Wright MBE" class="hero-image">
+                    <div class="credential-badges">
+                        <div class="badge"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></span> <span>MBE</span></div>
+                        <div class="badge"><span><svg viewBox="0 0 24 24"><path d="M12 2L4 7v4c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V7l-8-5z"/><path d="M9 12l2 2 4-4"/></svg></span> <span>Oxford MBA</span></div>
+                        <div class="badge"><span><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span> <span>HSBC Top 25</span></div>
+                    </div>
+                </div>
+                <div class="hero-content-column animate-on-scroll">
+                    <div class="section-label">ABOUT LORRAINE</div>
+                    <h1 class="hero-title">Your Trusted Partner in<br><span style="color: var(--purple-accent);">Ghana Real Estate Investment</span></h1>
+                    <p class="hero-intro">With an Oxford MBA and recognition as a Member of the British Empire (MBE), I bring institutional rigor to Ghana property investment. But credentials alone don't build legacies&#8212;lived experience does.</p>
+                    <div class="hero-stats">
+                        <div class="stat"><div class="stat-number">17+</div><div class="stat-label">Years Experience</div></div>
+                        <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Clients Served</div></div>
+                        <div class="stat"><div class="stat-number">$50M+</div><div class="stat-label">Properties Facilitated</div></div>
+                    </div>
+                    <div class="hero-ctas">
+                        <a href="/new-contact" class="cta-button-primary">Book a Consultation &#8594;</a>
+                        <a href="/new-contact" class="cta-button-secondary">Get in Touch &#8594;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-wrapper">
+                <div class="section-label animate-on-scroll">MY JOURNEY</div>
+                <h2 class="section-title animate-on-scroll">From Diaspora Investor to Trusted Guide</h2>
+                <div class="story-content">
+                    <p class="story-paragraph animate-on-scroll"><strong>I've walked the exact path you're considering.</strong> As a diaspora investor myself, I understand the excitement of investing back home&#8212;and the overwhelm that comes with navigating an unfamiliar property market from thousands of miles away.</p>
+                    <p class="story-paragraph animate-on-scroll">My journey into Ghana real estate wasn't academic&#8212;it was personal. After earning my MBA from Oxford's Sa&#239;d Business School, I could have stayed in comfortable corporate roles. But I felt a pull toward something more meaningful: helping diaspora Africans build wealth and legacy through property investment in Ghana.</p>
+                    <p class="story-paragraph animate-on-scroll"><strong>The truth? My first property purchase was terrifying.</strong> I made mistakes. I asked the wrong questions. I nearly fell for schemes that looked legitimate on the surface. Those early struggles became my greatest teacher&#8212;and now, they're your advantage.</p>
+                    <p class="story-paragraph animate-on-scroll">For over 17 years, I've specialised in one thing: making Ghana property investment straightforward, secure, and profitable for people like you. I've built relationships with verified developers, learned the legal intricacies, and created systems that protect my clients from the pitfalls I once faced.</p>
+                    <p class="story-paragraph highlight animate-on-scroll">When you work with me, you're not just getting a real estate adviser. You're getting a fellow diaspora investor who's been where you are&#8212;and who now has the institutional knowledge, connections, and recognition to guide you safely to your investment goals.</p>
+                </div>
+                <blockquote class="story-quote animate-on-scroll">
+                    <p>"I don't just understand the mechanics of Ghana real estate. I understand the psychology of being a diaspora investor&#8212;the questions you're afraid to ask, the concerns keeping you up at night, and the dreams pulling you toward this decision."</p>
+                    <cite>&#8212; Lorraine Wright MBE</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section class="credentials-section">
+        <div class="container">
+            <div class="section-label animate-on-scroll">CREDENTIALS &amp; RECOGNITION</div>
+            <h2 class="section-title animate-on-scroll">Experience Meets Excellence</h2>
+            <p class="section-subtitle animate-on-scroll">Recognised for business excellence and community impact across the UK and Ghana.</p>
+            <div class="credentials-grid">
+                <div class="credential-card animate-on-scroll">
+                    <div class="credential-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8"/></svg></div>
+                    <h3 class="credential-title">Member of the British Empire (MBE)</h3>
+                    <p class="credential-year">Awarded 2023</p>
+                    <p class="credential-description">Recognised by His Majesty for outstanding services to business and the African diaspora community in the United Kingdom.</p>
+                    <img src="https://via.placeholder.com/120x120/7170B4/FFFFFF?text=MBE" alt="MBE Badge" class="badge-image">
+                </div>
+                <div class="credential-card animate-on-scroll">
+                    <div class="credential-icon"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v4c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V7l-8-5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                    <h3 class="credential-title">Oxford MBA</h3>
+                    <p class="credential-year">Sa&#239;d Business School</p>
+                    <p class="credential-description">Graduate of Oxford University's prestigious Sa&#239;d Business School, bringing world-class business acumen to real estate investment.</p>
+                    <img src="https://via.placeholder.com/120x60/231B4F/FFFFFF?text=OXFORD" alt="Oxford University" class="badge-image">
+                </div>
+                <div class="credential-card animate-on-scroll">
+                    <div class="credential-icon"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+                    <h3 class="credential-title">HSBC Top 25 Entrepreneur</h3>
+                    <p class="credential-year">2023 Award</p>
+                    <p class="credential-description">Selected as one of HSBC's Top 25 Entrepreneurs, recognising innovation and impact in the real estate and investment sector.</p>
+                    <img src="https://via.placeholder.com/120x60/DB0011/FFFFFF?text=HSBC" alt="HSBC" class="badge-image">
+                </div>
+                <div class="credential-card animate-on-scroll">
+                    <div class="credential-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" fill="none"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></div>
+                    <h3 class="credential-title">17+ Years Expertise</h3>
+                    <p class="credential-year">Since 2008</p>
+                    <p class="credential-description">Specialised focus on Ghana real estate investment, helping diaspora investors navigate property markets with confidence.</p>
+                    <div class="credential-stats">
+                        <span class="mini-stat">500+ Clients</span>
+                        <span class="mini-stat">$50M+ Facilitated</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VALUES -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-layout">
+                <div class="mission-column">
+                    <div class="section-label" style="color: var(--purple-accent);">MY MISSION</div>
+                    <h2 class="section-title" style="color: white;">Empowering Diaspora Investors</h2>
+                    <p class="mission-text">My mission is simple: to make Ghana property investment accessible, secure, and profitable for diaspora investors across the UK, US, and Canada.</p>
+                    <p class="mission-text">I believe every member of the African diaspora deserves the opportunity to build wealth and legacy back home&#8212;without the overwhelm, confusion, or risk that comes from navigating unfamiliar markets alone.</p>
+                    <p class="mission-text">Through personalised guidance, verified partnerships, and institutional rigor, I help you invest with confidence&#8212;because your success is my legacy.</p>
+                </div>
+                <div class="values-column">
+                    <div class="section-label" style="color: var(--purple-accent);">CORE VALUES</div>
+                    <h3 class="values-heading">What Guides My Work</h3>
+                    <div class="values-list">
+                        <div class="value-item">
+                            <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="4,12 9,17 20,6"/></svg></div>
+                            <div class="value-content"><h4 class="value-title">Transparency</h4><p class="value-description">No hidden fees, no surprises&#8212;just honest guidance and clear communication every step of the way.</p></div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="4,12 9,17 20,6"/></svg></div>
+                            <div class="value-content"><h4 class="value-title">Integrity</h4><p class="value-description">I only work with verified developers and recommend properties I would invest in myself.</p></div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="4,12 9,17 20,6"/></svg></div>
+                            <div class="value-content"><h4 class="value-title">Excellence</h4><p class="value-description">Bringing Oxford-level rigor and HSBC-recognised expertise to every client relationship.</p></div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="4,12 9,17 20,6"/></svg></div>
+                            <div class="value-content"><h4 class="value-title">Empowerment</h4><p class="value-description">You make the final decisions&#8212;I ensure you have the knowledge and confidence to make them wisely.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="video-section">
+        <div class="container">
+            <div class="section-label animate-on-scroll">MEET LORRAINE</div>
+            <h2 class="section-title animate-on-scroll">A Personal Message for You</h2>
+            <p class="section-subtitle animate-on-scroll">Watch this 3-minute video to learn more about my journey and how I can help you achieve your Ghana investment goals.</p>
+            <div class="video-wrapper animate-on-scroll">
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="placeholder-play"><svg viewBox="0 0 24 24" style="width:36px;height:36px;fill:white;stroke:none;margin-left:4px;"><polygon points="6,3 20,12 6,21"/></svg></div>
+                        <p class="placeholder-text">Video coming soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOGNITION -->
+    <section class="recognition-section">
+        <div class="container">
+            <div class="section-label animate-on-scroll">AS FEATURED IN</div>
+            <h2 class="section-title animate-on-scroll">Media &amp; Recognition</h2>
+            <div class="media-logos animate-on-scroll">
+                <div class="media-logo"><img src="https://via.placeholder.com/200x80/CCCCCC/666666?text=BBC" alt="BBC" class="logo-img"></div>
+                <div class="media-logo"><img src="https://via.placeholder.com/200x80/CCCCCC/666666?text=Guardian" alt="The Guardian" class="logo-img"></div>
+                <div class="media-logo"><img src="https://via.placeholder.com/200x80/CCCCCC/666666?text=Forbes" alt="Forbes" class="logo-img"></div>
+                <div class="media-logo"><img src="https://via.placeholder.com/200x80/CCCCCC/666666?text=HSBC" alt="HSBC" class="logo-img"></div>
+                <div class="media-logo"><img src="https://via.placeholder.com/200x80/CCCCCC/666666?text=Financial+Times" alt="Financial Times" class="logo-img"></div>
+            </div>
+            <div class="testimonial-highlight animate-on-scroll">
+                <div class="stars"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#D4A843;stroke:none;display:inline;"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#D4A843;stroke:none;display:inline;"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#D4A843;stroke:none;display:inline;"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#D4A843;stroke:none;display:inline;"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#D4A843;stroke:none;display:inline;"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+                <p class="testimonial-text">"Lorraine's expertise and personal experience as a diaspora investor made all the difference. She understood my concerns and guided me through every step with patience and professionalism. I now own a beautiful property in Accra that's already appreciating in value."</p>
+                <div class="testimonial-author">
+                    <img src="https://via.placeholder.com/60x60/7170B4/FFFFFF?text=JO" alt="James O." class="author-image">
+                    <div class="author-details"><div class="author-name">James O.</div><div class="author-location">London, UK &#8594; Accra, Ghana</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta-section">
+        <div class="container">
+            <h2 class="cta-title animate-on-scroll">Ready to Start Your<br>Investment Journey?</h2>
+            <p class="cta-subtitle-text animate-on-scroll">Let's discuss your Ghana property goals and how I can help you invest with confidence.</p>
+            <div class="cta-buttons animate-on-scroll">
+                <a href="/new-contact" class="cta-button-primary cta-button-white">Book Free Consultation &#8594;</a>
+                <a href="/new-contact" class="cta-button-primary cta-button-outline">Send a Message &#8594;</a>
+            </div>
+            <p class="cta-note animate-on-scroll">Free 30-minute discovery call &nbsp;&#8226;&nbsp; No obligation</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-column footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="footer-logo">
+                    <p class="footer-tagline">Your trusted partner for Ghana real estate investment. Helping diaspora investors build wealth and legacy.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/new-home">Home</a></li>
+                        <li><a href="/new-about">About Lorraine</a></li>
+                        <li><a href="/new-services">Services</a></li>
+                        <li><a href="/new-properties">Properties</a></li>
+                        <li><a href="/new-resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/choose-free-guide">Free Investment Guide</a></li>
+                        <li><a href="/new-resource-blog">Blog</a></li>
+                        <li><a href="/new-resource-guides">Guides</a></li>
+                        <li><a href="/new-resource-videos">Videos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="/cdn-cgi/l/email-protection#2e474048416e4a474f5d5e415c4f5a414641434b004d4143"><span class="__cf_email__" data-cfemail="e48d8a828ba4808d8597948b9685908b8c8b8981ca878b89">[email&#160;protected]</span></a></li>
+                        <li>London, United Kingdom</li>
+                        <li>Accra, Ghana</li>
+                    </ul>
+                    <div class="footer-socials">
+                        <a href="#" class="social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 11v6"/><path d="M7 7v.01"/><path d="M11 11v6"/><path d="M11 14c0-2 1.5-3 3-3s3 1 3 3v3"/></svg></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><rect x="2" y="4" width="20" height="16" rx="4"/><polygon points="10,8.5 16,12 10,15.5" fill="currentColor" stroke="none"/></svg></a>
+                        <a href="#" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="/new-privacy">Privacy Policy</a>
+                    <span class="footer-separator">|</span>
+                    <a href="/new-terms">Terms &amp; Conditions</a>
+                </div>
+                <p class="footer-copyright">&copy; 2026 Diaspora to Home. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chatbot-widget">
+        <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/6977bf68f62bb7297e93744a.jpg" alt="Lorraine" class="chatbot-avatar">
+        <div class="chatbot-status"></div>
+        <div class="chatbot-text"><div class="chatbot-title">Need assistance?</div><div class="chatbot-subtitle">Tap to chat</div></div>
+    </div>
+
+    <script>
+        // Mobile Menu - matching homepage behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuButton = document.querySelector('.menu-button');
+            var mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            var closeButton = document.querySelector('.mobile-menu-close');
+            var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            mobileNavLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            mobileMenuOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Scroll animations
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var siblings = entry.target.parentElement.querySelectorAll('.animate-on-scroll');
+                    var idx = Array.from(siblings).indexOf(entry.target);
+                    setTimeout(function() { entry.target.classList.add('visible'); }, idx * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(function(el) { observer.observe(el); });
+    </script>
+</body>
+</html>
