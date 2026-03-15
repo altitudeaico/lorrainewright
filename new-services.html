@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Diaspora to Home - Ghana Real Estate Investment</title>
+    <meta name="description" content="Comprehensive Ghana property investment services for diaspora investors. From free discovery calls to full investment packages. Expert guidance by Lorraine Wright MBE.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3D325F;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --gold: #D4AF37;
+        }
+
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* ========== BUTTONS ========== */
+        .cta-button-primary {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--purple-accent);
+            box-shadow: 0 8px 24px rgba(113, 112, 180, 0.3);
+        }
+
+        .cta-button-primary:hover {
+            background: var(--navy-medium);
+            border-color: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(113, 112, 180, 0.4);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--purple-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--purple-accent);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--purple-accent);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(113, 112, 180, 0.3);
+        }
+
+        /* ========== NAVIGATION ========== */
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0.5rem 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-image {
+            height: 55px;
+            width: auto;
+        }
+
+        .hero-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--navy-dark);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a[href="/new-services"]::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        .nav-links a[href="/new-services"] {
+            color: var(--purple-accent);
+        }
+
+        .nav-cta {
+            background: var(--purple-accent) !important;
+            color: var(--white) !important;
+            padding: 0.8rem 2rem !important;
+            border-radius: 4px !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase;
+            padding-bottom: 0.8rem !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-medium) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.4);
+        }
+
+        .search-icon {
+            color: var(--navy-dark);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .search-icon:hover {
+            color: var(--purple-accent);
+        }
+
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 2px;
+            background: var(--navy-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(35, 27, 79, 0.98);
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 3rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--purple-accent);
+            transform: translateX(10px);
+        }
+
+        .mobile-nav-contact {
+            background: var(--purple-accent);
+            color: var(--white) !important;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .mobile-nav-contact:hover {
+            background: var(--navy-dark);
+            transform: translateX(0) translateY(-2px);
+        }
+
+        /* ========== SECTION 1: HERO ========== */
+        .services-hero {
+            background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy-medium) 50%, #2a2060 100%);
+            padding: 10rem 1.5rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(113, 112, 180, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .services-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(113, 112, 180, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .services-hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .services-hero .section-label {
+            color: var(--purple-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 5vw, 52px);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-features {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item .feature-icon {
+            color: var(--purple-accent);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .feature-item .feature-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ========== SECTION 2: SERVICE PACKAGES GRID ========== */
+        .services-grid-section {
+            padding: 8rem 3rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-service {
+            border-color: var(--purple-accent);
+            background: linear-gradient(to bottom, rgba(113, 112, 180, 0.04) 0%, white 100%);
+        }
+
+        .premium-service {
+            border-color: var(--gold);
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.04) 0%, white 100%);
+        }
+
+        .featured-badge,
+        .premium-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-badge {
+            background: var(--purple-accent);
+        }
+
+        .premium-badge {
+            background: var(--gold);
+        }
+
+        .service-icon {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-icon svg {
+            width: 44px;
+            height: 44px;
+        }
+
+        .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--purple-accent);
+            margin: 0.25rem 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .service-duration {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-description p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            margin: 0.5rem 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-features li {
+            padding: 0.4rem 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .service-cta {
+            margin-top: auto;
+        }
+
+        .service-cta .cta-button-primary,
+        .service-cta .cta-button-secondary {
+            display: block;
+            text-align: center;
+            padding: 0.85rem 1.5rem;
+            font-size: 14px;
+        }
+
+        .additional-services {
+            margin-top: 3rem;
+            padding: 1.5rem 2rem;
+            background: var(--beige);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .additional-services p {
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .additional-services a {
+            color: var(--purple-accent);
+            font-weight: 600;
+        }
+
+        .additional-services a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== SECTION 3: HOW IT WORKS ========== */
+        .how-it-works-section {
+            padding: 8rem 3rem;
+            background: var(--beige);
+            text-align: center;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            padding: 0 0.5rem;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: var(--purple-accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(113, 112, 180, 0.35);
+        }
+
+        .step-content {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 32px;
+            left: calc(50% + 32px);
+            width: calc(100% - 64px);
+            height: 2px;
+            background: linear-gradient(to right, var(--purple-accent), rgba(113, 112, 180, 0.3));
+            z-index: 1;
+        }
+
+        .process-step:last-child .step-connector {
+            display: none;
+        }
+
+        .process-note {
+            margin-top: 3rem;
+            padding: 1.25rem 2rem;
+            background: var(--white);
+            border-radius: 8px;
+            border-left: 4px solid var(--purple-accent);
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .process-note p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .process-note strong {
+            color: var(--navy-dark);
+        }
+
+        /* ========== SECTION 4: COMPARISON TABLE ========== */
+        .comparison-section {
+            padding: 8rem 3rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin-top: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 700px;
+        }
+
+        .comparison-table thead th {
+            background: var(--navy-dark);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .comparison-table thead th:first-child {
+            text-align: left;
+            border-radius: 10px 0 0 0;
+        }
+
+        .comparison-table thead th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+        .comparison-table td {
+            padding: 1.15rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(245, 241, 237, 0.4);
+        }
+
+        .feature-column {
+            min-width: 180px;
+        }
+
+        .featured-column {
+            background: rgba(113, 112, 180, 0.08) !important;
+            color: var(--text-dark) !important;
+            font-weight: 600;
+        }
+
+        .premium-column {
+            background: rgba(212, 175, 55, 0.08) !important;
+            color: var(--text-dark) !important;
+            font-weight: 600;
+        }
+
+        .feature-name {
+            text-align: left !important;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comparison-note {
+            margin-top: 1.5rem;
+            font-size: 14px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .comparison-note a {
+            color: var(--purple-accent);
+            font-weight: 600;
+        }
+
+        .comparison-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== SECTION 5: WHY CHOOSE ME ========== */
+        .why-choose-section {
+            padding: 8rem 3rem;
+            background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .why-choose-section .section-title {
+            color: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-icon {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-icon svg {
+            width: 44px;
+            height: 44px;
+        }
+
+        .benefit-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-description {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ========== SECTION 6: FAQ ========== */
+        .services-faq-section {
+            padding: 8rem 3rem;
+            background: var(--beige);
+            text-align: center;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            text-align: left;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            padding: 1.25rem 3rem 1.25rem 1.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: rgba(113, 112, 180, 0.03);
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            color: var(--purple-accent);
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* ========== SECTION 7: CTA ========== */
+        .services-cta-section {
+            padding: 8rem 3rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .cta-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .cta-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 19px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-features {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .cta-feature .feature-icon {
+            color: var(--purple-accent);
+            font-weight: 700;
+        }
+
+        /* ========== FOOTER ========== */
+        .site-footer {
+            background: var(--navy-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 6rem 3rem 3rem;
+            border-top: 1px solid rgba(113, 112, 180, 0.3);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 2.5rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            height: 36px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            max-width: 260px;
+        }
+
+        .footer-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-contact li {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact a {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-contact a:hover {
+            color: var(--white);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--purple-accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-legal a {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-legal a:hover {
+            color: var(--white);
+        }
+
+        .footer-separator {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 968px) {
+            .top-nav-bar {
+                padding: 1rem 1.5rem !important;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            .menu-line {
+                background: var(--navy-dark);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .search-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 7.5rem 1.5rem 4rem;
+            }
+
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .services-grid-section,
+            .how-it-works-section,
+            .comparison-section,
+            .why-choose-section,
+            .services-faq-section,
+            .services-cta-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-label {
+                font-size: 11px !important;
+                letter-spacing: 2px !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .section-title {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .section-subtitle {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+            }
+
+            .cta-title {
+                font-size: 28px !important;
+            }
+
+            .cta-description {
+                font-size: 16px !important;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .step-connector {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cta-features {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .site-footer {
+                padding: 3rem 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-nav-bar {
+                padding: 0.8rem 1rem !important;
+            }
+
+            .logo-image {
+                height: 38px !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-hero {
+                padding: 6.5rem 1rem 3.5rem;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 24px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="top-nav-bar">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="/new-home">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+            </a>
+        </div>
+        <div class="hero-nav">
+            <div class="nav-links">
+                <a href="/new-about">About</a>
+                <a href="/new-properties">Properties</a>
+                <a href="/new-services">Services</a>
+                <a href="/new-resources">Resources</a>
+                <a href="/new-contact" class="nav-cta">Contact Lorraine</a>
+            </div>
+            <div class="search-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <div class="menu-button" onclick="toggleMobileMenu()">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-content">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <nav class="mobile-nav-links">
+            <a href="/new-home" class="mobile-nav-link">Home</a>
+            <a href="/new-about" class="mobile-nav-link">About</a>
+            <a href="/new-services" class="mobile-nav-link">Services</a>
+            <a href="/new-properties" class="mobile-nav-link">Properties</a>
+            <a href="/new-resources" class="mobile-nav-link">Resources</a>
+            <a href="/new-contact" class="mobile-nav-link mobile-nav-contact">Contact</a>
+        </nav>
+    </div>
+</div>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="services-hero">
+    <div class="container">
+        <div class="hero-content fade-in">
+            <div class="section-label">SERVICES</div>
+            <h1 class="hero-title">
+                Comprehensive Support for<br>
+                Your <span style="color: #7170B4;">Investment Journey</span>
+            </h1>
+            <p class="hero-subtitle">
+                From property search to ownership, I provide end-to-end guidance 
+                tailored to diaspora investors. Choose the service that fits your needs.
+            </p>
+            <div class="hero-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">Verified Properties Only</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">Legal Support Included</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">17+ Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICE PACKAGES GRID ========== -->
+<section class="services-grid-section" id="packages">
+    <div class="container">
+        <div class="section-label">WHAT I OFFER</div>
+        <h2 class="section-title">Choose Your Service Package</h2>
+        <p class="section-subtitle">
+            Whether you're just starting your research or ready to invest, 
+            I have a service tailored to your needs.
+        </p>
+
+        <div class="services-grid">
+
+            <!-- Service 1: Free Discovery Call -->
+            <div class="service-card fade-in">
+                <div class="service-header">
+                    <div class="service-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="32" height="24" rx="4" stroke="#7170B4" stroke-width="2.5"/><path d="M12 32v6l8-6" stroke="#7170B4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="4" width="32" height="24" rx="4" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5"/><line x1="20" y1="12" x2="36" y2="12" stroke="#7170B4" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="18" x2="32" y2="18" stroke="#7170B4" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="24" x2="28" y2="24" stroke="#7170B4" stroke-width="2" stroke-linecap="round"/></svg></div>
+                    <h3 class="service-title">Free Discovery Call</h3>
+                    <div class="service-price">Free</div>
+                    <div class="service-duration">30 minutes</div>
+                </div>
+                <div class="service-description">
+                    <p>Perfect if you're just starting to explore Ghana property investment.</p>
+                </div>
+                <ul class="service-features">
+                    <li>✓ Discuss your investment goals</li>
+                    <li>✓ Overview of Ghana property market</li>
+                    <li>✓ Answer your initial questions</li>
+                    <li>✓ Assess if we're a good fit</li>
+                    <li>✓ No obligation or pressure</li>
+                </ul>
+                <div class="service-cta">
+                    <a href="/new-book-call" class="cta-button-secondary">Book Free Call →</a>
+                </div>
+            </div>
+
+            <!-- Service 2: Property Consultation -->
+            <div class="service-card featured-service fade-in" id="consultation">
+                <div class="featured-badge">Most Popular</div>
+                <div class="service-header">
+                    <div class="service-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M6 22L24 8l18 14" stroke="#7170B4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="22" width="12" height="18" rx="2" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5"/><rect x="26" y="18" width="14" height="22" rx="2" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5"/><rect x="14" y="28" width="4" height="6" rx="1" stroke="#7170B4" stroke-width="1.5"/><rect x="30" y="24" width="4" height="4" rx="1" stroke="#7170B4" stroke-width="1.5"/><rect x="30" y="32" width="4" height="4" rx="1" stroke="#7170B4" stroke-width="1.5"/></svg></div>
+                    <h3 class="service-title">Property Consultation</h3>
+                    <div class="service-price">Custom Quote</div>
+                    <div class="service-duration">Ongoing support</div>
+                </div>
+                <div class="service-description">
+                    <p>Personalized guidance to find and evaluate the right property for your goals.</p>
+                </div>
+                <ul class="service-features">
+                    <li>✓ Needs assessment &amp; budget planning</li>
+                    <li>✓ Curated property recommendations</li>
+                    <li>✓ Location &amp; neighborhood analysis</li>
+                    <li>✓ Property evaluation &amp; due diligence</li>
+                    <li>✓ Negotiation support</li>
+                    <li>✓ Developer verification</li>
+                    <li>✓ Investment ROI projections</li>
+                </ul>
+                <div class="service-cta">
+                    <a href="/new-contact" class="cta-button-primary">Get Started →</a>
+                </div>
+            </div>
+
+            <!-- Service 3: Site Visit Coordination -->
+            <div class="service-card fade-in" id="site-visit">
+                <div class="service-header">
+                    <div class="service-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M42 14L28 24l14 10V14z" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5" stroke-linejoin="round"/><path d="M6 18h22v12H6z" rx="3" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5" stroke-linejoin="round"/><path d="M6 18L17 8l11 10" stroke="#7170B4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="24" r="2" fill="#7170B4"/><circle cx="22" cy="24" r="2" fill="#7170B4"/><line x1="6" y1="40" x2="42" y2="40" stroke="#7170B4" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/></svg></div>
+                    <h3 class="service-title">Site Visit Coordination</h3>
+                    <div class="service-price">Custom Quote</div>
+                    <div class="service-duration">1–3 days</div>
+                </div>
+                <div class="service-description">
+                    <p>Organize and accompany you on property site visits in Ghana.</p>
+                </div>
+                <ul class="service-features">
+                    <li>✓ Pre-visit property shortlisting</li>
+                    <li>✓ Itinerary planning &amp; logistics</li>
+                    <li>✓ Personal accompaniment to properties</li>
+                    <li>✓ Meet developers &amp; agents</li>
+                    <li>✓ Neighborhood tours</li>
+                    <li>✓ Post-visit debrief &amp; recommendations</li>
+                </ul>
+                <div class="service-cta">
+                    <a href="/new-contact" class="cta-button-secondary">Plan Visit →</a>
+                </div>
+            </div>
+
+            <!-- Service 4: Full Investment Package -->
+            <div class="service-card premium-service fade-in" id="full-package">
+                <div class="premium-badge">Premium</div>
+                <div class="service-header">
+                    <div class="service-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M24 4L10 12v12c0 10 14 18 14 18s14-8 14-18V12L24 4z" fill="rgba(113,112,180,0.1)" stroke="#7170B4" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 16l2.5 5 5.5.8-4 3.9.9 5.3-4.9-2.6L19.1 32l.9-5.3-4-3.9 5.5-.8L24 16z" fill="#7170B4" stroke="#7170B4" stroke-width="1" stroke-linejoin="round"/></svg></div>
+                    <h3 class="service-title">Full Investment Package</h3>
+                    <div class="service-price">Custom Quote</div>
+                    <div class="service-duration">End-to-end</div>
+                </div>
+                <div class="service-description">
+                    <p>Comprehensive support from search to ownership and beyond.</p>
+                </div>
+                <ul class="service-features">
+                    <li>✓ Everything in Property Consultation</li>
+                    <li>✓ Site visit coordination (if needed)</li>
+                    <li>✓ Legal document review &amp; support</li>
+                    <li>✓ Payment structure guidance</li>
+                    <li>✓ Contract negotiation</li>
+                    <li>✓ Construction monitoring (new builds)</li>
+                    <li>✓ Property handover assistance</li>
+                    <li>✓ Post-purchase support</li>
+                </ul>
+                <div class="service-cta">
+                    <a href="/new-contact" class="cta-button-primary">Inquire Now →</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Additional Services Note -->
+        <div class="additional-services fade-in">
+            <p>
+                <strong>Need something different?</strong> I also offer custom packages 
+                tailored to your specific needs. 
+                <a href="/new-contact">Contact me</a> to discuss.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="how-it-works-section">
+    <div class="container">
+        <div class="section-label">THE PROCESS</div>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">
+            A simple, transparent process designed for diaspora investors.
+        </p>
+
+        <div class="process-timeline">
+            <div class="process-step fade-in">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="step-title">Discovery Call</h3>
+                    <p class="step-description">
+                        We start with a free 30-minute call to discuss your 
+                        goals, budget, timeline, and preferred locations.
+                    </p>
+                </div>
+                <div class="step-connector"></div>
+            </div>
+
+            <div class="process-step fade-in">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="step-title">Property Matching</h3>
+                    <p class="step-description">
+                        I curate a personalized selection of verified properties 
+                        that match your criteria and investment strategy.
+                    </p>
+                </div>
+                <div class="step-connector"></div>
+            </div>
+
+            <div class="process-step fade-in">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="step-title">Evaluation &amp; Visit</h3>
+                    <p class="step-description">
+                        Review properties remotely or schedule a site visit. 
+                        I provide detailed analysis and accompany you if needed.
+                    </p>
+                </div>
+                <div class="step-connector"></div>
+            </div>
+
+            <div class="process-step fade-in">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 class="step-title">Secure &amp; Close</h3>
+                    <p class="step-description">
+                        I guide you through legal review, negotiation, payment, 
+                        and final handover—ensuring a smooth transaction.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="process-note fade-in">
+            <p>
+                <strong>Timeline:</strong> The entire process typically takes 3–6 months, 
+                depending on your availability and decision-making pace. I work on your schedule.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== COMPARISON TABLE ========== -->
+<section class="comparison-section">
+    <div class="container">
+        <div class="section-label">COMPARE PACKAGES</div>
+        <h2 class="section-title">Which Service is Right for You?</h2>
+
+        <div class="comparison-table-wrapper fade-in">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-column">Feature</th>
+                        <th>Discovery Call</th>
+                        <th class="featured-column">Property Consultation</th>
+                        <th>Site Visit</th>
+                        <th class="premium-column">Full Package</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">Initial Consultation</td>
+                        <td>✓</td>
+                        <td class="featured-column">✓</td>
+                        <td>✓</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Property Recommendations</td>
+                        <td>—</td>
+                        <td class="featured-column">✓</td>
+                        <td>✓</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Due Diligence Support</td>
+                        <td>—</td>
+                        <td class="featured-column">✓</td>
+                        <td>—</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Site Visit Coordination</td>
+                        <td>—</td>
+                        <td class="featured-column">—</td>
+                        <td>✓</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Legal Document Review</td>
+                        <td>—</td>
+                        <td class="featured-column">—</td>
+                        <td>—</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Negotiation Support</td>
+                        <td>—</td>
+                        <td class="featured-column">Limited</td>
+                        <td>—</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Post-Purchase Support</td>
+                        <td>—</td>
+                        <td class="featured-column">—</td>
+                        <td>—</td>
+                        <td class="premium-column">✓</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Investment</td>
+                        <td><strong>Free</strong></td>
+                        <td class="featured-column"><strong>Custom</strong></td>
+                        <td><strong>Custom</strong></td>
+                        <td class="premium-column"><strong>Custom</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="comparison-note">
+            * Custom quotes based on property value, location, and scope of work. 
+            <a href="/new-contact">Contact me</a> for a personalized quote.
+        </p>
+    </div>
+</section>
+
+<!-- ========== WHY CHOOSE ME ========== -->
+<section class="why-choose-section">
+    <div class="container">
+        <div class="section-label" style="color: #7170B4;">WHY CHOOSE ME</div>
+        <h2 class="section-title" style="color: white;">What Makes My Service Different</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/><path d="M24 10l2.5 5 5.5.8-4 3.9.9 5.3-4.9-2.6-4.9 2.6.9-5.3-4-3.9 5.5-.8L24 10z" fill="rgba(255,255,255,0.9)"/><path d="M18 30l-3 14 9-5 9 5-3-14" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3 class="benefit-title">MBE-Recognized Excellence</h3>
+                <p class="benefit-description">
+                    Honored by the British Empire for business excellence and 
+                    community impact. You're working with recognized expertise.
+                </p>
+            </div>
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M8 44V18L24 6l16 12v26" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="28" width="12" height="16" rx="2" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/><circle cx="34" cy="14" r="8" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/><path d="M30 14l3 3 5-5" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3 class="benefit-title">Verified Properties Only</h3>
+                <p class="benefit-description">
+                    I only recommend properties from developers I've personally 
+                    vetted and trust. Your investment security is my priority.
+                </p>
+            </div>
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="rgba(255,255,255,0.9)" stroke-width="2"/><line x1="6" y1="24" x2="42" y2="24" stroke="rgba(255,255,255,0.9)" stroke-width="2"/><path d="M8 16h32M8 32h32" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></div>
+                <h3 class="benefit-title">Diaspora-First Approach</h3>
+                <p class="benefit-description">
+                    As a diaspora investor myself, I understand the unique challenges 
+                    of investing from abroad. I've been where you are.
+                </p>
+            </div>
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><line x1="24" y1="6" x2="24" y2="40" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="14" x2="38" y2="14" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/><path d="M10 14l-2 12c0 3 4 5 7 5s7-2 7-5l-2-12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 14l-2 12c0 3 4 5 7 5s7-2 7-5l-2-12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="40" x2="32" y2="40" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+                <h3 class="benefit-title">Legal Protection</h3>
+                <p class="benefit-description">
+                    Comprehensive legal support to ensure your interests are protected 
+                    throughout the transaction. No surprises, no hidden clauses.
+                </p>
+            </div>
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/><polyline points="12,32 20,22 28,28 36,14" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="14" r="3" fill="rgba(255,255,255,0.9)"/></svg></div>
+                <h3 class="benefit-title">Data-Driven Decisions</h3>
+                <p class="benefit-description">
+                    Oxford MBA-backed analysis and market research. Every recommendation 
+                    is supported by data, not just intuition.
+                </p>
+            </div>
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M6 20h8l6 4 6-4h4l6-4h6" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 20v-8a2 2 0 012-2h4" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/><path d="M34 20v-8a2 2 0 00-2-2h-4" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 24l4 4 4-4" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 28v8" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/><circle cx="18" cy="38" r="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/><circle cx="30" cy="38" r="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/></svg></div>
+                <h3 class="benefit-title">Ongoing Relationship</h3>
+                <p class="benefit-description">
+                    I don't disappear after the sale. Post-purchase support, property 
+                    management guidance, and future investment opportunities.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<section class="services-faq-section">
+    <div class="container">
+        <div class="section-label">FREQUENTLY ASKED</div>
+        <h2 class="section-title">Common Questions About My Services</h2>
+
+        <div class="faq-list">
+            <div class="faq-item active">
+                <h3 class="faq-question" onclick="toggleFaq(this)">How much do your services cost?</h3>
+                <div class="faq-answer">
+                    <p>
+                        The discovery call is completely free. For other services, pricing 
+                        depends on the property value, location, and scope of work. I provide 
+                        custom quotes based on your specific needs. Contact me for a personalized estimate.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">Do I have to visit Ghana?</h3>
+                <div class="faq-answer">
+                    <p>
+                        Not necessarily. Many clients successfully invest remotely with detailed 
+                        property reports, virtual tours, and video walkthroughs. However, I do 
+                        recommend visiting at least once before finalizing, and I can coordinate 
+                        the entire trip for you.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">What if I'm not ready to invest yet?</h3>
+                <div class="faq-answer">
+                    <p>
+                        That's perfectly fine! Start with the free discovery call to learn more 
+                        and get your questions answered. There's no pressure, and I'm happy to 
+                        guide you through the research phase until you're ready.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">Can you help with financing?</h3>
+                <div class="faq-answer">
+                    <p>
+                        While I don't provide financing directly, I can guide you through payment 
+                        structures, connect you with mortgage providers in Ghana, and advise on 
+                        payment plans offered by developers. Many properties offer flexible payment options.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">How long does the process take?</h3>
+                <div class="faq-answer">
+                    <p>
+                        Typically 3–6 months from initial consultation to property handover, but 
+                        this varies based on your availability, decision-making pace, and property 
+                        type (off-plan vs. completed). I work on your timeline.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">Do you work with first-time investors?</h3>
+                <div class="faq-answer">
+                    <p>
+                        Absolutely! Most of my clients are first-time Ghana property investors. 
+                        I specialize in guiding diaspora investors through their first purchase, 
+                        ensuring you understand every step of the process.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question" onclick="toggleFaq(this)">What locations do you cover?</h3>
+                <div class="faq-answer">
+                    <p>
+                        I work across Ghana's major investment hotspots including Accra (East Legon, 
+                        Airport Residential, Cantonments), Tema, Kumasi, Takoradi, and Cape Coast. 
+                        If you have a specific area in mind, let's discuss.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section class="services-cta-section">
+    <div class="container">
+        <div class="cta-wrapper fade-in">
+            <div class="section-label">NOT SURE WHICH SERVICE?</div>
+            <h2 class="cta-title">
+                Let's Find the Right<br>
+                Solution for You
+            </h2>
+            <p class="cta-description">
+                Book a free 30-minute discovery call, and I'll help you determine 
+                which service best fits your investment goals and timeline.
+            </p>
+            <div class="cta-buttons">
+                <a href="/new-book-call" class="cta-button-primary">Book Free Discovery Call →</a>
+                <a href="/new-contact" class="cta-button-secondary">Send a Message →</a>
+            </div>
+            <div class="cta-features">
+                <div class="cta-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>No obligation</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Free consultation</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Expert guidance</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-column footer-brand">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="footer-logo">
+                <p class="footer-tagline">
+                    Your trusted partner for Ghana real estate investment
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/new-home">Home</a></li>
+                    <li><a href="/new-about">About Lorraine</a></li>
+                    <li><a href="/new-services">Services</a></li>
+                    <li><a href="/new-properties">Properties</a></li>
+                    <li><a href="/new-resources">Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="/new-book-call">Free Discovery Call</a></li>
+                    <li><a href="/new-services#consultation">Property Consultation</a></li>
+                    <li><a href="/new-services#site-visit">Site Visits</a></li>
+                    <li><a href="/new-services#full-package">Full Package</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="footer-heading">Contact</h4>
+                <ul class="footer-contact">
+                    <li><a href="mailto:info@diasporatohome.com">info@diasporatohome.com</a></li>
+                    <li>London, United Kingdom</li>
+                    <li>Accra, Ghana</li>
+                </ul>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+                    <a href="#" class="social-icon" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg></a>
+                    <a href="#" class="social-icon" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.5h-2.8v8.43C19.61 23.09 24 18.1 24 12.07z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="/new-privacy">Privacy Policy</a>
+                <span class="footer-separator">|</span>
+                <a href="/new-terms">Terms &amp; Conditions</a>
+            </div>
+            <p class="footer-copyright">© 2026 Diaspora to Home. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // FAQ Accordion
+    function toggleFaq(element) {
+        const item = element.parentElement;
+        const wasActive = item.classList.contains('active');
+        
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        
+        // Open clicked (if it wasn't already open)
+        if (!wasActive) {
+            item.classList.add('active');
+        }
+    }
+
+    // Scroll-triggered fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Stagger siblings
+                const parent = entry.target.parentElement;
+                const siblings = Array.from(parent.querySelectorAll('.fade-in'));
+                const idx = siblings.indexOf(entry.target);
+                
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, idx * 100);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
