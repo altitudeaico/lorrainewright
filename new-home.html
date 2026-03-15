@@ -556,6 +556,279 @@
             line-height: 1.6;
         }
 
+        /* Trust Bar */
+        .trust-bar {
+            width: 100%;
+            background: var(--beige);
+            padding: 2rem 3rem;
+            border-bottom: 1px solid rgba(35, 27, 79, 0.1);
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .trust-badges {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy-medium);
+        }
+
+        .trust-separator {
+            color: var(--purple-accent);
+            font-weight: 300;
+        }
+
+        /* Pain Points Grid */
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .pain-point {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .pain-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--purple-accent), var(--navy-medium));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pain-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--white);
+        }
+
+        .pain-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .pain-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-medium);
+        }
+
+        .transition-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--navy-dark);
+            text-align: center;
+            margin-top: 4rem;
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--text-medium);
+            text-align: center;
+            max-width: 800px;
+            margin: 1rem auto 0;
+        }
+
+        .story-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--purple-accent);
+            color: var(--purple-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: var(--purple-accent);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(113, 112, 180, 0.3);
+        }
+
+        /* Pathways Grid */
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .pathway-card {
+            background: var(--white);
+            border: 2px solid rgba(35, 27, 79, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pathway-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(113, 112, 180, 0.15);
+            border-color: var(--purple-accent);
+        }
+
+        .pathway-featured {
+            border-color: var(--purple-accent);
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+
+        .pathway-featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .pathway-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--purple-accent);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pathway-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--navy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .pathway-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--purple-accent);
+            margin-bottom: 2rem;
+        }
+
+        .pathway-journey {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .journey-step {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy-medium);
+            padding: 0.4rem 0.8rem;
+            background: var(--beige);
+            border-radius: 4px;
+        }
+
+        .journey-arrow {
+            color: var(--purple-accent);
+            font-weight: 700;
+        }
+
+        .pathway-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .pathway-pricing {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .pathway-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--navy-dark);
+            color: var(--navy-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .pathway-button:hover {
+            background: var(--navy-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .pathway-button-primary {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+        }
+
+        .pathway-button-primary:hover {
+            background: var(--navy-dark);
+            border-color: var(--navy-dark);
+        }
+
         /* Navy Section - Featured Properties */
         .navy-section {
             width: 100%;
@@ -647,6 +920,234 @@
         }
 
         /* Beige Section - Services */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .advantage-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .advantage-icon svg {
+            width: 35px;
+            height: 35px;
+            stroke: var(--white);
+        }
+
+        .advantage-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-medium);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(35, 27, 79, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(113, 112, 180, 0.15);
+        }
+
+        .resource-icon {
+            font-size: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .resource-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--purple-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--navy-dark);
+            transform: translateX(4px);
+        }
+
+        /* FAQ Container */
+        .faq-container {
+            max-width: 900px;
+            margin: 4rem auto 0;
+        }
+
+        .faq-item {
+            background: var(--beige);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px rgba(113, 112, 180, 0.1);
+        }
+
+        .faq-question {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-medium);
+        }
+
+        /* Enhanced Final CTA */
+        .final-cta-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .final-cta-content {
+            padding: 3rem;
+        }
+
+        .final-cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .final-cta-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons-dual {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button-primary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--purple-accent);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--purple-accent);
+        }
+
+        .cta-button-primary:hover {
+            background: var(--white);
+            color: var(--purple-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--white);
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--white);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .cta-trust-elements {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .trust-element {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Beige Section - Services */
         .beige-section {
             width: 100%;
             background: var(--beige);
@@ -713,6 +1214,28 @@
         }
 
         /* Dark Navy Section - Testimonials */
+        .video-testimonial {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -1428,6 +1951,72 @@
             .hero-nav {
                 gap: 1rem !important;
             }
+
+            /* New Sections Mobile Styles */
+            .trust-content {
+                flex-direction: column;
+                gap: 1rem !important;
+                padding: 1.5rem !important;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 0.5rem !important;
+                text-align: center;
+            }
+
+            .pain-points-grid,
+            .pathways-grid,
+            .advantages-grid,
+            .resources-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .pathway-featured {
+                transform: scale(1) !important;
+            }
+
+            .pathway-journey {
+                flex-direction: column;
+                gap: 0.3rem !important;
+            }
+
+            .journey-arrow {
+                transform: rotate(90deg);
+            }
+
+            .final-cta-title {
+                font-size: 28px !important;
+            }
+
+            .final-cta-text {
+                font-size: 17px !important;
+            }
+
+            .cta-buttons-dual {
+                flex-direction: column;
+                gap: 1rem !important;
+            }
+
+            .cta-button-primary,
+            .cta-button-secondary {
+                width: 100%;
+                padding: 1rem 2rem !important;
+            }
+
+            .cta-trust-elements {
+                flex-direction: column;
+                gap: 0.8rem !important;
+            }
+
+            .faq-question {
+                font-size: 17px !important;
+            }
+
+            .faq-answer {
+                font-size: 15px !important;
+            }
         }
 
         /* Samsung Z Fold Front Screen (Narrow - folded mode < 400px) */
@@ -1669,35 +2258,202 @@
         </div>
     </div>
 
-    <!-- White Section - About -->
-    <section class="white-section" id="about">
+    <!-- Trust Bar - Social Proof -->
+    <section class="trust-bar">
+        <div class="trust-content">
+            <span class="trust-label">As Seen On & Recognized By:</span>
+            <div class="trust-badges">
+                <span class="trust-badge">Instagram 45K+</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-badge">HSBC Top 25 2023</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-badge">MBE 2023</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-badge">Oxford MBA</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-badge">15+ Years Experience</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section - Address Pain Points -->
+    <section class="white-section" id="problem">
         <div class="section-content">
-            <div class="section-label">About Lorraine</div>
-            <h2 class="section-title">Hey, I'm Lorraine!</h2>
-            <p class="section-text">I'm Lorraine Wright MBE, a British-born Ghanaian passionate about bridging the gap between the diaspora and property investment in Ghana. Like many of you, I felt a deep connection to the motherland and a strong desire to own a piece of it. But the journey wasn't straightforward.</p>
+            <div class="section-label">The Reality</div>
+            <h2 class="section-title">You Want to Invest in Ghana, But...</h2>
+            <p class="section-subtitle">The reality of diaspora property investment isn't what the adverts promise.</p>
+
+            <div class="pain-points-grid">
+                <div class="pain-point">
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <h3 class="pain-title">Fear of Getting Scammed</h3>
+                    <p class="pain-desc">Unverified developers, fake land titles, and disappearing "agents" make diaspora investors easy targets.</p>
+                </div>
+
+                <div class="pain-point">
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="pain-title">Managing from Abroad</h3>
+                    <p class="pain-desc">How do you verify properties, attend viewings, or manage legal processes from London, New York, or Toronto?</p>
+                </div>
+
+                <div class="pain-point">
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3 class="pain-title">Legal Complexity</h3>
+                    <p class="pain-desc">Leasehold vs. freehold, land titles, family disputes, and documentation requirements feel like a maze.</p>
+                </div>
+            </div>
+
+            <p class="transition-text">I know exactly how this feels, because I experienced all three. Here's what I learned...</p>
+        </div>
+    </section>
+
+    <!-- Lorraine's Story - Shortened and Focused -->
+    <section class="navy-section" id="about">
+        <div class="section-content">
+            <div class="section-label">My Story</div>
+            <h2 class="section-title">From Costly Mistakes to Guiding 500+ Investors</h2>
             
-            <p class="section-text">Fifteen years ago, I purchased my first piece of land in Ghana, and ten years ago, I dived headfirst into property investment after attending a Property Expo in London. What I thought would be a smooth experience quickly turned into a series of roadblocks, missteps, and expensive lessons. From navigating complex legal frameworks to dealing with unreliable developers, I encountered challenges that could have easily discouraged me. But instead, they fueled my mission.</p>
+            <p class="section-text">Fifteen years ago, I made every mistake you're afraid of making. I trusted the wrong people. I signed documents I didn't fully understand. I lost money on deals that looked legitimate. My dream of owning property in Ghana almost became a nightmare.</p>
             
-            <p class="section-text">Now, I use my firsthand experience to educate and guide others who want to invest in Ghana safely and strategically. Through my platform, Diaspora to Home, I provide resources, masterclasses, and consultancy services to help aspiring investors make informed decisions, avoid costly mistakes, and build generational wealth through real estate.</p>
+            <p class="section-text">Those expensive lessons became my education. While earning my MBA at Oxford and working at Meta, UBS, and Accenture, I spent a decade learning Ghana's property market from the inside—building relationships with verified developers, understanding the legal system, and creating systems to protect investors like you.</p>
             
-            <p class="section-text">I believe that property investment in Ghana isn't just about owning land or a home—it's about reclaiming our narratives, creating opportunities, and leaving a legacy. Whether you're looking to buy your first property, explore Airbnb opportunities, or navigate the mortgage process as a diaspora investor, I'm here to help you every step of the way.</p>
+            <p class="section-text">Today, I use that insider knowledge to help diaspora investors avoid the pitfalls I faced. Whether you need a free guide to get started or full white-glove service from search to keys, I'm here to make your Ghana property journey secure, transparent, and successful.</p>
 
             <div class="credentials-list">
                 <div class="credential-item">
-                    <div class="credential-title">MBE Recognition</div>
-                    <div class="credential-desc">Member of the British Empire for services to young people through music</div>
+                    <div class="credential-title">MBE</div>
+                    <div class="credential-desc">Member of the British Empire</div>
                 </div>
                 <div class="credential-item">
                     <div class="credential-title">Oxford MBA</div>
-                    <div class="credential-desc">Executive MBA from University of Oxford Saïd Business School</div>
+                    <div class="credential-desc">Saïd Business School</div>
                 </div>
                 <div class="credential-item">
                     <div class="credential-title">HSBC Top 25</div>
-                    <div class="credential-desc">Top 25 Black Entrepreneurs to Watch 2023</div>
+                    <div class="credential-desc">Entrepreneur 2023</div>
                 </div>
                 <div class="credential-item">
-                    <div class="credential-title">15+ Years Experience</div>
-                    <div class="credential-desc">Corporate roles at Accenture, UBS, and Meta + property investment expertise</div>
+                    <div class="credential-title">15+ Years</div>
+                    <div class="credential-desc">Corporate + Property Expertise</div>
+                </div>
+            </div>
+
+            <div class="story-cta">
+                <a href="new-about.html" class="secondary-button">Read My Full Story →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works - Three Pathways -->
+    <section class="white-section" id="how-it-works">
+        <div class="section-content">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Your Path from Interest to Ownership</h2>
+            <p class="section-subtitle">Three proven pathways, depending on where you are in your journey</p>
+
+            <div class="pathways-grid">
+                <!-- DIY Learner -->
+                <div class="pathway-card">
+                    <div class="pathway-badge">Best for Budget-Conscious</div>
+                    <h3 class="pathway-title">DIY Learner</h3>
+                    <p class="pathway-subtitle">Learn the Process Yourself</p>
+                    <div class="pathway-journey">
+                        <div class="journey-step">Free Guide</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">eBooks</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Course</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Community</div>
+                    </div>
+                    <p class="pathway-desc">Perfect for hands-on investors who want to understand every step and build their expertise.</p>
+                    <a href="choose-free-guide.html" class="pathway-button">Get Free Guide</a>
+                </div>
+
+                <!-- Guided Investor -->
+                <div class="pathway-card pathway-featured">
+                    <div class="pathway-badge">Most Popular</div>
+                    <h3 class="pathway-title">Guided Investor</h3>
+                    <p class="pathway-subtitle">Expert Guidance, Your Control</p>
+                    <div class="pathway-journey">
+                        <div class="journey-step">Consultation</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Due Diligence</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Vetted Properties</div>
+                    </div>
+                    <p class="pathway-desc">For busy professionals who want expert oversight but maintain decision-making control.</p>
+                    <div class="pathway-pricing">Starting at £499</div>
+                    <a href="new-book-call.html" class="pathway-button pathway-button-primary">Book Consultation</a>
+                </div>
+
+                <!-- Done-For-You -->
+                <div class="pathway-card">
+                    <div class="pathway-badge">White-Glove Service</div>
+                    <h3 class="pathway-title">Done-For-You</h3>
+                    <p class="pathway-subtitle">Hands-Off, Stress-Free</p>
+                    <div class="pathway-journey">
+                        <div class="journey-step">Property Search</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Full Service</div>
+                        <div class="journey-arrow">→</div>
+                        <div class="journey-step">Keys in Hand</div>
+                    </div>
+                    <p class="pathway-desc">For time-poor investors who want complete support from search to ownership.</p>
+                    <div class="pathway-pricing">£5,999 Full Service</div>
+                    <a href="new-services.html" class="pathway-button">View Elite Packages</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - Social Proof (MOVED UP) -->
+    <section class="navy-section">
+        <div class="section-content">
+            <div class="section-label">Real Results</div>
+            <h2 class="section-title">Diaspora Investors Building Wealth with My Guidance</h2>
+            <p class="section-text">Don't just take my word for it—hear from investors who've successfully navigated Ghana's property market.</p>
+
+            <!-- Video Testimonial -->
+            <div class="video-testimonial">
+                <div class="video-wrapper">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/pYv9DPE7ubw" title="Client Testimonial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Lorraine made the entire process seamless. Her guidance was invaluable in navigating Ghana's property market from the UK. I couldn't have done it without her expertise.</p>
+                    <div class="testimonial-author">Kwame Asante</div>
+                    <div class="testimonial-location">Property Investor, London</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Best investment decision I ever made. Lorraine's transparency and professionalism gave me complete confidence throughout the entire process.</p>
+                    <div class="testimonial-author">Abena Ntim</div>
+                    <div class="testimonial-location">Diaspora Investor, USA</div>
                 </div>
             </div>
         </div>
@@ -1706,9 +2462,9 @@
     <!-- Dark Navy Section - Featured Properties -->
     <section class="navy-section" id="featured">
         <div class="section-content">
-            <div class="section-label">Featured Portfolio</div>
-            <h2 class="section-title">Exclusive Ghana Properties</h2>
-            <p class="section-text">Curated properties from verified premier developers across Ghana's most sought-after locations.</p>
+            <div class="section-label">Investment Opportunities</div>
+            <h2 class="section-title">This Month's Curated Ghana Properties</h2>
+            <p class="section-text">Vetted by Lorraine • Verified Developers • Transparent Pricing</p>
 
             <div class="properties-grid">
                 <!-- Property 1 -->
@@ -1742,6 +2498,103 @@
                         <div class="property-location">Ada Foah, Ghana</div>
                         <a href="#" class="property-link">View Details →</a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Lorraine - Differentiation Section -->
+    <section class="white-section">
+        <div class="section-content">
+            <div class="section-label">Why Choose Me</div>
+            <h2 class="section-title">What Makes Diaspora to Home Different</h2>
+            <p class="section-subtitle">Five advantages that set my approach apart from traditional property agents</p>
+
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h3 class="advantage-title">Diaspora Investor Myself</h3>
+                    <p class="advantage-desc">I've been exactly where you are—navigating Ghana property investment from abroad. I understand the psychology, not just the process.</p>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M2 12h20"/>
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                    </div>
+                    <h3 class="advantage-title">Fixed Fees, No Conflicts</h3>
+                    <p class="advantage-desc">I charge transparent fixed fees (£499-£5,999), not commission percentages. Your best interest is my only interest.</p>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3z"/>
+                            <path d="M21 9H3"/>
+                            <path d="M21 15H3"/>
+                        </svg>
+                    </div>
+                    <h3 class="advantage-title">15 Years of Insider Access</h3>
+                    <p class="advantage-desc">Direct relationships with verified developers, lawyers, and property professionals across Ghana. No middlemen.</p>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="advantage-title">Complete Transparency</h3>
+                    <p class="advantage-desc">You see every document, every step, every decision. No hidden fees, no surprises, no pressure.</p>
+                </div>
+
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3 class="advantage-title">Post-Purchase Support</h3>
+                    <p class="advantage-desc">Airbnb setup guidance, property management connections, and ongoing support—your investment journey doesn't end at purchase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Resources Section - Lead Generation -->
+    <section class="beige-section">
+        <div class="section-content">
+            <div class="section-label">Start Learning</div>
+            <h2 class="section-title">Free Resources to Get You Started</h2>
+            <p class="section-subtitle">No email required—start learning about Ghana property investment today</p>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📘</div>
+                    <h3 class="resource-title">Free Property Guide</h3>
+                    <p class="resource-desc">5 Things You Must Know Before Investing in Ghana Real Estate</p>
+                    <a href="choose-free-guide.html" class="resource-link">Download Free Guide →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <h3 class="resource-title">Roots to Revenue Masterclass</h3>
+                    <p class="resource-desc">Free video training on building Airbnb income from Ghana property</p>
+                    <a href="new-resources.html" class="resource-link">Watch Masterclass →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📱</div>
+                    <h3 class="resource-title">Daily Instagram Tips</h3>
+                    <p class="resource-desc">Join 45,000+ diaspora investors getting property insights</p>
+                    <a href="https://instagram.com/lorrainehwright" target="_blank" class="resource-link">Follow on Instagram →</a>
                 </div>
             </div>
         </div>
@@ -1794,38 +2647,61 @@
         </div>
     </section>
 
-    <!-- Dark Navy Section - Testimonials -->
-    <section class="navy-section">
+    <!-- FAQ Section - Objection Crusher -->
+    <section class="white-section">
         <div class="section-content">
-            <div class="section-label">Testimonials</div>
-            <h2 class="section-title">What Clients Say</h2>
-            <p class="section-text">Hear from diaspora investors who have successfully built wealth in Ghana with my guidance.</p>
+            <div class="section-label">Your Questions Answered</div>
+            <h2 class="section-title">Common Questions from Diaspora Investors</h2>
+            <p class="section-subtitle">Everything you need to know before taking your first step</p>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">Lorraine made the entire process seamless. Her guidance was invaluable in navigating Ghana's property market from the UK. I couldn't have done it without her expertise.</p>
-                    <div class="testimonial-author">Kwame Asante</div>
-                    <div class="testimonial-location">Property Investor, London</div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to visit Ghana to buy property?</div>
+                    <div class="faq-answer">No. While visiting is ideal, it's not required. I can arrange virtual viewings, coordinate site visits through trusted representatives, and handle all documentation remotely. Many of my clients complete their entire purchase from the UK, US, or Canada.</div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">Best investment decision I ever made. Lorraine's transparency and professionalism gave me complete confidence throughout the entire process.</p>
-                    <div class="testimonial-author">Abena Ntim</div>
-                    <div class="testimonial-location">Diaspora Investor, USA</div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I know developers are legitimate?</div>
+                    <div class="faq-answer">Every developer I work with has been personally vetted over 15 years. I verify their track record, inspect completed projects, review legal documentation, and ensure they have proper registration. You get my "Vetted by Lorraine" guarantee on all properties I recommend.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What's the typical timeline from search to ownership?</div>
+                    <div class="faq-answer">With my guidance, most clients complete their purchase in 3-6 months. This includes property search, due diligence, legal review, and final transfer. DIY investors typically take 6-12 months. My Elite service can fast-track this to 2-3 months.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I get a mortgage as a diaspora investor?</div>
+                    <div class="faq-answer">Yes! I have partnerships with lenders who specialize in diaspora mortgages. You'll need proof of income, a deposit (typically 20-30%), and valid ID. I can guide you through the entire mortgage application process and connect you with the right lenders.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What if something goes wrong after I purchase?</div>
+                    <div class="faq-answer">My support doesn't end at purchase. I provide post-purchase guidance including property management connections, Airbnb setup support, and ongoing advice. If issues arise with developers, I leverage my relationships to help resolve them quickly.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- White Section - CTA -->
-    <section class="white-section" id="contact">
+    <!-- Enhanced Final CTA Section -->
+    <section class="navy-section" id="contact">
         <div class="section-content">
-            <div class="cta-box">
-                <h2 class="cta-title">Ready to Build Your Legacy in Ghana?</h2>
-                <p class="cta-text">Book a free consultation and discover how to invest in Ghana property with confidence, backed by expertise and proven systems.</p>
-                <a href="#" class="cta-button">Book Free Consultation</a>
+            <div class="final-cta-wrapper">
+                <div class="final-cta-content">
+                    <h2 class="final-cta-title">Ready to Build Your Ghana Legacy?</h2>
+                    <p class="final-cta-text">Book a free 15-minute clarity call and discover your best path to Ghana property ownership—whether you're starting from scratch or ready to invest today.</p>
+                    
+                    <div class="cta-buttons-dual">
+                        <a href="new-book-call.html" class="cta-button-primary">Book Free Call</a>
+                        <a href="choose-free-guide.html" class="cta-button-secondary">Download Free Guide</a>
+                    </div>
+
+                    <div class="cta-trust-elements">
+                        <div class="trust-element">✅ No sales pressure</div>
+                        <div class="trust-element">✅ 15-minute clarity call</div>
+                        <div class="trust-element">✅ Custom roadmap for your situation</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
