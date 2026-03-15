@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Properties - Diaspora to Home DEMO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +12,24 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: #F5F1ED;
-            color: #231B4F;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3d325f;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --beige-light: #FAF8F5;
+            --white: #ffffff;
+            --black: #000000;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
         }
 
         /* Demo Banner */
@@ -26,65 +40,140 @@
             padding: 12px;
             font-weight: 600;
             font-size: 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
         }
 
-        /* Header */
-        .header {
-            background: white;
-            padding: 20px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .demo-banner a {
+            color: white;
+            text-decoration: underline;
         }
 
-        .header-content {
-            max-width: 1200px;
+        /* Navigation Bar */
+        .top-nav-bar {
+            position: fixed;
+            top: 42px;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0.5rem 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #231B4F;
+        .logo-image {
+            height: 55px;
+            width: auto;
         }
 
-        .nav {
+        .hero-nav {
             display: flex;
-            gap: 30px;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .nav a {
-            color: #231B4F;
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--navy-dark);
             text-decoration: none;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--purple-accent);
+        }
+
+        .nav-cta {
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.4);
+        }
+
+        .search-icon {
+            color: var(--navy-dark);
+            font-size: 22px;
+            cursor: pointer;
         }
 
         /* Main Content */
+        body {
+            background: var(--beige);
+            padding-top: 150px;
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 60px 40px;
         }
 
         .page-title {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #231B4F;
+            color: var(--navy-dark);
             margin-bottom: 10px;
         }
 
         .page-subtitle {
             font-size: 18px;
-            color: #7170B4;
+            color: var(--purple-accent);
             margin-bottom: 40px;
         }
 
         /* Filters */
         .filters {
-            background: white;
+            background: var(--white);
             padding: 30px;
             border-radius: 8px;
             margin-bottom: 40px;
@@ -107,17 +196,17 @@
             font-weight: 600;
             margin-bottom: 8px;
             font-size: 14px;
-            color: #231B4F;
+            color: var(--navy-dark);
         }
 
         .filter-item select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #F5F1ED;
+            border: 2px solid var(--beige);
             border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
             font-size: 14px;
-            background: white;
+            background: var(--white);
         }
 
         /* Properties Grid */
@@ -129,7 +218,7 @@
         }
 
         .property-card {
-            background: white;
+            background: var(--white);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -163,24 +252,24 @@
         }
 
         .badge-vetted {
-            background: #231B4F;
-            color: white;
+            background: var(--navy-dark);
+            color: var(--white);
         }
 
         .badge-seller {
-            background: #7170B4;
-            color: white;
+            background: var(--purple-accent);
+            color: var(--white);
         }
 
         .property-title {
             font-size: 20px;
             font-weight: 700;
-            color: #231B4F;
+            color: var(--navy-dark);
             margin-bottom: 8px;
         }
 
         .property-location {
-            color: #7170B4;
+            color: var(--purple-accent);
             font-size: 14px;
             margin-bottom: 12px;
         }
@@ -188,7 +277,7 @@
         .property-price {
             font-size: 24px;
             font-weight: 700;
-            color: #231B4F;
+            color: var(--navy-dark);
             margin-bottom: 12px;
         }
 
@@ -200,16 +289,10 @@
             margin-bottom: 15px;
         }
 
-        .property-detail {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
         .view-details-btn {
             display: inline-block;
-            background: #7170B4;
-            color: white;
+            background: var(--purple-accent);
+            color: var(--white);
             padding: 12px 24px;
             border-radius: 4px;
             text-decoration: none;
@@ -219,52 +302,75 @@
         }
 
         .view-details-btn:hover {
-            background: #231B4F;
-        }
-
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 8px;
-        }
-
-        .no-results h3 {
-            font-size: 24px;
-            color: #231B4F;
-            margin-bottom: 10px;
-        }
-
-        .no-results p {
-            color: #666;
+            background: var(--navy-dark);
         }
 
         /* Footer */
         .footer {
-            background: #231B4F;
-            color: white;
-            padding: 40px;
+            background: var(--navy-dark);
+            color: var(--white);
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-section a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            margin-top: 60px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .properties-grid {
-                grid-template-columns: 1fr;
+            .top-nav-bar {
+                padding: 0.5rem 1rem;
             }
 
-            .filter-group {
-                flex-direction: column;
+            .nav-links {
+                display: none;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
             }
 
             .container {
                 padding: 40px 20px;
             }
 
-            .header {
-                padding: 20px;
+            .page-title {
+                font-size: 36px;
             }
         }
     </style>
@@ -272,20 +378,30 @@
 <body>
     <!-- Demo Banner -->
     <div class="demo-banner">
-        🎬 DEMO VERSION - This is a working prototype. Once approved, we'll integrate with your live site!
+        🎬 DEMO VERSION - This is a working prototype | <a href="../new-home.html">Back to Main Site</a>
     </div>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="header-content">
-            <div class="logo">Diaspora to Home</div>
-            <nav class="nav">
-                <a href="demo-properties.html">Properties</a>
-                <a href="#">Submit Property</a>
-                <a href="demo-admin.html">Admin</a>
-            </nav>
+    <!-- Navigation Bar -->
+    <nav class="top-nav-bar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../new-home.html">
+                    <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+                </a>
+            </div>
+
+            <div class="hero-nav">
+                <div class="nav-links">
+                    <a href="../new-about.html">About</a>
+                    <a href="demo-properties.html" class="active">Properties</a>
+                    <a href="../new-services.html">Services</a>
+                    <a href="../new-resources.html">Resources</a>
+                    <a href="../new-contact.html" class="nav-cta">Contact Lorraine</a>
+                </div>
+                <div class="search-icon">🔍</div>
+            </div>
         </div>
-    </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="container">
@@ -326,229 +442,106 @@
         </div>
 
         <!-- Properties Grid -->
-        <div class="properties-grid" id="properties-container">
-            <!-- Properties will be loaded here by JavaScript -->
-        </div>
+        <div class="properties-grid" id="properties-container"></div>
     </div>
 
     <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2026 Diaspora to Home by Lorraine Wright MBE. All rights reserved.</p>
-        <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">DEMO VERSION - Built by Altitude AI Co</p>
-    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="../new-about.html">Our Story</a>
+                <a href="../new-about.html">Why Choose Us</a>
+                <a href="../new-contact.html">Contact</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="../new-book-call.html">Consultation</a>
+                <a href="../new-services.html">Due Diligence</a>
+                <a href="../new-resources.html">Courses</a>
+                <a href="demo-properties.html">Listings</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="../choose-free-guide.html">Free Guide</a>
+                <a href="../new-resources.html">Blog</a>
+                <a href="../new-resources.html">Market Insights</a>
+                <a href="../new-resources.html">eBooks</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="https://instagram.com/lorrainehwright" target="_blank">Instagram</a>
+                <a href="https://uk.linkedin.com/in/lorrainehwright" target="_blank">LinkedIn</a>
+                <a href="../new-contact.html">Email</a>
+                <a href="../new-book-call.html">Book Call</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Diaspora to Home by Lorraine Wright MBE. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">DEMO VERSION - Built by Altitude AI Co</p>
+        </div>
+    </footer>
 
     <script>
-        // Sample property data (simulating Supabase)
         var properties = [
-            {
-                id: 1,
-                type: 'vetted',
-                title: 'Luxury Villa in East Legon',
-                location: 'East Legon, Accra',
-                price: 250000,
-                bedrooms: 4,
-                bathrooms: 3,
-                property_type: 'villa',
-                size: '500 sqm',
-                description: 'Beautiful modern villa with swimming pool and landscaped gardens.',
-                featured_image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800'
-            },
-            {
-                id: 2,
-                type: 'vetted',
-                title: 'Modern Apartment in Airport Residential',
-                location: 'Airport Residential, Accra',
-                price: 120000,
-                bedrooms: 3,
-                bathrooms: 2,
-                property_type: 'apartment',
-                size: '180 sqm',
-                description: 'Contemporary 3-bedroom apartment in secure gated community.',
-                featured_image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800'
-            },
-            {
-                id: 3,
-                type: 'vetted',
-                title: 'Beachfront Estate in Kokrobite',
-                location: 'Kokrobite Beach Road',
-                price: 380000,
-                bedrooms: 5,
-                bathrooms: 4,
-                property_type: 'estate',
-                size: '800 sqm',
-                description: 'Stunning beachfront property with direct beach access and infinity pool.',
-                featured_image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800'
-            },
-            {
-                id: 4,
-                type: 'vetted',
-                title: 'Prime Commercial Land in Tema',
-                location: 'Tema Community 1',
-                price: 85000,
-                bedrooms: 0,
-                bathrooms: 0,
-                property_type: 'land',
-                size: '1000 sqm',
-                description: 'Development-ready commercial land in high-traffic area.',
-                featured_image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'
-            },
-            {
-                id: 5,
-                type: 'vetted',
-                title: 'Executive Townhouse in Cantonments',
-                location: 'Cantonments, Accra',
-                price: 195000,
-                bedrooms: 3,
-                bathrooms: 3,
-                property_type: 'villa',
-                size: '250 sqm',
-                description: 'Elegant townhouse in diplomatic enclave with rooftop terrace.',
-                featured_image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800'
-            },
-            {
-                id: 6,
-                type: 'seller',
-                title: 'Family Home in Spintex',
-                location: 'Spintex Road, Accra',
-                price: 95000,
-                bedrooms: 3,
-                bathrooms: 2,
-                property_type: 'villa',
-                size: '300 sqm',
-                description: 'Cozy family home in established neighborhood.',
-                featured_image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800'
-            },
-            {
-                id: 7,
-                type: 'seller',
-                title: 'Investment Land in Prampram',
-                location: 'Prampram Beach Road',
-                price: 45000,
-                bedrooms: 0,
-                bathrooms: 0,
-                property_type: 'land',
-                size: '600 sqm',
-                description: 'Beach-adjacent land parcel perfect for vacation home.',
-                featured_image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'
-            },
-            {
-                id: 8,
-                type: 'seller',
-                title: 'Renovated Bungalow in Madina',
-                location: 'Madina Estate, Accra',
-                price: 78000,
-                bedrooms: 2,
-                bathrooms: 2,
-                property_type: 'villa',
-                size: '200 sqm',
-                description: 'Recently renovated bungalow ideal for small family.',
-                featured_image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800'
-            },
-            {
-                id: 9,
-                type: 'seller',
-                title: 'Duplex in Trassaco Valley',
-                location: 'Trassaco Valley Estate',
-                price: 165000,
-                bedrooms: 4,
-                bathrooms: 3,
-                property_type: 'villa',
-                size: '350 sqm',
-                description: 'Modern duplex in prestigious gated estate.',
-                featured_image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800'
-            },
-            {
-                id: 10,
-                type: 'seller',
-                title: 'Warehouse Space in Tema Industrial',
-                location: 'Tema Industrial Area',
-                price: 125000,
-                bedrooms: 0,
-                bathrooms: 2,
-                property_type: 'land',
-                size: '1200 sqm',
-                description: 'Spacious warehouse with office annex and loading dock.',
-                featured_image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800'
-            }
+            {id: 1, type: 'vetted', title: 'Luxury Villa in East Legon', location: 'East Legon, Accra', price: 250000, bedrooms: 4, bathrooms: 3, property_type: 'villa', size: '500 sqm', featured_image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800'},
+            {id: 2, type: 'vetted', title: 'Modern Apartment in Airport Residential', location: 'Airport Residential, Accra', price: 120000, bedrooms: 3, bathrooms: 2, property_type: 'apartment', size: '180 sqm', featured_image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800'},
+            {id: 3, type: 'vetted', title: 'Beachfront Estate in Kokrobite', location: 'Kokrobite Beach Road', price: 380000, bedrooms: 5, bathrooms: 4, property_type: 'estate', size: '800 sqm', featured_image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800'},
+            {id: 4, type: 'vetted', title: 'Prime Commercial Land in Tema', location: 'Tema Community 1', price: 85000, bedrooms: 0, bathrooms: 0, property_type: 'land', size: '1000 sqm', featured_image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'},
+            {id: 5, type: 'vetted', title: 'Executive Townhouse in Cantonments', location: 'Cantonments, Accra', price: 195000, bedrooms: 3, bathrooms: 3, property_type: 'villa', size: '250 sqm', featured_image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800'},
+            {id: 6, type: 'seller', title: 'Family Home in Spintex', location: 'Spintex Road, Accra', price: 95000, bedrooms: 3, bathrooms: 2, property_type: 'villa', size: '300 sqm', featured_image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800'},
+            {id: 7, type: 'seller', title: 'Investment Land in Prampram', location: 'Prampram Beach Road', price: 45000, bedrooms: 0, bathrooms: 0, property_type: 'land', size: '600 sqm', featured_image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'},
+            {id: 8, type: 'seller', title: 'Renovated Bungalow in Madina', location: 'Madina Estate, Accra', price: 78000, bedrooms: 2, bathrooms: 2, property_type: 'villa', size: '200 sqm', featured_image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800'},
+            {id: 9, type: 'seller', title: 'Duplex in Trassaco Valley', location: 'Trassaco Valley Estate', price: 165000, bedrooms: 4, bathrooms: 3, property_type: 'villa', size: '350 sqm', featured_image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800'},
+            {id: 10, type: 'seller', title: 'Warehouse Space in Tema Industrial', location: 'Tema Industrial Area', price: 125000, bedrooms: 0, bathrooms: 2, property_type: 'land', size: '1200 sqm', featured_image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800'}
         ];
 
-        // Current filtered properties
-        var filteredProperties = properties;
-
-        // Display properties
         function displayProperties(propertiesToShow) {
             var container = document.getElementById('properties-container');
             container.innerHTML = '';
-
-            if (propertiesToShow.length === 0) {
-                container.innerHTML = '<div class="no-results"><h3>No properties found</h3><p>Try adjusting your filters</p></div>';
-                return;
-            }
-
             propertiesToShow.forEach(function(property) {
-                var card = createPropertyCard(property);
-                container.appendChild(card);
+                container.appendChild(createPropertyCard(property));
             });
         }
 
-        // Create property card
         function createPropertyCard(property) {
             var card = document.createElement('div');
             card.className = 'property-card';
-
             var badgeClass = property.type === 'vetted' ? 'badge-vetted' : 'badge-seller';
             var badgeText = property.type === 'vetted' ? 'Vetted by Lorraine' : 'Seller\'s Listing';
-
-            var bedroomsBathrooms = '';
-            if (property.bedrooms > 0) {
-                bedroomsBathrooms = '<div class="property-details">' +
-                    '<div class="property-detail">' + property.bedrooms + ' bed</div>' +
-                    '<div class="property-detail">' + property.bathrooms + ' bath</div>' +
-                    '<div class="property-detail">' + property.size + '</div>' +
-                    '</div>';
-            } else {
-                bedroomsBathrooms = '<div class="property-details">' +
-                    '<div class="property-detail">' + property.size + '</div>' +
-                    '</div>';
-            }
-
-            card.innerHTML = 
-                '<img src="' + property.featured_image + '" alt="' + property.title + '" class="property-image">' +
+            var details = property.bedrooms > 0 ? '<div class="property-details"><div>' + property.bedrooms + ' bed</div><div>' + property.bathrooms + ' bath</div><div>' + property.size + '</div></div>' : '<div class="property-details"><div>' + property.size + '</div></div>';
+            
+            card.innerHTML = '<img src="' + property.featured_image + '" alt="' + property.title + '" class="property-image">' +
                 '<div class="property-content">' +
                     '<span class="property-badge ' + badgeClass + '">' + badgeText + '</span>' +
                     '<h3 class="property-title">' + property.title + '</h3>' +
                     '<p class="property-location">' + property.location + '</p>' +
                     '<p class="property-price">$' + property.price.toLocaleString() + '</p>' +
-                    bedroomsBathrooms +
+                    details +
                     '<a href="#" class="view-details-btn">View Details →</a>' +
                 '</div>';
-
             return card;
         }
 
-        // Filter properties
         function filterProperties() {
             var locationFilter = document.getElementById('filter-location').value.toLowerCase();
             var typeFilter = document.getElementById('filter-type').value.toLowerCase();
             var listingFilter = document.getElementById('filter-listing').value.toLowerCase();
-
-            filteredProperties = properties.filter(function(property) {
-                var matchesLocation = !locationFilter || property.location.toLowerCase().includes(locationFilter);
-                var matchesType = !typeFilter || property.property_type === typeFilter;
-                var matchesListing = !listingFilter || property.type === listingFilter;
-
-                return matchesLocation && matchesType && matchesListing;
+            var filtered = properties.filter(function(property) {
+                return (!locationFilter || property.location.toLowerCase().includes(locationFilter)) &&
+                       (!typeFilter || property.property_type === typeFilter) &&
+                       (!listingFilter || property.type === listingFilter);
             });
-
-            displayProperties(filteredProperties);
+            displayProperties(filtered);
         }
 
-        // Event listeners
         document.getElementById('filter-location').addEventListener('change', filterProperties);
         document.getElementById('filter-type').addEventListener('change', filterProperties);
         document.getElementById('filter-listing').addEventListener('change', filterProperties);
-
-        // Initial display
         displayProperties(properties);
     </script>
 </body>
