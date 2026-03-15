@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Diaspora to Home | Ghana Real Estate Investment by Lorraine Wright MBE</title>
+    <!-- Version: 5.5 - DEV URL convention: all pages use /new- prefix -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Montserrat', 'Orkney', sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --navy-dark: #231B4F;
+            --navy-medium: #3d325f;
+            --purple-accent: #7170B4;
+            --beige: #F5F1ED;
+            --beige-light: #FAF8F5;
+            --white: #ffffff;
+            --black: #000000;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+        }
+
+        /* Hero Section - Gradient Background */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            background: var(--navy-dark);
+            padding-top: 55px;
+            padding-bottom: 0;
+        }
+
+        /* Video Background */
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-video-bg video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Purple/Navy Gradient Overlay - Strong left, transparent right */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, 
+                var(--navy-dark) 0%, 
+                var(--navy-dark) 25%, 
+                rgba(61, 50, 95, 0.85) 40%, 
+                rgba(113, 112, 180, 0.4) 60%, 
+                rgba(245, 241, 237, 0.2) 75%, 
+                transparent 90%
+            );
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Navigation Bar - White Background for Desktop */
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 0.5rem 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo in Nav Bar */
+        .logo {
+            position: relative;
+            top: auto;
+            left: auto;
+            z-index: auto;
+            opacity: 1;
+            animation: none;
+        }
+
+        .logo-image {
+            height: 55px;
+            width: auto;
+        }
+
+        /* Navigation in Nav Bar */
+        .hero-nav {
+            position: relative;
+            top: auto;
+            right: auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            z-index: auto;
+            opacity: 1;
+            animation: none;
+        }
+
+        .search-icon {
+            color: var(--navy-dark);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .search-icon:hover {
+            color: var(--purple-accent);
+        }
+
+        /* Desktop Navigation Menu */
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--navy-dark);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        /* Animated underline on hover */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
+        }
+
+        /* Contact CTA Button */
+        .nav-cta {
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding-bottom: 0.8rem !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(113, 112, 180, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-line {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(35, 27, 79, 0.98);
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 3rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--purple-accent);
+            transform: translateX(10px);
+        }
+
+        .mobile-nav-contact {
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .mobile-nav-contact:hover {
+            background: var(--navy-dark);
+            transform: translateX(0) translateY(-2px);
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            z-index: 10;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 525px;
+            margin: 0;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            z-index: 10;
+        }
+
+        .hero-main-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 5;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        /* Animated Scroll Arrow - hidden on desktop */
+        .scroll-arrow-wrapper {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 998;
+            cursor: pointer;
+            display: none;
+        }
+
+        .scroll-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(113, 112, 180, 0.9);
+            border-radius: 50%;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            transition: opacity 0.3s ease, background 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+            background: rgba(113, 112, 180, 1);
+        }
+
+        /* Hide arrow once user scrolls past hero */
+        .scroll-arrow-wrapper.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Text Overlay - Positioned center-left, raised higher */
+        .hero-text-overlay {
+            position: absolute;
+            top: 28%;
+            left: 42%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+            width: 35%;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .hero-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.3;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .hero-headline strong {
+            font-weight: 800;
+        }
+
+        .hero-cta-button {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(113, 112, 180, 0.4);
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .hero-cta-button:hover {
+            background: var(--navy-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(113, 112, 180, 0.5);
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-cta-button::after {
+            content: ' →';
+            margin-left: 0.5rem;
+        }
+
+        /* Chatbot */
+        /* White Section - About */
+        .white-section {
+            width: 100%;
+            background: var(--white);
+            padding: 8rem 3rem;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .section-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .credentials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .credential-item {
+            border-left: 3px solid var(--purple-accent);
+            padding-left: 1.5rem;
+        }
+
+        .credential-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .credential-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navy Section - Featured Properties */
+        .navy-section {
+            width: 100%;
+            background: var(--navy-dark);
+            padding: 8rem 3rem;
+            position: relative;
+        }
+
+        .navy-section .section-label {
+            color: var(--purple-accent);
+        }
+
+        .navy-section .section-title {
+            color: var(--white);
+        }
+
+        .navy-section .section-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .property-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(113, 112, 180, 0.4);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .property-content {
+            padding: 2rem;
+        }
+
+        .property-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--purple-accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .property-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-location {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .property-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-bottom: 2px solid var(--purple-accent);
+            padding-bottom: 0.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .property-link:hover {
+            color: var(--purple-accent);
+        }
+
+        /* Beige Section - Services */
+        .beige-section {
+            width: 100%;
+            background: var(--beige);
+            padding: 8rem 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(113, 112, 180, 0.15);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            text-decoration: none;
+            border-bottom: 2px solid var(--purple-accent);
+            padding-bottom: 0.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: var(--navy-medium);
+            border-color: var(--navy-medium);
+        }
+
+        /* Dark Navy Section - Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: rgba(113, 112, 180, 0.08);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid rgba(113, 112, 180, 0.2);
+        }
+
+        .quote-mark {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            color: var(--purple-accent);
+            line-height: 1;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .testimonial-location {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.3rem;
+        }
+
+        /* White Section - CTA */
+        .cta-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .cta-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 19px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--purple-accent);
+            color: var(--white);
+            padding: 1.2rem 3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(113, 112, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--navy-medium);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(113, 112, 180, 0.4);
+        }
+
+        /* Footer - Dark Navy */
+        footer {
+            width: 100%;
+            background: var(--navy-dark);
+            padding: 6rem 3rem 3rem;
+            border-top: 1px solid rgba(113, 112, 180, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--purple-accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section a {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(113, 112, 180, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(113, 112, 180, 0.15);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: rgba(113, 112, 180, 0.6);
+            transition: fill 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: rgba(113, 112, 180, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .social-icon:hover svg {
+            fill: var(--purple-accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            * {
+                margin: 0 !important;
+                padding: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+
+            .top-nav-bar {
+                padding: 1rem 1.5rem !important;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            .menu-line {
+                background: var(--navy-dark);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Mobile gradient - more navy for better text contrast */
+            .hero-section {
+                background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-dark) 60%, var(--navy-medium) 75%, var(--beige) 90%, var(--beige) 100%) !important;
+                padding-top: 70px !important;
+                min-height: auto !important;
+                padding-bottom: 0 !important;
+                padding: 70px 0 0 0 !important;
+                margin: 0 -20px 0 -20px !important;
+                display: block !important;
+                align-items: flex-start !important;
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
+                width: calc(100vw + 40px) !important;
+                position: relative !important;
+                left: -20px !important;
+            }
+
+            .logo-image {
+                height: 55px !important;
+            }
+
+            .hero-content {
+                padding: 0 !important;
+                margin: 0 !important;
+                justify-content: center;
+                height: auto !important;
+                display: block !important;
+                position: relative !important;
+                max-width: 100vw !important;
+                width: 100vw !important;
+                left: 20px !important;
+            }
+
+            .hero-image-wrapper {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+                position: relative !important;
+                flex-shrink: 0 !important;
+                height: auto !important;
+            }
+
+            .hero-main-image {
+                max-height: none !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: relative !important;
+                object-fit: contain !important;
+                object-position: center center !important;
+            }
+
+            /* Center text overlay on mobile - moved down to body area */
+            .hero-text-overlay {
+                position: absolute !important;
+                top: 60% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 85% !important;
+                max-width: 450px !important;
+                text-align: center !important;
+            }
+
+            /* Scroll arrow on mobile - visible */
+            .scroll-arrow-wrapper {
+                display: block !important;
+                bottom: 1.5rem !important;
+            }
+
+            .scroll-arrow {
+                width: 45px !important;
+                height: 45px !important;
+            }
+
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-10px);
+                }
+                60% {
+                    transform: translateY(-5px);
+                }
+            }
+
+            /* Show video on mobile with reduced opacity */
+            .hero-video-bg {
+                display: block !important;
+                opacity: 0.4 !important;
+            }
+
+            .hero-video-bg video {
+                opacity: 0.4 !important;
+            }
+
+            .hero-headline {
+                font-size: 22px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            /* Two CTA buttons on mobile - stacked vertically */
+            .hero-cta-button {
+                font-size: 12px !important;
+                padding: 0.9rem 1.8rem !important;
+                font-weight: 700 !important;
+                background: rgba(113, 112, 180, 0.95) !important;
+                border: 2px solid rgba(255, 255, 255, 0.3) !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+                letter-spacing: 1px !important;
+                display: block !important;
+                margin: 0.4rem auto !important;
+                width: 90% !important;
+                max-width: 300px !important;
+            }
+
+            /* Book a Call button - darker blue for more contrast */
+            .hero-cta-button:nth-child(2) {
+                background: rgba(61, 50, 95, 0.95) !important;
+                border: 2px solid rgba(255, 255, 255, 0.4) !important;
+            }
+
+            .hero-cta-button:hover {
+                background: rgba(113, 112, 180, 1) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+            }
+
+            .hero-cta-button:nth-child(2):hover {
+                background: rgba(61, 50, 95, 1) !important;
+            }
+
+            .hero-cta-buttons {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.3rem !important;
+                margin-top: 0.8rem !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+
+            /* Chatbot - bottom right corner only */
+            .chatbot-widget {
+                right: 1rem !important;
+                bottom: 1rem !important;
+                left: auto !important;
+                padding: 0.8rem !important;
+                width: auto !important;
+                max-width: 60px !important;
+            }
+
+            .chatbot-text {
+                display: none !important;
+            }
+
+            .chatbot-avatar {
+                width: 45px !important;
+                height: 45px !important;
+            }
+
+            .chatbot-status {
+                width: 10px !important;
+                height: 10px !important;
+                bottom: 0.8rem !important;
+                left: 2.2rem !important;
+            }
+
+            .chatbot-widget {
+                right: 1rem;
+                bottom: 1rem;
+                padding: 0.8rem 1rem;
+            }
+
+            .hero-text-overlay {
+                bottom: 5%;
+                width: 95%;
+            }
+
+            .hero-headline {
+                font-size: 32px;
+                text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.8);
+            }
+
+            .hero-cta-button {
+                font-size: 12px;
+                padding: 0.9rem 2rem;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .cta-title {
+                font-size: 34px;
+            }
+
+            .properties-grid,
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-card {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .chatbot-widget {
+                left: 1rem;
+                bottom: 1rem;
+                padding: 0.8rem 1rem;
+            }
+
+            .chatbot-text {
+                display: none;
+            }
+
+            .chatbot-avatar {
+                width: 45px;
+                height: 45px;
+            }
+
+            /* ============================================
+               COMPREHENSIVE MOBILE SECTION IMPROVEMENTS
+               ============================================ */
+
+            /* Uniform section spacing */
+            .white-section,
+            .navy-section,
+            .beige-section {
+                padding: 3rem 1.5rem !important;
+            }
+
+            .section-content {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+
+            /* Typography - optimized for mobile readability */
+            .section-label {
+                font-size: 11px !important;
+                letter-spacing: 2px !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .section-title {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .section-text {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            /* Credentials - stack vertically with consistent spacing */
+            .credentials-list {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+
+            .credential-item {
+                padding: 1.25rem !important;
+                text-align: left !important;
+            }
+
+            .credential-title {
+                font-size: 16px !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .credential-desc {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+            }
+
+            /* Properties grid - single column on mobile */
+            .properties-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .property-card {
+                margin-bottom: 0 !important;
+            }
+
+            .property-image {
+                height: 220px !important;
+                object-fit: cover !important;
+            }
+
+            .property-content {
+                padding: 1.25rem !important;
+            }
+
+            .property-title {
+                font-size: 18px !important;
+                margin: 0.5rem 0 !important;
+            }
+
+            .property-location {
+                font-size: 14px !important;
+                margin-bottom: 1rem !important;
+                opacity: 0.8 !important;
+            }
+
+            .property-link,
+            .service-link {
+                font-size: 14px !important;
+                padding: 0.75rem 1.5rem !important;
+                display: inline-block !important;
+                margin-top: 0.5rem !important;
+                min-height: 44px !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Services grid - single column */
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.25rem !important;
+            }
+
+            .service-card {
+                padding: 1.5rem !important;
+                text-align: left !important;
+            }
+
+            .service-icon {
+                display: none !important;
+            }
+
+            .service-title {
+                font-size: 18px !important;
+                margin-bottom: 0.75rem !important;
+                margin-top: 0 !important;
+            }
+
+            .service-desc {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            /* Testimonials - single column */
+            .testimonials-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem !important;
+            }
+
+            .quote-mark {
+                font-size: 48px !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .testimonial-text {
+                font-size: 15px !important;
+                line-height: 1.7 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .testimonial-author {
+                font-size: 16px !important;
+                margin-bottom: 0.25rem !important;
+            }
+
+            .testimonial-location {
+                font-size: 14px !important;
+            }
+
+            /* Footer - stack vertically */
+            .footer-content {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                text-align: left !important;
+                gap: 2rem !important;
+            }
+
+            footer {
+                padding: 3rem 1.5rem 2rem !important;
+            }
+
+            .footer-brand h3 {
+                font-size: 20px !important;
+            }
+
+            .footer-brand p {
+                font-size: 13px !important;
+            }
+
+            .footer-section h4 {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .footer-section a {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .footer-bottom {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                text-align: left !important;
+                padding-top: 2rem !important;
+            }
+
+            .footer-socials {
+                justify-content: flex-start !important;
+            }
+
+            .footer-socials {
+                justify-content: center !important;
+            }
+
+            /* Fix CTA button on mobile */
+            .cta-button {
+                display: inline-block !important;
+                background: var(--purple-accent) !important;
+                color: var(--white) !important;
+                padding: 1rem 2.5rem !important;
+                font-size: 13px !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 1px !important;
+                text-decoration: none !important;
+                border-radius: 4px !important;
+                box-shadow: 0 8px 24px rgba(113, 112, 180, 0.3) !important;
+            }
+
+            /* Fix CTA section on mobile */
+            .cta-title {
+                font-size: 26px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .cta-text {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .cta-box {
+                padding: 0 0.5rem !important;
+                text-align: center !important;
+            }
+
+            /* Fix search icon on mobile nav */
+            .search-icon {
+                font-size: 20px !important;
+                color: var(--navy-dark) !important;
+                order: -1 !important;
+            }
+
+            /* Ensure nav items are properly spaced on mobile */
+            .hero-nav {
+                gap: 1rem !important;
+            }
+        }
+
+        /* Samsung Z Fold Front Screen (Narrow - folded mode < 400px) */
+        @media (max-width: 400px) {
+            .hero-cta-buttons {
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .hero-cta-button {
+                margin: 0.4rem auto !important;
+                text-align: center !important;
+                display: block !important;
+            }
+
+            .hero-text-overlay {
+                left: 50% !important;
+                text-align: center !important;
+            }
+        }
+
+        /* Samsung Z Fold Tablet Mode (Unfolded 600-968px) */
+        @media (min-width: 600px) and (max-width: 968px) {
+            .hero-main-image {
+                max-height: 65vh !important;
+                object-fit: cover !important;
+                object-position: center 20% !important;
+            }
+
+            .hero-section {
+                min-height: 75vh !important;
+            }
+
+            .hero-text-overlay {
+                top: 55% !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-nav-bar {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo-image {
+                height: 38px;
+            }
+
+            .hero-headline {
+                font-size: 26px;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-cta-button {
+                font-size: 11px;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .section-text {
+                font-size: 16px;
+            }
+
+            .white-section,
+            .navy-section,
+            .beige-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .property-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+
+            .services-grid {
+                gap: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            .credentials-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            footer {
+                padding: 3rem 1.5rem 2rem;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+
+            .cta-text {
+                font-size: 16px;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 100vh;
+                display: flex;
+                align-items: flex-start;
+                padding-top: 5rem;
+            }
+
+            .hero-image-wrapper {
+                margin-top: 3rem;
+            }
+
+            .hero-headline {
+                font-size: 22px;
+            }
+
+            .section-label {
+                font-size: 10px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- White Navigation Bar - Fixed at Top -->
+    <nav class="top-nav-bar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fcf7d1f68d180d5d05279.svg" alt="Diaspora to Home" class="logo-image">
+            </div>
+
+            <!-- Navigation -->
+            <div class="hero-nav">
+                <!-- Desktop Navigation Links -->
+                <div class="nav-links">
+                    <a href="/new-about">About</a>
+                    <a href="/new-properties">Properties</a>
+                    <a href="/new-services">Services</a>
+                    <a href="/new-resources">Resources</a>
+                    <a href="/new-contact" class="nav-cta">Contact Lorraine</a>
+                </div>
+
+                <div class="search-icon">🔍</div>
+
+                <!-- Mobile Menu Button -->
+                <div class="menu-button">
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close">&times;</button>
+            <nav class="mobile-nav-links">
+                <a href="/new-home" class="mobile-nav-link">Home</a>
+                <a href="/new-about" class="mobile-nav-link">About</a>
+                <a href="/new-services" class="mobile-nav-link">Services</a>
+                <a href="/new-properties" class="mobile-nav-link">Properties</a>
+                <a href="/new-resources" class="mobile-nav-link">Resources</a>
+                <a href="/new-contact" class="mobile-nav-link mobile-nav-contact">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section - Video Background with Gradient Overlay -->
+    <section class="hero-section">
+        <!-- Video Background -->
+        <div class="hero-video-bg">
+            <video id="heroVideo" autoplay muted playsinline>
+                <source src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fd99b1f68d109a2d3cd40.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <script>
+            // Video playlist - plays both videos in loop
+            const videoElement = document.getElementById('heroVideo');
+            const videos = [
+                'https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fd99b1f68d109a2d3cd40.mp4',
+                'https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/697fdbfb1fd827baff7444b4.mp4'
+            ];
+            let currentVideo = 0;
+
+            videoElement.addEventListener('ended', function() {
+                currentVideo = (currentVideo + 1) % videos.length;
+                videoElement.src = videos[currentVideo];
+                videoElement.play();
+            });
+        </script>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <!-- Lorraine's Image on Left -->
+            <div class="hero-image-wrapper">
+                <img src="https://storage.googleapis.com/msgsndr/MUCiWTChkVoaPw8fdKXQ/media/69781d3ba87beb2aa5274e02.png" alt="Lorraine Wright MBE" class="hero-main-image">
+            </div>
+        </div>
+
+        <!-- Text Overlay - Centered on Screen -->
+        <div class="hero-text-overlay">
+            <h1 class="hero-headline">
+                Guiding you to<br>
+                <strong>Ideal Real Estate</strong><br>
+                Investments in Ghana
+            </h1>
+            <div class="hero-cta-buttons">
+                <a href="/choose-free-guide" class="hero-cta-button">Free Real Estate Guide</a>
+                <a href="/new-book-call" class="hero-cta-button">Book a Call</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Animated Scroll Arrow -->
+    <div class="scroll-arrow-wrapper" id="scrollArrow">
+        <div class="scroll-arrow">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5 L20 30 M20 30 L15 25 M20 30 L25 25" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- White Section - About -->
+    <section class="white-section" id="about">
+        <div class="section-content">
+            <div class="section-label">About Lorraine</div>
+            <h2 class="section-title">Your Trusted Guide to Ghana Property Investment</h2>
+            <p class="section-text">With an Oxford MBA and recognition as a Member of the British Empire, I bring institutional rigor to Ghana property investment. But credentials alone don't build legacies—lived experience does.</p>
+            <p class="section-text">As a diaspora investor who has navigated every complexity of Ghana's property market firsthand, I understand not just the technicalities, but the psychology. I've made the mistakes so you don't have to.</p>
+
+            <div class="credentials-list">
+                <div class="credential-item">
+                    <div class="credential-title">MBE Recognition</div>
+                    <div class="credential-desc">Member of the British Empire for services to business and community</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-title">Oxford MBA</div>
+                    <div class="credential-desc">Graduate of Oxford University Saïd Business School</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-title">HSBC Top 25</div>
+                    <div class="credential-desc">Recognized as Top 25 Entrepreneur 2023</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-title">17+ Years Experience</div>
+                    <div class="credential-desc">Expert guidance in Ghana real estate investment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Navy Section - Featured Properties -->
+    <section class="navy-section" id="featured">
+        <div class="section-content">
+            <div class="section-label">Featured Portfolio</div>
+            <h2 class="section-title">Exclusive Ghana Properties</h2>
+            <p class="section-text">Curated properties from verified premier developers across Ghana's most sought-after locations.</p>
+
+            <div class="properties-grid">
+                <!-- Property 1 -->
+                <div class="property-card">
+                    <img src="https://assets.cdn.filesafe.space/MUCiWTChkVoaPw8fdKXQ/media/699f25bd753f150851e856e2.png" alt="Property" class="property-image">
+                    <div class="property-content">
+                        <div class="property-price">$250,000</div>
+                        <div class="property-title">Luxury Villa in East Legon</div>
+                        <div class="property-location">Accra, Ghana</div>
+                        <a href="#" class="property-link">View Details →</a>
+                    </div>
+                </div>
+
+                <!-- Property 2 -->
+                <div class="property-card">
+                    <img src="https://assets.cdn.filesafe.space/MUCiWTChkVoaPw8fdKXQ/media/699f25bd5dbbe85d9b4bbe3f.png" alt="Property" class="property-image">
+                    <div class="property-content">
+                        <div class="property-price">$180,000</div>
+                        <div class="property-title">Modern Apartment Complex</div>
+                        <div class="property-location">Kumasi, Ghana</div>
+                        <a href="#" class="property-link">View Details →</a>
+                    </div>
+                </div>
+
+                <!-- Property 3 -->
+                <div class="property-card">
+                    <img src="https://assets.cdn.filesafe.space/MUCiWTChkVoaPw8fdKXQ/media/699f25bd9185ff0be9d22e39.png" alt="Property" class="property-image">
+                    <div class="property-content">
+                        <div class="property-price">$320,000</div>
+                        <div class="property-title">Waterfront Estate</div>
+                        <div class="property-location">Ada Foah, Ghana</div>
+                        <a href="#" class="property-link">View Details →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beige Section - Services -->
+    <section class="beige-section" id="services">
+        <div class="section-content">
+            <div class="section-label">What I Offer</div>
+            <h2 class="section-title">Comprehensive Investment Solutions</h2>
+            <p class="section-text">Expert guidance for discerning diaspora investors building generational wealth in Ghana.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title">Expert Consultation</h3>
+                    <p class="service-desc">One-on-one guidance tailored to your investment goals and risk profile.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Due Diligence</h3>
+                    <p class="service-desc">Comprehensive property verification and legal review services.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Investment Courses</h3>
+                    <p class="service-desc">Master Ghana property investment through structured online courses.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Property Marketing</h3>
+                    <p class="service-desc">List your property and connect with serious diaspora buyers.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Exclusive Listings</h3>
+                    <p class="service-desc">Access to verified properties across Ghana's premier locations.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">Free Resources</h3>
+                    <p class="service-desc">Download guides, eBooks, and market insights.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Navy Section - Testimonials -->
+    <section class="navy-section">
+        <div class="section-content">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">What Clients Say</h2>
+            <p class="section-text">Hear from diaspora investors who have successfully built wealth in Ghana with my guidance.</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Lorraine made the entire process seamless. Her guidance was invaluable in navigating Ghana's property market from the UK. I couldn't have done it without her expertise.</p>
+                    <div class="testimonial-author">Kwame Asante</div>
+                    <div class="testimonial-location">Property Investor, London</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Best investment decision I ever made. Lorraine's transparency and professionalism gave me complete confidence throughout the entire process.</p>
+                    <div class="testimonial-author">Abena Ntim</div>
+                    <div class="testimonial-location">Diaspora Investor, USA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- White Section - CTA -->
+    <section class="white-section" id="contact">
+        <div class="section-content">
+            <div class="cta-box">
+                <h2 class="cta-title">Ready to Build Your Legacy in Ghana?</h2>
+                <p class="cta-text">Book a free consultation and discover how to invest in Ghana property with confidence, backed by expertise and proven systems.</p>
+                <a href="#" class="cta-button">Book Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Dark Navy -->
+    <footer id="resources">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Diaspora to Home</h3>
+                <p>By Lorraine Wright MBE • Oxford MBA • Expert guidance for diaspora investors building generational wealth through Ghana real estate.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#">Consultation</a>
+                <a href="#">Due Diligence</a>
+                <a href="#">Courses</a>
+                <a href="#">Listings</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Free Guide</a>
+                <a href="#">Blog</a>
+                <a href="#">Market Insights</a>
+                <a href="#">eBooks</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Email</a>
+                <a href="#">Book Call</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copyright">&copy; 2026 Diaspora to Home by Lorraine Wright MBE. All rights reserved.</div>
+            <div class="footer-socials">
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Mobile Menu Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.querySelector('.menu-button');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const closeButton = document.querySelector('.mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        // Open mobile menu
+        if (menuButton) {
+            menuButton.addEventListener('click', function() {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        }
+
+        // Close mobile menu
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            });
+        }
+
+        // Close menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        mobileMenuOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Scroll Arrow - click to scroll & hide after scrolling past hero
+        const scrollArrowWrapper = document.getElementById('scrollArrow');
+        const heroSection = document.querySelector('.hero-section');
+        
+        if (scrollArrowWrapper && heroSection) {
+            // Click to smooth scroll to the About section
+            scrollArrowWrapper.addEventListener('click', function() {
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // Hide arrow once user scrolls past hero
+            window.addEventListener('scroll', function() {
+                const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+                if (window.scrollY > heroBottom - 200) {
+                    scrollArrowWrapper.classList.add('hidden');
+                } else {
+                    scrollArrowWrapper.classList.remove('hidden');
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
