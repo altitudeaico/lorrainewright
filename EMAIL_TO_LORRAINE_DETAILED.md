@@ -128,7 +128,7 @@ Custom property listing systems with admin panels, payment processing, approval 
 A standalone partner management system that integrates with GHL:
 
 **Admin Panel for You:**
-- Add unlimited partners (Balaji Villas, Prestige Villas, Vow Properties, etc.)
+- Add unlimited partners (Bolaji Villas, Prestige Villas, Vow Properties, etc.)
 - Add unlimited properties per partner (no 8-branch limit!)
 - Create partner-specific forms with visual property tiles
 - Set which properties appear on which form
@@ -137,7 +137,7 @@ A standalone partner management system that integrates with GHL:
 - Analytics: which properties get most interest, which partners perform best
 
 **Generated Forms (Auto-Created):**
-- Each partner gets custom URL: `forms.diasporatohome.com/balaji`
+- Each partner gets custom URL: `forms.diasporatohome.com/bolaji`
 - Visual property selection with TILES (images, not dropdown)
 - Mobile-optimized, professional design
 - User clicks property tile → fills contact info → submits
@@ -145,13 +145,13 @@ A standalone partner management system that integrates with GHL:
 
 **Automation Flow:**
 1. User comments "BALAJI" on Instagram
-2. ManyChat auto-DMs them: "Check out Balaji properties: [link]"
-3. User clicks link, sees 2-3 Balaji properties as visual tiles
+2. ManyChat auto-DMs them: "Check out Bolaji properties: [link]"
+3. User clicks link, sees 2-3 Bolaji properties as visual tiles
 4. User selects property, fills form, submits
 5. Behind the scenes:
    - Submission saved to database
    - Contact created/updated in GHL
-   - Specific property tag applied (e.g., `property_balaji_accra`)
+   - Specific property tag applied (e.g., `property_bolaji_accra`)
    - Tag triggers your GHL automation
    - Property-specific email sequence starts
 6. You see lead in GHL ready for follow-up
