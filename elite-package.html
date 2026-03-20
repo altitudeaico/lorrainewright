@@ -1308,6 +1308,13 @@
                 font-size: 24px !important;
             }
         }
+
+        /* Who is This For - Mobile Responsive */
+        @media (max-width: 768px) {
+            .who-is-this-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1397,7 +1404,7 @@
         <!-- Who Is This For Section -->
         <div style="background: var(--beige); padding: 3rem 2.5rem; border-radius: 8px; margin-bottom: 5rem;">
             <h2 class="section-title" style="margin-bottom: 2rem; text-align: center;">🎯 Who is This For?</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
+            <div class="who-is-this-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto;">
                 <div style="display: flex; align-items: start; gap: 1rem;">
                     <span style="color: var(--purple-accent); font-size: 1.5rem; flex-shrink: 0;">✔️</span>
                     <p style="margin: 0; line-height: 1.6;">Diaspora buyers who want to secure property without the hassle.</p>
