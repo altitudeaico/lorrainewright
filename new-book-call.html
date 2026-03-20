@@ -31,7 +31,7 @@
     
     <!-- Additional SEO -->
     <meta name="theme-color" content="#231B4F">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ========================================
            CSS VARIABLES - BRAND DESIGN SYSTEM
@@ -97,7 +97,7 @@
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(28px, 4vw, 40px);
             font-weight: 700;
             color: var(--navy-dark);
@@ -121,7 +121,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: var(--navy-dark);
+            background: var(--white);
             padding: 0.75rem 0;
             transition: box-shadow 0.3s ease;
         }
@@ -157,16 +157,33 @@
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--navy-dark);
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.5px;
-            transition: color 0.3s ease;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
             white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
-            color: #ffffff;
+            color: var(--purple-accent);
         }
 
         .nav-links .nav-cta {
@@ -205,7 +222,7 @@
         .menu-line {
             width: 24px;
             height: 2px;
-            background: white;
+            background: var(--navy-dark);
             border-radius: 2px;
             transition: all 0.3s ease;
         }
@@ -327,7 +344,7 @@
         }
 
         .hero-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(32px, 5vw, 52px);
             font-weight: 700;
             line-height: 1.2;
@@ -424,7 +441,7 @@
         }
 
         .column-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             color: var(--navy-dark);
             margin-bottom: 2rem;
@@ -476,7 +493,7 @@
         }
 
         .timeline-content h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 18px;
             color: var(--navy-dark);
             margin-bottom: 0.4rem;
@@ -536,7 +553,7 @@
         }
 
         .call-method h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             color: var(--navy-dark);
             margin-bottom: 0.5rem;
             font-size: 16px;
@@ -591,7 +608,7 @@
         }
 
         .placeholder-content h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 24px;
             color: var(--navy-dark);
             margin-bottom: 1rem;
@@ -649,7 +666,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             color: var(--navy-dark);
             margin-bottom: 2rem;
@@ -847,7 +864,7 @@
         }
 
         .faq-question {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 17px;
             color: var(--navy-dark);
             margin-bottom: 0.75rem;
