@@ -24,7 +24,7 @@ The public listings page now reads from Supabase too, so an approval appears on 
 | DTH-02 | Enter real listings | Content | P1 | **Blocked — needs real property data from Lorraine** | Lorraine |
 | DTH-03 | Real property images | Content/Build | P1 | **DONE** — sellers upload photos on the form; shown in vetting; published to listing | — |
 | DTH-04 | Seller self-listing intake form | Build | P1 | **DONE & VERIFIED** — live at /submit/, writes to Supabase | — |
-| DTH-05 | $99 listing payment flow | Build (GHL) | P1 | Approach set: **GHL payment link**. Needs the link from GHL, then wire into the form | GHL link |
+| DTH-05 | $99 listing payment flow | Build (GHL) | P1 | **Form pre-wired** with a $99 pay step on the success screen — paste the GHL link into `PAYMENT_LINK_URL` to go live | GHL link |
 | DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
 | DTH-07 | Approval workspace (back-office) | Build | P1 | **DONE** — login + live submissions from Supabase at /vetting/ | DTH-13, DTH-16 |
 | DTH-08 | Approve → auto-publish to listings | Build | P1 | **DONE & VERIFIED** — approval upserts one listing per submission | DTH-07 |
