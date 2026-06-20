@@ -102,6 +102,9 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .toast.show{display:block}
 .toast.ok{background:var(--green)}
 .toast.bad{background:var(--red)}
+.dangerzone{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dangerzone button{font-family:inherit;font-size:12px;font-weight:600;padding:8px 12px;border:1px solid var(--red-bg);border-radius:4px;background:#fff;color:var(--red);cursor:pointer}
+.dangerzone span{font-size:11px;color:var(--muted)}
 .connect{max-width:1200px;margin:0 auto 30px;padding:0 20px}
 .connect .panel{padding:16px 20px}
 .connect h3{font-size:13px;margin:0 0 8px}
@@ -554,7 +557,13 @@ function render(){
       '<button class="'+(v.tier==="s"?"primary s":"")+'" '+((canS&&!sub.published)?'':'disabled')+' data-act="s">List as Seller\'s Listing</button>'+
       '<button data-act="info">Request documents</button>'+
       '<button class="'+(v.tier==="r"?"primary r":"")+'" data-act="r">Reject</button>'+
-    '</div><div class="toast" id="toast"></div></div>';
+    '</div>'+
+    '<div class="toast" id="toast"></div>'+
+    '<div class="dangerzone">'+
+      '<button id="deleteSubBtn" type="button">Delete this submission</button>'+
+      '<span>Permanently removes the submission and any listing created from it.</span>'+
+    '</div>'+
+    '</div>';
   html+='</div>';
   rev.innerHTML=html;
 
@@ -563,10 +572,30 @@ function render(){
   });
   var mp=document.getElementById("markpaidBtn");
   if(mp){ mp.onclick=function(){ markPaid(sub, !sub.paid); }; }
+  var del=document.getElementById("deleteSubBtn");
+  if(del){ del.onclick=function(){ deleteSubmission(sub); }; }
   rev.querySelectorAll(".acts button").forEach(function(btn){
     btn.onclick=function(){ if(btn.disabled) return; decide(btn.getAttribute("data-act")); };
   });
 }
+
+/* Delete a submission and any listing created from it (full removal). */
+function deleteSubmission(sub){
+  if(!window.confirm('Permanently delete "'+(sub.property_title||'this submission')+'"?\n\nThis removes the submission and any listing created from it.')) return;
+  fetch(SUPABASE_URL + "/rest/v1/listings?submission_id=eq."+encodeURIComponent(sub.id), { method:"DELETE", headers: authHeaders({ "Prefer":"return=minimal" }) })
+  .then(function(res){
+    if(res.status===401){ sessionExpired(); return null; }
+    return fetch(SUPABASE_URL + "/rest/v1/submissions?id=eq."+encodeURIComponent(sub.id), { method:"DELETE", headers: authHeaders({ "Prefer":"return=minimal" }) });
+  })
+  .then(function(res){
+    if(!res) return;
+    if(res.status===401){ sessionExpired(); return; }
+    if(res.ok){ current=null; document.getElementById("review").innerHTML=""; loadSubmissions(); }
+    else { alert("Could not delete the submission."); }
+  })
+  .catch(function(){ alert("Could not delete the submission."); });
+}
+
 /* ===================== LISTINGS MANAGEMENT ===================== */
 var LISTINGS = [];
 var view = 'subs';
