@@ -42,6 +42,12 @@
     .d2h-card__media{position:relative; height:280px;
       background:linear-gradient(135deg,#cdd6e4 0%,#9aa6bd 100%);}
     .d2h-card__media img{width:100%; height:100%; object-fit:cover; display:block;}
+    .d2h-imgph{display:flex !important; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#2E2566 0%,#231B4F 100%);}
+    .d2h-ph{color:rgba(255,255,255,.85); font-size:13px; font-weight:600; letter-spacing:.03em;
+      text-align:center; padding:0 16px; line-height:1.4;}
+    .d2h-ph small{display:block; font-size:10px; font-weight:600; opacity:.6; margin-top:5px;
+      letter-spacing:.16em; text-transform:uppercase;}
     .d2h-card__media .d2h-badge--offplan{position:absolute; top:16px; left:16px;}
     .d2h-card__media .d2h-badge--status{position:absolute; top:16px; right:16px;}
     .d2h-price{position:absolute; left:16px; bottom:16px; background:#fff; color:var(--navy);
@@ -349,8 +355,20 @@
     return html;
   }
 
-  function safeImg(img, src){
-    img.onerror = function(){ this.style.display = "none"; };
+  function setPlaceholder(container){
+    if(!container || container.getAttribute("data-ph")) return;
+    container.setAttribute("data-ph","1");
+    container.className += " d2h-imgph";
+    var im = container.getElementsByTagName("img"), i;
+    for(i=0;i<im.length;i++){ im[i].style.display = "none"; }
+    var ph = document.createElement("div");
+    ph.className = "d2h-ph";
+    ph.innerHTML = "Photo coming soon<small>Diaspora to Home</small>";
+    container.insertBefore(ph, container.firstChild);
+  }
+  function safeImg(img, src, container){
+    if(!src){ if(container){ setPlaceholder(container); } else { img.style.display = "none"; } return; }
+    img.onerror = function(){ if(container){ setPlaceholder(container); } else { this.style.display = "none"; } };
     img.src = src;
   }
 
@@ -366,8 +384,8 @@
         var media = document.createElement("div");
         media.className = "d2h-card__media";
         var img = document.createElement("img");
-        safeImg(img, p.images[0]);
         media.appendChild(img);
+        safeImg(img, p.images[0], media);
         if(p.off_plan){
           var ob = document.createElement("span");
           ob.className = "d2h-badge d2h-badge--offplan"; ob.textContent = "Off Plan";
@@ -462,7 +480,8 @@
         '</div>' +
       '</div>';
 
-    safeImg(document.getElementById("d2hHero"), p.images[0]);
+    var hero = document.getElementById("d2hHero");
+    safeImg(hero, p.images[0], hero.parentNode);
 
     // back button
     document.getElementById("d2hBack").onclick = backToGrid;

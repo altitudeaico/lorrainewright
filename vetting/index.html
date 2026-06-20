@@ -38,6 +38,12 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .logout{background:none;border:1px solid var(--purple);color:#fff;font-family:inherit;font-size:11px;font-weight:600;padding:6px 12px;border-radius:4px;cursor:pointer}
 .wrap{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:300px 1fr;gap:20px}
 @media(max-width:860px){.wrap{grid-template-columns:1fr}}
+@media(max-width:600px){
+  header.topbar{flex-wrap:wrap;gap:10px;padding:12px 16px}
+  header.topbar .src{display:none}
+  .viewtabs{order:3;width:100%}
+  .vtab{flex:1}
+}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:4px}
 .panel h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:0;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600}
 .queue ul{list-style:none;margin:0;padding:6px}
