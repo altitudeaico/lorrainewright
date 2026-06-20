@@ -262,13 +262,14 @@
   }
 
   // ============================================================
-  //  LIVE DATA  <-  Google Sheet published as CSV
+  //  LIVE DATA  <-  Supabase listings table (published rows only)
   //  In the Sheet:  File > Share > Publish to web > select the
   //  "Listings" tab > Comma-separated values (.csv) > Publish.
   //  Paste the published URL below. While it's the placeholder,
   //  the page shows the built-in sample listings.
   // ============================================================
-  var LISTINGS_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_URL_HERE";
+  var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
 
   var DATA = [];
   var byId = {};
@@ -284,94 +285,44 @@
   }
 
   function fetchListings(){
-    gridMessage("Loading properties\u2026");
-
-    if(LISTINGS_CSV_URL.indexOf("http") !== 0){
-      DATA = mockData(); indexData(); renderGrid();   // not configured yet
-      return;
-    }
-
-    var url = LISTINGS_CSV_URL + (LISTINGS_CSV_URL.indexOf("?") > -1 ? "&" : "?") +
-              "t=" + (new Date().getTime());   // cache-buster
-    var fail = function(){ gridMessage("We couldn\u2019t load the listings just now. Please refresh the page."); };
-
-    if(window.fetch){
-      fetch(url).then(function(res){ return res.text(); })
-        .then(function(txt){ handleCsv(txt); })["catch"](fail);
-    } else {
-      var x = new XMLHttpRequest();
-      x.open("GET", url, true);
-      x.onreadystatechange = function(){
-        if(x.readyState === 4){
-          if(x.status >= 200 && x.status < 300){ handleCsv(x.responseText); } else { fail(); }
-        }
-      };
-      x.send();
-    }
-  }
-
-  function handleCsv(txt){
-    DATA = rowsToListings(parseCsv(txt));
-    indexData();
-    if(DATA.length){ renderGrid(); }
-    else { gridMessage("No properties are listed at the moment. Please check back soon."); }
-  }
-
-  // ---- CSV helpers (handle quoted fields, commas, escaped quotes) ----
-  function parseCsv(text){
-    text = String(text).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-    var rows = [], row = [], field = "", inQ = false, i = 0, c;
-    while(i < text.length){
-      c = text.charAt(i);
-      if(inQ){
-        if(c === '"'){
-          if(text.charAt(i+1) === '"'){ field += '"'; i += 2; continue; }
-          inQ = false; i++; continue;
-        }
-        field += c; i++; continue;
-      }
-      if(c === '"'){ inQ = true; i++; continue; }
-      if(c === ','){ row.push(field); field = ""; i++; continue; }
-      if(c === '\n'){ row.push(field); rows.push(row); row = []; field = ""; i++; continue; }
-      field += c; i++;
-    }
-    if(field !== "" || row.length){ row.push(field); rows.push(row); }
-    return rows;
+    gridMessage("Loading properties...");
+    var url = SUPABASE_URL + "/rest/v1/listings?select=*&published=eq.true&order=created_at.desc";
+    var fail = function(){ gridMessage("We could not load the listings just now. Please refresh the page."); };
+    fetch(url, { headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY } })
+      .then(function(res){ if(!res.ok){ throw new Error("http " + res.status); } return res.json(); })
+      .then(function(rows){
+        DATA = rowsToListings(rows || []);
+        indexData();
+        if(DATA.length){ renderGrid(); }
+        else { gridMessage("No properties are listed at the moment. Please check back soon."); }
+      })["catch"](fail);
   }
 
   function rowsToListings(rows){
-    if(!rows.length) return [];
-    var headers = rows[0], idx = {}, h;
-    for(h = 0; h < headers.length; h++){ idx[trim(headers[h]).toLowerCase()] = h; }
-
     var out = [];
-    for(var r = 1; r < rows.length; r++){
-      var row = rows[r];
-      if(trim(cell(row, idx, "title")) === "") continue;
-      if(!truthy(cell(row, idx, "published"))) continue;
-
+    for(var i=0; i<rows.length; i++){
+      var r = rows[i];
       var images = [], imgKeys = ["image_1","image_2","image_3","image_4"], k, v;
-      for(k = 0; k < imgKeys.length; k++){ v = trim(cell(row, idx, imgKeys[k])); if(v){ images.push(v); } }
-
-      var features = [], raw = String(cell(row, idx, "features")).split("|"), f, fv;
-      for(f = 0; f < raw.length; f++){ fv = trim(raw[f]); if(fv){ features.push(fv); } }
-
+      for(k=0;k<imgKeys.length;k++){ v = trim(r[imgKeys[k]]); if(v){ images.push(v); } }
+      var features = [], raw = String(r.features || "").split("|"), f, fv;
+      for(f=0;f<raw.length;f++){ fv = trim(raw[f]); if(fv){ features.push(fv); } }
+      var cur = trim(r.currency); if(!cur || cur.toUpperCase()==="USD"){ cur = "$"; }
       out.push({
-        id: trim(cell(row, idx, "id")),
-        listing_type: (trim(cell(row, idx, "listing_type")).toLowerCase() === "seller") ? "seller" : "vetted",
-        title: trim(cell(row, idx, "title")),
-        price: num(cell(row, idx, "price")),
-        currency: trim(cell(row, idx, "currency")) || "$",
-        location: trim(cell(row, idx, "location")),
-        beds: num(cell(row, idx, "beds")),
-        baths: num(cell(row, idx, "baths")),
-        sqm: num(cell(row, idx, "sqm")),
-        off_plan: truthy(cell(row, idx, "off_plan")),
-        status: trim(cell(row, idx, "status")) || "SALE",
+        id: r.id,
+        listing_type: (String(r.listing_type||"").toLowerCase().indexOf("seller") > -1) ? "seller" : "vetted",
+        title: trim(r.title),
+        price: num(r.price),
+        currency: cur,
+        location: trim(r.location),
+        beds: num(r.beds),
+        baths: num(r.baths),
+        sqm: num(r.sqm),
+        off_plan: (r.off_plan === true) || truthy(r.off_plan),
+        status: "SALE",
         images: images,
-        description: trim(cell(row, idx, "description")),
+        description: trim(r.description),
         features: features,
-        map: trim(cell(row, idx, "map_location")) || trim(cell(row, idx, "location"))
+        map: trim(r.map_location) || trim(r.location)
       });
     }
     return out;
