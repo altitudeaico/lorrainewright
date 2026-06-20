@@ -1,14 +1,13 @@
 <!-- ============================================================
-     Diaspora to Home — Property Listings (Prototype, mock data)
-     Single self-contained block. ES5-compatible for GoHighLevel.
-     Grid view + in-place detail view (no separate pages, no Copy Link).
-     Data array below mirrors the JSON the Apps Script will return,
-     so swapping mock -> live is a one-line change in loadData().
+     Diaspora to Home — Property Listings (LIVE, GHL embed)
+     Self-contained block: paste into a GHL "Custom HTML / Code" element.
+     Reads published listings live from Supabase. ES5-only. All CSS is
+     scoped under #d2h-props so it cannot clash with the GHL template.
+     Font loaded via @import (GHL strips <link> tags).
      ============================================================ -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <div id="d2h-props">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
     #d2h-props{
       --navy:#231B4F; --purple:#7170B4; --beige:#F5F1ED;
       --ink:#231B4F; --muted:#6B6880; --line:#E7E3DD; --white:#fff;
