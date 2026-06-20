@@ -60,6 +60,8 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .evid{padding:12px 20px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6}
 .evid b{color:var(--ink);font-weight:600}
 .evid a{color:var(--purple);text-decoration:none}
+.photostrip{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pthumb{width:84px;height:64px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
 .body{display:grid;grid-template-columns:1fr 300px;gap:0}
 @media(max-width:860px){.body{grid-template-columns:1fr}}
 .checks{padding:8px 20px 20px;border-right:1px solid var(--line)}
@@ -267,11 +269,11 @@ function rowToSub(row){
     state: st,
     seller: row.seller_name || "",
     contact: row.email || row.phone || "",
+    photos: splitPipe(row.photos),
     evidence: {
       "Title / deed": row.title_or_deed,
       "Search report": row.search_report,
       "Site plan": row.site_plan,
-      "Photos": row.photos,
       "Permit": row.building_permit
     }
   };
@@ -346,6 +348,11 @@ function publishListing(sub, listingType, done){
     status: "live",
     published: true
   };
+  var ph = sub.photos || [];
+  body.image_1 = ph[0] || null;
+  body.image_2 = ph[1] || null;
+  body.image_3 = ph[2] || null;
+  body.image_4 = ph[3] || null;
   fetch(SUPABASE_URL + "/rest/v1/listings?on_conflict=submission_id", {
     method:"POST",
     headers: authHeaders({ "Content-Type":"application/json", "Prefer":"resolution=merge-duplicates,return=minimal" }),
@@ -420,6 +427,7 @@ function renderQueue(){
   });
 }
 function esc(s){ return (""+(s===undefined||s===null?"":s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function splitPipe(v){ if(!v) return []; return String(v).split("|").map(function(s){return s.replace(/^\s+|\s+$/g,"");}).filter(function(s){return s;}); }
 function seg(sub,c){
   var s=rawState(sub,c.id);
   function b(val,lab,cls){ return '<button class="'+(s===val?cls:'')+'" data-id="'+c.id+'" data-val="'+val+'">'+lab+'</button>'; }
@@ -441,6 +449,11 @@ function render(){
     if(sub.seller) html+='<b>From:</b> '+esc(sub.seller)+(sub.contact?' · '+esc(sub.contact):'')+'<br>';
     html+='<b>Evidence:</b> '+(ev.length?ev.map(function(k){return '<a href="'+esc(sub.evidence[k])+'" target="_blank" rel="noopener">'+esc(k)+'</a>';}).join(' &nbsp;·&nbsp; '):'none attached yet');
     html+='</div>';
+  }
+  if(sub.photos && sub.photos.length){
+    html+='<div class="evid"><b>Photos ('+sub.photos.length+'):</b><div class="photostrip">';
+    sub.photos.forEach(function(u){ html+='<a href="'+esc(u)+'" target="_blank" rel="noopener"><img class="pthumb" src="'+esc(u)+'" alt="property photo"></a>'; });
+    html+='</div></div>';
   }
 
   html+='<div class="body"><div class="checks">';
