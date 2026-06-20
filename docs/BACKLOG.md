@@ -18,6 +18,19 @@ team logs in at /vetting/, sees live submissions, works the checklist, and an ap
 publishes the property to the public listings table — verified working end to end.
 The public listings page now reads from Supabase too, so an approval appears on the live site automatically. The core loop is closed.
 
+## QA blockers (from QA-REVIEW.md) — progress
+- **B4 purge test data — DONE.** Database emptied; public site shows no listings.
+- **B5 consent/privacy — DONE.** Required consent checkbox on the form (privacy-link slot ready).
+- **B1 payment reconciliation — PART DONE.** Workspace now shows Paid/Unpaid, team can mark paid,
+  and approving an unpaid listing requires confirmation. Auto-reconciliation needs a GHL
+  "payment received" webhook (to mark paid automatically) — pending.
+- **B2 lead alert — BUILT & DORMANT.** DB pings GHL on each submission; needs the GHL inbound
+  webhook URL to switch on.
+- **B3 seller confirmation — PART DONE.** On-screen "what happens next" is in place; the
+  confirmation *email* is sent by the same GHL workflow (needs the webhook URL).
+
+**One unlock for B2 + B3 (+ a path for B1-auto): create the GHL inbound webhook and send the URL.**
+
 | ID | Item | Type | Pri | Status (2026-06-20) | Depends on |
 |---|---|---|---|---|---|
 | DTH-01 | Wire live CSV URL into the site | Build | — | **Superseded** by the Supabase data layer | — |
@@ -28,7 +41,7 @@ The public listings page now reads from Supabase too, so an approval appears on 
 | DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
 | DTH-07 | Approval workspace (back-office) | Build | P1 | **DONE** — login + live submissions from Supabase at /vetting/ | DTH-13, DTH-16 |
 | DTH-08 | Approve → auto-publish to listings | Build | P1 | **DONE & VERIFIED** — approval upserts one listing per submission | DTH-07 |
-| DTH-09 | Internal lead-alert via GHL | Build (GHL) | P1 | **Parked (prereq).** DB pings GHL webhook on new submission -> GHL tags contact + emails team. DB ping ready (pg_net confirmed); needs the GHL inbound webhook URL | GHL webhook |
+| DTH-09 | Internal lead-alert via GHL | Build (GHL) | P1 | **Built & dormant.** DB->GHL ping trigger is live; activate by setting the GHL inbound webhook URL. Covers B2 alert + B3 seller email via the GHL workflow | GHL webhook URL |
 | DTH-10 | Wire "Schedule a Tour" to booking calendar | Build | P2 | Pending | — |
 | DTH-11 | AI buyer first-reply on enquiry | Build (AI) | P2 | Pending | DTH-13 |
 | DTH-12 | On-site AI assistant / search | Build (AI) | P3 | Later | — |
@@ -39,13 +52,10 @@ The public listings page now reads from Supabase too, so an approval appears on 
 | DTH-17 | Ops owner role (BAU + lead SLA) | Org / People | P2 | Pending | — |
 | DTH-18 | Metrics & management cadence | Governance | P2 | Pending | — |
 
-## DTH-13 — done, with housekeeping left
-Done & verified: approved-team allowlist + RLS gating; shared login (admin/admin) created
-in Supabase's secure user store; login confirmed working end-to-end (an approval wrote to
-the database as the logged-in user).
-Housekeeping still to do:
-- ~~Change admin/admin~~ DONE — password changed from the default.
-- Privacy / consent wording on the public form.
+## DTH-13 — done
+Allowlist + RLS gating; shared login created & tested; password changed from default;
+consent checkbox added to the public form (B5). Audit attribution (per-person logins) is
+a should-fix in the QA review, not a blocker.
 
 ## Done so far (the whole supply engine)
 Seller form (DTH-04) → $99 payment (DTH-05) → secured database + login (DTH-13) →
