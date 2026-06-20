@@ -228,12 +228,19 @@ function doInsert(payload, btn){
   })
   .then(function(res){
     if (res.ok) {
+      rememberEmail(payload.email);
       showSuccess();
     } else {
       return res.text().then(function(t){ showErr("Something went wrong (" + res.status + "). " + t); btn.disabled=false; btn.textContent="Submit for review"; });
     }
   })
   .catch(function(e){ showErr("Could not reach the server: " + e.message); btn.disabled=false; btn.textContent="Submit for review"; });
+}
+
+/* Remember the payer's email so the post-payment page can mark this
+   submission paid (same-origin fallback; the GHL redirect carries it too). */
+function rememberEmail(email){
+  try { if (window.localStorage && email) { localStorage.setItem("dth_pay_email", email); } } catch(e){}
 }
 
 function showSuccess(){
