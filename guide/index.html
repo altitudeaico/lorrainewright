@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diaspora to Home — System Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --navy:#231B4F; --navy-med:#2E2566; --purple:#7170B4; --purple-soft:#9C9BD0;
+    --beige:#F5F1ED; --gold:#C9A961; --ink:#231B4F; --muted:#6B6880; --line:#E7E3DD;
+    --green:#2E7D55; --green-bg:#E7F2EC; --amber:#B07A1E; --amber-bg:#F7F0DF;
+    --white:#fff; --card:#fff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Montserrat',Arial,sans-serif;color:var(--ink);background:var(--beige);
+    line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{margin:0;line-height:1.15;font-weight:800;color:var(--navy);}
+  p{margin:0;}
+  a{color:var(--purple);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--purple);}
+
+  /* ---------- top nav ---------- */
+  .topnav{position:sticky;top:0;z-index:50;background:rgba(35,27,79,.97);backdrop-filter:blur(6px);
+    color:#fff;border-bottom:1px solid rgba(255,255,255,.08);}
+  .topnav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .brand{font-weight:800;font-size:15px;letter-spacing:.01em;color:#fff;}
+  .brand small{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--purple-soft);}
+  .navlinks{display:flex;gap:26px;}
+  .navlinks a{color:rgba(255,255,255,.78);text-decoration:none;font-size:13px;font-weight:600;}
+  .navlinks a:hover{color:#fff;}
+  @media(max-width:820px){ .navlinks{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-med) 60%,#3a2f7a 100%);color:#fff;
+    padding:72px 0 84px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,169,97,.22),transparent 65%);}
+  .hero .eyebrow{color:var(--gold);}
+  .hero h1{color:#fff;font-size:clamp(2rem,5vw,3.3rem);margin:14px 0 16px;max-width:18ch;}
+  .hero p.lead{font-size:18px;color:rgba(255,255,255,.85);max-width:60ch;}
+  .hero .meta{margin-top:26px;font-size:12px;letter-spacing:.04em;color:var(--purple-soft);}
+  .heromap{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap;}
+  .heromap .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;
+    padding:8px 16px;font-size:12.5px;font-weight:600;color:#fff;}
+
+  /* ---------- sections ---------- */
+  section.block{padding:64px 0;border-bottom:1px solid var(--line);}
+  section.block:nth-child(even){background:#fff;}
+  .sec-head{max-width:64ch;margin-bottom:34px;}
+  .sec-head h2{font-size:clamp(1.5rem,3vw,2rem);margin:8px 0 10px;}
+  .sec-head p{color:var(--muted);font-size:16px;}
+
+  /* ---------- one-minute ---------- */
+  .summary{font-size:18px;color:var(--ink);max-width:70ch;line-height:1.7;}
+  .summary b{color:var(--navy);}
+
+  /* ---------- tool cards ---------- */
+  .tools{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px;}
+  @media(max-width:680px){ .tools{grid-template-columns:1fr;} }
+  .tool{background:var(--beige);border:1px solid var(--line);border-radius:10px;padding:22px;}
+  section.block:nth-child(even) .tool{background:#FBFAF8;}
+  .tool .ico{width:40px;height:40px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .tool .ico svg{width:21px;height:21px;stroke:#fff;}
+  .tool h3{font-size:16px;margin-bottom:6px;}
+  .tool .where{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+    color:var(--purple);background:#EFEAFF;border-radius:4px;padding:3px 8px;margin-bottom:10px;}
+  .tool p{font-size:13.5px;color:var(--muted);line-height:1.55;}
+  .engine{margin-top:18px;background:var(--navy);color:#fff;border-radius:10px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+  .engine .ico{flex:none;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;}
+  .engine .ico svg{width:21px;height:21px;stroke:#fff;}
+  .engine h3{color:#fff;font-size:15px;margin-bottom:4px;}
+  .engine p{color:rgba(255,255,255,.8);font-size:13.5px;}
+
+  /* ---------- architecture diagram ---------- */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px;}
+  .legend span{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted);}
+  .legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;}
+  .stage{flex:1;background:#fff;border:1px solid var(--line);border-top:3px solid var(--purple);border-radius:10px;
+    padding:18px 16px;min-width:0;text-align:center;}
+  .stage.s-data{border-top-color:var(--navy);}
+  .stage.s-team{border-top-color:var(--navy-med);}
+  .stage.s-pub{border-top-color:var(--gold);}
+  .stage .si{width:38px;height:38px;border-radius:9px;background:var(--beige);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+  .stage .si svg{width:20px;height:20px;stroke:var(--navy);}
+  .stage h4{font-size:14px;margin-bottom:5px;}
+  .stage p{font-size:12px;color:var(--muted);line-height:1.45;}
+  .stage .where{display:inline-block;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+    color:var(--purple);margin-top:9px;}
+  .arrow{flex:none;width:42px;display:flex;align-items:center;justify-content:center;color:var(--purple-soft);}
+  .arrow svg{width:26px;height:26px;}
+  @media(max-width:760px){
+    .flow{flex-direction:column;}
+    .arrow{width:100%;height:34px;transform:rotate(90deg);}
+  }
+
+  .foundation{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:680px){ .foundation{grid-template-columns:1fr;} }
+  .fcard{border-radius:10px;padding:18px 20px;border:1px solid var(--line);}
+  .fcard.supa{background:#F2F0FA;border-color:#DAD5F0;}
+  .fcard.ghl{background:var(--amber-bg);border-color:#EAD9B0;}
+  .fcard h4{font-size:13px;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .fcard .dot{width:10px;height:10px;border-radius:50%;}
+  .fcard.supa .dot{background:var(--navy);}
+  .fcard.ghl .dot{background:var(--gold);}
+  .fcard p{font-size:12.5px;color:var(--muted);}
+  .fcard .chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+  .fcard .chips span{font-size:11px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--ink);}
+  .diag-note{font-size:12.5px;color:var(--muted);margin-top:16px;text-align:center;}
+
+  /* ---------- lifecycle ---------- */
+  .life{counter-reset:step;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-top:8px;}
+  @media(max-width:680px){ .life{grid-template-columns:1fr;} }
+  .life .li{display:flex;gap:14px;align-items:flex-start;}
+  .life .n{counter-increment:step;flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;
+    font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .life .n::before{content:counter(step);}
+  .life h4{font-size:14px;margin-bottom:2px;}
+  .life p{font-size:13px;color:var(--muted);line-height:1.5;}
+
+  /* ---------- wizard ---------- */
+  .wtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
+  .wtab{font-family:inherit;font-size:13.5px;font-weight:600;padding:11px 18px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--ink);}
+  .wtab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .wizard{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  section.block:nth-child(even) .wizard{background:#FBFAF8;}
+  .wbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);background:var(--beige);}
+  .wprog{display:flex;gap:6px;}
+  .wprog i{width:26px;height:5px;border-radius:3px;background:var(--line);transition:background .2s;}
+  .wprog i.on{background:var(--purple);}
+  .wcount{font-size:12px;font-weight:600;color:var(--muted);}
+  .wbody{padding:30px 26px;min-height:200px;}
+  .wstep{display:none;}
+  .wstep.show{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .wstep .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+  .wstep h3{font-size:20px;margin-bottom:12px;}
+  .wstep p{font-size:15px;color:var(--ink);margin-bottom:12px;max-width:64ch;}
+  .wstep ul{margin:0 0 12px;padding-left:20px;color:var(--muted);font-size:14px;}
+  .wstep li{margin:5px 0;}
+  .wstep .callout{background:var(--beige);border-left:3px solid var(--purple);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13px;color:var(--navy);margin-top:6px;}
+  .wnav{display:flex;justify-content:space-between;padding:18px 26px;border-top:1px solid var(--line);}
+  .wnav button{font-family:inherit;font-size:14px;font-weight:600;padding:11px 22px;border-radius:8px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);}
+  .wnav button.primary{background:var(--navy);color:#fff;border:none;}
+  .wnav button:disabled{opacity:.4;cursor:not-allowed;}
+
+  /* ---------- instructions / accordion ---------- */
+  .acc{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
+  section.block:nth-child(even) .acc{background:#FBFAF8;}
+  .acc .item{border-bottom:1px solid var(--line);}
+  .acc .item:last-child{border-bottom:none;}
+  .acc .q{width:100%;text-align:left;font-family:inherit;font-size:15px;font-weight:700;color:var(--navy);
+    background:none;border:none;cursor:pointer;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;}
+  .acc .q .plus{flex:none;width:22px;height:22px;border-radius:50%;background:var(--beige);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--purple);transition:transform .2s;}
+  .acc .item.open .q .plus{transform:rotate(45deg);}
+  .acc .a{display:none;padding:0 22px 20px;font-size:14px;color:var(--muted);line-height:1.65;}
+  .acc .item.open .a{display:block;}
+  .acc .a ol,.acc .a ul{padding-left:20px;margin:8px 0;}
+  .acc .a li{margin:6px 0;}
+  .acc .a code{background:var(--beige);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:12.5px;color:var(--navy);word-break:break-all;}
+  .acc .a b{color:var(--navy);}
+
+  /* ---------- reference ---------- */
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){ .ref{grid-template-columns:1fr;} }
+  .refcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
+  section.block:nth-child(even) .refcard{background:#FBFAF8;}
+  .refcard h4{font-size:13px;margin-bottom:12px;}
+  .refrow{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;}
+  .refrow:last-child{border-bottom:none;}
+  .refrow .k{color:var(--muted);font-weight:600;flex:none;}
+  .refrow .v{text-align:right;word-break:break-all;font-weight:600;color:var(--navy);}
+  .private{margin-top:14px;background:var(--amber-bg);border:1px solid #EAD9B0;border-radius:8px;padding:12px 16px;font-size:12.5px;color:#7a5a14;}
+  .private b{color:#7a5a14;}
+
+  /* ---------- next ---------- */
+  .next{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:680px){ .next{grid-template-columns:1fr;} }
+  .nextitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;gap:13px;align-items:flex-start;}
+  section.block:nth-child(even) .nextitem{background:#FBFAF8;}
+  .nextitem .badge{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:5px;}
+  .badge.you{background:var(--green-bg);color:var(--green);}
+  .badge.opt{background:#EFEAFF;color:var(--purple);}
+  .nextitem h4{font-size:14px;margin-bottom:3px;}
+  .nextitem p{font-size:13px;color:var(--muted);line-height:1.5;}
+
+  footer{background:var(--navy);color:rgba(255,255,255,.72);padding:34px 0;font-size:13px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+  footer b{color:#fff;}
+
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px;}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="topnav">
+  <div class="wrap">
+    <div class="brand">Diaspora to Home<small>System guide</small></div>
+    <div class="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#how">How it works</a>
+      <a href="#walkthrough">Walkthrough</a>
+      <a href="#setup">GHL setup</a>
+      <a href="#reference">Reference</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Property listings &amp; vetting system</div>
+    <h1>From seller enquiry to a live, vetted listing — without the manual work.</h1>
+    <p class="lead">A plain-English guide to everything that's been built: how sellers list a property, how your team approves it, how it appears on your website, and how the pieces fit together with GoHighLevel.</p>
+    <div class="heromap">
+      <span class="pill">Seller submits</span>
+      <span class="pill">Team vets</span>
+      <span class="pill">One-click publish</span>
+      <span class="pill">Live on your site</span>
+      <span class="pill">Leads into GHL</span>
+    </div>
+    <div class="meta">Built for Lorraine Wright MBE · Diaspora to Home</div>
+  </div>
+</header>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="block" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">In one minute</div>
+      <h2>What you now have</h2>
+    </div>
+    <p class="summary">
+      You have a complete pipeline that turns a seller's enquiry into a <b>live, vetted property listing</b> on your
+      website — no spreadsheets, no copy-pasting. Sellers submit their property through a branded form and pay the
+      <b>$99 listing fee</b>. Your team reviews each one against a vetting checklist and, with one click,
+      <b>publishes</b> the approved ones. Approved properties appear automatically on your listings page, which lives
+      inside your GoHighLevel site as a single block of code. Buyer enquiries flow straight into your <b>GHL CRM</b>.
+    </p>
+
+    <div class="tools">
+      <div class="tool">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <span class="where">Hosted page you link to</span>
+        <h3>Seller form</h3>
+        <p>Where sellers submit a property — details, photos, and a consent tick. Simple, branded, mobile-friendly.</p>
+      </div>
+      <div class="tool">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 10h18v11H3z"/><path d="M8 14h8"/></svg></div>
+        <span class="where">Private team login</span>
+        <h3>Vetting workspace</h3>
+        <p>Your team's secure dashboard. Review submissions against the checklist, approve, edit, mark sold, unpublish, or remove.</p>
+      </div>
+      <div class="tool">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <span class="where">In your GHL site</span>
+        <h3>Public listings page</h3>
+        <p>The grid buyers see. Sits inside a GoHighLevel page as one Custom HTML block and updates itself.</p>
+      </div>
+      <div class="tool">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></div>
+        <span class="where">Your CRM</span>
+        <h3>GoHighLevel</h3>
+        <p>Sends the emails, takes the $99 payment, and holds every lead. The system plugs straight into it.</p>
+      </div>
+    </div>
+
+    <div class="engine">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+      <div>
+        <h3>Behind it all: a secure database (the engine room)</h3>
+        <p>Every submission, photo, and listing is stored safely in one place. The form writes to it, the workspace reads and updates it, and the public page reads from it. You never touch it directly — the tools above do that for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS / ARCHITECTURE ===== -->
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How it works</div>
+      <h2>The architecture, at a glance</h2>
+      <p>Four stages from left to right. Underneath sit the two foundations everything relies on: your secure database and GoHighLevel.</p>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:var(--purple)"></i> Seller-facing</span>
+      <span><i style="background:var(--navy)"></i> Your team / database</span>
+      <span><i style="background:var(--gold)"></i> Public &amp; GHL</span>
+    </div>
+
+    <div class="flow">
+      <div class="stage">
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+        <h4>1 · Seller submits</h4>
+        <p>Fills the form, uploads photos, ticks consent, pays $99.</p>
+        <span class="where">Seller form</span>
+      </div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="stage s-data">
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/></svg></div>
+        <h4>2 · Saved securely</h4>
+        <p>Submission + photos land in the database. Emails fire automatically.</p>
+        <span class="where">Database</span>
+      </div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="stage s-team">
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h4>3 · Team vets &amp; approves</h4>
+        <p>Your team works the checklist and clicks a verdict.</p>
+        <span class="where">Vetting workspace</span>
+      </div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="stage s-pub">
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>4 · Live for buyers</h4>
+        <p>Approved property appears on your site. Enquiries become leads.</p>
+        <span class="where">Public listings</span>
+      </div>
+    </div>
+
+    <div class="foundation">
+      <div class="fcard supa">
+        <h4><span class="dot"></span> Secure database &amp; photo storage</h4>
+        <p>The single source of truth. Holds submissions, seller photos, and published listings.</p>
+        <div class="chips"><span>Submissions</span><span>Photos</span><span>Listings</span></div>
+      </div>
+      <div class="fcard ghl">
+        <h4><span class="dot"></span> GoHighLevel</h4>
+        <p>Does the talking and the money: sends emails, collects the $99, and stores every lead.</p>
+        <div class="chips"><span>Alert &amp; confirmation emails</span><span>$99 payment</span><span>CRM / leads</span></div>
+      </div>
+    </div>
+    <p class="diag-note">A new submission automatically pings GoHighLevel to send the emails · The public listings page reads only <b>published</b> properties · Buyer enquiries post straight into your GHL workflow.</p>
+  </div>
+</section>
+
+<!-- ===== LIFECYCLE ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Step by step</div>
+      <h2>The life of a listing</h2>
+      <p>What happens, in order, from the moment a seller hits submit.</p>
+    </div>
+    <div class="life">
+      <div class="li"><div class="n"></div><div><h4>Seller submits</h4><p>Fills the form, uploads up to 6 photos, ticks the consent box.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>Saved securely</h4><p>The submission and its photos land in your database instantly.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>Everyone's notified</h4><p>GHL emails your team a new-lead alert and emails the seller a confirmation.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>Seller pays $99</h4><p>Via the payment button. Your team confirms it and clicks <b>Mark as paid</b>.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>Team vets</h4><p>Opens the workspace, works through the checklist, and sets a verdict.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>One-click publish</h4><p>Approved → the property appears on your public listings page immediately.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>Buyers enquire</h4><p>They browse and submit an enquiry, which becomes a lead in your GHL CRM.</p></div></div>
+      <div class="li"><div class="n"></div><div><h4>You stay in control</h4><p>Edit, mark sold, unpublish, or remove any listing from the workspace anytime.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WALKTHROUGH WIZARD ===== -->
+<section class="block" id="walkthrough">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Walkthrough</div>
+      <h2>Try the journey, step by step</h2>
+      <p>Pick a role and click through exactly what happens. Nothing here changes anything — it's a guided tour.</p>
+    </div>
+
+    <div class="wtabs">
+      <button class="wtab active" data-role="seller">A seller lists a property</button>
+      <button class="wtab" data-role="team">Your team reviews &amp; publishes</button>
+      <button class="wtab" data-role="ghl">Put listings on your GHL page</button>
+    </div>
+
+    <div class="wizard">
+      <div class="wbar">
+        <div class="wprog" id="wprog"></div>
+        <div class="wcount" id="wcount"></div>
+      </div>
+      <div class="wbody" id="wbody">
+
+        <!-- SELLER -->
+        <div class="wpanel" data-role="seller">
+          <div class="wstep show">
+            <span class="tag">Seller · step 1</span>
+            <h3>Open the listing form</h3>
+            <p>You share one link with sellers (on social media, in a DM, or as a button on your site). It opens a clean, branded form titled "List your property".</p>
+            <div class="callout">The form works on a phone — most sellers will fill it in on mobile.</div>
+          </div>
+          <div class="wstep">
+            <span class="tag">Seller · step 2</span>
+            <h3>Add the property details &amp; photos</h3>
+            <p>They enter the title, location, price, type, and a short description, then upload up to six photos. Required fields are marked, so nothing important gets missed.</p>
+            <ul><li>Title, location, type, name and email are required.</li><li>Photos upload straight into secure storage.</li><li>A consent box must be ticked before they can submit.</li></ul>
+          </div>
+          <div class="wstep">
+            <span class="tag">Seller · step 3</span>
+            <h3>Submit</h3>
+            <p>They press submit. Behind the scenes the submission saves to your database, and GoHighLevel emails you a new-lead alert and emails them a confirmation.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Seller · step 4</span>
+            <h3>Pay the $99 listing fee</h3>
+            <p>The success screen shows a "Pay $99" button and a clear "what happens next". They pay through your FastPayDirect link.</p>
+            <div class="callout">If they pay later, your team simply marks the listing paid once the payment lands.</div>
+          </div>
+          <div class="wstep">
+            <span class="tag">Seller · step 5</span>
+            <h3>They wait for approval</h3>
+            <p>That's the seller's part done. The property is now in your queue, waiting for your team to review it. Nothing goes public until you approve it.</p>
+          </div>
+        </div>
+
+        <!-- TEAM -->
+        <div class="wpanel" data-role="team" style="display:none">
+          <div class="wstep show">
+            <span class="tag">Team · step 1</span>
+            <h3>Log in to the workspace</h3>
+            <p>Open the workspace link and sign in with your shared team login. Personal seller details never leave this logged-in screen.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Team · step 2</span>
+            <h3>Open a submission</h3>
+            <p>New submissions appear in the queue on the left. Click one to see the seller's details, their photos, and the evidence they provided.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Team · step 3</span>
+            <h3>Work the vetting checklist</h3>
+            <p>Go through the checks (ownership, documents, location, and so on). As you mark them, the system suggests a verdict — Verified, Seller's Listing, Reject, or Needs more info.</p>
+            <div class="callout">Red-line checks are flagged clearly, so a property can't be marked "Verified" unless the essentials are met.</div>
+          </div>
+          <div class="wstep">
+            <span class="tag">Team · step 4</span>
+            <h3>Confirm payment</h3>
+            <p>Each submission shows a Paid / Unpaid pill. Once you've confirmed the $99 arrived in GHL, click <b>Mark as paid</b>. If you try to approve an unpaid one, you'll get a gentle warning first.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Team · step 5</span>
+            <h3>Publish with one click</h3>
+            <p>Click <b>Approve as Verified</b> or <b>List as Seller's Listing</b>. The property is published to your public site immediately — no code, no spreadsheet.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Team · step 6</span>
+            <h3>Manage it anytime</h3>
+            <p>The <b>Listings</b> tab lets you edit the title, price or location, mark a property <b>sold</b>, <b>unpublish</b> it, or <b>remove</b> it. To clear an entry entirely, use <b>Delete this submission</b> — it removes the submission and its listing together.</p>
+          </div>
+        </div>
+
+        <!-- GHL -->
+        <div class="wpanel" data-role="ghl" style="display:none">
+          <div class="wstep show">
+            <span class="tag">Setup · step 1</span>
+            <h3>Copy the embed code</h3>
+            <p>In the workspace, open the <b>Listings</b> tab. At the top is a "Website embed code" box — click <b>Copy embed code</b>. This always copies the current, correct version.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Setup · step 2</span>
+            <h3>Open your GHL page</h3>
+            <p>In GoHighLevel, open the page where you want the property grid to appear, in the page builder.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Setup · step 3</span>
+            <h3>Add a Custom HTML element</h3>
+            <p>Drag in a <b>Custom HTML</b> element (sometimes called "Code" or "Custom Code / HTML"). This is the one rule that matters: it must be an HTML/Code block, not a text block.</p>
+            <div class="callout">If the styling ever looks off, it's almost always because the code got pasted into a text block. Re-paste into a Custom HTML element.</div>
+          </div>
+          <div class="wstep">
+            <span class="tag">Setup · step 4</span>
+            <h3>Paste &amp; save</h3>
+            <p>Paste the copied code into that element and save. Preview the page — the property grid appears and loads your live listings.</p>
+          </div>
+          <div class="wstep">
+            <span class="tag">Setup · step 5</span>
+            <h3>You're done — it stays current</h3>
+            <p>You only paste it once. Whenever you publish, edit, mark sold, or unpublish a listing in the workspace, the page updates itself. No need to touch GHL again.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="wnav">
+        <button id="wback" disabled>Back</button>
+        <button id="wnext" class="primary">Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SETUP / INSTRUCTIONS ===== -->
+<section class="block" id="setup">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">GHL setup &amp; details</div>
+      <h2>The GoHighLevel side, explained</h2>
+      <p>The parts that connect to your CRM — what's already wired up, and what to keep in mind.</p>
+    </div>
+
+    <div class="acc" id="acc">
+      <div class="item open">
+        <button class="q">Embedding the listings page <span class="plus">+</span></button>
+        <div class="a">
+          <ol>
+            <li>Copy the embed code from the workspace (<b>Listings</b> tab → <b>Copy embed code</b>).</li>
+            <li>In GHL, drag a <b>Custom HTML / Code</b> element onto the page.</li>
+            <li>Paste the code in and save.</li>
+          </ol>
+          <p>The font loads in a way that survives GHL's editor, and all styling is self-contained, so it won't clash with your template. It must go in a Code/HTML block — not a text block.</p>
+        </div>
+      </div>
+      <div class="item">
+        <button class="q">The two email workflows (already live) <span class="plus">+</span></button>
+        <div class="a">
+          <p>When a seller submits, the system pings a GHL <b>Inbound Webhook</b>, which triggers your "Property Listing Submission" workflow. That workflow:</p>
+          <ul>
+            <li>Creates or updates the seller as a <b>contact</b>.</li>
+            <li>Emails <b>your team</b> a new-lead alert.</li>
+            <li>Emails the <b>seller</b> a confirmation.</li>
+          </ul>
+          <p>This is built and confirmed working. If emails ever stop arriving, check the sending domain / from-address in GHL first.</p>
+        </div>
+      </div>
+      <div class="item">
+        <button class="q">Payments &amp; the $99 fee <span class="plus">+</span></button>
+        <div class="a">
+          <p>The seller pays through your FastPayDirect link on the form's success screen. Reconciliation is <b>manual by design</b>:</p>
+          <ol>
+            <li>Confirm the $99 landed (in FastPayDirect / GHL).</li>
+            <li>In the workspace, click <b>Mark as paid</b> on that submission.</li>
+          </ol>
+          <p>A built-in warning stops a property being approved while it still shows unpaid, so nothing slips through.</p>
+        </div>
+      </div>
+      <div class="item">
+        <button class="q">Buyer enquiries <span class="plus">+</span></button>
+        <div class="a">
+          <p>Every listing has a "Find out more / request a viewing" form. When a buyer submits it, the enquiry posts straight into your GHL workflow as a lead — tagged with the property they asked about.</p>
+          <p><b>Before you go public:</b> the enquiry form ships in a safe "demo" mode so test enquiries don't hit your CRM. When you're ready for real buyer leads, we switch it to live.</p>
+        </div>
+      </div>
+      <div class="item">
+        <button class="q">Coming later (optional) <span class="plus">+</span></button>
+        <div class="a">
+          <ul>
+            <li><b>Schedule a Tour</b> → connect the button to your GHL booking calendar so buyers can book viewings.</li>
+            <li><b>Seller decision emails</b> → automatically tell a seller when they're approved or need to send more documents.</li>
+          </ul>
+          <p>Both are straightforward to add when you want them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REFERENCE ===== -->
+<section class="block" id="reference">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Quick reference</div>
+      <h2>Links &amp; logins</h2>
+    </div>
+    <div class="ref">
+      <div class="refcard">
+        <h4>Your pages</h4>
+        <div class="refrow"><span class="k">Public listings</span><span class="v">…/lorrainewright/listings/</span></div>
+        <div class="refrow"><span class="k">Vetting workspace</span><span class="v">…/lorrainewright/vetting/</span></div>
+        <div class="refrow"><span class="k">Seller form</span><span class="v">…/lorrainewright/submit/</span></div>
+      </div>
+      <div class="refcard">
+        <h4>Workspace login</h4>
+        <div class="refrow"><span class="k">Username</span><span class="v">admin</span></div>
+        <div class="refrow"><span class="k">Password</span><span class="v">shared privately</span></div>
+        <div class="refrow"><span class="k">Listing fee</span><span class="v">$99 (FastPayDirect)</span></div>
+        <div class="private"><b>Keep this guide private.</b> Don't share it outside your team — it explains how to reach your admin workspace.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT'S NEXT ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Before you go fully live</div>
+      <h2>What's left, and who owns it</h2>
+    </div>
+    <div class="next">
+      <div class="nextitem"><span class="badge you">You / Lorraine</span><div><h4>Add Lorraine's own properties</h4><p>Load your vetted portfolio (details + photos) so the page launches with real listings.</p></div></div>
+      <div class="nextitem"><span class="badge you">You / Lorraine</span><div><h4>Sign off the vetting checklist</h4><p>Confirm the checks the team uses to verify a property are right for you.</p></div></div>
+      <div class="nextitem"><span class="badge you">You / team</span><div><h4>Switch enquiries to live</h4><p>Turn off the safe demo mode when you're ready for real buyer leads to flow into GHL.</p></div></div>
+      <div class="nextitem"><span class="badge opt">Optional</span><div><h4>Booking &amp; seller emails</h4><p>Wire "Schedule a Tour" to your calendar and auto-notify sellers of decisions, whenever you'd like.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Diaspora to Home — property listings &amp; vetting system</div>
+    <div>Built by <b>Altitude AI</b></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ----- Wizard ----- */
+  var role = "seller";
+  var index = 0;
+  var tabs = document.querySelectorAll(".wtab");
+  var panels = document.querySelectorAll(".wpanel");
+  var prog = document.getElementById("wprog");
+  var count = document.getElementById("wcount");
+  var back = document.getElementById("wback");
+  var next = document.getElementById("wnext");
+
+  function panel(){ for(var i=0;i<panels.length;i++){ if(panels[i].getAttribute("data-role")===role) return panels[i]; } return panels[0]; }
+  function steps(){ return panel().querySelectorAll(".wstep"); }
+
+  function render(){
+    var p = panel();
+    for(var i=0;i<panels.length;i++){ panels[i].style.display = (panels[i]===p)?"block":"none"; }
+    var s = steps();
+    for(var j=0;j<s.length;j++){ s[j].className = (j===index)?"wstep show":"wstep"; }
+    // progress dots
+    prog.innerHTML = "";
+    for(var k=0;k<s.length;k++){ var d=document.createElement("i"); if(k<=index) d.className="on"; prog.appendChild(d); }
+    count.textContent = "Step " + (index+1) + " of " + s.length;
+    back.disabled = (index===0);
+    next.textContent = (index===s.length-1) ? "Start over" : "Next";
+  }
+
+  for(var t=0;t<tabs.length;t++){
+    (function(btn){
+      btn.onclick = function(){
+        for(var i=0;i<tabs.length;i++){ tabs[i].className="wtab"; }
+        btn.className = "wtab active";
+        role = btn.getAttribute("data-role");
+        index = 0; render();
+      };
+    })(tabs[t]);
+  }
+  next.onclick = function(){ var n = steps().length; index = (index===n-1) ? 0 : index+1; render(); };
+  back.onclick = function(){ if(index>0){ index--; render(); } };
+  render();
+
+  /* ----- Accordion ----- */
+  var qs = document.querySelectorAll("#acc .q");
+  for(var a=0;a<qs.length;a++){
+    qs[a].onclick = function(){
+      var item = this.parentNode;
+      item.className = (item.className.indexOf("open")>-1) ? "item" : "item open";
+    };
+  }
+})();
+</script>
+</body>
+</html>
