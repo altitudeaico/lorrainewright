@@ -130,9 +130,14 @@ textarea{min-height:70px;resize:vertical}
           <option>Yes</option>
         </select>
       </div>
+      <div class="field">
+        <label>Photos of the property <span class="hint" style="display:inline">(optional — up to 6, JPG or PNG)</span></label>
+        <input id="photos" type="file" accept="image/*" multiple>
+        <div class="hint" id="photoStatus"></div>
+      </div>
 
       <button class="submit" id="btn" onclick="submitForm()">Submit for review</button>
-      <div class="note">We'll request title documents and photos after you submit. Your details are only seen by the Diaspora to Home team.</div>
+      <div class="note">We'll request title documents after you submit. Your details are only seen by the Diaspora to Home team.</div>
     </form>
 
     <div class="success" id="success">
@@ -175,6 +180,14 @@ function submitForm(){
   var btn = document.getElementById("btn");
   btn.disabled = true; btn.textContent = "Submitting…";
 
+  uploadPhotos(function(urls, uploadErr){
+    if (uploadErr){ showErr(uploadErr); btn.disabled=false; btn.textContent="Submit for review"; return; }
+    if (urls.length) payload.photos = urls.join("|");
+    doInsert(payload, btn);
+  });
+}
+
+function doInsert(payload, btn){
   fetch(SUPABASE_URL + "/rest/v1/submissions", {
     method: "POST",
     headers: {
@@ -196,11 +209,41 @@ function submitForm(){
   .catch(function(e){ showErr("Could not reach the server: " + e.message); btn.disabled=false; btn.textContent="Submit for review"; });
 }
 
+/* Upload selected photos to Supabase Storage, then hand back their public URLs. */
+function uploadPhotos(cb){
+  var input = document.getElementById("photos");
+  var files = (input && input.files) ? input.files : [];
+  if (!files.length){ cb([], null); return; }
+  if (files.length > 6){ cb(null, "Please select up to 6 photos."); return; }
+  var folder = "intake/" + Date.now() + "-" + Math.random().toString(36).slice(2,8);
+  var status = document.getElementById("photoStatus");
+  var urls = [], idx = 0;
+  function next(){
+    if (idx >= files.length){ cb(urls, null); return; }
+    var file = files[idx];
+    if (status) status.textContent = "Uploading photo " + (idx+1) + " of " + files.length + "…";
+    var safeName = (idx+1) + "-" + file.name.replace(/[^A-Za-z0-9._-]/g, "_");
+    var path = folder + "/" + safeName;
+    fetch(SUPABASE_URL + "/storage/v1/object/listing-photos/" + path, {
+      method: "POST",
+      headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY, "Content-Type": file.type || "application/octet-stream" },
+      body: file
+    })
+    .then(function(res){
+      if (res.ok){ urls.push(SUPABASE_URL + "/storage/v1/object/public/listing-photos/" + path); idx++; next(); }
+      else { return res.text().then(function(t){ cb(null, "Photo upload failed (" + res.status + "). " + t); }); }
+    })
+    .catch(function(e){ cb(null, "Photo upload failed: " + e.message); });
+  }
+  next();
+}
+
 function resetForm(){
   document.getElementById("form").reset();
   document.getElementById("form").style.display = "block";
   document.getElementById("success").className = "success";
   var btn=document.getElementById("btn"); btn.disabled=false; btn.textContent="Submit for review";
+  var ps=document.getElementById("photoStatus"); if(ps) ps.textContent="";
   clearErr();
 }
 </script>
