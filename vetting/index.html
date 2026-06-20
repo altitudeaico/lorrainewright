@@ -335,6 +335,7 @@ function verdict(sub){
 /* ===================== PUBLISH (approve -> live) ===================== */
 function publishListing(sub, listingType, done){
   var body = {
+    submission_id: sub.id,
     listing_type: listingType,
     title: sub.title,
     price: sub.price,
@@ -345,9 +346,9 @@ function publishListing(sub, listingType, done){
     status: "live",
     published: true
   };
-  fetch(SUPABASE_URL + "/rest/v1/listings", {
+  fetch(SUPABASE_URL + "/rest/v1/listings?on_conflict=submission_id", {
     method:"POST",
-    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"resolution=merge-duplicates,return=minimal" }),
     body: JSON.stringify(body)
   })
   .then(function(res){
