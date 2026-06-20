@@ -1,7 +1,7 @@
 id,item,type,priority,status,depends_on
 DTH-01,Wire live CSV URL into the site,Build,-,Superseded by Supabase data layer,
 DTH-02,Enter real listings,Content,P1,Pending - into Supabase listings table,
-DTH-03,Real property images,Content,P1,Pending - hosting TBD,DTH-02
+DTH-03,Real property images,Content/Build,P1,DONE - sellers upload on form; shown in vetting; published to listing,
 DTH-04,Seller self-listing intake form,Build,P1,DONE & VERIFIED - live /submit/ writes to Supabase test confirmed,
 DTH-05,$99 listing payment flow,Build (GHL),P1,Pending,DTH-04
 DTH-06,AI listing triage + drafting,Build (AI),P1,Pending - uses vetting-rubric.json,"DTH-16, DTH-13"

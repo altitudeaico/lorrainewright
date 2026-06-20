@@ -22,7 +22,7 @@ The public listings page now reads from Supabase too, so an approval appears on 
 |---|---|---|---|---|---|
 | DTH-01 | Wire live CSV URL into the site | Build | — | **Superseded** by the Supabase data layer | — |
 | DTH-02 | Enter real listings | Content | P1 | Pending — into the Supabase `listings` table | — |
-| DTH-03 | Real property images | Content | P1 | Pending — hosting TBD (Supabase Storage or GHL CDN) | DTH-02 |
+| DTH-03 | Real property images | Content/Build | P1 | **DONE** — sellers upload photos on the form; shown in vetting; published to listing | — |
 | DTH-04 | Seller self-listing intake form | Build | P1 | **DONE & VERIFIED** — live at /submit/, writes to Supabase | — |
 | DTH-05 | $99 listing payment flow | Build (GHL) | P1 | Pending | DTH-04 |
 | DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
