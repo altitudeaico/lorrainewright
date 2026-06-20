@@ -16,7 +16,7 @@ GoHighLevel stays for CRM / nurture / the $99 payment. Google Sheets/CSV is bein
 The seller form is live and writes to the database. The back-office is now **real**:
 team logs in at /vetting/, sees live submissions, works the checklist, and an approval
 publishes the property to the public listings table — verified working end to end.
-What's left to make it public-facing: point the live website's listings page at Supabase.
+The public listings page now reads from Supabase too, so an approval appears on the live site automatically. The core loop is closed.
 
 | ID | Item | Type | Pri | Status (2026-06-20) | Depends on |
 |---|---|---|---|---|---|
@@ -34,7 +34,7 @@ What's left to make it public-facing: point the live website's listings page at 
 | DTH-12 | On-site AI assistant / search | Build (AI) | P3 | Later | — |
 | DTH-13 | Login + PII / consent / compliance | Build / Gov | P1 | **DONE (login live & tested)** — housekeeping below | — |
 | DTH-14 | Unified data / ops dashboard | Build | P2 | Pending | — |
-| DTH-15 | Retire legacy third-party embed + Sheets/CSV | Migration | P2 | Pending | DTH-02, DTH-07 |
+| DTH-15 | Retire legacy third-party embed + Sheets/CSV | Migration | P2 | Public listings page now reads Supabase; legacy embed/Sheets still to retire | DTH-02, DTH-07 |
 | DTH-16 | Documented vetting criteria | Governance | P1 | **Delivered (v1.0-rc)** — awaiting Lorraine sign-off | — |
 | DTH-17 | Ops owner role (BAU + lead SLA) | Org / People | P2 | Pending | — |
 | DTH-18 | Metrics & management cadence | Governance | P2 | Pending | — |
@@ -48,8 +48,8 @@ Housekeeping still to do:
 - Privacy / consent wording on the public form.
 
 ## Immediate next step
-Point the public website's listings page at the Supabase `listings` table, so approved
-properties actually show up on the live site. Then real content (DTH-02/03).
+Core loop is live end-to-end (form -> vet -> approve -> public site). Next: add real
+listings and photos (DTH-02/03), and change admin/admin before real seller data goes in.
 
 ## Housekeeping / open risks
 - admin/admin is temporary — change before real PII.
