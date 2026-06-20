@@ -124,6 +124,9 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .tag.live{background:var(--green-bg);color:var(--green)}
 .tag.sold{background:var(--amber-bg);color:var(--amber)}
 .tag.unpub{background:#EDEBF4;color:var(--navy-medium)}
+.embed-hint{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 10px}
+#embedBox{width:100%;height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.4;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:10px;resize:vertical;background:#FBFAF8;white-space:pre;overflow:auto}
+.copymsg{font-size:12px;color:var(--green);font-weight:600;align-self:center}
 </style>
 </head>
 <body>
@@ -174,6 +177,15 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 
   <div id="viewListings" style="display:none">
     <div class="wrap" style="grid-template-columns:1fr">
+      <div class="panel">
+        <h2>Website embed code</h2>
+        <p class="embed-hint">Paste this once into a GoHighLevel <b>Custom HTML / Code</b> element on your listings page. It shows every published property automatically &mdash; you don't need to paste it again when listings change.</p>
+        <textarea id="embedBox" readonly spellcheck="false">Loading embed code…</textarea>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <button id="copyEmbedBtn" class="primary" style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 16px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer" onclick="copyEmbed()">Copy embed code</button>
+          <span id="copyMsg" class="copymsg"></span>
+        </div>
+      </div>
       <div class="panel">
         <h2>Live &amp; published listings</h2>
         <div id="listingsBody" style="padding:8px"></div>
@@ -558,13 +570,39 @@ function render(){
 /* ===================== LISTINGS MANAGEMENT ===================== */
 var LISTINGS = [];
 var view = 'subs';
+var EMBED_LOADED = false;
+function loadEmbed(){
+  if(EMBED_LOADED) return;
+  var box=document.getElementById("embedBox");
+  fetch("../listings/index.html", { cache:"no-store" })
+  .then(function(res){ return res.text(); })
+  .then(function(txt){ if(txt && txt.indexOf("d2h-props")>-1){ box.value=txt; EMBED_LOADED=true; } else { box.value="Could not load the embed code automatically. Use the listings-embed.html file from your developer."; } })
+  .catch(function(){ box.value="Could not load the embed code automatically. Use the listings-embed.html file from your developer."; });
+}
+function copyEmbed(){
+  var box=document.getElementById("embedBox");
+  var msg=document.getElementById("copyMsg");
+  box.focus(); box.select();
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(box.value).then(
+      function(){ msg.textContent="Copied. Now paste into a GHL Custom HTML element."; },
+      function(){ fallbackCopy(msg); }
+    );
+    return;
+  }
+  fallbackCopy(msg);
+}
+function fallbackCopy(msg){
+  try{ var ok=document.execCommand("copy"); msg.textContent = ok ? "Copied. Now paste into a GHL Custom HTML element." : "Press Ctrl/Cmd+C to copy."; }
+  catch(e){ msg.textContent="Press Ctrl/Cmd+C to copy."; }
+}
 function setView(v){
   view = v;
   document.getElementById("viewSubs").style.display = (v==='subs')?'block':'none';
   document.getElementById("viewListings").style.display = (v==='listings')?'block':'none';
   document.getElementById("tabSubs").className = 'vtab'+(v==='subs'?' active':'');
   document.getElementById("tabListings").className = 'vtab'+(v==='listings'?' active':'');
-  if(v==='listings') loadListings();
+  if(v==='listings'){ loadListings(); loadEmbed(); }
 }
 function loadListings(){
   var body=document.getElementById("listingsBody");
