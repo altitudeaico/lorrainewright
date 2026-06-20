@@ -1,0 +1,688 @@
+<!-- ============================================================
+     Diaspora to Home — Property Listings (Prototype, mock data)
+     Single self-contained block. ES5-compatible for GoHighLevel.
+     Grid view + in-place detail view (no separate pages, no Copy Link).
+     Data array below mirrors the JSON the Apps Script will return,
+     so swapping mock -> live is a one-line change in loadData().
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<div id="d2h-props">
+  <style>
+    #d2h-props{
+      --navy:#231B4F; --purple:#7170B4; --beige:#F5F1ED;
+      --ink:#231B4F; --muted:#6B6880; --line:#E7E3DD; --white:#fff;
+      font-family:'Montserrat',Arial,sans-serif; color:var(--ink);
+      max-width:1200px; margin:0 auto; padding:24px 20px 48px;
+      -webkit-font-smoothing:antialiased;
+    }
+    #d2h-props *{box-sizing:border-box;}
+
+    /* ---------- shared ---------- */
+    .d2h-eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--purple); font-weight:700; margin:0 0 6px;}
+    .d2h-h2{font-size:34px; line-height:1.1; font-weight:800; margin:0 0 28px; color:var(--navy);}
+    .d2h-badge{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; padding:7px 12px; border-radius:6px;}
+    .d2h-badge--offplan{background:var(--purple); color:#fff;}
+    .d2h-badge--status{background:rgba(35,27,79,.82); color:#fff; backdrop-filter:blur(2px);}
+    .d2h-badge--type{font-size:10px; padding:5px 10px; border-radius:20px;}
+    .d2h-badge--vetted{background:#0E7C5A; color:#fff;}
+    .d2h-badge--seller{background:#EFEAFF; color:var(--purple); border:1px solid #DAD2FB;}
+
+    .d2h-specs{display:flex; gap:16px; align-items:center; color:var(--muted); font-weight:600; font-size:14px;}
+    .d2h-specs span{display:inline-flex; align-items:center; gap:6px;}
+    .d2h-specs svg{width:18px; height:18px; flex:none; opacity:.7;}
+
+    /* ---------- grid ---------- */
+    .d2h-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+    .d2h-card{background:var(--white); border:1px solid var(--line); border-radius:14px;
+      overflow:hidden; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow:0 1px 2px rgba(35,27,79,.04);}
+    .d2h-card:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(35,27,79,.14);}
+    .d2h-card__media{position:relative; height:280px;
+      background:linear-gradient(135deg,#cdd6e4 0%,#9aa6bd 100%);}
+    .d2h-card__media img{width:100%; height:100%; object-fit:cover; display:block;}
+    .d2h-card__media .d2h-badge--offplan{position:absolute; top:16px; left:16px;}
+    .d2h-card__media .d2h-badge--status{position:absolute; top:16px; right:16px;}
+    .d2h-price{position:absolute; left:16px; bottom:16px; background:#fff; color:var(--navy);
+      font-weight:800; font-size:20px; padding:9px 16px; border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,.18);}
+    .d2h-card__body{padding:18px 20px 20px; display:flex; justify-content:space-between;
+      align-items:flex-start; gap:14px;}
+    .d2h-card__title{font-size:20px; font-weight:700; margin:0 0 4px; color:var(--navy);}
+    .d2h-card__loc{margin:0; color:var(--muted); font-size:14px; font-weight:500;}
+    .d2h-card__meta{display:flex; flex-direction:column; align-items:flex-end; gap:10px; flex:none;}
+
+    /* ---------- detail ---------- */
+    .d2h-detail{display:none;}
+    .d2h-back{display:inline-flex; align-items:center; gap:8px; background:none; border:none;
+      cursor:pointer; font-family:inherit; font-weight:700; font-size:14px; color:var(--purple);
+      padding:0; margin:0 0 22px;}
+    .d2h-back svg{width:18px; height:18px;}
+    .d2h-back:hover{color:var(--navy);}
+    .d2h-detail__top{display:grid; grid-template-columns:1.05fr .95fr; gap:32px; align-items:start;}
+    .d2h-gallery{border-radius:16px; overflow:hidden;
+      background:linear-gradient(135deg,#cdd6e4 0%,#9aa6bd 100%); aspect-ratio:4/3;}
+    .d2h-gallery img{width:100%; height:100%; object-fit:cover; display:block;}
+    .d2h-panel__head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px;}
+    .d2h-panel__title{font-size:26px; font-weight:800; margin:0; color:var(--navy);}
+    .d2h-panel__price{font-size:38px; font-weight:800; color:var(--navy); margin:14px 0 2px;}
+    .d2h-panel__loc{color:var(--muted); font-weight:600; margin:0 0 14px;}
+    .d2h-tagrow{display:flex; gap:10px; align-items:center; margin:0 0 20px; flex-wrap:wrap;}
+    .d2h-cta{display:flex; gap:12px; margin:0 0 26px;}
+    .d2h-btn{flex:1; text-align:center; font-family:inherit; font-weight:700; font-size:14px;
+      padding:15px 18px; border-radius:10px; cursor:pointer; border:2px solid var(--navy);
+      transition:background .15s ease, color .15s ease;}
+    .d2h-btn--solid{background:var(--navy); color:#fff;}
+    .d2h-btn--solid:hover{background:#160F38;}
+    .d2h-btn--ghost{background:#fff; color:var(--navy);}
+    .d2h-btn--ghost:hover{background:var(--beige);}
+    .d2h-tabs{display:flex; gap:28px; border-bottom:1px solid var(--line); margin:0 0 20px;}
+    .d2h-tab{background:none; border:none; cursor:pointer; font-family:inherit; font-weight:700;
+      font-size:15px; color:var(--muted); padding:0 0 12px; position:relative; transition:color .15s;}
+    .d2h-tab.is-active{color:var(--navy);}
+    .d2h-tab.is-active:after{content:""; position:absolute; left:0; right:0; bottom:-1px;
+      height:3px; background:var(--purple); border-radius:3px;}
+    .d2h-tabpane{display:none;}
+    .d2h-tabpane.is-active{display:block;}
+    .d2h-map{width:100%; height:260px; border:0; border-radius:12px; margin:0 0 20px;}
+    .d2h-desc h4{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--purple);
+      margin:0 0 10px; font-weight:700;}
+    .d2h-desc p{line-height:1.7; color:#3C3858; margin:0 0 14px; font-size:15px;}
+    .d2h-feat{list-style:none; padding:0; margin:0; columns:2; column-gap:28px;}
+    .d2h-feat li{padding:9px 0 9px 26px; position:relative; font-weight:600; color:#3C3858;
+      font-size:14px; break-inside:avoid;}
+    .d2h-feat li:before{content:""; position:absolute; left:0; top:13px; width:11px; height:11px;
+      border-radius:50%; background:var(--purple);}
+    .d2h-mortgage{background:var(--beige); border-radius:12px; padding:22px 24px;}
+    .d2h-mortgage p{margin:0 0 8px; color:#3C3858; font-size:15px; line-height:1.6;}
+    .d2h-mortgage strong{color:var(--navy);}
+
+    /* ---------- enquiry modal ---------- */
+    .d2h-overlay{display:none; position:fixed; inset:0; z-index:9999;
+      background:rgba(20,15,45,.55); backdrop-filter:blur(2px);
+      align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto;}
+    .d2h-overlay.is-open{display:flex;}
+    .d2h-modal{background:#fff; width:100%; max-width:560px; border-radius:16px;
+      box-shadow:0 24px 60px rgba(20,15,45,.4); overflow:hidden;
+      font-family:'Montserrat',Arial,sans-serif; animation:d2hPop .18s ease;}
+    @keyframes d2hPop{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
+    .d2h-modal__head{padding:24px 28px 18px; border-bottom:1px solid var(--line);}
+    .d2h-modal__head h3{margin:0; font-size:17px; letter-spacing:.1em; text-transform:uppercase;
+      font-weight:800; color:var(--navy);}
+    .d2h-modal__sub{margin:6px 0 0; font-size:14px; color:var(--purple); font-weight:600;}
+    .d2h-modal__body{padding:24px 28px 8px;}
+    .d2h-field{margin:0 0 18px;}
+    .d2h-field label{display:block; font-size:14px; font-weight:600; color:var(--navy); margin:0 0 7px;}
+    .d2h-field label .req{color:var(--purple);}
+    .d2h-input{width:100%; font-family:inherit; font-size:15px; padding:13px 14px;
+      border:1px solid var(--line); border-radius:9px; color:var(--ink); background:#fff;}
+    .d2h-input:focus{outline:none; border-color:var(--purple); box-shadow:0 0 0 3px rgba(113,112,180,.15);}
+    .d2h-input.is-invalid{border-color:#D64545; box-shadow:0 0 0 3px rgba(214,69,69,.12);}
+    textarea.d2h-input{resize:vertical; min-height:110px;}
+    .d2h-phone{display:flex; gap:10px;}
+    .d2h-phone select{flex:none; width:104px; font-family:inherit; font-size:15px; font-weight:600;
+      padding:13px 10px; border:1px solid var(--line); border-radius:9px; background:#F7F5F2; color:var(--navy);}
+    .d2h-phone select:focus{outline:none; border-color:var(--purple);}
+    .d2h-helper{font-size:14px; color:#3C3858; line-height:1.55; margin:0 0 10px;}
+    .d2h-modal__foot{padding:18px 28px 24px; border-top:1px solid var(--line);
+      display:flex; justify-content:flex-end; gap:14px; align-items:center;}
+    .d2h-modal__foot .d2h-err{margin-right:auto; color:#D64545; font-size:13px; font-weight:600; display:none;}
+    .d2h-btn--text{flex:none; background:none; border:none; cursor:pointer; font-family:inherit;
+      font-weight:700; letter-spacing:.06em; font-size:14px; color:var(--muted); padding:14px 8px;}
+    .d2h-btn--text:hover{color:var(--navy);}
+    .d2h-btn--submit{flex:none; background:var(--navy); color:#fff; border:none; cursor:pointer;
+      font-family:inherit; font-weight:700; letter-spacing:.06em; font-size:14px;
+      padding:14px 30px; border-radius:10px;}
+    .d2h-btn--submit:hover{background:#160F38;}
+    .d2h-btn--submit:disabled{opacity:.6; cursor:default;}
+    .d2h-success{padding:40px 28px; text-align:center;}
+    .d2h-success svg{width:54px; height:54px; color:#0E7C5A; margin:0 0 14px;}
+    .d2h-success h3{margin:0 0 8px; font-size:21px; color:var(--navy); font-weight:800;}
+    .d2h-success p{margin:0 0 22px; color:#3C3858; line-height:1.6; font-size:15px;}
+
+    /* ---------- responsive ---------- */
+    @media (max-width:880px){
+      .d2h-grid{grid-template-columns:1fr; gap:20px;}
+      .d2h-detail__top{grid-template-columns:1fr; gap:22px;}
+      .d2h-h2{font-size:27px;}
+      .d2h-card__media{height:240px;}
+      .d2h-feat{columns:1;}
+    }
+  </style>
+
+  <!-- LIST VIEW -->
+  <div class="d2h-list" id="d2hList">
+    <p class="d2h-eyebrow">Our Portfolio</p>
+    <h2 class="d2h-h2">Properties for Sale in Ghana</h2>
+    <div class="d2h-grid" id="d2hGrid"></div>
+  </div>
+
+  <!-- DETAIL VIEW -->
+  <div class="d2h-detail" id="d2hDetail"></div>
+
+  <!-- ENQUIRY MODAL -->
+  <div class="d2h-overlay" id="d2hOverlay">
+    <div class="d2h-modal" role="dialog" aria-modal="true">
+      <div id="d2hModalInner">
+        <div class="d2h-modal__head">
+          <h3>Find Out More</h3>
+          <p class="d2h-modal__sub" id="d2hEnqProp"></p>
+        </div>
+        <div class="d2h-modal__body">
+          <div class="d2h-field">
+            <label>First Name <span class="req">*</span></label>
+            <input class="d2h-input" id="d2hFn" type="text" placeholder="First Name">
+          </div>
+          <div class="d2h-field">
+            <label>Last Name <span class="req">*</span></label>
+            <input class="d2h-input" id="d2hLn" type="text" placeholder="Last Name">
+          </div>
+          <div class="d2h-field">
+            <label>Phone Number <span class="req">*</span></label>
+            <div class="d2h-phone">
+              <select id="d2hDial">
+                <option value="+44">+44</option>
+                <option value="+233">+233</option>
+                <option value="+234">+234</option>
+                <option value="+1">+1</option>
+                <option value="+27">+27</option>
+                <option value="+971">+971</option>
+              </select>
+              <input class="d2h-input" id="d2hPhone" type="tel" placeholder="7400 123456">
+            </div>
+          </div>
+          <div class="d2h-field">
+            <label>Email Address <span class="req">*</span></label>
+            <input class="d2h-input" id="d2hEmail" type="email" placeholder="you@example.com">
+          </div>
+          <div class="d2h-field">
+            <p class="d2h-helper">Thanks for your interest in buying a property. Leave a message or instructions and we&rsquo;ll be in touch soon.</p>
+            <textarea class="d2h-input" id="d2hComment" placeholder="Add Comment"></textarea>
+          </div>
+        </div>
+        <div class="d2h-modal__foot">
+          <span class="d2h-err" id="d2hErr">Please complete the required fields.</span>
+          <button class="d2h-btn--text" id="d2hClose">CLOSE</button>
+          <button class="d2h-btn--submit" id="d2hSubmit">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- Fallback mock data (used only if the live URL isn't set yet) ----
+  function mockData(){
+    return [
+      { id:"p1", listing_type:"vetted", title:"Studio Apartment", price:92340, currency:"$",
+        location:"Airport, Accra", beds:1, baths:1, sqm:131, off_plan:true, status:"SALE",
+        images:["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1000&q=80&auto=format&fit=crop"],
+        description:"A refined studio in the heart of Airport Residential. Floor-to-ceiling glazing, premium fittings and a secure, managed development with on-site amenities. Ideal as a pied-a-terre or a high-yield rental for diaspora investors.",
+        features:["Floor-to-ceiling windows","24/7 security","Fitted kitchen","Borehole + city water","Backup generator","Covered parking","Gym access","Title documentation provided"],
+        map:"Airport Residential, Accra, Ghana" },
+
+      { id:"p2", listing_type:"vetted", title:"4 Bedroom Townhouse", price:200000, currency:"$",
+        location:"Haatso, Accra", beds:4, baths:4, off_plan:true, status:"SALE",
+        images:["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=80&auto=format&fit=crop"],
+        description:"A smart development with state of the art facilities to give you a perfect living style. A location that gives you access to everything that matters, minutes from Academic City University, GA East Hospital and the Madina corridor.",
+        features:["4 en-suite bedrooms","Private parking for 2","Smart-home wiring","Rooftop terrace","Landscaped grounds","Backup power","Gated community","Flexible payment plan"],
+        map:"Haatso, Accra, Ghana" },
+
+      { id:"p3", listing_type:"vetted", title:"3 Bedroom Villa", price:350000, currency:"$",
+        location:"East Legon, Accra", beds:3, baths:3, off_plan:false, status:"SALE",
+        images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1000&q=80&auto=format&fit=crop"],
+        description:"Completed and move-in ready. A contemporary villa on a quiet East Legon street with mature landscaping, a private garden and finishes selected for low-maintenance luxury living.",
+        features:["Move-in ready","Private garden","Solar-ready roof","En-suite master","Open-plan living","Walled & gated","Staff quarters","Freehold title"],
+        map:"East Legon, Accra, Ghana" },
+
+      { id:"p4", listing_type:"seller", title:"2 Bedroom Apartment", price:145000, currency:"$",
+        location:"Cantonments, Accra", beds:2, baths:2, off_plan:false, status:"SALE",
+        images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1000&q=80&auto=format&fit=crop"],
+        description:"Listed directly by the owner. A bright two-bedroom apartment in a sought-after Cantonments block, walking distance to embassies, cafes and the A&C Mall.",
+        features:["Owner listing","2 double bedrooms","Balcony","Lift access","Allocated parking","24/7 security","Water storage","Negotiable"],
+        map:"Cantonments, Accra, Ghana" },
+
+      { id:"p5", listing_type:"vetted", title:"5 Bedroom Detached", price:850000, currency:"$",
+        location:"Trasacco, Accra", beds:5, baths:6, off_plan:true, status:"SALE",
+        images:["https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1000&q=80&auto=format&fit=crop"],
+        description:"An exclusive off-plan residence within the Trasacco enclave. Generous proportions, a private pool plot and bespoke specification options for buyers reserving early.",
+        features:["Private pool","Double-height atrium","6 bathrooms","Cinema room","Staff annexe","Triple garage","Estate security","Bespoke finish options"],
+        map:"Trasacco Valley, Accra, Ghana" },
+
+      { id:"p6", listing_type:"seller", title:"1 Bedroom Apartment", price:78500, currency:"$",
+        location:"Osu, Accra", beds:1, baths:1, off_plan:false, status:"SALE",
+        images:["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1000&q=80&auto=format&fit=crop"],
+        description:"Owner-listed one-bedroom in vibrant Osu, steps from Oxford Street. A strong short-let or first-investment opportunity in one of Accra's most walkable districts.",
+        features:["Owner listing","Furnished option","City-centre location","Short-let friendly","Secure entry","Backup power","Water storage","Quick sale"],
+        map:"Osu, Accra, Ghana" },
+    ];
+  }
+
+  // ============================================================
+  //  LIVE DATA  <-  Google Sheet published as CSV
+  //  In the Sheet:  File > Share > Publish to web > select the
+  //  "Listings" tab > Comma-separated values (.csv) > Publish.
+  //  Paste the published URL below. While it's the placeholder,
+  //  the page shows the built-in sample listings.
+  // ============================================================
+  var LISTINGS_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_URL_HERE";
+
+  var DATA = [];
+  var byId = {};
+
+  function indexData(){
+    byId = {};
+    for(var i=0;i<DATA.length;i++){ byId[DATA[i].id] = DATA[i]; }
+  }
+
+  function gridMessage(msg){
+    document.getElementById("d2hGrid").innerHTML =
+      '<p style="grid-column:1/-1; color:#6B6880; font-weight:600; padding:36px 0;">' + msg + '</p>';
+  }
+
+  function fetchListings(){
+    gridMessage("Loading properties\u2026");
+
+    if(LISTINGS_CSV_URL.indexOf("http") !== 0){
+      DATA = mockData(); indexData(); renderGrid();   // not configured yet
+      return;
+    }
+
+    var url = LISTINGS_CSV_URL + (LISTINGS_CSV_URL.indexOf("?") > -1 ? "&" : "?") +
+              "t=" + (new Date().getTime());   // cache-buster
+    var fail = function(){ gridMessage("We couldn\u2019t load the listings just now. Please refresh the page."); };
+
+    if(window.fetch){
+      fetch(url).then(function(res){ return res.text(); })
+        .then(function(txt){ handleCsv(txt); })["catch"](fail);
+    } else {
+      var x = new XMLHttpRequest();
+      x.open("GET", url, true);
+      x.onreadystatechange = function(){
+        if(x.readyState === 4){
+          if(x.status >= 200 && x.status < 300){ handleCsv(x.responseText); } else { fail(); }
+        }
+      };
+      x.send();
+    }
+  }
+
+  function handleCsv(txt){
+    DATA = rowsToListings(parseCsv(txt));
+    indexData();
+    if(DATA.length){ renderGrid(); }
+    else { gridMessage("No properties are listed at the moment. Please check back soon."); }
+  }
+
+  // ---- CSV helpers (handle quoted fields, commas, escaped quotes) ----
+  function parseCsv(text){
+    text = String(text).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    var rows = [], row = [], field = "", inQ = false, i = 0, c;
+    while(i < text.length){
+      c = text.charAt(i);
+      if(inQ){
+        if(c === '"'){
+          if(text.charAt(i+1) === '"'){ field += '"'; i += 2; continue; }
+          inQ = false; i++; continue;
+        }
+        field += c; i++; continue;
+      }
+      if(c === '"'){ inQ = true; i++; continue; }
+      if(c === ','){ row.push(field); field = ""; i++; continue; }
+      if(c === '\n'){ row.push(field); rows.push(row); row = []; field = ""; i++; continue; }
+      field += c; i++;
+    }
+    if(field !== "" || row.length){ row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function rowsToListings(rows){
+    if(!rows.length) return [];
+    var headers = rows[0], idx = {}, h;
+    for(h = 0; h < headers.length; h++){ idx[trim(headers[h]).toLowerCase()] = h; }
+
+    var out = [];
+    for(var r = 1; r < rows.length; r++){
+      var row = rows[r];
+      if(trim(cell(row, idx, "title")) === "") continue;
+      if(!truthy(cell(row, idx, "published"))) continue;
+
+      var images = [], imgKeys = ["image_1","image_2","image_3","image_4"], k, v;
+      for(k = 0; k < imgKeys.length; k++){ v = trim(cell(row, idx, imgKeys[k])); if(v){ images.push(v); } }
+
+      var features = [], raw = String(cell(row, idx, "features")).split("|"), f, fv;
+      for(f = 0; f < raw.length; f++){ fv = trim(raw[f]); if(fv){ features.push(fv); } }
+
+      out.push({
+        id: trim(cell(row, idx, "id")),
+        listing_type: (trim(cell(row, idx, "listing_type")).toLowerCase() === "seller") ? "seller" : "vetted",
+        title: trim(cell(row, idx, "title")),
+        price: num(cell(row, idx, "price")),
+        currency: trim(cell(row, idx, "currency")) || "$",
+        location: trim(cell(row, idx, "location")),
+        beds: num(cell(row, idx, "beds")),
+        baths: num(cell(row, idx, "baths")),
+        sqm: num(cell(row, idx, "sqm")),
+        off_plan: truthy(cell(row, idx, "off_plan")),
+        status: trim(cell(row, idx, "status")) || "SALE",
+        images: images,
+        description: trim(cell(row, idx, "description")),
+        features: features,
+        map: trim(cell(row, idx, "map_location")) || trim(cell(row, idx, "location"))
+      });
+    }
+    return out;
+  }
+
+  function cell(row, idx, key){ return (key in idx && idx[key] < row.length) ? row[idx[key]] : ""; }
+  function trim(v){ return String(v == null ? "" : v).replace(/^\s+|\s+$/g, ""); }
+  function num(v){ var n = Number(String(v).replace(/[^0-9.\-]/g, "")); return isNaN(n) ? 0 : n; }
+  function truthy(v){ var s = trim(v).toLowerCase(); return s === "true" || s === "yes" || s === "1" || s === "y"; }
+
+  // ---- SVG icon helpers ----
+  function icoBed(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v11M3 13h18M21 18v-5a2 2 0 0 0-2-2H8V9a2 2 0 0 1 2-2h7"/></svg>'; }
+  function icoBath(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/></svg>'; }
+  function icoArea(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4zM4 9h5M15 4v5M9 20v-5M20 15h-5"/></svg>'; }
+  function icoBack(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>'; }
+
+  function money(p, cur){
+    return (cur || "$") + Number(p).toLocaleString("en-US");
+  }
+
+  function specHtml(p, withArea){
+    var html = '<span>' + icoBed() + p.beds + '</span>' +
+               '<span>' + icoBath() + p.baths + '</span>';
+    if(withArea && p.sqm){ html += '<span>' + icoArea() + p.sqm + ' sqm</span>'; }
+    return html;
+  }
+
+  function safeImg(img, src){
+    img.onerror = function(){ this.style.display = "none"; };
+    img.src = src;
+  }
+
+  // ---- Render grid ----
+  function renderGrid(){
+    var grid = document.getElementById("d2hGrid");
+    grid.innerHTML = "";
+    for(var i=0;i<DATA.length;i++){
+      (function(p){
+        var card = document.createElement("div");
+        card.className = "d2h-card";
+
+        var media = document.createElement("div");
+        media.className = "d2h-card__media";
+        var img = document.createElement("img");
+        safeImg(img, p.images[0]);
+        media.appendChild(img);
+        if(p.off_plan){
+          var ob = document.createElement("span");
+          ob.className = "d2h-badge d2h-badge--offplan"; ob.textContent = "Off Plan";
+          media.appendChild(ob);
+        }
+        var sb = document.createElement("span");
+        sb.className = "d2h-badge d2h-badge--status"; sb.textContent = p.status;
+        media.appendChild(sb);
+        var price = document.createElement("div");
+        price.className = "d2h-price"; price.textContent = money(p.price, p.currency);
+        media.appendChild(price);
+
+        var typeBadge = (p.listing_type === "vetted")
+          ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified</span>'
+          : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Listing</span>';
+
+        var body = document.createElement("div");
+        body.className = "d2h-card__body";
+        body.innerHTML =
+          '<div>' +
+            '<h3 class="d2h-card__title">' + p.title + '</h3>' +
+            '<p class="d2h-card__loc">' + p.location + '</p>' +
+          '</div>' +
+          '<div class="d2h-card__meta">' +
+            typeBadge +
+            '<div class="d2h-specs">' + specHtml(p, true) + '</div>' +
+          '</div>';
+
+        card.appendChild(media);
+        card.appendChild(body);
+        card.onclick = function(){ openDetail(p.id); };
+        grid.appendChild(card);
+      })(DATA[i]);
+    }
+  }
+
+  // ---- Render detail (in place) ----
+  function openDetail(id){
+    var p = byId[id];
+    if(!p) return;
+    var d = document.getElementById("d2hDetail");
+
+    var typeBadge = (p.listing_type === "vetted")
+      ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified Portfolio</span>'
+      : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Own Listing</span>';
+    var offBadge = p.off_plan ? '<span class="d2h-badge d2h-badge--offplan">Off Plan</span>' : '';
+
+    var featList = '';
+    for(var f=0; f<p.features.length; f++){ featList += '<li>' + p.features[f] + '</li>'; }
+
+    var mapSrc = "https://maps.google.com/maps?q=" + encodeURIComponent(p.map) + "&z=13&output=embed";
+
+    d.innerHTML =
+      '<button class="d2h-back" id="d2hBack">' + icoBack() + 'Back to listings</button>' +
+      '<div class="d2h-detail__top">' +
+        '<div class="d2h-gallery"><img id="d2hHero" alt="' + p.title + '"></div>' +
+        '<div class="d2h-panel">' +
+          '<div class="d2h-panel__head">' +
+            '<h2 class="d2h-panel__title">' + p.title + '</h2>' +
+            '<div class="d2h-specs">' + specHtml(p, true) + '</div>' +
+          '</div>' +
+          '<div class="d2h-panel__price">' + money(p.price, p.currency) + '</div>' +
+          '<p class="d2h-panel__loc">' + p.location + '</p>' +
+          '<div class="d2h-tagrow">' + offBadge +
+            '<span class="d2h-badge d2h-badge--status" style="background:#231B4F">' + p.status + '</span>' +
+            typeBadge +
+          '</div>' +
+          '<div class="d2h-cta">' +
+            '<button class="d2h-btn d2h-btn--solid" id="d2hTour">Schedule a Tour</button>' +
+            '<button class="d2h-btn d2h-btn--ghost" id="d2hFindOut">Find out more</button>' +
+          '</div>' +
+          '<div class="d2h-tabs">' +
+            '<button class="d2h-tab is-active" data-tab="overview">Overview</button>' +
+            '<button class="d2h-tab" data-tab="features">Key Features</button>' +
+            '<button class="d2h-tab" data-tab="mortgage">Mortgage</button>' +
+          '</div>' +
+          '<div class="d2h-tabpane is-active" data-pane="overview">' +
+            '<iframe class="d2h-map" src="' + mapSrc + '" loading="lazy"></iframe>' +
+            '<div class="d2h-desc"><h4>Description</h4><p>' + p.description + '</p></div>' +
+          '</div>' +
+          '<div class="d2h-tabpane" data-pane="features">' +
+            '<div class="d2h-desc"><h4>Key Features</h4></div>' +
+            '<ul class="d2h-feat">' + featList + '</ul>' +
+          '</div>' +
+          '<div class="d2h-tabpane" data-pane="mortgage">' +
+            '<div class="d2h-mortgage">' +
+              '<p><strong>Mortgage & financing</strong></p>' +
+              '<p>Diaspora-friendly mortgage options are available on selected developments. ' +
+              'Book a consultation to review deposit requirements, rates and eligibility for this property.</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    safeImg(document.getElementById("d2hHero"), p.images[0]);
+
+    // back button
+    document.getElementById("d2hBack").onclick = backToGrid;
+
+    // enquiry button -> open modal pre-loaded with THIS property
+    document.getElementById("d2hFindOut").onclick = function(){ openEnquiry(p); };
+
+    // tab switching
+    var tabs = d.querySelectorAll(".d2h-tab");
+    var panes = d.querySelectorAll(".d2h-tabpane");
+    for(var t=0; t<tabs.length; t++){
+      (function(tab){
+        tab.onclick = function(){
+          var name = tab.getAttribute("data-tab");
+          for(var x=0;x<tabs.length;x++){ tabs[x].className = "d2h-tab"; }
+          tab.className = "d2h-tab is-active";
+          for(var y=0;y<panes.length;y++){
+            panes[y].className = "d2h-tabpane" +
+              (panes[y].getAttribute("data-pane") === name ? " is-active" : "");
+          }
+        };
+      })(tabs[t]);
+    }
+
+    document.getElementById("d2hList").style.display = "none";
+    d.style.display = "block";
+    window.scrollTo(0, 0);
+  }
+
+  function backToGrid(){
+    document.getElementById("d2hDetail").style.display = "none";
+    document.getElementById("d2hList").style.display = "block";
+    window.scrollTo(0, 0);
+  }
+
+  // ============================================================
+  //  ENQUIRY MODAL  ->  GHL Inbound Webhook
+  //  1. In GHL: create a Workflow with an "Inbound Webhook" trigger.
+  //  2. Copy the webhook URL it generates and paste it below.
+  //  While left as the placeholder, the form runs in DEMO mode:
+  //  it shows success and logs the exact payload to the console.
+  // ============================================================
+  var WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/MUCiWTChkVoaPw8fdKXQ/webhook-trigger/7f75414f-3b3c-4fdc-823e-43bebcbbf6bf";
+
+  // Hosted demo safety: while DEMO_MODE is true the enquiry form simulates
+  // success and does NOT post to the live GHL webhook (so demo submissions
+  // never reach Lorraine's CRM). Set to false to send real enquiries.
+  var DEMO_MODE = true;
+
+  var enqProperty = null;
+  var ENQ_TEMPLATE = document.getElementById("d2hModalInner").innerHTML;
+
+  function wireEnquiryControls(){
+    document.getElementById("d2hClose").onclick = closeEnquiry;
+    document.getElementById("d2hSubmit").onclick = submitEnquiry;
+  }
+
+  function openEnquiry(p){
+    enqProperty = p;
+    document.getElementById("d2hModalInner").innerHTML = ENQ_TEMPLATE; // fresh, empty form
+    wireEnquiryControls();
+    document.getElementById("d2hEnqProp").textContent = p.title + " \u2014 " + p.location;
+    document.getElementById("d2hOverlay").className = "d2h-overlay is-open";
+  }
+
+  function closeEnquiry(){
+    document.getElementById("d2hOverlay").className = "d2h-overlay";
+  }
+
+  function validEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function markInvalid(el, bad){
+    el.className = "d2h-input" + (bad ? " is-invalid" : "");
+  }
+
+  function submitEnquiry(){
+    var fn = document.getElementById("d2hFn");
+    var ln = document.getElementById("d2hLn");
+    var ph = document.getElementById("d2hPhone");
+    var em = document.getElementById("d2hEmail");
+    var cm = document.getElementById("d2hComment");
+
+    var badFn = fn.value.replace(/\s/g,"") === "";
+    var badLn = ln.value.replace(/\s/g,"") === "";
+    var badPh = ph.value.replace(/\s/g,"") === "";
+    var badEm = !validEmail(em.value);
+    markInvalid(fn, badFn); markInvalid(ln, badLn);
+    markInvalid(ph, badPh); markInvalid(em, badEm);
+
+    if(badFn || badLn || badPh || badEm){
+      document.getElementById("d2hErr").style.display = "block";
+      return;
+    }
+    document.getElementById("d2hErr").style.display = "none";
+
+    var payload = {
+      first_name: fn.value,
+      last_name: ln.value,
+      phone: document.getElementById("d2hDial").value + " " + ph.value,
+      email: em.value,
+      message: cm.value,
+      property_name: enqProperty ? enqProperty.title : "",
+      property_id: enqProperty ? enqProperty.id : "",
+      property_location: enqProperty ? enqProperty.location : "",
+      source: "Property listing - Find out more"
+    };
+
+    var btn = document.getElementById("d2hSubmit");
+    btn.disabled = true; btn.textContent = "Sending\u2026";
+
+    // Demo-safe: skip the live webhook while DEMO_MODE is on
+    if(DEMO_MODE || WEBHOOK_URL.indexOf("http") !== 0){
+      if(window.console){ console.log("[Diaspora to Home] Enquiry payload (demo, not sent):", payload); }
+      showEnquirySuccess();
+      return;
+    }
+
+    // Live: GHL inbound webhooks don't return CORS headers, so we POST
+    // no-cors. We send form-urlencoded (a CORS-safelisted content type)
+    // because GHL parses that into named fields most reliably.
+    try {
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: encodeForm(payload)
+      }).then(function(){
+        showEnquirySuccess();
+      })["catch"](function(){
+        btn.disabled = false; btn.textContent = "SUBMIT";
+        var err = document.getElementById("d2hErr");
+        err.textContent = "Something went wrong. Please try again.";
+        err.style.display = "block";
+      });
+    } catch(e){
+      btn.disabled = false; btn.textContent = "SUBMIT";
+    }
+  }
+
+  function encodeForm(obj){
+    var parts = [];
+    for(var k in obj){
+      if(obj.hasOwnProperty(k)){
+        parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]));
+      }
+    }
+    return parts.join("&");
+  }
+
+  function showEnquirySuccess(){
+    var name = enqProperty ? enqProperty.title : "this property";
+    document.getElementById("d2hModalInner").innerHTML =
+      '<div class="d2h-success">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+          '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>' +
+        '<h3>Enquiry sent</h3>' +
+        '<p>Thanks for your interest in <strong>' + name + '</strong>. ' +
+        'Our team will be in touch with you shortly.</p>' +
+        '<button class="d2h-btn--submit" id="d2hDone">CLOSE</button>' +
+      '</div>';
+    document.getElementById("d2hDone").onclick = closeEnquiry;
+  }
+
+  // modal wiring (overlay persists; form controls are wired per-open)
+  document.getElementById("d2hOverlay").onclick = function(e){
+    if(e.target === this){ closeEnquiry(); }
+  };
+
+  fetchListings();
+})();
+</script>
