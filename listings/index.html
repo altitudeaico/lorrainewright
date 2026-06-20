@@ -318,7 +318,7 @@
         baths: num(r.baths),
         sqm: num(r.sqm),
         off_plan: (r.off_plan === true) || truthy(r.off_plan),
-        status: "SALE",
+        status: (String(r.status||"").toLowerCase()==="sold") ? "SOLD" : "SALE",
         images: images,
         description: trim(r.description),
         features: features,
