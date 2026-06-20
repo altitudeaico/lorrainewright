@@ -44,7 +44,7 @@ Done & verified: approved-team allowlist + RLS gating; shared login (admin/admin
 in Supabase's secure user store; login confirmed working end-to-end (an approval wrote to
 the database as the logged-in user).
 Housekeeping still to do:
-- **Change admin/admin** before any real seller data goes in.
+- ~~Change admin/admin~~ DONE — password changed from the default.
 - Privacy / consent wording on the public form.
 
 ## Immediate next step
@@ -52,7 +52,7 @@ Core loop is live end-to-end (form -> vet -> approve -> public site). Next: add 
 listings and photos (DTH-02/03), and change admin/admin before real seller data goes in.
 
 ## Housekeeping / open risks
-- admin/admin is temporary — change before real PII.
+- ~~admin/admin temporary~~ DONE — password changed from the default.
 - Confirm the GitHub deploy token (PAT) is revoked.
 - Retire the Google Sheets/CSV path (now redundant).
 

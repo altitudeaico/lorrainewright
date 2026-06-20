@@ -11,7 +11,7 @@ DTH-09,Internal team lead-alert email,Build (GHL),P1,Pending,
 DTH-10,Wire Schedule a Tour to booking calendar,Build,P2,Pending - button inert,
 DTH-11,AI buyer first-reply on enquiry,Build (AI),P2,Pending,DTH-13
 DTH-12,On-site AI assistant / search,Build (AI),P3,Later,
-DTH-13,Login + PII / consent / compliance,Build / Gov,P1,DONE login live & tested - change password + consent text outstanding,
+DTH-13,Login + PII / consent / compliance,Build / Gov,P1,DONE login live & tested - password changed; consent text outstanding,
 DTH-14,Unified data / ops dashboard,Build,P2,Pending,
 DTH-15,Retire legacy embed + Sheets/CSV,Migration,P2,Public page now on Supabase; legacy embed/Sheets still to retire,"DTH-02, DTH-07"
 DTH-16,Documented vetting criteria,Governance,P1,Delivered v1.0-rc - awaiting Lorraine sign-off,
