@@ -41,6 +41,9 @@ textarea{min-height:70px;resize:vertical}
 .success h2{font-size:20px;margin:0 0 8px;color:var(--navy-dark)}
 .success p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 18px}
 .success button{background:none;border:1px solid var(--line);border-radius:4px;padding:10px 18px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink)}
+.success .paybtn{display:none;background:var(--navy-dark);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:13px 24px;border-radius:4px;margin:0 0 10px}
+.success .paybtn:hover{background:var(--navy-medium)}
+.success .payskip{display:none;font-size:12px;color:var(--muted);margin:0 0 18px}
 </style>
 </head>
 <body>
@@ -143,7 +146,9 @@ textarea{min-height:70px;resize:vertical}
     <div class="success" id="success">
       <div class="tick">&#10003;</div>
       <h2>Thank you — received</h2>
-      <p>Your property has been submitted for review. Our team will check the details and contact you about the documents we need before it can go live.</p>
+      <p>Your property has been submitted. The last step is the $99 listing fee — once that's paid, our team reviews your property and, if approved, it goes live on the site.</p>
+      <a class="paybtn" id="payBtn" href="#" target="_blank" rel="noopener">Pay the $99 listing fee</a>
+      <p class="payskip" id="paySkip">You can also pay later — we'll email you the link.</p>
       <button onclick="resetForm()">Submit another property</button>
     </div>
   </div>
@@ -152,6 +157,13 @@ textarea{min-height:70px;resize:vertical}
 <script>
 var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
 var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
+
+/* ============================================================
+   $99 LISTING FEE — paste your GoHighLevel payment link below.
+   While it's the placeholder, the success screen simply thanks
+   the seller without a pay button (nothing breaks).
+   ============================================================ */
+var PAYMENT_LINK_URL = "PASTE_GHL_PAYMENT_LINK_HERE";
 
 function val(id){ var e=document.getElementById(id); return e ? e.value.trim() : ""; }
 function showErr(t){ var e=document.getElementById("err"); e.textContent=t; e.className="msg err"; window.scrollTo(0,0); }
@@ -200,13 +212,22 @@ function doInsert(payload, btn){
   })
   .then(function(res){
     if (res.ok) {
-      document.getElementById("form").style.display = "none";
-      document.getElementById("success").className = "success show";
+      showSuccess();
     } else {
       return res.text().then(function(t){ showErr("Something went wrong (" + res.status + "). " + t); btn.disabled=false; btn.textContent="Submit for review"; });
     }
   })
   .catch(function(e){ showErr("Could not reach the server: " + e.message); btn.disabled=false; btn.textContent="Submit for review"; });
+}
+
+function showSuccess(){
+  document.getElementById("form").style.display = "none";
+  document.getElementById("success").className = "success show";
+  if (PAYMENT_LINK_URL.indexOf("http") === 0){
+    var b = document.getElementById("payBtn"); b.href = PAYMENT_LINK_URL; b.style.display = "inline-block";
+    document.getElementById("paySkip").style.display = "block";
+  }
+  window.scrollTo(0,0);
 }
 
 /* Upload selected photos to Supabase Storage, then hand back their public URLs. */
