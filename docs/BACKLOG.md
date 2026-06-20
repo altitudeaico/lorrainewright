@@ -77,6 +77,14 @@ and even that needs the booking link to actually go live.
 - Confirm the GitHub deploy token (PAT) is revoked.
 - Retire the Google Sheets/CSV path (now redundant).
 
+## Deferred follow-ups
+- **GHL custom fields for property details.** The inbound-webhook workflow currently maps
+  only name/email/phone onto the contact. Create GHL custom fields for the rest
+  (property_title, location, price, type, seller_role, company, land_tenure, submission_id)
+  and map them, so the full property info is stored on the contact record for
+  filtering/segmentation. _Not a blocker_ — the alert email can reference the webhook payload
+  fields directly in the meantime.
+
 ## Priority key
 - P1 — core value gap (supply / approval side)
 - P2 — next
