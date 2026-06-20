@@ -1,0 +1,19 @@
+ID,Item,Epic,Type,Priority,Status,Depends_on
+DTH-01,Wire live published-CSV URL into the site,Go-live,Build,P0,Code ready; needs URL,
+DTH-02,Enter real listings into the sheet,Go-live,Content,P0,Not started,
+DTH-03,Load real property images to GHL media,Go-live,Content,P0,Not started,
+DTH-04,Seller self-listing intake form,Supply & approval,Build,P1,Not started,
+DTH-05,$99 listing payment flow,Supply & approval,Build (GHL),P1,Not started,DTH-04
+DTH-06,AI listing triage + drafting,Supply & approval,Build (AI),P1,Not started,"DTH-16, DTH-13"
+DTH-07,Approval workspace,Supply & approval,Build,P1,Mockup only,DTH-16
+DTH-08,Approve to auto-publish linkage,Supply & approval,Build,P1,Not started,DTH-07
+DTH-09,Internal team lead-alert email,Demand & conversion,Build (GHL),P1,Not started,
+DTH-10,"Wire ""Schedule a Tour"" to booking calendar",Demand & conversion,Build,P2,Not started,
+DTH-11,AI buyer first-reply on enquiry,Demand & conversion,Build (AI),P2,Not started,DTH-13
+DTH-12,On-site AI assistant / search,Demand & conversion,Build (AI),P3,Not started,
+DTH-13,PII / consent / compliance control,Data & compliance,Build / Gov,P1,Not started,
+DTH-14,Unified data / ops dashboard,Data & compliance,Build,P2,Not started,
+DTH-15,Retire / relegate legacy third-party embed,Data & compliance,Migration,P2,Not started,
+DTH-16,Documented vetting criteria,Operating model,Governance,P1,Not started,
+DTH-17,Ops owner role (BAU + lead SLA),Operating model,Org / People,P2,Not started,
+DTH-18,Metrics & management cadence,Operating model,Governance,P2,Not started,
