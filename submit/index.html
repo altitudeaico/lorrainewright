@@ -33,6 +33,10 @@ textarea{min-height:70px;resize:vertical}
 .submit:hover{background:var(--navy-medium)}
 .submit:disabled{opacity:.6;cursor:not-allowed}
 .note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.5}
+.consent{background:var(--beige);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:16px}
+.consent label{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;font-weight:400;color:var(--ink);line-height:1.5;cursor:pointer}
+.consent input{width:auto;margin-top:2px;flex:none}
+.consent a{color:var(--purple)}
 .msg{padding:12px 14px;border-radius:4px;font-size:13px;margin-bottom:16px;display:none;line-height:1.5}
 .msg.err{display:block;background:var(--red-bg);color:var(--red)}
 .success{display:none;text-align:center;padding:30px 20px}
@@ -139,6 +143,13 @@ textarea{min-height:70px;resize:vertical}
         <div class="hint" id="photoStatus"></div>
       </div>
 
+      <div class="consent">
+        <label>
+          <input type="checkbox" id="consent">
+          <span>I agree that Diaspora to Home may store and use the details and photos I provide to review and list my property, and may contact me about it.<span id="privacyLink"></span></span>
+        </label>
+      </div>
+
       <button class="submit" id="btn" onclick="submitForm()">Submit for review</button>
       <div class="note">We'll request title documents after you submit. Your details are only seen by the Diaspora to Home team.</div>
     </form>
@@ -165,6 +176,10 @@ var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
    ============================================================ */
 var PAYMENT_LINK_URL = "https://link.fastpaydirect.com/payment-link/6a36ecc1eaa0b5cf5db566ec";
 
+/* Optional: paste your privacy-policy page URL to add a link to the consent line.
+   Leave empty to show the consent text without a link. */
+var PRIVACY_URL = "";
+
 function val(id){ var e=document.getElementById(id); return e ? e.value.trim() : ""; }
 function showErr(t){ var e=document.getElementById("err"); e.textContent=t; e.className="msg err"; window.scrollTo(0,0); }
 function clearErr(){ var e=document.getElementById("err"); e.className="msg err"; e.style.display="none"; e.textContent=""; }
@@ -173,6 +188,7 @@ function submitForm(){
   clearErr();
   var required = {property_title:"Property title", location:"Location", type:"Type", seller_name:"Your name", email:"Email"};
   for (var k in required){ if(!val(k)){ showErr("Please fill in: "+required[k]); return; } }
+  if(!document.getElementById("consent").checked){ showErr("Please tick the consent box so we can review your property."); return; }
 
   var payload = {
     property_title: val("property_title"),
@@ -267,6 +283,13 @@ function resetForm(){
   var ps=document.getElementById("photoStatus"); if(ps) ps.textContent="";
   clearErr();
 }
+
+(function(){
+  var pl=document.getElementById("privacyLink");
+  if(pl && PRIVACY_URL.indexOf("http")===0){
+    pl.innerHTML=' See our <a href="'+PRIVACY_URL+'" target="_blank" rel="noopener">privacy policy</a>.';
+  }
+})();
 </script>
 </body>
 </html>

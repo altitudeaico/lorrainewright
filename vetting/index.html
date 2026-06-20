@@ -50,6 +50,10 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .queue .empty{padding:20px 14px;color:var(--muted);font-size:13px;line-height:1.5}
 .tag{font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:4px;background:#EDEBF4;color:var(--navy-medium);font-weight:600}
 .tag.off{background:var(--amber-bg);color:var(--amber)}
+.tag.paidpill{background:var(--green-bg);color:var(--green)}
+.tag.unpaidpill{background:var(--red-bg);color:var(--red)}
+.markpaid{font-family:inherit;font-size:10px;font-weight:600;padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer;margin-left:2px}
+.markpaid:hover{background:var(--beige)}
 .done-dot{font-size:11px;font-weight:600}
 .done-v{color:var(--green)} .done-s{color:var(--purple)} .done-r{color:var(--red)} .done-h{color:var(--amber)}
 .rev-head{padding:18px 20px;border-bottom:1px solid var(--line)}
@@ -266,6 +270,7 @@ function rowToSub(row){
     customary: tenure.indexOf("stool")>-1 || tenure.indexOf("family")>-1,
     status: statusToBadge(row.status),
     published: row.status==="verified" || row.status==="sellers_listing",
+    paid: row.paid === true,
     state: st,
     seller: row.seller_name || "",
     contact: row.email || row.phone || "",
@@ -305,6 +310,16 @@ function saveState(sub){
     headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
     body: JSON.stringify({ review_state: sub.state })
   }).catch(function(){});
+}
+
+function markPaid(sub, value){
+  fetch(SUPABASE_URL + "/rest/v1/submissions?id=eq."+encodeURIComponent(sub.id), {
+    method:"PATCH",
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    body: JSON.stringify({ paid: value, paid_at: value ? new Date().toISOString() : null })
+  })
+  .then(function(res){ if(res.status===401){ sessionExpired(); return; } if(res.ok){ sub.paid=value; render(); } })
+  .catch(function(){});
 }
 
 /* ===================== VERDICT ===================== */
@@ -368,6 +383,9 @@ function publishListing(sub, listingType, done){
 
 function decide(act){
   var sub=current;
+  if((act==="v"||act==="s") && !sub.paid){
+    if(!window.confirm("This property is marked UNPAID. Approve and publish it anyway?")) return;
+  }
   var map={
     v:{tier:"v",label:"Verified",db:"verified",lt:"Verified"},
     s:{tier:"s",label:"Seller's Listing",db:"sellers_listing",lt:"Seller's Listing"},
@@ -421,6 +439,7 @@ function renderQueue(){
     var done = sub.status ? '<span class="done-dot done-'+sub.status.tier+'">· '+sub.status.label+(sub.published?' ✓':'')+'</span>' : '';
     li.innerHTML='<div class="qt">'+esc(sub.title)+'</div><div class="ql">'+esc(sub.loc)+(sub.price?' · '+esc(sub.price):'')+'</div>'+
       '<div class="qmeta"><span class="tag'+(sub.offplan?' off':'')+'">'+(sub.offplan?'Off-plan':'Completed')+'</span>'+
+      '<span class="tag '+(sub.paid?'paidpill':'unpaidpill')+'">'+(sub.paid?'Paid':'Unpaid')+'</span>'+
       '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span>'+done+'</div>';
     li.onclick=function(){ current=sub; render(); };
     ul.appendChild(li);
@@ -441,7 +460,10 @@ function render(){
   var html='<div class="rev-head"><div class="price">'+esc(sub.price)+'</div><div class="ttl">'+esc(sub.title)+'</div>'+
     '<div class="loc">'+esc(sub.loc)+'</div><div class="chips">'+
     '<span class="tag'+(sub.offplan?' off':'')+'">'+(sub.offplan?'Off-plan':'Completed')+'</span>'+
-    '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span></div></div>';
+    '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span>'+
+    '<span class="tag '+(sub.paid?'paidpill':'unpaidpill')+'">'+(sub.paid?'Paid ✓':'Unpaid')+'</span>'+
+    '<button class="markpaid" id="markpaidBtn">'+(sub.paid?'Mark unpaid':'Mark as paid')+'</button>'+
+    '</div></div>';
 
   if(sub.evidence||sub.seller){
     var ev=sub.evidence?Object.keys(sub.evidence).filter(function(k){return sub.evidence[k];}):[];
@@ -495,6 +517,8 @@ function render(){
   rev.querySelectorAll(".seg button").forEach(function(btn){
     btn.onclick=function(){ sub.state[btn.getAttribute("data-id")]=btn.getAttribute("data-val"); saveState(sub); render(); };
   });
+  var mp=document.getElementById("markpaidBtn");
+  if(mp){ mp.onclick=function(){ markPaid(sub, !sub.paid); }; }
   rev.querySelectorAll(".acts button").forEach(function(btn){
     btn.onclick=function(){ if(btn.disabled) return; decide(btn.getAttribute("data-act")); };
   });
