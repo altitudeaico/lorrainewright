@@ -107,6 +107,23 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .connect h3{font-size:13px;margin:0 0 8px}
 .connect p{font-size:13px;color:var(--muted);line-height:1.55;margin:0}
 .connect .step{display:inline-block;background:#EDEBF4;color:var(--navy-medium);font-weight:700;font-size:11px;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;margin-right:4px}
+.viewtabs{display:flex;gap:4px}
+.vtab{font-family:inherit;font-size:13px;font-weight:600;padding:7px 14px;border:1px solid var(--purple);border-radius:4px;background:transparent;color:#fff;cursor:pointer}
+.vtab.active{background:#fff;color:var(--navy-dark)}
+.lrow{border:1px solid var(--line);border-radius:4px;padding:14px;margin-bottom:12px;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.lmain{flex:1;min-width:240px}
+.lin{width:100%;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink);margin-bottom:6px}
+.lin.sm{font-weight:400;font-size:13px}
+.lsub{display:flex;gap:8px}
+.lsub .lin{margin-bottom:0}
+.lbadges{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.lacts{display:flex;flex-direction:column;gap:6px;min-width:140px}
+.lacts button{font-family:inherit;font-size:12px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer}
+.lacts button.primary{background:var(--navy-dark);color:#fff;border:none}
+.lacts button.danger{color:var(--red);border-color:var(--red-bg)}
+.tag.live{background:var(--green-bg);color:var(--green)}
+.tag.sold{background:var(--amber-bg);color:var(--amber)}
+.tag.unpub{background:#EDEBF4;color:var(--navy-medium)}
 </style>
 </head>
 <body>
@@ -128,12 +145,17 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 <div id="app" style="display:none">
   <header class="topbar">
     <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
+    <div class="viewtabs">
+      <button id="tabSubs" class="vtab active" onclick="setView('subs')">Submissions</button>
+      <button id="tabListings" class="vtab" onclick="setView('listings')">Listings</button>
+    </div>
     <div class="right">
       <span class="src" id="src">Loading…</span>
       <button class="logout" onclick="doLogout()">Log out</button>
     </div>
   </header>
 
+  <div id="viewSubs">
   <div class="wrap">
     <div class="panel queue">
       <h2>Pending submissions</h2>
@@ -146,6 +168,16 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
     <div class="panel">
       <h3>How a decision reaches the website</h3>
       <p><span class="step">1</span> A seller submission lands here from the intake form. &nbsp; <span class="step">2</span> The team confirms each check against the evidence (the AI will pre-fill these later). &nbsp; <span class="step">3</span> The verdict resolves automatically. &nbsp; <span class="step">4</span> You click the decision — an approved property publishes itself to the live site. No code, no spreadsheet.</p>
+    </div>
+  </div>
+  </div><!-- /viewSubs -->
+
+  <div id="viewListings" style="display:none">
+    <div class="wrap" style="grid-template-columns:1fr">
+      <div class="panel">
+        <h2>Live &amp; published listings</h2>
+        <div id="listingsBody" style="padding:8px"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -522,6 +554,75 @@ function render(){
   rev.querySelectorAll(".acts button").forEach(function(btn){
     btn.onclick=function(){ if(btn.disabled) return; decide(btn.getAttribute("data-act")); };
   });
+}
+/* ===================== LISTINGS MANAGEMENT ===================== */
+var LISTINGS = [];
+var view = 'subs';
+function setView(v){
+  view = v;
+  document.getElementById("viewSubs").style.display = (v==='subs')?'block':'none';
+  document.getElementById("viewListings").style.display = (v==='listings')?'block':'none';
+  document.getElementById("tabSubs").className = 'vtab'+(v==='subs'?' active':'');
+  document.getElementById("tabListings").className = 'vtab'+(v==='listings'?' active':'');
+  if(v==='listings') loadListings();
+}
+function loadListings(){
+  var body=document.getElementById("listingsBody");
+  body.innerHTML='<div style="padding:18px;color:var(--muted);font-size:13px">Loading…</div>';
+  fetch(SUPABASE_URL + "/rest/v1/listings?select=*&order=created_at.desc", { headers: authHeaders() })
+  .then(function(res){ if(res.status===401){ sessionExpired(); return null; } return res.json(); })
+  .then(function(rows){ if(rows===null) return; LISTINGS=rows||[]; renderListings(); })
+  .catch(function(e){ body.innerHTML='<div style="padding:18px;color:var(--red);font-size:13px">Could not load listings: '+e.message+'</div>'; });
+}
+function lState(l){
+  if(!l.published) return '<span class="tag unpub">Unpublished</span>';
+  if(l.status==='sold') return '<span class="tag sold">Sold</span>';
+  return '<span class="tag live">Live</span>';
+}
+function renderListings(){
+  var body=document.getElementById("listingsBody");
+  if(!LISTINGS.length){ body.innerHTML='<div style="padding:18px;color:var(--muted);font-size:13px">No listings yet. Approve a submission to publish one.</div>'; return; }
+  var html='';
+  LISTINGS.forEach(function(l){
+    var isSeller = String(l.listing_type||'').toLowerCase().indexOf('seller')>-1;
+    var typeBadge='<span class="tag">'+(isSeller?"Seller's Listing":'Verified')+'</span>';
+    html+='<div class="lrow"><div class="lmain">'+
+      '<input class="lin" id="t_'+l.id+'" value="'+esc(l.title)+'">'+
+      '<div class="lsub"><input class="lin sm" id="p_'+l.id+'" value="'+esc(l.price)+'" placeholder="Price"><input class="lin sm" id="loc_'+l.id+'" value="'+esc(l.location)+'" placeholder="Location"></div>'+
+      '<div class="lbadges">'+typeBadge+lState(l)+'</div>'+
+      '</div><div class="lacts">'+
+      '<button class="primary" onclick="saveListing(\''+l.id+'\')">Save edits</button>'+
+      '<button onclick="toggleSold(\''+l.id+'\','+(l.status==='sold'?'false':'true')+')">'+(l.status==='sold'?'Mark available':'Mark sold')+'</button>'+
+      '<button onclick="togglePublished(\''+l.id+'\','+(l.published?'false':'true')+')">'+(l.published?'Unpublish':'Publish')+'</button>'+
+      '<button class="danger" onclick="deleteListing(\''+l.id+'\')">Remove</button>'+
+      '</div></div>';
+  });
+  body.innerHTML=html;
+}
+function patchListing(id, patch, done){
+  fetch(SUPABASE_URL + "/rest/v1/listings?id=eq."+encodeURIComponent(id), {
+    method:"PATCH",
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    body: JSON.stringify(patch)
+  })
+  .then(function(res){ if(res.status===401){ sessionExpired(); return; } done(res.ok); })
+  .catch(function(){ done(false); });
+}
+function saveListing(id){
+  var patch={
+    title: document.getElementById('t_'+id).value,
+    price: document.getElementById('p_'+id).value,
+    location: document.getElementById('loc_'+id).value
+  };
+  patchListing(id, patch, function(ok){ if(ok){ loadListings(); } else { alert('Could not save changes.'); } });
+}
+function toggleSold(id, sold){ patchListing(id, { status: sold?'sold':'live' }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
+function togglePublished(id, pub){ patchListing(id, { published: pub }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
+function deleteListing(id){
+  if(!window.confirm('Remove this listing from the site permanently?')) return;
+  fetch(SUPABASE_URL + "/rest/v1/listings?id=eq."+encodeURIComponent(id), { method:"DELETE", headers: authHeaders({ "Prefer":"return=minimal" }) })
+  .then(function(res){ if(res.status===401){ sessionExpired(); return; } if(res.ok){ loadListings(); } else { alert('Could not remove.'); } })
+  .catch(function(){ alert('Could not remove.'); });
 }
 </script>
 </body>
