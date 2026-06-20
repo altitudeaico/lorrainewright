@@ -2,7 +2,7 @@
 
 Stable IDs (`DTH-NN`) for the property listings / seller-vetting solution.
 
-_Last updated: 2026-06-20 (late) — back-office now live & verified end-to-end (login → vet → publish). DTH-04/07/08/13 done._
+_Last updated: 2026-06-20 (end of day) — full supply loop live: submit → pay → vet → approve → public site. DTH-03/04/05/07/08/13 done._
 
 ## Architecture note
 
@@ -47,15 +47,20 @@ Housekeeping still to do:
 - ~~Change admin/admin~~ DONE — password changed from the default.
 - Privacy / consent wording on the public form.
 
+## Done so far (the whole supply engine)
+Seller form (DTH-04) → $99 payment (DTH-05) → secured database + login (DTH-13) →
+vetting workspace (DTH-07) → approve-to-publish (DTH-08) → photos (DTH-03) →
+public listings page reading Supabase. All live and verified end-to-end.
+
 ## Immediate next step
-Core loop is live end-to-end, photos included. Most remaining items now wait on external
-inputs (see below). Buildable now without waiting: DTH-10 (Schedule-a-Tour -> booking
-calendar) and pre-wiring DTH-05's payment step so it's ready for the GHL link.
+The build side is essentially complete. Remaining items wait on external inputs (below).
+The only thing buildable without an input is DTH-10 (Schedule-a-Tour → booking calendar),
+and even that needs the booking link to actually go live.
 
 ## Waiting on inputs
-- **From GHL (Bolaji):** inbound webhook URL (DTH-09), the $99 payment link (DTH-05),
-  and the booking-calendar link if we wire "Schedule a Tour" (DTH-10).
-- **From Lorraine:** her real property listings + photos (DTH-02), and sign-off on the
+- **From GHL (Bolaji):** inbound webhook URL for lead alerts (DTH-09); booking-calendar
+  link if we wire "Schedule a Tour" (DTH-10).
+- **From Lorraine:** her real property listings + photos (DTH-02); sign-off on the
   vetting criteria (DTH-16).
 
 ## Housekeeping / open risks
