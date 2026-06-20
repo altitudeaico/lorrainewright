@@ -15,10 +15,27 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Montserrat,sans-serif;background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ---- login ---- */
+.login-wrap{position:fixed;inset:0;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.login-card{background:#fff;border-radius:4px;width:100%;max-width:360px;padding:30px 28px}
+.login-card .brand{font-weight:700;font-size:18px;color:var(--navy-dark)}
+.login-card .brand small{display:block;font-weight:400;color:var(--purple);letter-spacing:1.5px;font-size:11px;text-transform:uppercase;margin-top:4px}
+.login-card label{display:block;font-size:12px;font-weight:600;margin:16px 0 5px}
+.login-card input{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);border-radius:4px}
+.login-card input:focus{outline:none;border-color:var(--purple)}
+.login-card button{width:100%;margin-top:20px;background:var(--navy-dark);color:#fff;border:none;border-radius:4px;padding:12px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.login-card button:hover{background:var(--navy-medium)}
+.login-card button:disabled{opacity:.6;cursor:not-allowed}
+.login-err{display:none;margin-top:14px;background:var(--red-bg);color:var(--red);font-size:12px;padding:10px 12px;border-radius:4px;line-height:1.5}
+.login-err.show{display:block}
+
 header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .topbar .brand{font-weight:600;letter-spacing:.5px}
 .topbar .brand small{display:block;font-weight:400;color:var(--purple-soft);letter-spacing:1px;font-size:11px;text-transform:uppercase;margin-top:2px}
+.topbar .right{display:flex;align-items:center;gap:14px}
 .src{font-size:11px;color:var(--purple-soft)}
+.logout{background:none;border:1px solid var(--purple);color:#fff;font-family:inherit;font-size:11px;font-weight:600;padding:6px 12px;border-radius:4px;cursor:pointer}
 .wrap{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:300px 1fr;gap:20px}
 @media(max-width:860px){.wrap{grid-template-columns:1fr}}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:4px}
@@ -30,6 +47,7 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .queue .qt{font-weight:600;font-size:14px}
 .queue .ql{font-size:12px;color:var(--muted);margin-top:2px}
 .queue .qmeta{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.queue .empty{padding:20px 14px;color:var(--muted);font-size:13px;line-height:1.5}
 .tag{font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:4px;background:#EDEBF4;color:var(--navy-medium);font-weight:600}
 .tag.off{background:var(--amber-bg);color:var(--amber)}
 .done-dot{font-size:11px;font-weight:600}
@@ -76,6 +94,8 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .acts button:disabled{opacity:.4;cursor:not-allowed}
 .toast{margin-top:12px;font-size:12px;background:var(--navy-dark);color:#fff;padding:10px 12px;border-radius:4px;line-height:1.45;display:none}
 .toast.show{display:block}
+.toast.ok{background:var(--green)}
+.toast.bad{background:var(--red)}
 .connect{max-width:1200px;margin:0 auto 30px;padding:0 20px}
 .connect .panel{padding:16px 20px}
 .connect h3{font-size:13px;margin:0 0 8px}
@@ -84,35 +104,58 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
-  <div class="src" id="src">Demo · sample submissions</div>
-</header>
 
-<div class="wrap">
-  <div class="panel queue">
-    <h2>Pending submissions</h2>
-    <ul id="queue"></ul>
+<!-- ================= LOGIN ================= -->
+<div class="login-wrap" id="login">
+  <div class="login-card">
+    <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
+    <label>Username</label>
+    <input id="u" autocomplete="username" placeholder="admin">
+    <label>Password</label>
+    <input id="p" type="password" autocomplete="current-password" placeholder="••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button id="loginBtn" onclick="doLogin()">Log in</button>
+    <div class="login-err" id="loginErr"></div>
   </div>
-  <div class="panel" id="review"></div>
 </div>
 
-<div class="connect">
-  <div class="panel">
-    <h3>How a decision reaches the website</h3>
-    <p><span class="step">1</span> A seller submission lands here from the intake form. &nbsp; <span class="step">2</span> The team confirms each check against the evidence (the AI will pre-fill these later). &nbsp; <span class="step">3</span> The verdict resolves automatically. &nbsp; <span class="step">4</span> You click the decision, then set that property's <b>Badge</b> column in your listings sheet to match — the live site updates itself. No code at any step.</p>
+<!-- ================= APP ================= -->
+<div id="app" style="display:none">
+  <header class="topbar">
+    <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
+    <div class="right">
+      <span class="src" id="src">Loading…</span>
+      <button class="logout" onclick="doLogout()">Log out</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="panel queue">
+      <h2>Pending submissions</h2>
+      <ul id="queue"></ul>
+    </div>
+    <div class="panel" id="review"></div>
+  </div>
+
+  <div class="connect">
+    <div class="panel">
+      <h3>How a decision reaches the website</h3>
+      <p><span class="step">1</span> A seller submission lands here from the intake form. &nbsp; <span class="step">2</span> The team confirms each check against the evidence (the AI will pre-fill these later). &nbsp; <span class="step">3</span> The verdict resolves automatically. &nbsp; <span class="step">4</span> You click the decision — an approved property publishes itself to the live site. No code, no spreadsheet.</p>
+    </div>
   </div>
 </div>
 
 <script>
 /* =========================================================================
-   ONE SETTING TO GO LIVE.
-   Paste the published-CSV link of your Submissions sheet between the quotes.
-   Leave it empty to keep showing the demo samples.
-   IMPORTANT: do not point this at real seller data until this page is behind
-   a login (real submissions contain personal information).
+   Diaspora to Home — vetting workspace
+   Reads real submissions from Supabase (only after login) and publishes
+   approved ones to the public listings table. Personal data never leaves
+   this logged-in screen.
    ========================================================================= */
-var SUBMISSIONS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTipq_TmjdOMAzJ_zIJidPOEtVZX7y4poWf6ELk7U9ZkmIZMerxrrloqpQ3SB5li_djyv_jIS7IegCh/pub?output=csv";
+var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
+var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
+var DOMAIN = "diasporatohome.com"; /* short username "admin" becomes admin@diasporatohome.com */
+
+var AUTH = { token:null, email:null };
 
 /* ---- the 24 checks, from vetting-rubric.json v1.0 ---- */
 var CHECKS = [
@@ -143,95 +186,126 @@ var CHECKS = [
 ];
 var CATNAME = {A:"Legal title & ownership",B:"Seller / developer (KYC)",C:"Property reality",D:"Off-plan safeguards",E:"Commercial disclosure",F:"Diaspora payment safety"};
 
-/* ---- demo samples (used until a real CSV link is added above) ---- */
-function allPass(){ var s={}; CHECKS.forEach(function(c){s[c.id]="pass";}); return s; }
-var SAMPLE_SUBS = [
-  { id:"s1", title:"Prestige Gardens — 3 bed townhouse", loc:"East Legon, Accra", price:"$185,000",
-    offplan:false, company:true, customary:false, status:null, state: allPass() },
-  { id:"s2", title:"Adenta Hills — serviced plot", loc:"Adenta, Greater Accra", price:"$42,000",
-    offplan:false, company:false, customary:false, status:null,
-    state: { A1:"pass",A2:"pass",A3:"miss",A4:"miss",A6:"pass",B1:"pass",B4:"pass",
-             C1:"pass",C2:"pass",C3:"miss",E1:"pass",E2:"pass",E3:"pass",
-             F1:"pass",F2:"miss",F3:"miss",F4:"miss" } },
-  { id:"s3", title:"Kwabenya Court — 2 bed apartment", loc:"Kwabenya, Accra", price:"$98,000",
-    offplan:true, company:true, customary:false, status:null,
-    state: { A1:"pass",A2:"pass",A3:"miss",A4:"miss",A6:"pass",B1:"pass",B2:"pass",B3:"flag",B4:"pass",
-             C1:"flag",C2:"pass",C3:"miss",D1:"miss",D2:"miss",D3:"miss",D4:"miss",
-             E1:"pass",E2:"pass",E3:"pass",F1:"miss",F2:"miss",F3:"miss",F4:"miss" } }
-];
-
-var SUBS = SAMPLE_SUBS;
+var SUBS = [];
 var current = null;
 
-/* ---- read real submissions from the published Google Sheet CSV ---- */
-function parseCsv(text){
-  var rows=[], row=[], val="", i=0, inQ=false, ch;
-  while(i<text.length){
-    ch=text.charAt(i);
-    if(inQ){
-      if(ch==='"'){ if(text.charAt(i+1)==='"'){ val+='"'; i++; } else { inQ=false; } }
-      else { val+=ch; }
+/* ===================== AUTH ===================== */
+function doLogin(){
+  var u = document.getElementById("u").value.trim();
+  var p = document.getElementById("p").value;
+  var err = document.getElementById("loginErr");
+  var btn = document.getElementById("loginBtn");
+  if(!u || !p){ err.textContent="Enter your username and password."; err.className="login-err show"; return; }
+  var email = u.indexOf("@")>-1 ? u : (u + "@" + DOMAIN);
+  err.className="login-err"; btn.disabled=true; btn.textContent="Logging in…";
+
+  fetch(SUPABASE_URL + "/auth/v1/token?grant_type=password", {
+    method:"POST",
+    headers:{ "apikey":SUPABASE_KEY, "Content-Type":"application/json" },
+    body: JSON.stringify({ email:email, password:p })
+  })
+  .then(function(res){ return res.json().then(function(j){ return {ok:res.ok, j:j}; }); })
+  .then(function(r){
+    btn.disabled=false; btn.textContent="Log in";
+    if(r.ok && r.j.access_token){
+      AUTH.token = r.j.access_token;
+      AUTH.email = (r.j.user && r.j.user.email) ? r.j.user.email : email;
+      document.getElementById("login").style.display="none";
+      document.getElementById("app").style.display="block";
+      loadSubmissions();
     } else {
-      if(ch==='"'){ inQ=true; }
-      else if(ch===','){ row.push(val); val=""; }
-      else if(ch==='\n'){ row.push(val); rows.push(row); row=[]; val=""; }
-      else if(ch==='\r'){ }
-      else { val+=ch; }
+      var msg = r.j.error_description || r.j.msg || r.j.error || "Login failed. Check the username and password.";
+      err.textContent = msg; err.className="login-err show";
     }
-    i++;
-  }
-  if(val!==""||row.length){ row.push(val); rows.push(row); }
-  return rows;
+  })
+  .catch(function(e){
+    btn.disabled=false; btn.textContent="Log in";
+    err.textContent="Could not reach the server: " + e.message; err.className="login-err show";
+  });
 }
-function blankState(){ var s={}; CHECKS.forEach(function(c){ s[c.id]="unset"; }); return s; }
-function rowsToSubs(rows){
-  if(!rows.length) return [];
-  var head=rows[0], idx={};
-  head.forEach(function(h,k){ idx[h.trim().toLowerCase()]=k; });
-  function g(r,name){ var k=idx[name]; return (k===undefined||r[k]===undefined)?"":(""+r[k]).trim(); }
-  var out=[];
-  for(var r=1;r<rows.length;r++){
-    var row=rows[r]; if(!row.length||(row.length===1&&row[0]==="")) continue;
-    var type=g(row,"type").toLowerCase();
-    var role=g(row,"seller role").toLowerCase();
-    var tenure=g(row,"land tenure").toLowerCase();
-    out.push({
-      id: g(row,"submission id")||g(row,"timestamp")||("row"+r),
-      title: g(row,"property title")||"(untitled)",
-      loc: g(row,"location"),
-      price: g(row,"price"),
-      offplan: type.indexOf("off")===0,
-      company: role==="developer",
-      customary: tenure.indexOf("stool")>-1||tenure.indexOf("family")>-1,
-      status:null, state: blankState(),
-      seller: g(row,"seller name"),
-      contact: g(row,"email")||g(row,"phone"),
-      evidence: {
-        "Title / deed": g(row,"title or deed"),
-        "Search report": g(row,"search report"),
-        "Site plan": g(row,"site plan"),
-        "Photos": g(row,"photos"),
-        "Permit": g(row,"building permit")
-      }
-    });
-  }
-  return out;
+function doLogout(){
+  AUTH.token=null; AUTH.email=null; SUBS=[]; current=null;
+  document.getElementById("app").style.display="none";
+  document.getElementById("login").style.display="flex";
+  document.getElementById("p").value="";
 }
-function loadSubmissions(){
-  if(!SUBMISSIONS_CSV_URL){ SUBS=SAMPLE_SUBS; render(); return; }
-  var sep=SUBMISSIONS_CSV_URL.indexOf("?")>-1?"&":"?";
-  fetch(SUBMISSIONS_CSV_URL+sep+"t="+(new Date()).getTime())
-    .then(function(res){ return res.text(); })
-    .then(function(txt){
-      var subs=rowsToSubs(parseCsv(txt));
-      if(subs.length){ SUBS=subs; document.getElementById("src").textContent="Live · "+subs.length+" submission(s)"; }
-      else { SUBS=SAMPLE_SUBS; }
-      render();
-    })
-    .catch(function(){ SUBS=SAMPLE_SUBS; document.getElementById("src").textContent="Demo · could not reach sheet"; render(); });
+function authHeaders(extra){
+  var h = { "apikey":SUPABASE_KEY, "Authorization":"Bearer "+AUTH.token };
+  if(extra){ for(var k in extra){ h[k]=extra[k]; } }
+  return h;
+}
+function sessionExpired(){
+  alert("Your session expired. Please log in again.");
+  doLogout();
 }
 
-/* ---- verdict logic ---- */
+/* ===================== LOAD ===================== */
+function blankState(){ var s={}; CHECKS.forEach(function(c){ s[c.id]="unset"; }); return s; }
+
+function statusToBadge(st){
+  if(st==="verified") return {tier:"v",label:"Verified"};
+  if(st==="sellers_listing") return {tier:"s",label:"Seller's Listing"};
+  if(st==="rejected") return {tier:"r",label:"Rejected"};
+  if(st==="awaiting_docs") return {tier:"h",label:"Awaiting docs"};
+  return null;
+}
+function rowToSub(row){
+  var type = (row.type||"").toLowerCase();
+  var role = (row.seller_role||"").toLowerCase();
+  var tenure = (row.land_tenure||"").toLowerCase();
+  var st = (row.review_state && typeof row.review_state==="object") ? row.review_state : blankState();
+  return {
+    id: row.id,
+    title: row.property_title || "(untitled)",
+    loc: row.location || "",
+    price: row.price || "",
+    offplan: type.indexOf("off")===0,
+    company: role==="developer" || !!(row.company && row.company.length),
+    customary: tenure.indexOf("stool")>-1 || tenure.indexOf("family")>-1,
+    status: statusToBadge(row.status),
+    published: row.status==="verified" || row.status==="sellers_listing",
+    state: st,
+    seller: row.seller_name || "",
+    contact: row.email || row.phone || "",
+    evidence: {
+      "Title / deed": row.title_or_deed,
+      "Search report": row.search_report,
+      "Site plan": row.site_plan,
+      "Photos": row.photos,
+      "Permit": row.building_permit
+    }
+  };
+}
+function loadSubmissions(){
+  document.getElementById("src").textContent="Loading…";
+  fetch(SUPABASE_URL + "/rest/v1/submissions?select=*&order=created_at.desc", { headers: authHeaders() })
+  .then(function(res){
+    if(res.status===401){ sessionExpired(); return null; }
+    return res.json();
+  })
+  .then(function(rows){
+    if(rows===null) return;
+    if(!rows || !rows.length){ SUBS=[]; document.getElementById("src").textContent="No submissions yet"; render(); return; }
+    SUBS = rows.map(rowToSub);
+    document.getElementById("src").textContent = "Live · " + SUBS.length + " submission(s) · " + AUTH.email;
+    render();
+  })
+  .catch(function(e){
+    document.getElementById("src").textContent="Could not load submissions";
+    document.getElementById("review").innerHTML='<h2>Review</h2><div style="padding:30px 20px;color:var(--red);font-size:13px">Couldn\'t load submissions: '+e.message+'</div>';
+  });
+}
+
+/* ---- save vetting progress (fire-and-forget) ---- */
+function saveState(sub){
+  fetch(SUPABASE_URL + "/rest/v1/submissions?id=eq."+encodeURIComponent(sub.id), {
+    method:"PATCH",
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    body: JSON.stringify({ review_state: sub.state })
+  }).catch(function(){});
+}
+
+/* ===================== VERDICT ===================== */
 function applicable(sub){
   return CHECKS.filter(function(c){
     if(!c.applies) return true;
@@ -258,20 +332,93 @@ function verdict(sub){
   return {tier:"v",label:"Verified",reason:"ok",items:[]};
 }
 
-/* ---- rendering ---- */
+/* ===================== PUBLISH (approve -> live) ===================== */
+function publishListing(sub, listingType, done){
+  var body = {
+    listing_type: listingType,
+    title: sub.title,
+    price: sub.price,
+    currency: "USD",
+    location: sub.loc,
+    off_plan: sub.offplan,
+    description: "",
+    status: "live",
+    published: true
+  };
+  fetch(SUPABASE_URL + "/rest/v1/listings", {
+    method:"POST",
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    body: JSON.stringify(body)
+  })
+  .then(function(res){
+    if(res.status===401){ sessionExpired(); return; }
+    if(res.ok){ done(true,""); }
+    else { res.text().then(function(t){ done(false, t); }); }
+  })
+  .catch(function(e){ done(false, e.message); });
+}
+
+function decide(act){
+  var sub=current;
+  var map={
+    v:{tier:"v",label:"Verified",db:"verified",lt:"Verified"},
+    s:{tier:"s",label:"Seller's Listing",db:"sellers_listing",lt:"Seller's Listing"},
+    r:{tier:"r",label:"Rejected",db:"rejected"},
+    info:{tier:"h",label:"Awaiting docs",db:"awaiting_docs"}
+  };
+  var m=map[act];
+  var t=document.getElementById("toast");
+  t.className="toast show"; t.textContent="Saving…";
+
+  var patch={ status:m.db, reviewer:AUTH.email, decided_at:new Date().toISOString(), review_state:sub.state };
+  fetch(SUPABASE_URL + "/rest/v1/submissions?id=eq."+encodeURIComponent(sub.id), {
+    method:"PATCH",
+    headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+    body: JSON.stringify(patch)
+  })
+  .then(function(res){
+    if(res.status===401){ sessionExpired(); return; }
+    if(!res.ok){ return res.text().then(function(x){ throw new Error(x); }); }
+    sub.status={tier:m.tier,label:m.label};
+
+    if(act==="v" || act==="s"){
+      publishListing(sub, m.lt, function(ok,errtext){
+        if(ok){
+          sub.published=true;
+          t.className="toast show ok";
+          t.textContent = (act==="v"?"Approved as Verified":"Listed as Seller's Listing") + " — now live on the public site.";
+        } else {
+          t.className="toast show bad";
+          t.textContent="Decision saved, but publishing to the site failed: " + errtext;
+        }
+        renderQueue();
+      });
+    } else {
+      t.className="toast show";
+      if(act==="r") t.textContent="Rejected — send the decline template. Not added to the site.";
+      else t.textContent="Marked awaiting documents — send the request-documents template.";
+      renderQueue();
+    }
+  })
+  .catch(function(e){ t.className="toast show bad"; t.textContent="Could not save: " + e.message; });
+}
+
+/* ===================== RENDER ===================== */
 function renderQueue(){
   var ul=document.getElementById("queue"); ul.innerHTML="";
+  if(!SUBS.length){ ul.innerHTML='<li class="empty">No submissions yet. New seller entries from the form will appear here.</li>'; return; }
   SUBS.forEach(function(sub){
     var li=document.createElement("li");
     if(current&&current.id===sub.id) li.className="active";
-    var done = sub.status ? '<span class="done-dot done-'+sub.status.tier+'">· '+sub.status.label+'</span>' : '';
-    li.innerHTML='<div class="qt">'+sub.title+'</div><div class="ql">'+sub.loc+(sub.price?' · '+sub.price:'')+'</div>'+
+    var done = sub.status ? '<span class="done-dot done-'+sub.status.tier+'">· '+sub.status.label+(sub.published?' ✓':'')+'</span>' : '';
+    li.innerHTML='<div class="qt">'+esc(sub.title)+'</div><div class="ql">'+esc(sub.loc)+(sub.price?' · '+esc(sub.price):'')+'</div>'+
       '<div class="qmeta"><span class="tag'+(sub.offplan?' off':'')+'">'+(sub.offplan?'Off-plan':'Completed')+'</span>'+
       '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span>'+done+'</div>';
     li.onclick=function(){ current=sub; render(); };
     ul.appendChild(li);
   });
 }
+function esc(s){ return (""+(s===undefined||s===null?"":s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 function seg(sub,c){
   var s=rawState(sub,c.id);
   function b(val,lab,cls){ return '<button class="'+(s===val?cls:'')+'" data-id="'+c.id+'" data-val="'+val+'">'+lab+'</button>'; }
@@ -282,16 +429,16 @@ function render(){
   var rev=document.getElementById("review");
   if(!current){ rev.innerHTML='<h2>Review</h2><div style="padding:40px 20px;color:var(--muted);font-size:13px">Select a submission to begin.</div>'; return; }
   var sub=current, apps=applicable(sub), v=verdict(sub);
-  var html='<div class="rev-head"><div class="price">'+(sub.price||'')+'</div><div class="ttl">'+sub.title+'</div>'+
-    '<div class="loc">'+sub.loc+'</div><div class="chips">'+
+  var html='<div class="rev-head"><div class="price">'+esc(sub.price)+'</div><div class="ttl">'+esc(sub.title)+'</div>'+
+    '<div class="loc">'+esc(sub.loc)+'</div><div class="chips">'+
     '<span class="tag'+(sub.offplan?' off':'')+'">'+(sub.offplan?'Off-plan':'Completed')+'</span>'+
     '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span></div></div>';
 
   if(sub.evidence||sub.seller){
     var ev=sub.evidence?Object.keys(sub.evidence).filter(function(k){return sub.evidence[k];}):[];
     html+='<div class="evid">';
-    if(sub.seller) html+='<b>From:</b> '+sub.seller+(sub.contact?' · '+sub.contact:'')+'<br>';
-    html+='<b>Evidence:</b> '+(ev.length?ev.map(function(k){return '<a href="'+sub.evidence[k]+'" target="_blank" rel="noopener">'+k+'</a>';}).join(' &nbsp;·&nbsp; '):'none attached');
+    if(sub.seller) html+='<b>From:</b> '+esc(sub.seller)+(sub.contact?' · '+esc(sub.contact):'')+'<br>';
+    html+='<b>Evidence:</b> '+(ev.length?ev.map(function(k){return '<a href="'+esc(sub.evidence[k])+'" target="_blank" rel="noopener">'+esc(k)+'</a>';}).join(' &nbsp;·&nbsp; '):'none attached yet');
     html+='</div>';
   }
 
@@ -318,12 +465,13 @@ function render(){
   else reason='<b>Safe to surface, not fully vetted.</b> Missing for the green badge:<ul>'+v.items.map(function(c){return '<li>'+c.id+' — '+c.label+'</li>';}).join('')+'</ul>';
 
   var canV = v.tier==="v", canS = (v.tier==="v"||v.tier==="s");
+  var pubNote = sub.published ? '<div class="reason" style="color:var(--green)"><b>Already published to the live site.</b></div>' : '';
   var label = v.tier==="v"?"Verified ✓":v.tier==="s"?"Seller's Listing":v.tier==="r"?"Reject":v.tier==="h"?"Needs more info":"Not started";
   html+='<div class="verdict"><div class="badge '+v.tier+'">'+label+'</div>'+
-    '<div class="reason">'+reason+'</div>'+
+    '<div class="reason">'+reason+'</div>'+ pubNote +
     '<div class="acts">'+
-      '<button class="primary v" '+(canV?'':'disabled')+' data-act="v">Approve as Verified</button>'+
-      '<button class="'+(v.tier==="s"?"primary s":"")+'" '+(canS?'':'disabled')+' data-act="s">List as Seller\'s Listing</button>'+
+      '<button class="primary v" '+((canV&&!sub.published)?'':'disabled')+' data-act="v">Approve as Verified</button>'+
+      '<button class="'+(v.tier==="s"?"primary s":"")+'" '+((canS&&!sub.published)?'':'disabled')+' data-act="s">List as Seller\'s Listing</button>'+
       '<button data-act="info">Request documents</button>'+
       '<button class="'+(v.tier==="r"?"primary r":"")+'" data-act="r">Reject</button>'+
     '</div><div class="toast" id="toast"></div></div>';
@@ -331,26 +479,12 @@ function render(){
   rev.innerHTML=html;
 
   rev.querySelectorAll(".seg button").forEach(function(btn){
-    btn.onclick=function(){ sub.state[btn.getAttribute("data-id")]=btn.getAttribute("data-val"); render(); };
+    btn.onclick=function(){ sub.state[btn.getAttribute("data-id")]=btn.getAttribute("data-val"); saveState(sub); render(); };
   });
-  var labels={v:{t:"v",l:"Verified"},s:{t:"s",l:"Seller's Listing"},r:{t:"r",l:"Rejected"},info:{t:"h",l:"Awaiting docs"}};
   rev.querySelectorAll(".acts button").forEach(function(btn){
-    btn.onclick=function(){
-      if(btn.disabled) return;
-      var act=btn.getAttribute("data-act"), m=labels[act];
-      sub.status={tier:m.t,label:m.l};
-      var t=document.getElementById("toast");
-      if(act==="v") t.textContent='Marked Verified - now set this property\'s Badge column to "Verified" in your listings sheet.';
-      else if(act==="s") t.textContent='Marked Seller\'s Listing - set the Badge column to "Seller\'s Listing" in your listings sheet.';
-      else if(act==="r") t.textContent='Rejected - send the decline template. Not added to the site.';
-      else t.textContent='Marked awaiting documents - send the "please send the missing documents" template.';
-      t.className="toast show";
-      renderQueue();
-    };
+    btn.onclick=function(){ if(btn.disabled) return; decide(btn.getAttribute("data-act")); };
   });
 }
-
-loadSubmissions();
 </script>
 </body>
 </html>
