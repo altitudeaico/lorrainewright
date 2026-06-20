@@ -21,14 +21,14 @@ The public listings page now reads from Supabase too, so an approval appears on 
 | ID | Item | Type | Pri | Status (2026-06-20) | Depends on |
 |---|---|---|---|---|---|
 | DTH-01 | Wire live CSV URL into the site | Build | — | **Superseded** by the Supabase data layer | — |
-| DTH-02 | Enter real listings | Content | P1 | Pending — into the Supabase `listings` table | — |
+| DTH-02 | Enter real listings | Content | P1 | **Blocked — needs real property data from Lorraine** | Lorraine |
 | DTH-03 | Real property images | Content/Build | P1 | **DONE** — sellers upload photos on the form; shown in vetting; published to listing | — |
 | DTH-04 | Seller self-listing intake form | Build | P1 | **DONE & VERIFIED** — live at /submit/, writes to Supabase | — |
-| DTH-05 | $99 listing payment flow | Build (GHL) | P1 | Pending | DTH-04 |
+| DTH-05 | $99 listing payment flow | Build (GHL) | P1 | Approach set: **GHL payment link**. Needs the link from GHL, then wire into the form | GHL link |
 | DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
 | DTH-07 | Approval workspace (back-office) | Build | P1 | **DONE** — login + live submissions from Supabase at /vetting/ | DTH-13, DTH-16 |
 | DTH-08 | Approve → auto-publish to listings | Build | P1 | **DONE & VERIFIED** — approval upserts one listing per submission | DTH-07 |
-| DTH-09 | Internal team lead-alert email | Build (GHL) | P1 | Pending | — |
+| DTH-09 | Internal lead-alert via GHL | Build (GHL) | P1 | **Parked (prereq).** DB pings GHL webhook on new submission -> GHL tags contact + emails team. DB ping ready (pg_net confirmed); needs the GHL inbound webhook URL | GHL webhook |
 | DTH-10 | Wire "Schedule a Tour" to booking calendar | Build | P2 | Pending | — |
 | DTH-11 | AI buyer first-reply on enquiry | Build (AI) | P2 | Pending | DTH-13 |
 | DTH-12 | On-site AI assistant / search | Build (AI) | P3 | Later | — |
@@ -48,8 +48,15 @@ Housekeeping still to do:
 - Privacy / consent wording on the public form.
 
 ## Immediate next step
-Core loop is live end-to-end (form -> vet -> approve -> public site). Next: add real
-listings and photos (DTH-02/03), and change admin/admin before real seller data goes in.
+Core loop is live end-to-end, photos included. Most remaining items now wait on external
+inputs (see below). Buildable now without waiting: DTH-10 (Schedule-a-Tour -> booking
+calendar) and pre-wiring DTH-05's payment step so it's ready for the GHL link.
+
+## Waiting on inputs
+- **From GHL (Bolaji):** inbound webhook URL (DTH-09), the $99 payment link (DTH-05),
+  and the booking-calendar link if we wire "Schedule a Tour" (DTH-10).
+- **From Lorraine:** her real property listings + photos (DTH-02), and sign-off on the
+  vetting criteria (DTH-16).
 
 ## Housekeeping / open risks
 - ~~admin/admin temporary~~ DONE — password changed from the default.
