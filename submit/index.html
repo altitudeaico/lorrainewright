@@ -216,6 +216,10 @@ function submitForm(){
 }
 
 function doInsert(payload, btn){
+  // Generate the submission's id on the client so we can uniquely tie this
+  // exact listing to its payment — even if the same person submits several.
+  var sid = uuidv4();
+  payload.id = sid;
   fetch(SUPABASE_URL + "/rest/v1/submissions", {
     method: "POST",
     headers: {
@@ -228,8 +232,8 @@ function doInsert(payload, btn){
   })
   .then(function(res){
     if (res.ok) {
-      rememberEmail(payload.email);
-      showSuccess();
+      rememberForPayment(sid, payload.email);
+      showSuccess(sid);
     } else {
       return res.text().then(function(t){ showErr("Something went wrong (" + res.status + "). " + t); btn.disabled=false; btn.textContent="Submit for review"; });
     }
@@ -237,13 +241,28 @@ function doInsert(payload, btn){
   .catch(function(e){ showErr("Could not reach the server: " + e.message); btn.disabled=false; btn.textContent="Submit for review"; });
 }
 
-/* Remember the payer's email so the post-payment page can mark this
-   submission paid (same-origin fallback; the GHL redirect carries it too). */
-function rememberEmail(email){
-  try { if (window.localStorage && email) { localStorage.setItem("dth_pay_email", email); } } catch(e){}
+/* RFC4122-ish v4 id, ES5-safe. Unguessable, so it doubles as a capability:
+   only someone who submitted this listing knows its id. */
+function uuidv4(){
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c){
+    var r = Math.random() * 16 | 0;
+    var v = (c === "x") ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
 
-function showSuccess(){
+/* Remember THIS submission (by its unique id) so the post-payment page can
+   mark the exact right listing paid. Email kept only as a last-resort fallback. */
+function rememberForPayment(sid, email){
+  try {
+    if (window.localStorage){
+      if (sid)   localStorage.setItem("dth_pay_sid", sid);
+      if (email) localStorage.setItem("dth_pay_email", email);
+    }
+  } catch(e){}
+}
+
+function showSuccess(sid){
   document.getElementById("form").style.display = "none";
   document.getElementById("success").className = "success show";
   if (PAYMENT_LINK_URL.indexOf("http") === 0){
