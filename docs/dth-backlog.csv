@@ -1,19 +1,19 @@
-ID,Item,Epic,Type,Priority,Status,Depends_on
-DTH-01,Wire live published-CSV URL into the site,Go-live,Build,P0,Code ready; needs URL,
-DTH-02,Enter real listings into the sheet,Go-live,Content,P0,Not started,
-DTH-03,Load real property images to GHL media,Go-live,Content,P0,Not started,
-DTH-04,Seller self-listing intake form,Supply & approval,Build,P1,In progress - workspace reads live CSV; build form + paste URL,
-DTH-05,$99 listing payment flow,Supply & approval,Build (GHL),P1,Not started,DTH-04
-DTH-06,AI listing triage + drafting,Supply & approval,Build (AI),P1,Not started,"DTH-16, DTH-13"
-DTH-07,Approval workspace,Supply & approval,Build,P1,MVP built & deployed; demo data,DTH-16
-DTH-08,Approve to auto-publish linkage,Supply & approval,Build,P1,Not started,DTH-07
-DTH-09,Internal team lead-alert email,Demand & conversion,Build (GHL),P1,Not started,
-DTH-10,"Wire ""Schedule a Tour"" to booking calendar",Demand & conversion,Build,P2,Not started,
-DTH-11,AI buyer first-reply on enquiry,Demand & conversion,Build (AI),P2,Not started,DTH-13
-DTH-12,On-site AI assistant / search,Demand & conversion,Build (AI),P3,Not started,
-DTH-13,PII / consent / compliance control,Data & compliance,Build / Gov,P1,Gates real submissions behind workspace login,
-DTH-14,Unified data / ops dashboard,Data & compliance,Build,P2,Not started,
-DTH-15,Retire / relegate legacy third-party embed,Data & compliance,Migration,P2,Not started,
-DTH-16,Documented vetting criteria,Operating model,Governance,P1,Delivered (v1.0-rc) - awaiting sign-off,
-DTH-17,Ops owner role (BAU + lead SLA),Operating model,Org / People,P2,Not started,
-DTH-18,Metrics & management cadence,Operating model,Governance,P2,Not started,
+id,item,type,priority,status,depends_on
+DTH-01,Wire live CSV URL into the site,Build,-,Superseded by Supabase data layer,
+DTH-02,Enter real listings,Content,P1,Pending - into Supabase listings table,
+DTH-03,Real property images,Content,P1,Pending - hosting TBD,DTH-02
+DTH-04,Seller self-listing intake form,Build,P1,DONE & VERIFIED - live /submit/ writes to Supabase test confirmed,
+DTH-05,$99 listing payment flow,Build (GHL),P1,Pending,DTH-04
+DTH-06,AI listing triage + drafting,Build (AI),P1,Pending - uses vetting-rubric.json,"DTH-16, DTH-13"
+DTH-07,Approval workspace (back-office),Build,P1,MVP built NOT finished - reads old CSV no login needs rewire to Supabase + login,"DTH-13, DTH-16"
+DTH-08,Approve to auto-publish to listings,Build,P1,Pending,DTH-07
+DTH-09,Internal team lead-alert email,Build (GHL),P1,Pending,
+DTH-10,Wire Schedule a Tour to booking calendar,Build,P2,Pending - button inert,
+DTH-11,AI buyer first-reply on enquiry,Build (AI),P2,Pending,DTH-13
+DTH-12,On-site AI assistant / search,Build (AI),P3,Later,
+DTH-13,Login + PII / consent / compliance,Build / Gov,P1,IN PROGRESS - DB lock + shared admin login done; login box + test + change password pending,
+DTH-14,Unified data / ops dashboard,Build,P2,Pending,
+DTH-15,Retire legacy embed + Sheets/CSV layer,Migration,P2,Pending,"DTH-02, DTH-07"
+DTH-16,Documented vetting criteria,Governance,P1,Delivered v1.0-rc - awaiting Lorraine sign-off,
+DTH-17,Ops owner role (BAU + lead SLA),Org / People,P2,Pending,
+DTH-18,Metrics & management cadence,Governance,P2,Pending,

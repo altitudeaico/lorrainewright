@@ -1,44 +1,71 @@
 # Diaspora to Home — Property Listings Backlog
 
-Stable IDs (`DTH-NN`) for the not-yet-built pieces of the property listings
-solution, reconciled against what's already live in the prototype.
+Stable IDs (`DTH-NN`) for the property listings / seller-vetting solution.
 
-_Last updated: 2026-06-20 — DTH-16 delivered (awaiting sign-off); DTH-07 MVP built & deployed; DTH-04 in progress._
+_Last updated: 2026-06-20 (evening) — Supabase is now the backbone. DTH-04 done & verified. DTH-13 part-built. DTH-07 needs rewiring to Supabase._
 
-| ID | Item | Epic | Type | Pri | Status / notes | Depends on |
-|---|---|---|---|---|---|---|
-| DTH-01 | Wire live published-CSV URL into the site | Go-live | Build | P0 | Code ready; just needs the URL | — |
-| DTH-02 | Enter real listings into the sheet | Go-live | Content | P0 | Replaces the 6 sample rows | — |
-| DTH-03 | Load real property images to GHL media | Go-live | Content | P0 | Replace Unsplash placeholders | — |
-| DTH-04 | Seller self-listing intake form | Supply & approval | Build | P1 | **In progress** — workspace now reads a live submissions CSV; build the form + paste the URL (see INTAKE-FORM-GUIDE.md) | — |
-| DTH-05 | $99 listing payment flow | Supply & approval | Build (GHL) | P1 | — | DTH-04 |
-| DTH-06 | AI listing triage + drafting | Supply & approval | Build (AI) | P1 | Raw facts to polished copy | DTH-16, DTH-13 |
-| DTH-07 | Approval workspace | Supply & approval | Build | P1 | **MVP built & deployed** (vetting-workspace.html); demo data — real data via DTH-04 | DTH-16 |
-| DTH-08 | Approve to auto-publish linkage | Supply & approval | Build | P1 | — | DTH-07 |
-| DTH-09 | Internal team lead-alert email | Demand & conversion | Build (GHL) | P1 | Small; stops lost leads | — |
-| DTH-10 | Wire "Schedule a Tour" to booking calendar | Demand & conversion | Build | P2 | Button inert today | — |
-| DTH-11 | AI buyer first-reply on enquiry | Demand & conversion | Build (AI) | P2 | — | DTH-13 |
-| DTH-12 | On-site AI assistant / search | Demand & conversion | Build (AI) | P3 | Later | — |
-| DTH-13 | PII / consent / compliance control | Data & compliance | Build / Gov | P1 | Before AI touches lead data **and before real submissions sit behind the workspace** (login / GHL members area) | — |
-| DTH-14 | Unified data / ops dashboard | Data & compliance | Build | P2 | Looker over Sheet + CRM | — |
-| DTH-15 | Retire / relegate legacy third-party embed | Data & compliance | Migration | P2 | Cutover risk | — |
-| DTH-16 | Documented vetting criteria | Operating model | Governance | P1 | **Delivered** (v1.0-rc) — awaiting Lorraine sign-off (LORRAINE-SIGNOFF.md) | — |
-| DTH-17 | Ops owner role (BAU + lead SLA) | Operating model | Org / People | P2 | The "run" capability | — |
-| DTH-18 | Metrics & management cadence | Operating model | Governance | P2 | So it can be measured | — |
+## Architecture note (what changed today)
 
-## How to read it
+We moved off the Google Sheets / published-CSV approach. **Supabase is now the single
+source of truth** — a real database with two tables (`submissions` = private seller
+entries incl. personal details; `listings` = public, vetted listings, no personal data),
+each protected by row-level security. GoHighLevel stays for CRM, nurture and the $99
+payment. The Google Sheets/CSV layer is being retired (see DTH-15).
 
-- **P0 (DTH-01 to 03)** is the critical path to getting *what's already built*
-  actually live. Nothing should jump ahead of these.
-- **DTH-16** (vetting criteria) looks like soft governance but blocks the AI work:
-  no triage or fast approval until "what makes a listing approvable" is written down.
-- **DTH-13** (compliance) must land before any lead data flows through an AI call.
-- **DTH-17 and DTH-18** are operating-model pieces, not dev tickets, but they're
-  real work — the model fails without them.
+## Where we are right now (one-line)
+
+The public seller form is **live and writing into the database**. The back-office
+(vetting workspace) is built but still reads the old spreadsheet and has **no login on it
+yet** — that's the immediate next job.
+
+| ID | Item | Type | Pri | Status (2026-06-20) | Depends on |
+|---|---|---|---|---|---|
+| DTH-01 | Wire live CSV URL into the site | Build | — | **Superseded** by the Supabase data layer | — |
+| DTH-02 | Enter real listings | Content | P1 | Pending — now goes into the Supabase `listings` table, not a sheet | — |
+| DTH-03 | Real property images | Content | P1 | Pending — hosting TBD (Supabase Storage or GHL CDN) | DTH-02 |
+| DTH-04 | Seller self-listing intake form | Build | P1 | **DONE & VERIFIED** — live at /submit/, writes to Supabase, test row confirmed | — |
+| DTH-05 | $99 listing payment flow | Build (GHL) | P1 | Pending | DTH-04 |
+| DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
+| DTH-07 | Approval workspace (back-office) | Build | P1 | **MVP built; NOT finished** — still reads old CSV, no login. Needs rewire to Supabase + login box | DTH-13, DTH-16 |
+| DTH-08 | Approve → auto-publish to listings | Build | P1 | Pending | DTH-07 |
+| DTH-09 | Internal team lead-alert email | Build (GHL) | P1 | Pending | — |
+| DTH-10 | Wire "Schedule a Tour" to booking calendar | Build | P2 | Pending — button inert today | — |
+| DTH-11 | AI buyer first-reply on enquiry | Build (AI) | P2 | Pending | DTH-13 |
+| DTH-12 | On-site AI assistant / search | Build (AI) | P3 | Later | — |
+| DTH-13 | Login + PII / consent / compliance | Build / Gov | P1 | **IN PROGRESS** — see breakdown below | — |
+| DTH-14 | Unified data / ops dashboard | Build | P2 | Pending | — |
+| DTH-15 | Retire legacy third-party embed + Sheets/CSV layer | Migration | P2 | Pending | DTH-02, DTH-07 |
+| DTH-16 | Documented vetting criteria | Governance | P1 | **Delivered (v1.0-rc)** — awaiting Lorraine sign-off (LORRAINE-SIGNOFF.md) | — |
+| DTH-17 | Ops owner role (BAU + lead SLA) | Org / People | P2 | Pending | — |
+| DTH-18 | Metrics & management cadence | Governance | P2 | Pending | — |
+
+## DTH-13 breakdown (the login / security item)
+
+Done & verified today:
+- Database access-lock built: an approved-team list, with every "team read/edit" rule
+  gated so it only works for emails on that list. List itself sealed from outside access.
+- Security scan clean of real holes (2 remaining notices are correct-by-design).
+- One **shared login created** in Supabase's secure user store: username `admin`,
+  password `admin` (stored hashed). Verified the account is well-formed.
+
+Still to do:
+- Put the **login box on the workspace** and wire it to Supabase (this is also what
+  finishes DTH-07). Until this exists, the admin/admin login can't actually be used anywhere.
+- Test the login end-to-end once the box is up.
+- **Change admin/admin** before any real seller's details go into the system.
+- Consent / privacy wording on the public form.
+
+## Immediate next step
+
+Finish DTH-07: build the login box onto the vetting workspace and point it at Supabase,
+so admin/admin gets the team into a screen showing the real submissions.
+
+## Housekeeping / open risks
+- admin/admin is temporary — must change before real PII.
+- Confirm the GitHub access token (PAT) used for deploys has been **revoked**.
+- Google Sheets/CSV path now redundant — retire once the workspace reads Supabase.
 
 ## Priority key
-
-- **P0** — required to go live with what's built
-- **P1** — the core value gap (supply / approval side)
-- **P2** — next
-- **P3** — later / optional
+- P1 — core value gap (supply / approval side)
+- P2 — next
+- P3 — later / optional
