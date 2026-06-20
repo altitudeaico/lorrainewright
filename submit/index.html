@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List your property — Diaspora to Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+:root{
+  --navy-dark:#231B4F; --navy-medium:#2E2566; --purple:#7170B4; --purple-soft:#9C9BD0;
+  --beige:#F5F1ED; --gold:#C9A961; --ink:#231B4F; --muted:#6E6A88; --line:#E4E0EC;
+  --green:#2E7D55; --green-bg:#E7F2EC; --red:#B23B3B; --red-bg:#F7EAEA;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat,sans-serif;background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased}
+.shell{max-width:640px;margin:0 auto;padding:24px 18px 60px}
+.head{text-align:center;padding:24px 0 18px}
+.head .eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);font-weight:600}
+.head h1{font-size:26px;font-weight:700;margin:8px 0 6px;color:var(--navy-dark)}
+.head p{font-size:14px;color:var(--muted);margin:0;line-height:1.5}
+.card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:22px 20px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field .req{color:var(--purple)}
+.field .hint{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+input,select,textarea{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--purple)}
+textarea{min-height:70px;resize:vertical}
+.row{display:flex;gap:12px}
+.row .field{flex:1}
+@media(max-width:520px){.row{flex-direction:column;gap:0}}
+.submit{width:100%;background:var(--navy-dark);color:#fff;border:none;border-radius:4px;padding:14px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px}
+.submit:hover{background:var(--navy-medium)}
+.submit:disabled{opacity:.6;cursor:not-allowed}
+.note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.5}
+.msg{padding:12px 14px;border-radius:4px;font-size:13px;margin-bottom:16px;display:none;line-height:1.5}
+.msg.err{display:block;background:var(--red-bg);color:var(--red)}
+.success{display:none;text-align:center;padding:30px 20px}
+.success.show{display:block}
+.success .tick{width:54px;height:54px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:28px;line-height:54px;margin:0 auto 14px}
+.success h2{font-size:20px;margin:0 0 8px;color:var(--navy-dark)}
+.success p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+.success button{background:none;border:1px solid var(--line);border-radius:4px;padding:10px 18px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="head">
+    <div class="eyebrow">Diaspora to Home</div>
+    <h1>List your property</h1>
+    <p>Submit your property for review. Our team vets every listing before it goes on the site — we'll be in touch about next steps and any documents we need.</p>
+  </div>
+
+  <div class="card" id="card">
+    <div class="msg err" id="err"></div>
+    <form id="form" onsubmit="return false">
+      <div class="field">
+        <label>Property title <span class="req">*</span></label>
+        <input id="property_title" placeholder="e.g. 3-bed townhouse, East Legon">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Location <span class="req">*</span></label>
+          <input id="location" placeholder="Area and city">
+        </div>
+        <div class="field">
+          <label>Price</label>
+          <input id="price" placeholder="e.g. $120,000">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Type <span class="req">*</span></label>
+          <select id="type">
+            <option value="">Choose…</option>
+            <option>Completed</option>
+            <option>Off-plan</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Land tenure</label>
+          <select id="land_tenure">
+            <option value="">Choose…</option>
+            <option>Private / leasehold</option>
+            <option>Stool land</option>
+            <option>Family land</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Your name <span class="req">*</span></label>
+        <input id="seller_name" placeholder="Full name">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>You are the… </label>
+          <select id="seller_role">
+            <option value="">Choose…</option>
+            <option>Owner</option>
+            <option>Developer</option>
+            <option>Agent</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Company <span class="hint" style="display:inline">(if any)</span></label>
+          <input id="company" placeholder="Company name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input id="email" type="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input id="phone" placeholder="Include country code">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>How should a buyer pay?</label>
+        <textarea id="payment_method" placeholder="e.g. staged payments to a company account"></textarea>
+      </div>
+      <div class="field">
+        <label>Any ongoing dispute over this land?</label>
+        <select id="disputes">
+          <option value="">Choose…</option>
+          <option>No</option>
+          <option>Yes</option>
+        </select>
+      </div>
+
+      <button class="submit" id="btn" onclick="submitForm()">Submit for review</button>
+      <div class="note">We'll request title documents and photos after you submit. Your details are only seen by the Diaspora to Home team.</div>
+    </form>
+
+    <div class="success" id="success">
+      <div class="tick">&#10003;</div>
+      <h2>Thank you — received</h2>
+      <p>Your property has been submitted for review. Our team will check the details and contact you about the documents we need before it can go live.</p>
+      <button onclick="resetForm()">Submit another property</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
+var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
+
+function val(id){ var e=document.getElementById(id); return e ? e.value.trim() : ""; }
+function showErr(t){ var e=document.getElementById("err"); e.textContent=t; e.className="msg err"; window.scrollTo(0,0); }
+function clearErr(){ var e=document.getElementById("err"); e.className="msg err"; e.style.display="none"; e.textContent=""; }
+
+function submitForm(){
+  clearErr();
+  var required = {property_title:"Property title", location:"Location", type:"Type", seller_name:"Your name", email:"Email"};
+  for (var k in required){ if(!val(k)){ showErr("Please fill in: "+required[k]); return; } }
+
+  var payload = {
+    property_title: val("property_title"),
+    location:       val("location"),
+    price:          val("price"),
+    type:           val("type"),
+    seller_name:    val("seller_name"),
+    seller_role:    val("seller_role"),
+    email:          val("email"),
+    phone:          val("phone"),
+    company:        val("company"),
+    land_tenure:    val("land_tenure"),
+    payment_method: val("payment_method"),
+    disputes:       val("disputes")
+  };
+
+  var btn = document.getElementById("btn");
+  btn.disabled = true; btn.textContent = "Submitting…";
+
+  fetch(SUPABASE_URL + "/rest/v1/submissions", {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json",
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function(res){
+    if (res.ok) {
+      document.getElementById("form").style.display = "none";
+      document.getElementById("success").className = "success show";
+    } else {
+      return res.text().then(function(t){ showErr("Something went wrong (" + res.status + "). " + t); btn.disabled=false; btn.textContent="Submit for review"; });
+    }
+  })
+  .catch(function(e){ showErr("Could not reach the server: " + e.message); btn.disabled=false; btn.textContent="Submit for review"; });
+}
+
+function resetForm(){
+  document.getElementById("form").reset();
+  document.getElementById("form").style.display = "block";
+  document.getElementById("success").className = "success";
+  var btn=document.getElementById("btn"); btn.disabled=false; btn.textContent="Submit for review";
+  clearErr();
+}
+</script>
+</body>
+</html>
