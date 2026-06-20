@@ -21,13 +21,12 @@ The public listings page now reads from Supabase too, so an approval appears on 
 ## QA blockers (from QA-REVIEW.md) — progress
 - **B4 purge test data — DONE.** Database emptied; public site shows no listings.
 - **B5 consent/privacy — DONE.** Required consent checkbox on the form (privacy-link slot ready).
-- **B1 payment reconciliation — PART DONE.** Workspace now shows Paid/Unpaid, team can mark paid,
-  and approving an unpaid listing requires confirmation. Auto-reconciliation needs a GHL
-  "payment received" webhook (to mark paid automatically) — pending.
-- **B2 lead alert — BUILT & DORMANT.** DB pings GHL on each submission; needs the GHL inbound
-  webhook URL to switch on.
-- **B3 seller confirmation — PART DONE.** On-screen "what happens next" is in place; the
-  confirmation *email* is sent by the same GHL workflow (needs the webhook URL).
+- **B1 payment reconciliation — Manual LIVE; auto BUILT & TESTED.** Workspace shows Paid/Unpaid +
+  Mark-as-paid + approve guard. Auto-reconcile endpoint built and verified; needs the GHL
+  "payment received" webhook action (Job 2) configured to call it.
+- **B2 lead alert — LIVE.** Webhook connected & verified (GHL returned 200). Every submission pings GHL.
+- **B3 seller confirmation — On-screen DONE; email pending.** Webhook is live; just add a
+  "send email to seller" action in the GHL workflow.
 
 **One unlock for B2 + B3 (+ a path for B1-auto): create the GHL inbound webhook and send the URL.**
 
@@ -41,7 +40,7 @@ The public listings page now reads from Supabase too, so an approval appears on 
 | DTH-06 | AI listing triage + drafting | Build (AI) | P1 | Pending — will consume vetting-rubric.json | DTH-16, DTH-13 |
 | DTH-07 | Approval workspace (back-office) | Build | P1 | **DONE** — login + live submissions from Supabase at /vetting/ | DTH-13, DTH-16 |
 | DTH-08 | Approve → auto-publish to listings | Build | P1 | **DONE & VERIFIED** — approval upserts one listing per submission | DTH-07 |
-| DTH-09 | Internal lead-alert via GHL | Build (GHL) | P1 | **Built & dormant.** DB->GHL ping trigger is live; activate by setting the GHL inbound webhook URL. Covers B2 alert + B3 seller email via the GHL workflow | GHL webhook URL |
+| DTH-09 | Internal lead-alert via GHL | Build (GHL) | P1 | **LIVE** — webhook connected & verified (200). Every submission pings GHL. B3 seller email = add the email action in the GHL workflow | — |
 | DTH-10 | Wire "Schedule a Tour" to booking calendar | Build | P2 | Pending | — |
 | DTH-11 | AI buyer first-reply on enquiry | Build (AI) | P2 | Pending | DTH-13 |
 | DTH-12 | On-site AI assistant / search | Build (AI) | P3 | Later | — |
