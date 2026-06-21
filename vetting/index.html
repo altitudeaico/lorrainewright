@@ -119,35 +119,49 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .viewtabs{display:flex;gap:4px}
 .vtab{font-family:inherit;font-size:13px;font-weight:600;padding:7px 14px;border:1px solid var(--purple);border-radius:4px;background:transparent;color:#fff;cursor:pointer}
 .vtab.active{background:#fff;color:var(--navy-dark)}
-.lrow{border:1px solid var(--line);border-radius:4px;padding:14px;margin-bottom:12px;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.lrow{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:12px;display:flex;gap:18px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.lrow:last-child{margin-bottom:0}
 .lmain{flex:1;min-width:240px}
-.lin{width:100%;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink);margin-bottom:6px}
+.lin{width:100%;font-family:inherit;font-size:14px;font-weight:600;padding:9px 11px;border:1px solid var(--line);border-radius:4px;color:var(--ink);margin-bottom:8px}
 .lin.sm{font-weight:400;font-size:13px}
-.lsub{display:flex;gap:8px}
-.lsub .lin{margin-bottom:0}
-.lbadges{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
-.lacts{display:flex;flex-direction:column;gap:6px;min-width:140px}
+.lsub{display:flex;gap:8px;flex-wrap:wrap}
+.lsub .lin{margin-bottom:0;flex:1;min-width:120px}
+.lbadges{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.lacts{display:flex;flex-direction:column;gap:6px;width:150px;flex:none}
+@media(max-width:560px){.lacts{width:100%}}
 .lacts button{font-family:inherit;font-size:12px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer}
 .lacts button.primary{background:var(--navy-dark);color:#fff;border:none}
 .lacts button.danger{color:var(--red);border-color:var(--red-bg)}
 .tag.live{background:var(--green-bg);color:var(--green)}
 .tag.sold{background:var(--amber-bg);color:var(--amber)}
 .tag.unpub{background:#EDEBF4;color:var(--navy-medium)}
+.phead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.phead h2{padding:0;border:0;margin:0}
+.pbody{padding:16px}
+.addform{background:var(--beige);border:1px solid var(--line);border-radius:6px;padding:18px;margin-bottom:18px}
+.addform h3{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--navy-dark);margin:0 0 4px;font-weight:700}
+.btn-primary{font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer}
+.btn-ghost{font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer}
+.afbtns{display:flex;gap:10px;margin-top:16px}
+.afreq{color:var(--red)}
+.afnote{font-weight:400;color:var(--muted)}
+.copyrow{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
 .embed-hint{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 10px}
 #embedBox{width:100%;height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.4;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:10px;resize:vertical;background:#FBFAF8;white-space:pre;overflow:auto}
 .copymsg{font-size:12px;color:var(--green);font-weight:600;align-self:center}
-.addhint{font-size:13px;color:var(--muted);margin:6px 0 0;line-height:1.5}
-.afgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.addhint{font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.5}
+.afgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:2px}
+.af3group{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .affield{display:flex;flex-direction:column;gap:4px}
 .affield.af-2{grid-column:1 / -1}
 .affield label{font-size:12px;font-weight:600;color:var(--navy-dark)}
-.affield input,.affield select,.affield textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink);width:100%;background:#fff}
+.affield input,.affield select,.affield textarea{font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid var(--line);border-radius:4px;color:var(--ink);width:100%;background:#fff}
 .affield textarea{resize:vertical}
 .afstatus{font-size:12px;color:var(--muted)}
 .afcheck{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--navy-dark);margin-top:14px;cursor:pointer}
 .aferr{color:var(--red);font-size:13px;margin-top:8px;min-height:1px}
 .addbtn{font-family:inherit;font-size:13px;font-weight:600;padding:9px 16px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer}
-@media(max-width:560px){.afgrid{grid-template-columns:1fr}}
+@media(max-width:560px){.afgrid{grid-template-columns:1fr}.af3group{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -198,47 +212,54 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 
   <div id="viewListings" style="display:none">
     <div class="wrap" style="grid-template-columns:1fr">
+
       <div class="panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <h2 style="margin:0">Add a listing</h2>
+        <div class="phead">
+          <h2>Live &amp; published listings</h2>
           <button class="addbtn" id="addToggle" onclick="toggleAddListing()">+ Add a listing</button>
         </div>
-        <p class="addhint">Add one of Lorraine's own properties directly &mdash; no seller submission needed. It's saved as a Verified listing by default and can be published straight to the website.</p>
-        <div id="addForm" style="display:none">
-          <div class="afgrid">
-            <div class="affield af-2"><label>Title *</label><input id="nl_title" placeholder="e.g. 3-bed townhouse, East Legon"></div>
-            <div class="affield"><label>Location *</label><input id="nl_location" placeholder="Area, city"></div>
-            <div class="affield"><label>Price</label><input id="nl_price" placeholder="e.g. $250,000"></div>
-            <div class="affield"><label>Type</label><select id="nl_type"><option value="Verified">Verified (Lorraine's portfolio)</option><option value="Seller's Listing">Seller's Listing</option></select></div>
-            <div class="affield"><label>Stage</label><select id="nl_offplan"><option value="no">Ready / completed</option><option value="yes">Off-plan</option></select></div>
-            <div class="affield"><label>Bedrooms</label><input id="nl_beds" type="number" min="0" placeholder="e.g. 3"></div>
-            <div class="affield"><label>Bathrooms</label><input id="nl_baths" type="number" min="0" placeholder="e.g. 2"></div>
-            <div class="affield"><label>Size (sqm)</label><input id="nl_sqm" type="number" min="0" placeholder="e.g. 180"></div>
-            <div class="affield af-2"><label>Description</label><textarea id="nl_desc" rows="3" placeholder="Short description buyers will see"></textarea></div>
-            <div class="affield af-2"><label>Features (comma-separated)</label><input id="nl_features" placeholder="e.g. Gated community, Borehole, Title deed"></div>
-            <div class="affield af-2"><label>Photos (up to 4)</label><input id="nl_photos" type="file" accept="image/*" multiple><div class="afstatus" id="nl_photostatus"></div></div>
+        <div class="pbody">
+          <div id="addForm" class="addform" style="display:none">
+            <h3>New listing</h3>
+            <p class="addhint">Add one of Lorraine's own properties directly &mdash; no seller submission needed. Saved as a Verified listing by default.</p>
+            <div class="afgrid">
+              <div class="affield af-2"><label>Title <span class="afreq">*</span></label><input id="nl_title" placeholder="e.g. 3-bed townhouse, East Legon"></div>
+              <div class="affield"><label>Location <span class="afreq">*</span></label><input id="nl_location" placeholder="Area, city"></div>
+              <div class="affield"><label>Price</label><input id="nl_price" placeholder="e.g. $250,000"></div>
+              <div class="affield"><label>Type</label><select id="nl_type"><option value="Verified">Verified (Lorraine's portfolio)</option><option value="Seller's Listing">Seller's Listing</option></select></div>
+              <div class="affield"><label>Stage</label><select id="nl_offplan"><option value="no">Ready / completed</option><option value="yes">Off-plan</option></select></div>
+              <div class="af3group">
+                <div class="affield"><label>Bedrooms</label><input id="nl_beds" type="number" min="0" placeholder="3"></div>
+                <div class="affield"><label>Bathrooms</label><input id="nl_baths" type="number" min="0" placeholder="2"></div>
+                <div class="affield"><label>Size (sqm)</label><input id="nl_sqm" type="number" min="0" placeholder="180"></div>
+              </div>
+              <div class="affield af-2"><label>Description</label><textarea id="nl_desc" rows="3" placeholder="Short description buyers will see"></textarea></div>
+              <div class="affield af-2"><label>Features <span class="afnote">(comma-separated)</span></label><input id="nl_features" placeholder="e.g. Gated community, Borehole, Title deed"></div>
+              <div class="affield af-2"><label>Photos <span class="afnote">(up to 4)</span></label><input id="nl_photos" type="file" accept="image/*" multiple><div class="afstatus" id="nl_photostatus"></div></div>
+            </div>
+            <label class="afcheck"><input type="checkbox" id="nl_publish" checked> Publish to the website immediately</label>
+            <div class="aferr" id="nl_err"></div>
+            <div class="afbtns">
+              <button class="btn-primary" id="nl_submit" onclick="submitNewListing()">Add listing</button>
+              <button class="btn-ghost" onclick="toggleAddListing(false)">Cancel</button>
+            </div>
           </div>
-          <label class="afcheck"><input type="checkbox" id="nl_publish" checked> Publish to the website immediately</label>
-          <div class="aferr" id="nl_err"></div>
-          <div style="display:flex;gap:10px;margin-top:12px">
-            <button class="primary" id="nl_submit" style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer" onclick="submitNewListing()">Add listing</button>
-            <button style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer" onclick="toggleAddListing(false)">Cancel</button>
+          <div id="listingsBody"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="phead"><h2>Website embed code</h2></div>
+        <div class="pbody">
+          <p class="embed-hint">Paste this once into a GoHighLevel <b>Custom HTML / Code</b> element on your listings page. It shows every published property automatically &mdash; you don't need to paste it again when listings change.</p>
+          <textarea id="embedBox" readonly spellcheck="false">Loading embed code…</textarea>
+          <div class="copyrow">
+            <button id="copyEmbedBtn" class="btn-primary" onclick="copyEmbed()">Copy embed code</button>
+            <span id="copyMsg" class="copymsg"></span>
           </div>
         </div>
       </div>
-      <div class="panel">
-        <h2>Website embed code</h2>
-        <p class="embed-hint">Paste this once into a GoHighLevel <b>Custom HTML / Code</b> element on your listings page. It shows every published property automatically &mdash; you don't need to paste it again when listings change.</p>
-        <textarea id="embedBox" readonly spellcheck="false">Loading embed code…</textarea>
-        <div style="display:flex;gap:10px;margin-top:8px">
-          <button id="copyEmbedBtn" class="primary" style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 16px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer" onclick="copyEmbed()">Copy embed code</button>
-          <span id="copyMsg" class="copymsg"></span>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>Live &amp; published listings</h2>
-        <div id="listingsBody" style="padding:8px"></div>
-      </div>
+
     </div>
   </div>
 </div>
