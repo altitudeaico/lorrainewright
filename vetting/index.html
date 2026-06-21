@@ -136,6 +136,18 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .embed-hint{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 10px}
 #embedBox{width:100%;height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.4;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:10px;resize:vertical;background:#FBFAF8;white-space:pre;overflow:auto}
 .copymsg{font-size:12px;color:var(--green);font-weight:600;align-self:center}
+.addhint{font-size:13px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+.afgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.affield{display:flex;flex-direction:column;gap:4px}
+.affield.af-2{grid-column:1 / -1}
+.affield label{font-size:12px;font-weight:600;color:var(--navy-dark)}
+.affield input,.affield select,.affield textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink);width:100%;background:#fff}
+.affield textarea{resize:vertical}
+.afstatus{font-size:12px;color:var(--muted)}
+.afcheck{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--navy-dark);margin-top:14px;cursor:pointer}
+.aferr{color:var(--red);font-size:13px;margin-top:8px;min-height:1px}
+.addbtn{font-family:inherit;font-size:13px;font-weight:600;padding:9px 16px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer}
+@media(max-width:560px){.afgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -186,6 +198,34 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 
   <div id="viewListings" style="display:none">
     <div class="wrap" style="grid-template-columns:1fr">
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <h2 style="margin:0">Add a listing</h2>
+          <button class="addbtn" id="addToggle" onclick="toggleAddListing()">+ Add a listing</button>
+        </div>
+        <p class="addhint">Add one of Lorraine's own properties directly &mdash; no seller submission needed. It's saved as a Verified listing by default and can be published straight to the website.</p>
+        <div id="addForm" style="display:none">
+          <div class="afgrid">
+            <div class="affield af-2"><label>Title *</label><input id="nl_title" placeholder="e.g. 3-bed townhouse, East Legon"></div>
+            <div class="affield"><label>Location *</label><input id="nl_location" placeholder="Area, city"></div>
+            <div class="affield"><label>Price</label><input id="nl_price" placeholder="e.g. $250,000"></div>
+            <div class="affield"><label>Type</label><select id="nl_type"><option value="Verified">Verified (Lorraine's portfolio)</option><option value="Seller's Listing">Seller's Listing</option></select></div>
+            <div class="affield"><label>Stage</label><select id="nl_offplan"><option value="no">Ready / completed</option><option value="yes">Off-plan</option></select></div>
+            <div class="affield"><label>Bedrooms</label><input id="nl_beds" type="number" min="0" placeholder="e.g. 3"></div>
+            <div class="affield"><label>Bathrooms</label><input id="nl_baths" type="number" min="0" placeholder="e.g. 2"></div>
+            <div class="affield"><label>Size (sqm)</label><input id="nl_sqm" type="number" min="0" placeholder="e.g. 180"></div>
+            <div class="affield af-2"><label>Description</label><textarea id="nl_desc" rows="3" placeholder="Short description buyers will see"></textarea></div>
+            <div class="affield af-2"><label>Features (comma-separated)</label><input id="nl_features" placeholder="e.g. Gated community, Borehole, Title deed"></div>
+            <div class="affield af-2"><label>Photos (up to 4)</label><input id="nl_photos" type="file" accept="image/*" multiple><div class="afstatus" id="nl_photostatus"></div></div>
+          </div>
+          <label class="afcheck"><input type="checkbox" id="nl_publish" checked> Publish to the website immediately</label>
+          <div class="aferr" id="nl_err"></div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button class="primary" id="nl_submit" style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:none;border-radius:4px;background:var(--navy-dark);color:#fff;cursor:pointer" onclick="submitNewListing()">Add listing</button>
+            <button style="font-family:inherit;font-size:13px;font-weight:600;padding:10px 18px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer" onclick="toggleAddListing(false)">Cancel</button>
+          </div>
+        </div>
+      </div>
       <div class="panel">
         <h2>Website embed code</h2>
         <p class="embed-hint">Paste this once into a GoHighLevel <b>Custom HTML / Code</b> element on your listings page. It shows every published property automatically &mdash; you don't need to paste it again when listings change.</p>
@@ -654,7 +694,7 @@ function lState(l){
 }
 function renderListings(){
   var body=document.getElementById("listingsBody");
-  if(!LISTINGS.length){ body.innerHTML='<div style="padding:18px;color:var(--muted);font-size:13px">No listings yet. Approve a submission to publish one.</div>'; return; }
+  if(!LISTINGS.length){ body.innerHTML='<div style="padding:18px;color:var(--muted);font-size:13px">No listings yet. Approve a submission, or use &ldquo;Add a listing&rdquo; above.</div>'; return; }
   var html='';
   LISTINGS.forEach(function(l){
     var isSeller = String(l.listing_type||'').toLowerCase().indexOf('seller')>-1;
@@ -696,6 +736,90 @@ function deleteListing(id){
   fetch(SUPABASE_URL + "/rest/v1/listings?id=eq."+encodeURIComponent(id), { method:"DELETE", headers: authHeaders({ "Prefer":"return=minimal" }) })
   .then(function(res){ if(res.status===401){ sessionExpired(); return; } if(res.ok){ loadListings(); } else { alert('Could not remove.'); } })
   .catch(function(){ alert('Could not remove.'); });
+}
+
+/* ----- Add a listing directly (Lorraine's own portfolio) ----- */
+function toggleAddListing(show){
+  var f=document.getElementById("addForm");
+  var t=document.getElementById("addToggle");
+  if(show===undefined){ show = (f.style.display==="none"); }
+  f.style.display = show ? "block" : "none";
+  if(t){ t.textContent = show ? "Close" : "+ Add a listing"; }
+}
+function nlVal(id){ var el=document.getElementById(id); return el ? el.value.replace(/^\s+|\s+$/g,"") : ""; }
+function uploadListingPhotos(cb){
+  var input=document.getElementById("nl_photos");
+  var files=(input && input.files) ? input.files : [];
+  if(!files.length){ cb([], null); return; }
+  if(files.length>4){ cb(null,"Please select up to 4 photos."); return; }
+  var folder="manual/"+(new Date()).getTime()+"-"+Math.random().toString(36).slice(2,8);
+  var status=document.getElementById("nl_photostatus");
+  var urls=[], idx=0;
+  function next(){
+    if(idx>=files.length){ cb(urls,null); return; }
+    var file=files[idx];
+    if(status) status.textContent="Uploading photo "+(idx+1)+" of "+files.length+"…";
+    var safe=(idx+1)+"-"+file.name.replace(/[^A-Za-z0-9._-]/g,"_");
+    var path=folder+"/"+safe;
+    fetch(SUPABASE_URL+"/storage/v1/object/listing-photos/"+path,{
+      method:"POST",
+      headers:{ "apikey":SUPABASE_KEY, "Authorization":"Bearer "+SUPABASE_KEY, "Content-Type":file.type||"application/octet-stream" },
+      body:file
+    })
+    .then(function(res){
+      if(res.ok){ urls.push(SUPABASE_URL+"/storage/v1/object/public/listing-photos/"+path); idx++; next(); }
+      else { return res.text().then(function(){ cb(null,"Photo upload failed ("+res.status+")."); }); }
+    })
+    .catch(function(e){ cb(null,"Photo upload failed: "+e.message); });
+  }
+  next();
+}
+function submitNewListing(){
+  var err=document.getElementById("nl_err"); err.textContent="";
+  if(!nlVal("nl_title")){ err.textContent="Please enter a title."; return; }
+  if(!nlVal("nl_location")){ err.textContent="Please enter a location."; return; }
+  var btn=document.getElementById("nl_submit"); btn.disabled=true; btn.textContent="Adding…";
+  uploadListingPhotos(function(urls, upErr){
+    if(upErr){ err.textContent=upErr; btn.disabled=false; btn.textContent="Add listing"; var ps=document.getElementById("nl_photostatus"); if(ps) ps.textContent=""; return; }
+    function num(id){ var s=nlVal(id); return s==="" ? null : parseInt(s,10); }
+    var rec={
+      listing_type: nlVal("nl_type") || "Verified",
+      title: nlVal("nl_title"),
+      location: nlVal("nl_location"),
+      price: nlVal("nl_price"),
+      beds: num("nl_beds"),
+      baths: num("nl_baths"),
+      sqm: num("nl_sqm"),
+      off_plan: (nlVal("nl_offplan")==="yes"),
+      description: nlVal("nl_desc"),
+      features: nlVal("nl_features"),
+      status: "live",
+      published: document.getElementById("nl_publish").checked
+    };
+    urls = urls || [];
+    if(urls[0]) rec.image_1=urls[0];
+    if(urls[1]) rec.image_2=urls[1];
+    if(urls[2]) rec.image_3=urls[2];
+    if(urls[3]) rec.image_4=urls[3];
+    fetch(SUPABASE_URL+"/rest/v1/listings",{
+      method:"POST",
+      headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+      body: JSON.stringify(rec)
+    })
+    .then(function(res){
+      if(res.status===401){ sessionExpired(); return; }
+      if(res.ok){ resetNewListing(); toggleAddListing(false); loadListings(); }
+      else { return res.text().then(function(t){ err.textContent="Could not add the listing ("+res.status+")."; if(window.console) console.log("Add listing failed:",t); btn.disabled=false; btn.textContent="Add listing"; }); }
+    })
+    .catch(function(e){ err.textContent="Could not add the listing: "+e.message; btn.disabled=false; btn.textContent="Add listing"; });
+  });
+}
+function resetNewListing(){
+  ["nl_title","nl_location","nl_price","nl_beds","nl_baths","nl_sqm","nl_desc","nl_features"].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
+  var p=document.getElementById("nl_photos"); if(p) p.value="";
+  var ps=document.getElementById("nl_photostatus"); if(ps) ps.textContent="";
+  var pub=document.getElementById("nl_publish"); if(pub) pub.checked=true;
+  var btn=document.getElementById("nl_submit"); if(btn){ btn.disabled=false; btn.textContent="Add listing"; }
 }
 </script>
 </body>
