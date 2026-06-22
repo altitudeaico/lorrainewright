@@ -112,6 +112,37 @@
   .fcard .chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
   .fcard .chips span{font-size:11px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--ink);}
   .diag-note{font-size:12.5px;color:var(--muted);margin-top:16px;text-align:center;}
+  .subhead{font-size:19px;font-weight:800;color:var(--navy);margin:40px 0 6px;}
+  .subnote{color:var(--muted);font-size:15px;margin:0 0 20px;max-width:62ch;}
+  .twosys{display:flex;gap:16px;flex-wrap:wrap;}
+  .sys{flex:1;min-width:260px;border-radius:10px;padding:20px 22px;border:1px solid var(--line);}
+  .sys-supa{background:#F2F0FA;border-color:#DAD5F0;}
+  .sys-ghl{background:var(--amber-bg);border-color:#EAD9B0;}
+  .sys-h{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;color:var(--navy);margin-bottom:8px;}
+  .sys-dot{width:11px;height:11px;border-radius:50%;}
+  .sys-supa .sys-dot{background:var(--navy);}
+  .sys-ghl .sys-dot{background:var(--gold);}
+  .sys p{font-size:13.5px;color:var(--muted);margin:0 0 12px;line-height:1.5;}
+  .sys ul{margin:0;padding-left:18px;}
+  .sys li{font-size:13.5px;color:var(--navy);margin:5px 0;}
+  .bridges{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;}
+  .bridge{flex:1;min-width:240px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;gap:14px;align-items:flex-start;}
+  section.block:nth-child(even) .bridge{background:#FBFAF8;}
+  .bnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .bridge b{display:block;font-size:14px;color:var(--navy);margin-bottom:4px;}
+  .bridge span{display:block;font-size:13px;color:var(--muted);line-height:1.5;}
+  .bridge em{display:inline-block;margin-top:8px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);background:#EFEAFF;border-radius:4px;padding:3px 8px;}
+  .acctcards{display:flex;gap:16px;flex-wrap:wrap;}
+  .acctcard{flex:1;min-width:260px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
+  section.block:nth-child(even) .acctcard{background:#FBFAF8;}
+  .acctcard h4{font-size:15px;margin-bottom:8px;}
+  .acctcard p{font-size:14px;color:var(--muted);line-height:1.6;}
+  .acctcard b{color:var(--navy);}
+  .handover{margin-top:16px;display:flex;gap:16px;align-items:flex-start;background:var(--amber-bg);border:1px solid #EAD9B0;border-radius:10px;padding:18px 20px;}
+  .handover .ho-ico{flex:none;width:32px;height:32px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;}
+  .handover h4{font-size:14px;margin-bottom:3px;color:#6e5210;}
+  .handover p{font-size:13.5px;color:#6e5210;line-height:1.55;}
+  .handover b{color:#513c0a;}
 
   /* ---------- lifecycle ---------- */
   .life{counter-reset:step;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-top:8px;}
@@ -219,6 +250,7 @@
       <a href="#how">How it works</a>
       <a href="#walkthrough">Walkthrough</a>
       <a href="#setup">GHL setup</a>
+      <a href="#accounts">Accounts</a>
       <a href="#reference">Reference</a>
     </div>
   </div>
@@ -351,6 +383,35 @@
       </div>
     </div>
     <p class="diag-note">A new submission automatically pings GoHighLevel to send the emails · The public listings page reads only <b>published</b> properties · Buyer enquiries post straight into your GHL workflow.</p>
+
+    <h3 class="subhead">Two systems, one job each</h3>
+    <p class="subnote">Behind the scenes there are two platforms. They do different things, and they're joined by three simple connections.</p>
+    <div class="twosys">
+      <div class="sys sys-supa">
+        <div class="sys-h"><span class="sys-dot"></span> Supabase — the data engine</div>
+        <p>Where all your property data and photos actually live, and the live feed your pages read from. You don't log in here day to day — your workspace does the talking for you.</p>
+        <ul>
+          <li>Seller submissions &amp; their photos</li>
+          <li>Your published listings</li>
+          <li>The secure team login</li>
+        </ul>
+      </div>
+      <div class="sys sys-ghl">
+        <div class="sys-h"><span class="sys-dot"></span> GoHighLevel — the front office</div>
+        <p>Your customer-facing side: the website, your contacts, the emails, and the money. This is where you already work every day.</p>
+        <ul>
+          <li>Your website pages (incl. the listings page)</li>
+          <li>Contacts &amp; leads (your CRM)</li>
+          <li>Emails &amp; automations</li>
+          <li>The $99 payment</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bridges">
+      <div class="bridge"><div class="bnum">1</div><div><b>New submission &rarr; email</b><span>When a seller submits, Supabase automatically pings GoHighLevel, which sends the team alert and the seller's confirmation.</span><em>Supabase to GHL</em></div></div>
+      <div class="bridge"><div class="bnum">2</div><div><b>Listings on your website</b><span>Your GoHighLevel page shows a window that displays the listings stored in Supabase. GHL hosts the page; Supabase supplies the properties.</span><em>GHL page shows Supabase data</em></div></div>
+      <div class="bridge"><div class="bnum">3</div><div><b>Buyer enquiries &rarr; leads</b><span>When a buyer enquires on a listing, the enquiry drops into GoHighLevel as a new lead.</span><em>Listings page to GHL</em></div></div>
+    </div>
   </div>
 </section>
 
@@ -565,6 +626,34 @@
         <p class="refdesc"><b>Workspace login</b> — username and password, shared privately with your team.</p>
         <p class="refdesc"><b>Listing fee</b> — $99, collected via FastPayDirect.</p>
         <div class="private"><b>Keep the workspace link and login within your team.</b> The seller form and listings page are fine to share publicly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACCOUNTS / HANDOVER ===== -->
+<section class="block" id="accounts">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Your accounts</div>
+      <h2>What you own &mdash; and what we need to hand over</h2>
+      <p>The system runs on two accounts. GoHighLevel is already yours. Supabase is the one we set up for you, and it needs transferring into your name.</p>
+    </div>
+    <div class="acctcards">
+      <div class="acctcard">
+        <h4>How your Supabase account was set up</h4>
+        <p>To create your Supabase database, we first set up a dedicated <b>Gmail account</b> and used it to register Supabase. So your Supabase account is tied to that Gmail &mdash; the two go together, and whoever holds the Gmail holds the database.</p>
+      </div>
+      <div class="acctcard">
+        <h4>You're on the free tier</h4>
+        <p>Supabase is currently on its <b>free tier</b>, which should comfortably cover this project. If usage ever outgrows the free limits &mdash; a lot of listings, photos, or traffic &mdash; there's a <b>paid tier</b> you can upgrade to with no rebuild needed. We'll flag it well before you'd reach any limit.</p>
+      </div>
+    </div>
+    <div class="handover">
+      <div class="ho-ico">!</div>
+      <div>
+        <h4>Action: transfer the account to you</h4>
+        <p>We'll hand over the <b>Gmail and Supabase login details</b> so the account sits firmly in your ownership. Until that's done, treat it as an open handover item &mdash; it's how you keep full control of your own data.</p>
       </div>
     </div>
   </div>
