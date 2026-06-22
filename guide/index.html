@@ -175,6 +175,13 @@
   .refdesc{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 10px;}
   .refdesc:last-child{margin-bottom:0;}
   .refdesc b{color:var(--navy);font-weight:700;}
+  .linkrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);}
+  .linkrow:last-child{border-bottom:none;}
+  .linkmeta{display:flex;flex-direction:column;gap:2px;}
+  .linkmeta b{font-size:14px;color:var(--navy);font-weight:700;}
+  .linkmeta span{font-size:12.5px;color:var(--muted);line-height:1.45;}
+  .golink{flex:none;text-decoration:none;font-size:13px;font-weight:700;color:#fff;background:var(--navy);padding:9px 18px;border-radius:6px;}
+  .golink:hover{background:var(--navy-med);}
   .refrow{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;}
   .refrow:last-child{border-bottom:none;}
   .refrow .k{color:var(--muted);font-weight:600;flex:none;}
@@ -535,20 +542,29 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Quick reference</div>
-      <h2>What's where</h2>
+      <h2>Where to go</h2>
     </div>
     <div class="ref">
       <div class="refcard">
         <h4>Your pages</h4>
-        <p class="refdesc"><b>Public listings</b> — the property grid buyers see, embedded inside your GoHighLevel site.</p>
-        <p class="refdesc"><b>Vetting workspace</b> — your team's private, login-protected dashboard to review, approve, add and manage listings.</p>
-        <p class="refdesc"><b>Seller form</b> — the page sellers use to submit a property and pay the fee.</p>
+        <div class="linkrow">
+          <div class="linkmeta"><b>Vetting workspace</b><span>Your team's login — review, approve, add &amp; manage listings.</span></div>
+          <a class="golink" href="https://altitudeaico.github.io/lorrainewright/vetting/" target="_blank" rel="noopener">Open</a>
+        </div>
+        <div class="linkrow">
+          <div class="linkmeta"><b>Seller form</b><span>Share this with sellers so they can submit a property.</span></div>
+          <a class="golink" href="https://altitudeaico.github.io/lorrainewright/submit/" target="_blank" rel="noopener">Open</a>
+        </div>
+        <div class="linkrow">
+          <div class="linkmeta"><b>Public listings (preview)</b><span>What buyers see. The same grid is embedded in your GHL site.</span></div>
+          <a class="golink" href="https://altitudeaico.github.io/lorrainewright/listings/" target="_blank" rel="noopener">Open</a>
+        </div>
       </div>
       <div class="refcard">
         <h4>Access</h4>
         <p class="refdesc"><b>Workspace login</b> — username and password, shared privately with your team.</p>
         <p class="refdesc"><b>Listing fee</b> — $99, collected via FastPayDirect.</p>
-        <div class="private"><b>Keep page addresses and the login private.</b> Share them directly with your team rather than writing them into this guide.</div>
+        <div class="private"><b>Keep the workspace link and login within your team.</b> The seller form and listings page are fine to share publicly.</div>
       </div>
     </div>
   </div>
