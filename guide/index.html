@@ -172,6 +172,9 @@
   .refcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
   section.block:nth-child(even) .refcard{background:#FBFAF8;}
   .refcard h4{font-size:13px;margin-bottom:12px;}
+  .refdesc{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 10px;}
+  .refdesc:last-child{margin-bottom:0;}
+  .refdesc b{color:var(--navy);font-weight:700;}
   .refrow{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;}
   .refrow:last-child{border-bottom:none;}
   .refrow .k{color:var(--muted);font-weight:600;flex:none;}
@@ -345,26 +348,6 @@
 </section>
 
 <!-- ===== LIFECYCLE ===== -->
-<section class="block">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Step by step</div>
-      <h2>The life of a listing</h2>
-      <p>What happens, in order, from the moment a seller hits submit.</p>
-    </div>
-    <div class="life">
-      <div class="li"><div class="n"></div><div><h4>Seller submits</h4><p>Fills the form, uploads up to 6 photos, ticks the consent box.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>Saved securely</h4><p>The submission and its photos land in your database instantly.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>Everyone's notified</h4><p>GHL emails your team a new-lead alert and emails the seller a confirmation.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>Seller pays $99</h4><p>Via the payment button. Your team confirms it and clicks <b>Mark as paid</b>.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>Team vets</h4><p>Opens the workspace, works through the checklist, and sets a verdict.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>One-click publish</h4><p>Approved → the property appears on your public listings page immediately.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>Buyers enquire</h4><p>They browse and submit an enquiry, which becomes a lead in your GHL CRM.</p></div></div>
-      <div class="li"><div class="n"></div><div><h4>You stay in control</h4><p>Edit, mark sold, unpublish, or remove any listing from the workspace anytime.</p></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== WALKTHROUGH WIZARD ===== -->
 <section class="block" id="walkthrough">
   <div class="wrap">
@@ -504,17 +487,6 @@
 
     <div class="acc" id="acc">
       <div class="item open">
-        <button class="q">Embedding the listings page <span class="plus">+</span></button>
-        <div class="a">
-          <ol>
-            <li>Copy the embed code from the workspace (<b>Listings</b> tab → <b>Copy embed code</b>).</li>
-            <li>In GHL, drag a <b>Custom HTML / Code</b> element onto the page.</li>
-            <li>Paste the code in and save.</li>
-          </ol>
-          <p>The font loads in a way that survives GHL's editor, and all styling is self-contained, so it won't clash with your template. It must go in a Code/HTML block — not a text block.</p>
-        </div>
-      </div>
-      <div class="item">
         <button class="q">The two email workflows (already live) <span class="plus">+</span></button>
         <div class="a">
           <p>When a seller submits, the system pings a GHL <b>Inbound Webhook</b>, which triggers your "Property Listing Submission" workflow. That workflow:</p>
@@ -563,21 +535,20 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Quick reference</div>
-      <h2>Links &amp; logins</h2>
+      <h2>What's where</h2>
     </div>
     <div class="ref">
       <div class="refcard">
         <h4>Your pages</h4>
-        <div class="refrow"><span class="k">Public listings</span><span class="v">…/lorrainewright/listings/</span></div>
-        <div class="refrow"><span class="k">Vetting workspace</span><span class="v">…/lorrainewright/vetting/</span></div>
-        <div class="refrow"><span class="k">Seller form</span><span class="v">…/lorrainewright/submit/</span></div>
+        <p class="refdesc"><b>Public listings</b> — the property grid buyers see, embedded inside your GoHighLevel site.</p>
+        <p class="refdesc"><b>Vetting workspace</b> — your team's private, login-protected dashboard to review, approve, add and manage listings.</p>
+        <p class="refdesc"><b>Seller form</b> — the page sellers use to submit a property and pay the fee.</p>
       </div>
       <div class="refcard">
-        <h4>Workspace login</h4>
-        <div class="refrow"><span class="k">Username</span><span class="v">admin</span></div>
-        <div class="refrow"><span class="k">Password</span><span class="v">shared privately</span></div>
-        <div class="refrow"><span class="k">Listing fee</span><span class="v">$99 (FastPayDirect)</span></div>
-        <div class="private"><b>Keep this guide private.</b> Don't share it outside your team — it explains how to reach your admin workspace.</div>
+        <h4>Access</h4>
+        <p class="refdesc"><b>Workspace login</b> — username and password, shared privately with your team.</p>
+        <p class="refdesc"><b>Listing fee</b> — $99, collected via FastPayDirect.</p>
+        <div class="private"><b>Keep page addresses and the login private.</b> Share them directly with your team rather than writing them into this guide.</div>
       </div>
     </div>
   </div>
