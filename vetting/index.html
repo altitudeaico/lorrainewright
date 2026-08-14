@@ -170,11 +170,9 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 <div class="login-wrap" id="login">
   <div class="login-card">
     <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
-    <label>Username</label>
-    <input id="u" autocomplete="username" placeholder="admin">
-    <label>Password</label>
-    <input id="p" type="password" autocomplete="current-password" placeholder="••••••" onkeydown="if(event.key==='Enter')doLogin()">
-    <button id="loginBtn" onclick="doLogin()">Log in</button>
+    <label>Passphrase</label>
+    <input id="p" type="password" autocomplete="current-password" placeholder="Enter passphrase" onkeydown="if(event.key==='Enter')doLogin()">
+    <button id="loginBtn" onclick="doLogin()">Enter</button>
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
@@ -273,7 +271,7 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
    ========================================================================= */
 var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
 var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
-var DOMAIN = "diasporatohome.com"; /* short username "admin" becomes admin@diasporatohome.com */
+var ACCOUNT_EMAIL = "admin@diasporatohome.com"; /* fixed gate account — the passphrase typed on the login screen is this account's Supabase password */
 
 var AUTH = { token:null, email:null };
 
@@ -311,12 +309,11 @@ var current = null;
 
 /* ===================== AUTH ===================== */
 function doLogin(){
-  var u = document.getElementById("u").value.trim();
   var p = document.getElementById("p").value;
   var err = document.getElementById("loginErr");
   var btn = document.getElementById("loginBtn");
-  if(!u || !p){ err.textContent="Enter your username and password."; err.className="login-err show"; return; }
-  var email = u.indexOf("@")>-1 ? u : (u + "@" + DOMAIN);
+  if(!p){ err.textContent="Enter the passphrase."; err.className="login-err show"; return; }
+  var email = ACCOUNT_EMAIL;
   err.className="login-err"; btn.disabled=true; btn.textContent="Logging in…";
 
   fetch(SUPABASE_URL + "/auth/v1/token?grant_type=password", {
@@ -326,7 +323,7 @@ function doLogin(){
   })
   .then(function(res){ return res.json().then(function(j){ return {ok:res.ok, j:j}; }); })
   .then(function(r){
-    btn.disabled=false; btn.textContent="Log in";
+    btn.disabled=false; btn.textContent="Enter";
     if(r.ok && r.j.access_token){
       AUTH.token = r.j.access_token;
       AUTH.email = (r.j.user && r.j.user.email) ? r.j.user.email : email;
@@ -334,12 +331,11 @@ function doLogin(){
       document.getElementById("app").style.display="block";
       loadSubmissions();
     } else {
-      var msg = r.j.error_description || r.j.msg || r.j.error || "Login failed. Check the username and password.";
-      err.textContent = msg; err.className="login-err show";
+      err.textContent = "Incorrect passphrase."; err.className="login-err show";
     }
   })
   .catch(function(e){
-    btn.disabled=false; btn.textContent="Log in";
+    btn.disabled=false; btn.textContent="Enter";
     err.textContent="Could not reach the server: " + e.message; err.className="login-err show";
   });
 }
