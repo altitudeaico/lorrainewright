@@ -226,6 +226,7 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
               <div class="affield"><label>Price</label><input id="nl_price" placeholder="e.g. $250,000"></div>
               <div class="affield"><label>Type</label><select id="nl_type"><option value="Verified">Verified (Lorraine's portfolio)</option><option value="Seller's Listing">Seller's Listing</option></select></div>
               <div class="affield"><label>Stage</label><select id="nl_offplan"><option value="no">Ready / completed</option><option value="yes">Off-plan</option></select></div>
+              <div class="affield"><label>For sale or rent</label><select id="nl_deal"><option value="sale">For sale</option><option value="rent">For rent</option></select></div>
               <div class="af3group">
                 <div class="affield"><label>Bedrooms</label><input id="nl_beds" type="number" min="0" placeholder="3"></div>
                 <div class="affield"><label>Bathrooms</label><input id="nl_baths" type="number" min="0" placeholder="2"></div>
@@ -376,6 +377,7 @@ function rowToSub(row){
     loc: row.location || "",
     price: row.price || "",
     offplan: type.indexOf("off")===0,
+    dealType: (row.deal_type==="rent" ? "rent" : "sale"),
     company: role==="developer" || !!(row.company && row.company.length),
     customary: tenure.indexOf("stool")>-1 || tenure.indexOf("family")>-1,
     status: statusToBadge(row.status),
@@ -469,6 +471,7 @@ function publishListing(sub, listingType, done){
     currency: "USD",
     location: sub.loc,
     off_plan: sub.offplan,
+    deal_type: sub.dealType || "sale",
     description: "",
     status: "live",
     published: true
@@ -808,6 +811,7 @@ function submitNewListing(){
       baths: num("nl_baths"),
       sqm: num("nl_sqm"),
       off_plan: (nlVal("nl_offplan")==="yes"),
+      deal_type: (nlVal("nl_deal")||"sale"),
       description: nlVal("nl_desc"),
       features: nlVal("nl_features"),
       status: "live",

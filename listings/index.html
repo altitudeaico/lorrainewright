@@ -28,6 +28,14 @@
     .d2h-badge--type{font-size:10px; padding:5px 10px; border-radius:20px;}
     .d2h-badge--vetted{background:#0E7C5A; color:#fff;}
     .d2h-badge--seller{background:#EFEAFF; color:var(--purple); border:1px solid #DAD2FB;}
+    .d2h-badge--forsale{background:#231B4F; color:#fff;}
+    .d2h-badge--forrent{background:#C9A961; color:#231B4F;}
+    .d2h-filters{display:flex; gap:10px; margin:0 0 22px; flex-wrap:wrap;}
+    .d2h-fbtn{border:1px solid #E7E3DD; background:#fff; color:var(--navy,#231B4F);
+      font-weight:600; font-size:14px; padding:8px 18px; border-radius:22px; cursor:pointer;
+      transition:background .15s ease, color .15s ease, border-color .15s ease;}
+    .d2h-fbtn:hover{border-color:var(--purple,#7170B4);}
+    .d2h-fbtn.is-active{background:var(--navy,#231B4F); color:#fff; border-color:var(--navy,#231B4F);}
 
     .d2h-specs{display:flex; gap:16px; align-items:center; color:var(--muted); font-weight:600; font-size:14px;}
     .d2h-specs span{display:inline-flex; align-items:center; gap:6px;}
@@ -166,6 +174,11 @@
   <div class="d2h-list" id="d2hList">
     <p class="d2h-eyebrow">Our Portfolio</p>
     <h2 class="d2h-h2">Properties for Sale in Ghana</h2>
+    <div class="d2h-filters" id="d2hFilters">
+      <button class="d2h-fbtn is-active" data-deal="all">All</button>
+      <button class="d2h-fbtn" data-deal="sale">For Sale</button>
+      <button class="d2h-fbtn" data-deal="rent">For Rent</button>
+    </div>
     <div class="d2h-grid" id="d2hGrid"></div>
   </div>
 
@@ -282,6 +295,7 @@
   var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
 
   var DATA = [];
+  var DEAL_FILTER = "all";
   var byId = {};
 
   function indexData(){
@@ -328,6 +342,7 @@
         baths: num(r.baths),
         sqm: num(r.sqm),
         off_plan: (r.off_plan === true) || truthy(r.off_plan),
+        deal_type: (String(r.deal_type||"sale").toLowerCase()==="rent") ? "rent" : "sale",
         status: (String(r.status||"").toLowerCase()==="sold") ? "SOLD" : "SALE",
         images: images,
         description: trim(r.description),
@@ -378,10 +393,31 @@
   }
 
   // ---- Render grid ----
+  function wireDealFilters(){
+    var btns = document.querySelectorAll(".d2h-fbtn");
+    for(var i=0;i<btns.length;i++){
+      (function(b){
+        b.onclick = function(){
+          DEAL_FILTER = b.getAttribute("data-deal") || "all";
+          var all = document.querySelectorAll(".d2h-fbtn");
+          for(var j=0;j<all.length;j++){ all[j].className = "d2h-fbtn"; }
+          b.className = "d2h-fbtn is-active";
+          renderGrid();
+        };
+      })(btns[i]);
+    }
+  }
+
   function renderGrid(){
     var grid = document.getElementById("d2hGrid");
     grid.innerHTML = "";
-    for(var i=0;i<DATA.length;i++){
+    if(!window.__dealFiltersWired){ wireDealFilters(); window.__dealFiltersWired = true; }
+    var list = [];
+    for(var li=0; li<DATA.length; li++){
+      if(DEAL_FILTER==="all" || DATA[li].deal_type===DEAL_FILTER){ list.push(DATA[li]); }
+    }
+    if(!list.length){ grid.innerHTML = '<p style="color:#6B6880;font-size:15px;">No properties match this filter right now.</p>'; return; }
+    for(var i=0;i<list.length;i++){
       (function(p){
         var card = document.createElement("div");
         card.className = "d2h-card";
@@ -406,6 +442,7 @@
         var typeBadge = (p.listing_type === "vetted")
           ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified</span>'
           : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Listing</span>';
+        var dealBadge = '<span class="d2h-badge d2h-badge--type d2h-badge--for'+(p.deal_type==="rent"?"rent":"sale")+'">'+(p.deal_type==="rent"?"For Rent":"For Sale")+'</span>';
 
         var body = document.createElement("div");
         body.className = "d2h-card__body";
@@ -415,7 +452,7 @@
             '<p class="d2h-card__loc">' + p.location + '</p>' +
           '</div>' +
           '<div class="d2h-card__meta">' +
-            typeBadge +
+            dealBadge + typeBadge +
             '<div class="d2h-specs">' + specHtml(p, true) + '</div>' +
           '</div>';
 
@@ -423,7 +460,7 @@
         card.appendChild(body);
         card.onclick = function(){ openDetail(p.id); };
         grid.appendChild(card);
-      })(DATA[i]);
+      })(list[i]);
     }
   }
 
@@ -436,6 +473,7 @@
     var typeBadge = (p.listing_type === "vetted")
       ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified Portfolio</span>'
       : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Own Listing</span>';
+    var dealBadge = '<span class="d2h-badge d2h-badge--type d2h-badge--for'+(p.deal_type==="rent"?"rent":"sale")+'">'+(p.deal_type==="rent"?"For Rent":"For Sale")+'</span>';
     var offBadge = p.off_plan ? '<span class="d2h-badge d2h-badge--offplan">Off Plan</span>' : '';
 
     var featList = '';
@@ -454,7 +492,7 @@
           '</div>' +
           '<div class="d2h-panel__price">' + money(p.price, p.currency) + '</div>' +
           '<p class="d2h-panel__loc">' + p.location + '</p>' +
-          '<div class="d2h-tagrow">' + offBadge +
+          '<div class="d2h-tagrow">' + dealBadge + offBadge +
             '<span class="d2h-badge d2h-badge--status" style="background:#231B4F">' + p.status + '</span>' +
             typeBadge +
           '</div>' +

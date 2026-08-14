@@ -91,6 +91,13 @@ textarea{min-height:70px;resize:vertical}
           </select>
         </div>
         <div class="field">
+          <label>For sale or rent <span class="req">*</span></label>
+          <select id="deal_type">
+            <option value="sale">For sale</option>
+            <option value="rent">For rent</option>
+          </select>
+        </div>
+        <div class="field">
           <label>Land tenure</label>
           <select id="land_tenure">
             <option value="">Choose…</option>
@@ -233,6 +240,7 @@ function submitForm(){
     location:       val("location"),
     price:          val("price"),
     type:           val("type"),
+    deal_type:      val("deal_type") || "sale",
     seller_name:    val("seller_name"),
     seller_role:    val("seller_role"),
     email:          val("email"),
