@@ -190,7 +190,7 @@
     <div class="d2h-modal" role="dialog" aria-modal="true">
       <div id="d2hModalInner">
         <div class="d2h-modal__head">
-          <h3>Find Out More</h3>
+          <h3 id="d2hModalTitle">Find Out More</h3>
           <p class="d2h-modal__sub" id="d2hEnqProp"></p>
         </div>
         <div class="d2h-modal__body">
@@ -221,7 +221,7 @@
             <input class="d2h-input" id="d2hEmail" type="email" placeholder="you@example.com">
           </div>
           <div class="d2h-field">
-            <p class="d2h-helper">Thanks for your interest in buying a property. Leave a message or instructions and we&rsquo;ll be in touch soon.</p>
+            <p class="d2h-helper" id="d2hHelper">Thanks for your interest in buying a property. Leave a message or instructions and we&rsquo;ll be in touch soon.</p>
             <textarea class="d2h-input" id="d2hComment" placeholder="Add Comment"></textarea>
           </div>
         </div>
@@ -555,7 +555,8 @@
     document.getElementById("d2hBack").onclick = backToGrid;
 
     // enquiry button -> open modal pre-loaded with THIS property
-    document.getElementById("d2hFindOut").onclick = function(){ openEnquiry(p); };
+    document.getElementById("d2hFindOut").onclick = function(){ openEnquiry(p, "enquiry"); };
+    document.getElementById("d2hTour").onclick = function(){ openEnquiry(p, "tour"); };
 
     // tab switching
     var tabs = d.querySelectorAll(".d2h-tab");
@@ -600,6 +601,7 @@
   var DEMO_MODE = true;
 
   var enqProperty = null;
+  var enqIntent = "enquiry";
   var ENQ_TEMPLATE = document.getElementById("d2hModalInner").innerHTML;
 
   function wireEnquiryControls(){
@@ -607,10 +609,18 @@
     document.getElementById("d2hSubmit").onclick = submitEnquiry;
   }
 
-  function openEnquiry(p){
+  function openEnquiry(p, intent){
     enqProperty = p;
+    enqIntent = (intent === "tour") ? "tour" : "enquiry";
     document.getElementById("d2hModalInner").innerHTML = ENQ_TEMPLATE; // fresh, empty form
     wireEnquiryControls();
+    var isTour = (enqIntent === "tour");
+    var t = document.getElementById("d2hModalTitle");
+    if(t){ t.textContent = isTour ? "Schedule a Tour" : "Find Out More"; }
+    var h = document.getElementById("d2hHelper");
+    if(h){ h.textContent = isTour
+      ? "Let us know your preferred dates and times to view this property and we\u2019ll be in touch to arrange it."
+      : "Thanks for your interest in buying a property. Leave a message or instructions and we\u2019ll be in touch soon."; }
     document.getElementById("d2hEnqProp").textContent = p.title + " \u2014 " + p.location;
     document.getElementById("d2hOverlay").className = "d2h-overlay is-open";
   }
@@ -656,7 +666,8 @@
       property_name: enqProperty ? enqProperty.title : "",
       property_id: enqProperty ? enqProperty.id : "",
       property_location: enqProperty ? enqProperty.location : "",
-      source: "Property listing - Find out more"
+      enquiry_type: (enqIntent === "tour") ? "tour" : "enquiry",
+      source: (enqIntent === "tour") ? "Property listing - Schedule a tour" : "Property listing - Find out more"
     };
 
     var btn = document.getElementById("d2hSubmit");
