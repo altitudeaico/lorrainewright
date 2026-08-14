@@ -30,12 +30,23 @@
     .d2h-badge--seller{background:#EFEAFF; color:var(--purple); border:1px solid #DAD2FB;}
     .d2h-badge--forsale{background:#231B4F; color:#fff;}
     .d2h-badge--forrent{background:#C9A961; color:#231B4F;}
-    .d2h-filters{display:flex; gap:10px; margin:0 0 22px; flex-wrap:wrap;}
-    .d2h-fbtn{border:1px solid #E7E3DD; background:#fff; color:var(--navy,#231B4F);
-      font-weight:600; font-size:14px; padding:8px 18px; border-radius:22px; cursor:pointer;
-      transition:background .15s ease, color .15s ease, border-color .15s ease;}
-    .d2h-fbtn:hover{border-color:var(--purple,#7170B4);}
-    .d2h-fbtn.is-active{background:var(--navy,#231B4F); color:#fff; border-color:var(--navy,#231B4F);}
+    .d2h-toolbar{background:#fff; border:1px solid #E7E3DD; border-radius:14px; padding:16px 18px; margin:0 0 24px;}
+    .d2h-tbrow{display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;}
+    .d2h-tbrow + .d2h-tbrow{margin-top:12px;}
+    .d2h-tbinput{border:1px solid #E7E3DD; border-radius:10px; padding:10px 12px; font-family:inherit;
+      font-size:14px; color:var(--navy,#231B4F); background:#fff; width:100%; box-sizing:border-box;}
+    .d2h-tbinput:focus{outline:none; border-color:var(--purple,#7170B4);}
+    .d2h-tbsearch{flex:1 1 260px;}
+    .d2h-tbfield{display:flex; flex-direction:column; gap:5px; flex:1 1 120px; min-width:110px;}
+    .d2h-tbfield span{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#6B6880;}
+    .d2h-seg{display:inline-flex; border:1px solid #E7E3DD; border-radius:22px; overflow:hidden; flex:0 0 auto; height:42px;}
+    .d2h-segbtn{border:0; background:#fff; color:var(--navy,#231B4F); font-weight:600; font-size:14px; padding:0 18px; cursor:pointer;}
+    .d2h-segbtn + .d2h-segbtn{border-left:1px solid #E7E3DD;}
+    .d2h-segbtn.is-active{background:var(--navy,#231B4F); color:#fff;}
+    .d2h-tbclear{border:1px solid #E7E3DD; background:#F5F1ED; color:var(--navy,#231B4F); font-weight:600;
+      font-size:14px; padding:10px 16px; border-radius:10px; cursor:pointer; flex:0 0 auto; height:42px;}
+    .d2h-tbclear:hover{border-color:var(--purple,#7170B4);}
+    .d2h-tbcount{margin-top:12px; font-size:13px; color:#6B6880; font-weight:600;}
 
     .d2h-specs{display:flex; gap:16px; align-items:center; color:var(--muted); font-weight:600; font-size:14px;}
     .d2h-specs span{display:inline-flex; align-items:center; gap:6px;}
@@ -174,10 +185,27 @@
   <div class="d2h-list" id="d2hList">
     <p class="d2h-eyebrow">Our Portfolio</p>
     <h2 class="d2h-h2">Properties for Sale in Ghana</h2>
-    <div class="d2h-filters" id="d2hFilters">
-      <button class="d2h-fbtn is-active" data-deal="all">All</button>
-      <button class="d2h-fbtn" data-deal="sale">For Sale</button>
-      <button class="d2h-fbtn" data-deal="rent">For Rent</button>
+    <div class="d2h-toolbar" id="d2hToolbar">
+      <div class="d2h-tbrow">
+        <input id="fq" class="d2h-tbinput d2h-tbsearch" type="text" placeholder="Search by title or location&hellip;">
+        <div class="d2h-seg" id="d2hDeal">
+          <button type="button" class="d2h-segbtn is-active" data-deal="all">All</button>
+          <button type="button" class="d2h-segbtn" data-deal="sale">Sale</button>
+          <button type="button" class="d2h-segbtn" data-deal="rent">Rent</button>
+        </div>
+      </div>
+      <div class="d2h-tbrow">
+        <label class="d2h-tbfield"><span>Min price</span><input id="fmin" class="d2h-tbinput" type="number" min="0" placeholder="No min"></label>
+        <label class="d2h-tbfield"><span>Max price</span><input id="fmax" class="d2h-tbinput" type="number" min="0" placeholder="No max"></label>
+        <label class="d2h-tbfield"><span>Beds</span>
+          <select id="fbeds" class="d2h-tbinput"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
+        </label>
+        <label class="d2h-tbfield"><span>Stage</span>
+          <select id="foff" class="d2h-tbinput"><option value="any">Any</option><option value="completed">Completed</option><option value="offplan">Off-plan</option></select>
+        </label>
+        <button id="fclear" class="d2h-tbclear" type="button">Clear</button>
+      </div>
+      <div class="d2h-tbcount" id="d2hCount"></div>
     </div>
     <div class="d2h-grid" id="d2hGrid"></div>
   </div>
@@ -295,7 +323,30 @@
   var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
 
   var DATA = [];
-  var DEAL_FILTER = "all";
+  var FILTERS = { q:"", min:null, max:null, beds:0, off:"any", deal:"all" };
+
+  function readFilters(){
+    var qv = document.getElementById("fq"); FILTERS.q = qv ? qv.value.toLowerCase().replace(/^\s+|\s+$/g,"") : "";
+    var mn = parseFloat((document.getElementById("fmin")||{}).value); FILTERS.min = isNaN(mn) ? null : mn;
+    var mx = parseFloat((document.getElementById("fmax")||{}).value); FILTERS.max = isNaN(mx) ? null : mx;
+    var bd = document.getElementById("fbeds"); FILTERS.beds = bd ? (parseInt(bd.value,10)||0) : 0;
+    var of = document.getElementById("foff"); FILTERS.off = of ? of.value : "any";
+  }
+
+  function passesFilters(p){
+    if(FILTERS.deal !== "all" && p.deal_type !== FILTERS.deal){ return false; }
+    if(FILTERS.q){
+      var hay = ((p.title||"") + " " + (p.location||"")).toLowerCase();
+      if(hay.indexOf(FILTERS.q) === -1){ return false; }
+    }
+    var pr = p.price || 0;
+    if(FILTERS.min !== null && pr < FILTERS.min){ return false; }
+    if(FILTERS.max !== null && pr > FILTERS.max){ return false; }
+    if(FILTERS.beds && (p.beds||0) < FILTERS.beds){ return false; }
+    if(FILTERS.off === "offplan" && !p.off_plan){ return false; }
+    if(FILTERS.off === "completed" && p.off_plan){ return false; }
+    return true;
+  }
   var byId = {};
 
   function indexData(){
@@ -393,30 +444,47 @@
   }
 
   // ---- Render grid ----
-  function wireDealFilters(){
-    var btns = document.querySelectorAll(".d2h-fbtn");
-    for(var i=0;i<btns.length;i++){
+  function wireFilters(){
+    var ids = ["fq","fmin","fmax","fbeds","foff"], i, el;
+    for(i=0;i<ids.length;i++){
+      el = document.getElementById(ids[i]);
+      if(el){ el.oninput = function(){ readFilters(); renderGrid(); };
+              el.onchange = function(){ readFilters(); renderGrid(); }; }
+    }
+    var seg = document.querySelectorAll("#d2hDeal .d2h-segbtn");
+    for(i=0;i<seg.length;i++){
       (function(b){
         b.onclick = function(){
-          DEAL_FILTER = b.getAttribute("data-deal") || "all";
-          var all = document.querySelectorAll(".d2h-fbtn");
-          for(var j=0;j<all.length;j++){ all[j].className = "d2h-fbtn"; }
-          b.className = "d2h-fbtn is-active";
+          FILTERS.deal = b.getAttribute("data-deal") || "all";
+          var all = document.querySelectorAll("#d2hDeal .d2h-segbtn"), k;
+          for(k=0;k<all.length;k++){ all[k].className = "d2h-segbtn"; }
+          b.className = "d2h-segbtn is-active";
           renderGrid();
         };
-      })(btns[i]);
+      })(seg[i]);
     }
+    var clr = document.getElementById("fclear");
+    if(clr){ clr.onclick = function(){
+      var setv = function(id,v){ var e=document.getElementById(id); if(e){ e.value=v; } };
+      setv("fq",""); setv("fmin",""); setv("fmax",""); setv("fbeds","0"); setv("foff","any");
+      FILTERS.deal = "all";
+      var all = document.querySelectorAll("#d2hDeal .d2h-segbtn"), k;
+      for(k=0;k<all.length;k++){ all[k].className = "d2h-segbtn" + (all[k].getAttribute("data-deal")==="all" ? " is-active" : ""); }
+      readFilters(); renderGrid();
+    }; }
   }
 
   function renderGrid(){
     var grid = document.getElementById("d2hGrid");
     grid.innerHTML = "";
-    if(!window.__dealFiltersWired){ wireDealFilters(); window.__dealFiltersWired = true; }
+    if(!window.__filtersWired){ wireFilters(); window.__filtersWired = true; }
     var list = [];
     for(var li=0; li<DATA.length; li++){
-      if(DEAL_FILTER==="all" || DATA[li].deal_type===DEAL_FILTER){ list.push(DATA[li]); }
+      if(passesFilters(DATA[li])){ list.push(DATA[li]); }
     }
-    if(!list.length){ grid.innerHTML = '<p style="color:#6B6880;font-size:15px;">No properties match this filter right now.</p>'; return; }
+    var cnt = document.getElementById("d2hCount");
+    if(cnt){ cnt.textContent = list.length + (list.length===1 ? " property" : " properties") + (list.length !== DATA.length ? " (of " + DATA.length + ")" : ""); }
+    if(!list.length){ grid.innerHTML = '<p style="color:#6B6880;font-size:15px;">No properties match your search. Try widening your filters.</p>'; return; }
     for(var i=0;i<list.length;i++){
       (function(p){
         var card = document.createElement("div");
