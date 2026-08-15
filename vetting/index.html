@@ -223,6 +223,7 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
             <div class="afgrid">
               <div class="affield af-2"><label>Title <span class="afreq">*</span></label><input id="nl_title" placeholder="e.g. 3-bed townhouse, East Legon"></div>
               <div class="affield"><label>Location <span class="afreq">*</span></label><input id="nl_location" placeholder="Area, city"></div>
+              <div class="affield"><label>Google Maps link</label><input id="nl_map" type="url" placeholder="https://maps.app.goo.gl/…"></div>
               <div class="affield"><label>Price</label><input id="nl_price" placeholder="e.g. $250,000"></div>
               <div class="affield"><label>Type</label><select id="nl_type"><option value="Verified">Verified (Lorraine's portfolio)</option><option value="Seller's Listing">Seller's Listing</option></select></div>
               <div class="affield"><label>Stage</label><select id="nl_offplan"><option value="no">Ready / completed</option><option value="yes">Off-plan</option></select></div>
@@ -375,6 +376,7 @@ function rowToSub(row){
     id: row.id,
     title: row.property_title || "(untitled)",
     loc: row.location || "",
+    mapLink: row.map_link || "",
     price: row.price || "",
     offplan: type.indexOf("off")===0,
     dealType: (row.deal_type==="rent" ? "rent" : "sale"),
@@ -470,6 +472,7 @@ function publishListing(sub, listingType, done){
     price: sub.price,
     currency: "USD",
     location: sub.loc,
+    map_link: sub.mapLink || null,
     off_plan: sub.offplan,
     deal_type: sub.dealType || "sale",
     description: "",
@@ -811,6 +814,7 @@ function submitNewListing(){
       listing_type: nlVal("nl_type") || "Verified",
       title: nlVal("nl_title"),
       location: nlVal("nl_location"),
+      map_link: nlVal("nl_map") || null,
       price: nlVal("nl_price"),
       beds: num("nl_beds"),
       baths: num("nl_baths"),
