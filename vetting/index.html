@@ -121,6 +121,10 @@ header.topbar{background:var(--navy-dark);color:#fff;padding:14px 24px;display:f
 .vtab.active{background:#fff;color:var(--navy-dark)}
 .lrow{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:12px;display:flex;gap:18px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
 .lrow:last-child{margin-bottom:0}
+.lthumb{position:relative;width:140px;height:104px;flex:none;border-radius:6px;overflow:hidden;background:#f0ece7;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.lthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.lthumb .noimg{font-size:11px;color:var(--muted)}
+@media(max-width:560px){.lthumb{width:100%;height:180px}}
 .lmain{flex:1;min-width:240px}
 .lin{width:100%;font-family:inherit;font-size:14px;font-weight:600;padding:9px 11px;border:1px solid var(--line);border-radius:4px;color:var(--ink);margin-bottom:8px}
 .lin.sm{font-weight:400;font-size:13px}
@@ -722,10 +726,14 @@ function renderListings(){
   LISTINGS.forEach(function(l){
     var isSeller = String(l.listing_type||'').toLowerCase().indexOf('seller')>-1;
     var typeBadge='<span class="tag">'+(isSeller?"Seller's Listing":'Verified')+'</span>';
-    html+='<div class="lrow"><div class="lmain">'+
+    var img = l.image_1 || l.image_2 || l.image_3 || l.image_4 || '';
+    var thumb = '<div class="lthumb"><span class="noimg">No image</span>'+(img?'<img src="'+esc(img)+'" alt="" onerror="this.style.display=\'none\'">':'')+'</div>';
+    var dealBadge = (String(l.deal_type||'sale').toLowerCase()==='rent') ? '<span class="tag" style="background:#c9a961;color:#231B4F;border:1px solid #c9a961">For Rent</span>' : '<span class="tag" style="background:#231B4F;color:#fff;border:1px solid #231B4F">For Sale</span>';
+    var offBadge = (l.off_plan===true || String(l.off_plan)==='true') ? '<span class="tag" style="background:#7170B4;color:#fff;border:1px solid #7170B4">Off-plan</span>' : '';
+    html+='<div class="lrow">'+thumb+'<div class="lmain">'+
       '<input class="lin" id="t_'+l.id+'" value="'+esc(l.title)+'">'+
       '<div class="lsub"><input class="lin sm" id="p_'+l.id+'" value="'+esc(l.price)+'" placeholder="Price"><input class="lin sm" id="loc_'+l.id+'" value="'+esc(l.location)+'" placeholder="Location"></div>'+
-      '<div class="lbadges">'+typeBadge+lState(l)+(l.featured?'<span class="tag" style="background:#c9a961;color:#231B4F;border:1px solid #c9a961">&#9733; Featured</span>':'')+'</div>'+
+      '<div class="lbadges">'+typeBadge+dealBadge+offBadge+lState(l)+(l.featured?'<span class="tag" style="background:#c9a961;color:#231B4F;border:1px solid #c9a961">&#9733; Featured</span>':'')+'</div>'+
       '</div><div class="lacts">'+
       '<button class="primary" onclick="saveListing(\''+l.id+'\')">Save edits</button>'+
       '<button onclick="toggleSold(\''+l.id+'\','+(l.status==='sold'?'false':'true')+')">'+(l.status==='sold'?'Mark available':'Mark sold')+'</button>'+
