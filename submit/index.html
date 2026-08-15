@@ -274,6 +274,36 @@ function submitForm(){
   });
 }
 
+var SELLER_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/MUCiWTChkVoaPw8fdKXQ/webhook-trigger/dbf31060-411f-4247-820c-59a95b4faf24";
+
+function phoneToE164(combined){
+  if(!combined) return "";
+  var parts = combined.trim().split(/\s+/);
+  var dial = parts.shift();
+  var num = parts.join("").replace(/\D/g,"").replace(/^0+/,"");
+  return num ? (dial + num) : "";
+}
+
+function pushSellerToGHL(p){
+  try {
+    var name = (p.seller_name||"").trim(), first=name, last="";
+    var sp = name.indexOf(" ");
+    if(sp>-1){ first=name.slice(0,sp); last=name.slice(sp+1); }
+    var body = "first_name="+encodeURIComponent(first)
+      + "&last_name="+encodeURIComponent(last)
+      + "&email="+encodeURIComponent(p.email||"")
+      + "&phone="+encodeURIComponent(phoneToE164(p.phone))
+      + "&property_name="+encodeURIComponent(p.property_title||"")
+      + "&property_location="+encodeURIComponent(p.location||"")
+      + "&deal_type="+encodeURIComponent(p.deal_type||"")
+      + "&seller_role="+encodeURIComponent(p.seller_role||"")
+      + "&company="+encodeURIComponent(p.company||"")
+      + "&form_type=seller_submission"
+      + "&source="+encodeURIComponent("Property submission form");
+    fetch(SELLER_WEBHOOK_URL, { method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:body, mode:"no-cors" }).catch(function(){});
+  } catch(e){}
+}
+
 function doInsert(payload, btn){
   fetch(SUPABASE_URL + "/rest/v1/submissions", {
     method: "POST",
@@ -288,6 +318,7 @@ function doInsert(payload, btn){
   .then(function(res){
     if (res.ok) {
       try { if (window.localStorage) localStorage.setItem("dth_last_submit", String((new Date()).getTime())); } catch(e){}
+      pushSellerToGHL(payload);
       showSuccess();
     } else {
       return res.text().then(function(t){
