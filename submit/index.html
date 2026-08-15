@@ -24,6 +24,9 @@ body{margin:0;font-family:Montserrat,sans-serif;background:var(--beige);color:va
 .field .req{color:var(--purple)}
 .field .hint{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
 input,select,textarea{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+.phone-row{display:flex;gap:8px}
+.phone-row select{width:92px;flex:none;font-weight:600}
+.phone-row input{flex:1}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--purple)}
 textarea{min-height:70px;resize:vertical}
 .row{display:flex;gap:12px}
@@ -134,7 +137,17 @@ textarea{min-height:70px;resize:vertical}
         </div>
         <div class="field">
           <label>Phone</label>
-          <input id="phone" placeholder="Include country code">
+          <div class="phone-row">
+            <select id="dial">
+              <option value="+44">+44</option>
+              <option value="+233">+233</option>
+              <option value="+234">+234</option>
+              <option value="+1">+1</option>
+              <option value="+27">+27</option>
+              <option value="+971">+971</option>
+            </select>
+            <input id="phone" type="tel" placeholder="7400 123456">
+          </div>
         </div>
       </div>
 
@@ -244,7 +257,7 @@ function submitForm(){
     seller_name:    val("seller_name"),
     seller_role:    val("seller_role"),
     email:          val("email"),
-    phone:          val("phone"),
+    phone:          (val("phone") ? (document.getElementById("dial").value + " " + val("phone")) : ""),
     company:        val("company"),
     land_tenure:    val("land_tenure"),
     payment_method: val("payment_method"),
