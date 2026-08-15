@@ -69,6 +69,10 @@
       letter-spacing:.16em; text-transform:uppercase;}
     .d2h-card__media .d2h-badge--offplan{position:absolute; top:16px; left:16px;}
     .d2h-card__media .d2h-badge--status{position:absolute; top:16px; right:16px;}
+    .d2h-ribbon{position:absolute; top:16px; left:16px; z-index:2; background:#c9a961; color:#231B4F;
+      font-weight:700; font-size:12px; padding:6px 12px; border-radius:20px; box-shadow:0 2px 8px rgba(0,0,0,.18);}
+    .d2h-card--featured{border-color:#c9a961; box-shadow:0 0 0 2px rgba(201,169,97,.35);}
+    .d2h-card--featured .d2h-badge--offplan{top:52px;}
     .d2h-price{position:absolute; left:16px; bottom:16px; background:#fff; color:var(--navy);
       font-weight:800; font-size:20px; padding:9px 16px; border-radius:10px;
       box-shadow:0 4px 12px rgba(0,0,0,.18);}
@@ -367,6 +371,11 @@
       .then(function(res){ if(!res.ok){ throw new Error("http " + res.status); } return res.json(); })
       .then(function(rows){
         DATA = rowsToListings(rows || []);
+        DATA.sort(function(a,b){
+          if(a.featured !== b.featured){ return a.featured ? -1 : 1; }
+          if(a.featured && b.featured){ return (b.featured_at||"").localeCompare(a.featured_at||""); }
+          return 0;
+        });
         indexData();
         if(DATA.length){ renderGrid(); }
         else { gridMessage("No properties are listed at the moment. Please check back soon."); }
@@ -394,6 +403,8 @@
         sqm: num(r.sqm),
         off_plan: (r.off_plan === true) || truthy(r.off_plan),
         deal_type: (String(r.deal_type||"sale").toLowerCase()==="rent") ? "rent" : "sale",
+        featured: (r.featured === true) || truthy(r.featured),
+        featured_at: r.featured_at || null,
         status: (String(r.status||"").toLowerCase()==="sold") ? "SOLD" : "SALE",
         images: images,
         description: trim(r.description),
@@ -499,6 +510,12 @@
           var ob = document.createElement("span");
           ob.className = "d2h-badge d2h-badge--offplan"; ob.textContent = "Off Plan";
           media.appendChild(ob);
+        }
+        if(p.featured){
+          card.className = "d2h-card d2h-card--featured";
+          var fr = document.createElement("span");
+          fr.className = "d2h-ribbon"; fr.textContent = "\u2605 Featured";
+          media.appendChild(fr);
         }
         var sb = document.createElement("span");
         sb.className = "d2h-badge d2h-badge--status"; sb.textContent = p.status;
