@@ -382,6 +382,7 @@
         indexData();
         if(DATA.length){ renderGrid(); }
         else { gridMessage("No properties are listed at the moment. Please check back soon."); }
+        try{ var _pid = new URLSearchParams(window.location.search).get("property"); if(_pid && byId[_pid]){ openDetail(_pid); } }catch(e){}
       })["catch"](fail);
   }
 
@@ -557,6 +558,7 @@
   function openDetail(id){
     var p = byId[id];
     if(!p) return;
+    try{ history.replaceState(null,"","?property="+encodeURIComponent(id)); }catch(e){}
     var d = document.getElementById("d2hDetail");
 
     var typeBadge = (p.listing_type === "vetted")
