@@ -722,11 +722,12 @@ function renderListings(){
     html+='<div class="lrow"><div class="lmain">'+
       '<input class="lin" id="t_'+l.id+'" value="'+esc(l.title)+'">'+
       '<div class="lsub"><input class="lin sm" id="p_'+l.id+'" value="'+esc(l.price)+'" placeholder="Price"><input class="lin sm" id="loc_'+l.id+'" value="'+esc(l.location)+'" placeholder="Location"></div>'+
-      '<div class="lbadges">'+typeBadge+lState(l)+'</div>'+
+      '<div class="lbadges">'+typeBadge+lState(l)+(l.featured?'<span class="tag" style="background:#c9a961;color:#231B4F;border:1px solid #c9a961">&#9733; Featured</span>':'')+'</div>'+
       '</div><div class="lacts">'+
       '<button class="primary" onclick="saveListing(\''+l.id+'\')">Save edits</button>'+
       '<button onclick="toggleSold(\''+l.id+'\','+(l.status==='sold'?'false':'true')+')">'+(l.status==='sold'?'Mark available':'Mark sold')+'</button>'+
       '<button onclick="togglePublished(\''+l.id+'\','+(l.published?'false':'true')+')">'+(l.published?'Unpublish':'Publish')+'</button>'+
+      '<button onclick="toggleFeatured(\''+l.id+'\','+(l.featured?'false':'true')+')">'+(l.featured?'\u2605 Unfeature':'\u2606 Set as Featured')+'</button>'+
       '<button class="danger" onclick="deleteListing(\''+l.id+'\')">Remove</button>'+
       '</div></div>';
   });
@@ -751,6 +752,23 @@ function saveListing(id){
 }
 function toggleSold(id, sold){ patchListing(id, { status: sold?'sold':'live' }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
 function togglePublished(id, pub){ patchListing(id, { published: pub }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
+function toggleFeatured(id, makeFeatured){
+  if(makeFeatured){
+    // single featured at a time: clear any existing featured first, then set this one
+    fetch(SUPABASE_URL + "/rest/v1/listings?featured=eq.true", {
+      method:"PATCH",
+      headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
+      body: JSON.stringify({ featured:false })
+    })
+    .then(function(res){
+      if(res.status===401){ sessionExpired(); return; }
+      patchListing(id, { featured:true }, function(ok){ if(ok){ loadListings(); } else { alert('Could not set featured.'); } });
+    })
+    .catch(function(){ alert('Could not set featured.'); });
+  } else {
+    patchListing(id, { featured:false }, function(ok){ if(ok){ loadListings(); } else { alert('Could not update.'); } });
+  }
+}
 function deleteListing(id){
   if(!window.confirm('Remove this listing from the site permanently?')) return;
   fetch(SUPABASE_URL + "/rest/v1/listings?id=eq."+encodeURIComponent(id), { method:"DELETE", headers: authHeaders({ "Prefer":"return=minimal" }) })
