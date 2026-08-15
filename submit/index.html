@@ -80,6 +80,10 @@ textarea{min-height:70px;resize:vertical}
           <input id="location" placeholder="Area and city">
         </div>
         <div class="field">
+          <label>Google Maps link <span class="hint">(optional — paste the exact map pin so buyers find it)</span></label>
+          <input id="map_link" type="url" placeholder="https://maps.app.goo.gl/…">
+        </div>
+        <div class="field">
           <label>Price</label>
           <input id="price" placeholder="e.g. $120,000">
         </div>
@@ -251,6 +255,7 @@ function submitForm(){
   var payload = {
     property_title: val("property_title"),
     location:       val("location"),
+    map_link:       val("map_link"),
     price:          val("price"),
     type:           val("type"),
     deal_type:      val("deal_type") || "sale",
