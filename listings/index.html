@@ -824,3 +824,19 @@
   fetchListings();
 })();
 </script>
+
+<script>
+(function(){
+  function postHeight(){
+    try{
+      var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      if (window.parent && window.parent !== window){
+        window.parent.postMessage({ type:"dth-listings-height", height: h }, "*");
+      }
+    }catch(e){}
+  }
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+  setInterval(postHeight, 1000);
+})();
+</script>
