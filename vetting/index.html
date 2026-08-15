@@ -753,21 +753,8 @@ function saveListing(id){
 function toggleSold(id, sold){ patchListing(id, { status: sold?'sold':'live' }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
 function togglePublished(id, pub){ patchListing(id, { published: pub }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
 function toggleFeatured(id, makeFeatured){
-  if(makeFeatured){
-    // single featured at a time: clear any existing featured first, then set this one
-    fetch(SUPABASE_URL + "/rest/v1/listings?featured=eq.true", {
-      method:"PATCH",
-      headers: authHeaders({ "Content-Type":"application/json", "Prefer":"return=minimal" }),
-      body: JSON.stringify({ featured:false })
-    })
-    .then(function(res){
-      if(res.status===401){ sessionExpired(); return; }
-      patchListing(id, { featured:true }, function(ok){ if(ok){ loadListings(); } else { alert('Could not set featured.'); } });
-    })
-    .catch(function(){ alert('Could not set featured.'); });
-  } else {
-    patchListing(id, { featured:false }, function(ok){ if(ok){ loadListings(); } else { alert('Could not update.'); } });
-  }
+  var patch = makeFeatured ? { featured:true, featured_at:new Date().toISOString() } : { featured:false, featured_at:null };
+  patchListing(id, patch, function(ok){ if(ok){ loadListings(); } else { alert('Could not update featured.'); } });
 }
 function deleteListing(id){
   if(!window.confirm('Remove this listing from the site permanently?')) return;
