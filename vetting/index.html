@@ -28,6 +28,11 @@ body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);-web
 .login-card label{display:block;font-size:13px;font-weight:600;margin:22px 0 7px;color:var(--ink)}
 .login-card input{width:100%;font-family:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;transition:all .2s}
 .login-card input:focus{outline:none;border-color:var(--purple);box-shadow:var(--ring)}
+.login-card .pw-wrap{position:relative}
+.login-card .pw-wrap input{padding-right:46px}
+.login-card .pw-toggle{position:absolute;top:50%;right:8px;transform:translateY(-50%);width:auto;margin:0;padding:6px;background:none;border:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;border-radius:8px}
+.login-card .pw-toggle:hover{background:none;color:var(--navy);transform:translateY(-50%)}
+.login-card .pw-toggle svg{width:20px;height:20px;display:block}
 .login-card button{width:100%;margin-top:24px;background:var(--navy);color:#fff;border:none;border-radius:12px;padding:14px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:all .2s}
 .login-card button:hover{background:var(--navy-2);transform:translateY(-1px)}
 .login-card button:active{transform:translateY(0)}
@@ -203,7 +208,10 @@ header.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.82);
   <div class="login-card">
     <div class="brand">Diaspora to Home<small>Vetting workspace</small></div>
     <label>Passphrase</label>
-    <input id="p" type="password" autocomplete="current-password" placeholder="Enter passphrase" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="pw-wrap">
+      <input id="p" type="password" autocomplete="current-password" placeholder="Enter passphrase" onkeydown="if(event.key==='Enter')doLogin()">
+      <button type="button" class="pw-toggle" id="pwToggle" onclick="togglePw()" aria-label="Show passphrase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
     <button id="loginBtn" onclick="doLogin()">Enter</button>
     <div class="login-err" id="loginErr"></div>
   </div>
@@ -297,6 +305,7 @@ header.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.82);
 </div>
 
 <script>
+function togglePw(){var i=document.getElementById('p'),b=document.getElementById('pwToggle');if(!i)return;var show=(i.type==='password');i.type=show?'text':'password';if(b){b.setAttribute('aria-label',show?'Hide passphrase':'Show passphrase');b.innerHTML=show?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';}i.focus();}
 /* =========================================================================
    Diaspora to Home — vetting workspace
    Reads real submissions from Supabase (only after login) and publishes
