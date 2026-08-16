@@ -90,6 +90,8 @@
     .d2h-back svg{width:18px; height:18px;}
     .d2h-back:hover{color:var(--navy);}
     .d2h-detail__top{display:grid; grid-template-columns:1.05fr .95fr; gap:32px; align-items:start;}
+    .d2h-disclaimer{margin-top:26px;padding:16px 20px;background:#FBF7EF;border:1px solid #EADFC7;border-left:4px solid #C9A961;border-radius:10px;font-size:12.5px;line-height:1.65;color:#6B6455;}
+    .d2h-disclaimer strong{color:#231B4F;}
     .d2h-gallery{border-radius:16px; overflow:hidden;
       background:linear-gradient(135deg,#cdd6e4 0%,#9aa6bd 100%); aspect-ratio:4/3;}
     .d2h-gallery img{width:100%; height:100%; object-fit:cover; display:block;}
@@ -613,7 +615,8 @@
             '</div>' +
           '</div>' +
         '</div>' +
-      '</div>';
+      '</div>' +
+      '<div class="d2h-disclaimer"><strong>Important:</strong> Diaspora to Home strongly recommends that all buyers carry out their own independent due diligence \u2014 including legal title verification, physical inspection, and professional advice \u2014 before committing to any purchase or making any payment. Listings may include information provided by third-party sellers, which we do not independently guarantee. Diaspora to Home accepts no responsibility or liability for any loss arising from reliance on listing information or from any transaction between buyers and sellers.</div>';
 
     var hero = document.getElementById("d2hHero");
     safeImg(hero, p.images[0], hero.parentNode);
