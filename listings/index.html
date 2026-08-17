@@ -233,6 +233,9 @@
         <label class="d2h-tbfield"><span>Stage</span>
           <select id="foff" class="d2h-tbinput"><option value="any">Any</option><option value="completed">Completed</option><option value="offplan">Off-plan</option></select>
         </label>
+        <label class="d2h-tbfield"><span>Status</span>
+          <select id="fstatus" class="d2h-tbinput"><option value="any">All listings</option><option value="vetted">Vetted only</option><option value="owner">Owner listed</option></select>
+        </label>
         <button id="fclear" class="d2h-tbclear" type="button">Clear</button>
       </div>
       <div class="d2h-tbcount" id="d2hCount"></div>
@@ -351,9 +354,13 @@
   // ============================================================
   var SUPABASE_URL = "https://kxrhzijqyotyrzhpiflv.supabase.co";
   var SUPABASE_KEY = "sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb";
+  function track(name, data){
+    try{ window.dataLayer=window.dataLayer||[]; var o={event:name}; if(data){ for(var k in data){ o[k]=data[k]; } } window.dataLayer.push(o); }catch(e){}
+    try{ if(window.parent && window.parent!==window){ window.parent.postMessage({type:"dth-event", name:name, data:data||{}}, "*"); } }catch(e){}
+  }
 
   var DATA = [];
-  var FILTERS = { q:"", min:null, max:null, beds:0, off:"any", deal:"all" };
+  var FILTERS = { q:"", min:null, max:null, beds:0, off:"any", deal:"all", status:"any" };
 
   function readFilters(){
     var qv = document.getElementById("fq"); FILTERS.q = qv ? qv.value.toLowerCase().replace(/^\s+|\s+$/g,"") : "";
@@ -361,6 +368,7 @@
     var mx = parseFloat((document.getElementById("fmax")||{}).value); FILTERS.max = isNaN(mx) ? null : mx;
     var bd = document.getElementById("fbeds"); FILTERS.beds = bd ? (parseInt(bd.value,10)||0) : 0;
     var of = document.getElementById("foff"); FILTERS.off = of ? of.value : "any";
+    var st = document.getElementById("fstatus"); FILTERS.status = st ? st.value : "any";
   }
 
   function passesFilters(p){
@@ -375,6 +383,8 @@
     if(FILTERS.beds && (p.beds||0) < FILTERS.beds){ return false; }
     if(FILTERS.off === "offplan" && !p.off_plan){ return false; }
     if(FILTERS.off === "completed" && p.off_plan){ return false; }
+    if(FILTERS.status === "vetted" && p.listing_type !== "vetted"){ return false; }
+    if(FILTERS.status === "owner" && p.listing_type === "vetted"){ return false; }
     return true;
   }
   var byId = {};
@@ -499,13 +509,14 @@
           for(k=0;k<all.length;k++){ all[k].className = "d2h-segbtn"; }
           b.className = "d2h-segbtn is-active";
           renderGrid();
+          track("tenure_toggle", { deal: FILTERS.deal });
         };
       })(seg[i]);
     }
     var clr = document.getElementById("fclear");
     if(clr){ clr.onclick = function(){
       var setv = function(id,v){ var e=document.getElementById(id); if(e){ e.value=v; } };
-      setv("fq",""); setv("fmin",""); setv("fmax",""); setv("fbeds","0"); setv("foff","any");
+      setv("fq",""); setv("fmin",""); setv("fmax",""); setv("fbeds","0"); setv("foff","any"); setv("fstatus","any");
       FILTERS.deal = "all";
       var all = document.querySelectorAll("#d2hDeal .d2h-segbtn"), k;
       for(k=0;k<all.length;k++){ all[k].className = "d2h-segbtn" + (all[k].getAttribute("data-deal")==="all" ? " is-active" : ""); }
@@ -521,6 +532,7 @@
     for(var li=0; li<DATA.length; li++){
       if(passesFilters(DATA[li])){ list.push(DATA[li]); }
     }
+    list.sort(function(a,b){ var av=(a.listing_type==="vetted")?0:1, bv=(b.listing_type==="vetted")?0:1; return av-bv; });
     var cnt = document.getElementById("d2hCount");
     if(cnt){ cnt.textContent = list.length + (list.length===1 ? " property" : " properties") + (list.length !== DATA.length ? " (of " + DATA.length + ")" : ""); }
     if(!list.length){ grid.innerHTML = '<p style="color:#6B6880;font-size:15px;">No properties match your search. Try widening your filters.</p>'; return; }
@@ -553,8 +565,8 @@
         media.appendChild(price);
 
         var typeBadge = (p.listing_type === "vetted")
-          ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified</span>'
-          : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Listing</span>';
+          ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Vetted by Lorraine</span>'
+          : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Owner listed</span>';
         var dealBadge = '<span class="d2h-badge d2h-badge--type d2h-badge--for'+(p.deal_type==="rent"?"rent":"sale")+'">'+(p.deal_type==="rent"?"For Rent":"For Sale")+'</span>';
 
         var body = document.createElement("div");
@@ -585,8 +597,8 @@
     var d = document.getElementById("d2hDetail");
 
     var typeBadge = (p.listing_type === "vetted")
-      ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Verified Portfolio</span>'
-      : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Seller&rsquo;s Own Listing</span>';
+      ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Vetted by Lorraine</span>'
+      : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Owner listed</span>';
     var dealBadge = '<span class="d2h-badge d2h-badge--type d2h-badge--for'+(p.deal_type==="rent"?"rent":"sale")+'">'+(p.deal_type==="rent"?"For Rent":"For Sale")+'</span>';
     var offBadge = p.off_plan ? '<span class="d2h-badge d2h-badge--offplan">Off Plan</span>' : '';
 
@@ -728,6 +740,7 @@
   function openEnquiry(p, intent){
     enqProperty = p;
     enqIntent = (intent === "tour") ? "tour" : "enquiry";
+    track("enquire_click", { listing_id:(p&&p.id)||"", vetted:!!(p&&p.listing_type==="vetted"), intent:enqIntent });
     document.getElementById("d2hModalInner").innerHTML = ENQ_TEMPLATE; // fresh, empty form
     wireEnquiryControls();
     var isTour = (enqIntent === "tour");
