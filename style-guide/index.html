@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diaspora to Home — Brand &amp; Page Style Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+:root{
+  --navy:#231B4F; --purple:#7170B4; --beige:#F5F1ED; --gold:#C9A961;
+  --ink:#231B4F; --muted:#6B6880; --line:#E7E3DD; --white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',sans-serif;color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px;}
+header.hero{background:var(--navy);color:#fff;padding:56px 0 48px;}
+header.hero .eyebrow{color:var(--gold);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;}
+header.hero h1{font-size:38px;font-weight:800;letter-spacing:-0.02em;margin:0 0 10px;}
+header.hero p{font-size:16px;color:rgba(255,255,255,0.75);margin:0;max-width:640px;}
+header.hero .meta{margin-top:22px;font-size:12.5px;color:rgba(255,255,255,0.5);}
+section.block{padding:44px 0;border-bottom:1px solid var(--line);}
+section.block:last-child{border-bottom:none;}
+.snum{display:inline-block;background:var(--beige);color:var(--purple);font-weight:700;font-size:13px;border-radius:8px;padding:3px 11px;margin-bottom:14px;}
+h2{font-size:26px;font-weight:700;letter-spacing:-0.01em;margin:0 0 6px;}
+.lead{color:var(--muted);font-size:15px;margin:0 0 24px;max-width:680px;}
+h3{font-size:15px;font-weight:700;margin:26px 0 10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--purple);}
+
+/* colour swatches */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
+.swatch{border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.swatch .chip{height:92px;}
+.swatch .info{padding:12px 14px;}
+.swatch .nm{font-weight:700;font-size:14px;}
+.swatch .hx{font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;margin-top:2px;}
+.swatch .use{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.5;}
+
+/* type samples */
+.typerow{display:flex;align-items:baseline;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+.typerow:last-child{border-bottom:none;}
+.typerow .tag{font-size:11px;color:var(--muted);width:130px;flex:none;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+.t-hero{font-size:40px;font-weight:800;letter-spacing:-0.02em;}
+.t-h2{font-size:30px;font-weight:700;}
+.t-h3{font-size:17px;font-weight:700;}
+.t-body{font-size:16px;font-weight:400;}
+.t-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--purple);}
+.t-nav{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;}
+
+/* buttons */
+.btn{display:inline-block;font-family:inherit;font-weight:600;font-size:14px;padding:12px 24px;border-radius:4px;border:none;cursor:default;text-decoration:none;margin:0 10px 10px 0;}
+.btn--primary{background:var(--purple);color:#fff;}
+.btn--navy{background:var(--navy);color:#fff;}
+.btn--ghost{background:#fff;color:var(--navy);border:1px solid var(--line);}
+
+/* badges */
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.06em;padding:5px 11px;border-radius:8px;margin:0 8px 8px 0;}
+.b-vetted{background:#1E7A52;color:#fff;}
+.b-owner{background:#FBF2DF;color:#B07A1E;border:1px solid #EADFC7;}
+.b-sale{background:var(--navy);color:#fff;}
+.b-rent{background:var(--gold);color:var(--navy);}
+.b-off{background:var(--purple);color:#fff;}
+
+/* generic cards */
+.cardrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:8px;}
+.gcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 6px 20px rgba(35,27,79,0.05);}
+.gcard h4{margin:0 0 6px;font-size:15px;}
+.gcard p{margin:0;font-size:13px;color:var(--muted);}
+
+/* disclaimer example */
+.disc{background:#FBF7EF;border:1px solid #EADFC7;border-left:4px solid var(--gold);border-radius:10px;padding:16px 20px;font-size:13px;color:#6B6455;line-height:1.6;}
+.disc strong{color:var(--navy);}
+
+/* form example */
+.formex{max-width:420px;}
+.formex label{display:block;font-size:12.5px;font-weight:600;margin:14px 0 6px;}
+.formex input{width:100%;font-family:inherit;font-size:14px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;}
+.formex input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px rgba(113,112,180,0.18);}
+
+/* tables / lists */
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);}
+td code{background:var(--beige);padding:2px 7px;border-radius:6px;font-size:12px;}
+.howto{background:var(--beige);border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+.howto h4{margin:0 0 6px;font-size:15px;color:var(--navy);}
+.howto p{margin:0;font-size:13.5px;color:#5B5872;}
+.check{list-style:none;padding:0;margin:0;}
+.check li{position:relative;padding:8px 0 8px 30px;font-size:14px;border-bottom:1px solid var(--line);}
+.check li:before{content:"\2713";position:absolute;left:0;top:8px;color:#1E7A52;font-weight:800;}
+.check li:last-child{border-bottom:none;}
+footer.foot{background:var(--navy);color:rgba(255,255,255,0.55);font-size:12.5px;padding:26px 0;text-align:center;}
+@media(max-width:600px){header.hero h1{font-size:28px;} .typerow .tag{width:100%;} .t-hero{font-size:30px;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Diaspora to Home</p>
+    <h1>Brand &amp; Page Style Guide</h1>
+    <p>The single reference for how every page should look and behave — so new pages stay on-brand, and existing ones can be brought in line.</p>
+    <div class="meta">Maintained by Altitude AI · this page updates automatically when the guide changes.</div>
+  </div>
+</header>
+
+<section class="block"><div class="wrap">
+  <span class="snum">01</span>
+  <h2>Colour palette</h2>
+  <p class="lead">Navy gives structure and authority, purple marks anything interactive, beige is a restful background, and gold is a sparing highlight — never a background or body-text colour.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#231B4F"></div><div class="info"><div class="nm">Navy</div><div class="hx">#231B4F</div><div class="use">Headings, nav text, dark sections, primary buttons, footer.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#7170B4"></div><div class="info"><div class="nm">Purple</div><div class="hx">#7170B4</div><div class="use">Links, active states, accents, the Contact Lorraine button.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#F5F1ED"></div><div class="info"><div class="nm">Beige</div><div class="hx">#F5F1ED</div><div class="use">Calm section backgrounds and soft panels.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#C9A961"></div><div class="info"><div class="nm">Gold</div><div class="hx">#C9A961</div><div class="use">Sparing accents only — badges, For Rent, small dividers.</div></div></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">02</span>
+  <h2>Typography</h2>
+  <p class="lead"><strong>Montserrat only</strong> — every element, every weight. On GHL pages, load it with <code>@import</code> so it survives GHL's sanitiser.</p>
+  <div class="typerow"><span class="tag">Hero H1 · 800</span><span class="t-hero">Own your piece of Ghana</span></div>
+  <div class="typerow"><span class="tag">Section H2 · 700</span><span class="t-h2">A curated portfolio</span></div>
+  <div class="typerow"><span class="tag">Card H3 · 700</span><span class="t-h3">3-Bedroom Townhouse</span></div>
+  <div class="typerow"><span class="tag">Body · 400</span><span class="t-body">Buying from abroad shouldn't feel like a leap of faith.</span></div>
+  <div class="typerow"><span class="tag">Label · 600 caps</span><span class="t-label">Why Search With Us</span></div>
+  <div class="typerow"><span class="tag">Nav · 600 caps</span><span class="t-nav">Properties</span></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">03</span>
+  <h2>Buttons</h2>
+  <p class="lead">Corner radius is always <code>4px</code>. Primary buttons are purple (or navy on light sections); secondary buttons are outlined.</p>
+  <a class="btn btn--primary">Contact Lorraine</a>
+  <a class="btn btn--navy">Book a Discovery Call</a>
+  <a class="btn btn--ghost">List Your Property</a>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">04</span>
+  <h2>Global navigation</h2>
+  <p class="lead">A white bar on every page (GHL supplies it site-wide). Logo left at <code>55px</code>, uppercase links with <code>1.5px</code> letter-spacing and <code>3rem</code> gaps, and a purple "Contact Lorraine" CTA on the right.</p>
+  <table>
+    <tr><th>Menu</th><th>Items</th></tr>
+    <tr><td><strong>Properties</strong></td><td>All Properties · Featured Property · Sell Your Property</td></tr>
+    <tr><td><strong>Services</strong></td><td>All Services · Rental Request</td></tr>
+  </table>
+  <h3>Adding a dropdown</h3>
+  <p style="font-size:13.5px;color:var(--muted);max-width:680px;">The nav is one block of custom code applied site-wide. To add a dropdown, copy an existing dropdown block (e.g. Properties), rename the label and change the child links, then re-publish. Because it's global, one change updates every page — always test on one page first.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">05</span>
+  <h2>Footer</h2>
+  <p class="lead">Navy background, on every page. Link columns + a copyright row, the legal disclaimers, and the bright purple <strong>Workspace</strong> button that takes the team to the listings admin.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">06</span>
+  <h2>Layout &amp; spacing</h2>
+  <div class="cardrow">
+    <div class="gcard"><h4>Content width</h4><p>Max 1200px, centred, with ≥16px side padding on mobile.</p></div>
+    <div class="gcard"><h4>Section rhythm</h4><p>~4–5rem of vertical padding between major sections.</p></div>
+    <div class="gcard"><h4>Cards</h4><p>White, 12–16px radius, soft shadow — not hard borders.</p></div>
+    <div class="gcard"><h4>Mobile</h4><p>Everything reflows to one column; test at ~375px.</p></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">07</span>
+  <h2>Components</h2>
+  <h3>Listing badges</h3>
+  <span class="badge b-vetted">✓ Vetted by Lorraine</span>
+  <span class="badge b-owner">Owner listed</span>
+  <span class="badge b-sale">For Sale</span>
+  <span class="badge b-rent">For Rent</span>
+  <span class="badge b-off">Off-plan</span>
+  <h3>Disclaimer note</h3>
+  <div class="disc"><strong>Important:</strong> Diaspora to Home strongly recommends independent due diligence before committing to any purchase or payment. Listings may include information provided by third-party sellers, which we do not independently guarantee.</div>
+  <h3>Form fields</h3>
+  <div class="formex">
+    <label>First name</label>
+    <input type="text" placeholder="First name" disabled>
+    <label>Email</label>
+    <input type="email" placeholder="you@example.com" disabled>
+    <div style="margin-top:16px;"><a class="btn btn--navy">Submit</a></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">08</span>
+  <h2>Self-service how-tos</h2>
+  <div class="howto"><h4>Update the Featured Property</h4><p>GHL → Settings → Custom Values → edit the "Featured …" values (name, price, image, gallery 1–6, etc.). It updates the homepage card and the Featured Property page automatically.</p></div>
+  <div class="howto"><h4>Swap a video</h4><p>The video is a YouTube embed. In the page body, find the <code>&lt;iframe&gt;</code> and change its <code>src</code> to <code>https://www.youtube.com/embed/VIDEO_ID</code> — the ID is the part after <code>youtu.be/</code> or <code>watch?v=</code>. Save &amp; publish.</p></div>
+  <div class="howto"><h4>What the site search covers</h4><p>Google-powered search over your public pages — their visible text, titles and meta descriptions. New or changed pages become searchable a day or two after Google re-crawls them.</p></div>
+  <div class="howto"><h4>Golden rules for GHL pages</h4><p>Montserrat via <code>@import</code>; don't paste the nav/footer into a page (GHL adds them); keep custom JavaScript in the simple style we use; and always test on a fresh page before touching a live one.</p></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <span class="snum">09</span>
+  <h2>Consistency checklist</h2>
+  <p class="lead">Run every page against this — including pages created directly in GHL.</p>
+  <ul class="check">
+    <li>Correct global nav at top and footer at bottom</li>
+    <li>Montserrat only; no stray fonts</li>
+    <li>Palette matches Section 1; gold used sparingly</li>
+    <li>Buttons are 4px radius, correct colours</li>
+    <li>Heading/body sizes broadly match Section 2</li>
+    <li>Content within the 1200px container</li>
+    <li>Mobile: single column, nothing cut off at ~375px</li>
+    <li>Links work; no placeholder copy</li>
+    <li>Forms feed into the CRM and match the form pattern</li>
+  </ul>
+</div></section>
+
+<footer class="foot"><div class="wrap">Diaspora to Home — Brand &amp; Page Style Guide · maintained by Altitude AI</div></footer>
+
+</body>
+</html>
