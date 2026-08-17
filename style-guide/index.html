@@ -214,5 +214,13 @@ footer.foot{background:var(--navy);color:rgba(255,255,255,0.55);font-size:12.5px
 
 <footer class="foot"><div class="wrap">Diaspora to Home — Brand &amp; Page Style Guide · maintained by Altitude AI</div></footer>
 
+<script>
+(function(){
+  function report(){ try{ var h=document.documentElement.scrollHeight; if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'dth-guide-height', height:h}, '*'); } }catch(e){} }
+  window.addEventListener('load', report);
+  window.addEventListener('resize', report);
+  setTimeout(report, 400); setTimeout(report, 1400);
+})();
+</script>
 </body>
 </html>
