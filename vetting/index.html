@@ -274,6 +274,7 @@ header.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.82);
                 <div class="affield"><label>Size (sqm)</label><input id="nl_sqm" type="number" min="0" placeholder="180"></div>
               </div>
               <div class="affield af-2"><label>Description</label><textarea id="nl_desc" rows="3" placeholder="Short description buyers will see"></textarea></div>
+              <div class="affield af-2"><label>Video walkthrough URL <span class="afnote">(YouTube or Vimeo — optional)</span></label><input type="url" id="nl_video" placeholder="https://youtu.be/..."></div>
               <div class="affield af-2"><label>Features <span class="afnote">(comma-separated)</span></label><input id="nl_features" placeholder="e.g. Gated community, Borehole, Title deed"></div>
               <div class="affield af-2"><label>Photos <span class="afnote">(up to 4)</span></label><input id="nl_photos" type="file" accept="image/*" multiple><div class="afstatus" id="nl_photostatus"></div></div>
             </div>
@@ -867,6 +868,7 @@ function submitNewListing(){
       off_plan: (nlVal("nl_offplan")==="yes"),
       deal_type: (nlVal("nl_deal")||"sale"),
       description: nlVal("nl_desc"),
+      video_url: nlVal("nl_video"),
       features: nlVal("nl_features"),
       status: "live",
       published: document.getElementById("nl_publish").checked
@@ -890,7 +892,7 @@ function submitNewListing(){
   });
 }
 function resetNewListing(){
-  ["nl_title","nl_location","nl_price","nl_beds","nl_baths","nl_sqm","nl_desc","nl_features"].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
+  ["nl_title","nl_location","nl_price","nl_beds","nl_baths","nl_sqm","nl_desc","nl_features","nl_video"].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=""; });
   var p=document.getElementById("nl_photos"); if(p) p.value="";
   var ps=document.getElementById("nl_photostatus"); if(ps) ps.textContent="";
   var pub=document.getElementById("nl_publish"); if(pub) pub.checked=true;
