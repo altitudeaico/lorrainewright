@@ -384,6 +384,7 @@
 
   function passesFilters(p){
     if(FILTERS.deal !== "all" && p.deal_type !== FILTERS.deal){ return false; }
+    if(p.deal_type === "rent" && p.available === false){ return false; }
     if(FILTERS.q){
       var hay = ((p.title||"") + " " + (p.location||"")).toLowerCase();
       if(hay.indexOf(FILTERS.q) === -1){ return false; }
@@ -424,7 +425,7 @@
           return 0;
         });
         indexData();
-        if(DATA.length){ renderGrid(); }
+        if(DATA.length){ renderGrid(); updateRentVisibility(); }
         else { gridMessage("No properties are listed at the moment. Please check back soon."); }
         try{ var _pid = new URLSearchParams(window.location.search).get("property"); if(_pid && byId[_pid]){ openDetail(_pid); } }catch(e){}
       })["catch"](fail);
@@ -452,6 +453,7 @@
         sqm: num(r.sqm),
         off_plan: (r.off_plan === true) || truthy(r.off_plan),
         deal_type: (String(r.deal_type||"sale").toLowerCase()==="rent") ? "rent" : "sale",
+        available: r.available !== false,
         featured: (r.featured === true) || truthy(r.featured),
         featured_at: r.featured_at || null,
         status: (String(r.status||"").toLowerCase()==="sold") ? "SOLD" : "SALE",
@@ -534,6 +536,20 @@
       for(k=0;k<all.length;k++){ all[k].className = "d2h-segbtn" + (all[k].getAttribute("data-deal")==="all" ? " is-active" : ""); }
       readFilters(); renderGrid();
     }; }
+  }
+
+  function updateRentVisibility(){
+    var hasRentals = DATA.filter(function(p){ return p.deal_type==="rent" && p.available!==false; }).length > 0;
+    var rentBtn = document.querySelector('.d2h-segbtn[data-deal="rent"]');
+    if(rentBtn){
+      rentBtn.style.display = hasRentals ? "" : "none";
+      // If Rent is selected but no rentals, reset to All
+      if(!hasRentals && FILTERS.deal==="rent"){
+        FILTERS.deal="all";
+        document.querySelectorAll(".d2h-segbtn").forEach(function(b){ b.classList.toggle("is-active", b.dataset.deal==="all"); });
+        renderGrid();
+      }
+    }
   }
 
   function renderGrid(){

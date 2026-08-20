@@ -775,7 +775,9 @@ function loadListings(){
 }
 function lState(l){
   if(!l.published) return '<span class="tag unpub">Unpublished</span>';
-  if(l.status==='sold') return '<span class="tag sold">Sold</span>';
+  var isRent = String(l.deal_type||'sale').toLowerCase()==='rent';
+  if(isRent && l.available===false) return '<span class="tag sold">Let / No longer available</span>';
+  if(!isRent && l.status==='sold') return '<span class="tag sold">Sold</span>';
   return '<span class="tag live">Live</span>';
 }
 function renderListings(){
@@ -795,7 +797,12 @@ function renderListings(){
       '<div class="lbadges">'+typeBadge+dealBadge+offBadge+lState(l)+(l.featured?'<span class="tag" style="background:#c9a961;color:#231B4F;border:1px solid #c9a961">&#9733; Featured</span>':'')+'</div>'+
       '</div><div class="lacts">'+
       '<button class="primary" onclick="saveListing(\''+l.id+'\')">Save edits</button>'+
-      '<button onclick="toggleSold(\''+l.id+'\','+(l.status==='sold'?'false':'true')+')">'+(l.status==='sold'?'Mark available':'Mark sold')+'</button>'+
+      (function(){
+        var isRent=String(l.deal_type||'sale').toLowerCase()==='rent';
+        var isUnavailable=(isRent && l.available===false)||(!isRent && l.status==='sold');
+        var label=isUnavailable?(isRent?'Mark available':'Mark available'):(isRent?'Mark as let':'Mark as sold');
+        return '<button onclick="toggleAvailability(\''+l.id+'\','+isUnavailable+',\''+String(l.deal_type||'sale').toLowerCase()+'\')">' + label + '</button>';
+      })()+
       '<button onclick="togglePublished(\''+l.id+'\','+(l.published?'false':'true')+')">'+(l.published?'Unpublish':'Publish')+'</button>'+
       '<button onclick="toggleFeatured(\''+l.id+'\','+(l.featured?'false':'true')+')">'+(l.featured?'\u2605 Unfeature':'\u2606 Set as Featured')+'</button>'+
       '<button class="danger" onclick="deleteListing(\''+l.id+'\')">Remove</button>'+
@@ -819,6 +826,16 @@ function saveListing(id){
     location: document.getElementById('loc_'+id).value
   };
   patchListing(id, patch, function(ok){ if(ok){ loadListings(); } else { alert('Could not save changes.'); } });
+}
+function toggleAvailability(id, currentlyUnavailable, dealType){
+  var isRent = dealType==='rent';
+  var patch;
+  if(isRent){
+    patch = { available: currentlyUnavailable ? true : false };
+  } else {
+    patch = { status: currentlyUnavailable ? 'live' : 'sold' };
+  }
+  patchListing(id, patch, function(ok){ if(ok) loadListings(); else alert('Could not update.'); });
 }
 function toggleSold(id, sold){ patchListing(id, { status: sold?'sold':'live' }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
 function togglePublished(id, pub){ patchListing(id, { published: pub }, function(ok){ if(ok) loadListings(); else alert('Could not update.'); }); }
