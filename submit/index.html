@@ -316,22 +316,23 @@ function doInsert(payload, btn){
       "apikey": SUPABASE_KEY,
       "Authorization": "Bearer " + SUPABASE_KEY,
       "Content-Type": "application/json",
-      "Prefer": "return=minimal"
+      "Prefer": "return=representation"
     },
     body: JSON.stringify(payload)
   })
   .then(function(res){
-    if (res.ok) {
-      try { if (window.localStorage) localStorage.setItem("dth_last_submit", String((new Date()).getTime())); } catch(e){}
-      pushSellerToGHL(payload);
-      showSuccess();
-    } else {
-      return res.text().then(function(t){
-        if (window.console) { console.log("Submission failed (" + res.status + "):", t); }
-        showErr("Sorry — we couldn't submit your property just now. Please check your details and try again.");
+    return res.json().then(function(rows){
+      var saved = Array.isArray(rows) && rows.length > 0 && rows[0].id;
+      if (res.ok && saved) {
+        try { if (window.localStorage) localStorage.setItem("dth_last_submit", String((new Date()).getTime())); } catch(e){}
+        pushSellerToGHL(payload);
+        showSuccess();
+      } else {
+        if (window.console) { console.log("Submission response (" + res.status + "):", rows); }
+        showErr("Sorry — we couldn't save your submission just now. Please try again or contact us directly.");
         btn.disabled=false; btn.textContent="Submit for review";
-      });
-    }
+      }
+    });
   })
   .catch(function(e){
     if (window.console) { console.log("Submission error:", e && e.message); }
