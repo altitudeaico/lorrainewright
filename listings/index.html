@@ -93,6 +93,7 @@
     .d2h-back svg{width:18px; height:18px;}
     .d2h-back:hover{color:var(--navy);}
     .d2h-detail__top{display:grid; grid-template-columns:1.05fr .95fr; gap:32px; align-items:start;}
+    .d2h-card__disc{font-size:10.5px;color:#9A9680;line-height:1.4;padding:7px 14px;border-top:1px solid #F0ECE7;background:#FAFAF8;}
     .d2h-disclaimer{margin-top:26px;padding:16px 20px;background:#FBF7EF;border:1px solid #EADFC7;border-left:4px solid #C9A961;border-radius:10px;font-size:12.5px;line-height:1.65;color:#6B6455;}
     .d2h-disclaimer strong{color:#231B4F;}
     .d2h-gallery{border-radius:16px; overflow:hidden;
@@ -592,8 +593,12 @@
             '<div class="d2h-specs">' + specHtml(p, true) + '</div>' +
           '</div>';
 
+        var disc = document.createElement("div");
+        disc.className="d2h-card__disc";
+        disc.textContent="Details are seller-provided. Always carry out independent due diligence.";
         card.appendChild(media);
         card.appendChild(body);
+        card.appendChild(disc);
         card.onclick = function(){ openDetail(p.id); };
         grid.appendChild(card);
       })(list[i]);
@@ -660,7 +665,7 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="d2h-disclaimer"><strong>Important:</strong> Diaspora to Home strongly recommends that all buyers carry out their own independent due diligence \u2014 including legal title verification, physical inspection, and professional advice \u2014 before committing to any purchase or making any payment. Listings may include information provided by third-party sellers, which we do not independently guarantee. Diaspora to Home accepts no responsibility or liability for any loss arising from reliance on listing information or from any transaction between buyers and sellers.</div>';
+      '<div class="d2h-disclaimer"><strong>Please carry out your own due diligence.</strong> Details on this listing are provided by the seller or by our partner platform. Diaspora to Home is not a party to any transaction and accepts no liability for the accuracy of listing details, the condition of the property, or the validity of title. Even where a listing carries our Vetted badge, our checks are not a substitute for independent legal advice. We strongly recommend you instruct an independent lawyer in Ghana to carry out searches before you pay any money. Don\u2019t have a lawyer? <a href="/contact" style="color:#7170B4;font-weight:600;text-decoration:none;">We can introduce you to an independent lawyer in Ghana \u2192</a></div>';
 
     var hero = document.getElementById("d2hHero");
     safeImg(hero, p.images[0], hero.parentNode);
