@@ -539,6 +539,26 @@ function publishListing(sub, listingType, done){
   .catch(function(e){ done(false, e.message); });
 }
 
+function notifySellerApproved(sub, listingType){
+  try {
+    var listingUrl = 'https://diasporatohome.com/properties?property=' + encodeURIComponent(sub.id||'');
+    var firstName = (sub.seller||'').split(' ')[0] || 'there';
+    var body = 'first_name='+encodeURIComponent(firstName)
+      +'&email='+encodeURIComponent(sub.contact||'')
+      +'&property_title='+encodeURIComponent(sub.title||'')
+      +'&listing_url='+encodeURIComponent(listingUrl)
+      +'&listing_type='+encodeURIComponent(listingType||'')
+      +'&form_type=listing_approved'
+      +'&source=Workspace+approval';
+    fetch('https://services.leadconnectorhq.com/hooks/MUCiWTChkVoaPw8fdKXQ/webhook-trigger/dbf31060-411f-4247-820c-59a95b4faf24',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:body,
+      mode:'no-cors'
+    });
+  } catch(e){}
+}
+
 function decide(act){
   var sub=current;
   if((act==="v"||act==="s") && !sub.paid){
@@ -571,6 +591,7 @@ function decide(act){
           sub.published=true;
           t.className="toast show ok";
           t.textContent = (act==="v"?"Approved as Verified":"Listed as Seller's Listing") + " — now live on the public site.";
+          notifySellerApproved(sub, m.lt);
         } else {
           t.className="toast show bad";
           t.textContent="Decision saved, but publishing to the site failed: " + errtext;
