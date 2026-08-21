@@ -238,7 +238,7 @@
           <select id="fbeds" class="d2h-tbinput"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
         </label>
         <label class="d2h-tbfield"><span>Stage</span>
-          <select id="foff" class="d2h-tbinput"><option value="any">Any</option><option value="completed">Completed</option><option value="offplan">Off-plan</option></select>
+          <select id="foff" class="d2h-tbinput"><option value="any">Any stage</option><option value="ready">Ready</option><option value="off-plan">Off-plan</option><option value="under-construction">Under construction</option><option value="new-development">New development</option></select>
         </label>
         <label class="d2h-tbfield"><span>Status</span>
           <select id="fstatus" class="d2h-tbinput"><option value="any">All listings</option><option value="vetted">Vetted only</option><option value="owner">Owner listed</option></select>
@@ -393,8 +393,11 @@
     if(FILTERS.min !== null && pr < FILTERS.min){ return false; }
     if(FILTERS.max !== null && pr > FILTERS.max){ return false; }
     if(FILTERS.beds && (p.beds||0) < FILTERS.beds){ return false; }
-    if(FILTERS.off === "offplan" && !p.off_plan){ return false; }
-    if(FILTERS.off === "completed" && p.off_plan){ return false; }
+    if(FILTERS.off !== "any"){
+      var pstage = (p.stage||"ready").toLowerCase();
+      if(FILTERS.off === "ready" && pstage !== "ready"){ return false; }
+      if(FILTERS.off !== "ready" && pstage !== FILTERS.off){ return false; }
+    }
     if(FILTERS.status === "vetted" && p.listing_type !== "vetted"){ return false; }
     if(FILTERS.status === "owner" && p.listing_type === "vetted"){ return false; }
     return true;
@@ -452,6 +455,7 @@
         baths: num(r.baths),
         sqm: num(r.sqm),
         off_plan: (r.off_plan === true) || truthy(r.off_plan),
+        stage: String(r.stage||"ready"),
         deal_type: (String(r.deal_type||"sale").toLowerCase()==="rent") ? "rent" : "sale",
         available: r.available !== false,
         featured: (r.featured === true) || truthy(r.featured),
@@ -576,7 +580,8 @@
         safeImg(img, p.images[0], media);
         if(p.off_plan){
           var ob = document.createElement("span");
-          ob.className = "d2h-badge d2h-badge--offplan"; ob.textContent = "Off Plan";
+          ob.className = "d2h-badge d2h-badge--offplan";
+          ob.textContent = (p.stage && p.stage!=="ready") ? (p.stage.charAt(0).toUpperCase()+p.stage.slice(1).replace(/-/g," ")) : "Off-plan";
           media.appendChild(ob);
         }
         if(p.featured){
@@ -632,7 +637,7 @@
       ? '<span class="d2h-badge d2h-badge--type d2h-badge--vetted">Vetted by Lorraine</span>'
       : '<span class="d2h-badge d2h-badge--type d2h-badge--seller">Owner listed</span>';
     var dealBadge = '<span class="d2h-badge d2h-badge--type d2h-badge--for'+(p.deal_type==="rent"?"rent":"sale")+'">'+(p.deal_type==="rent"?"For Rent":"For Sale")+'</span>';
-    var offBadge = p.off_plan ? '<span class="d2h-badge d2h-badge--offplan">Off Plan</span>' : '';
+    var offBadge = (p.off_plan || (p.stage && p.stage!=="ready")) ? '<span class="d2h-badge d2h-badge--offplan">'+(p.stage && p.stage!=="ready" ? (p.stage.charAt(0).toUpperCase()+p.stage.slice(1).replace(/-/g," ")) : "Off-plan")+'</span>' : '';
 
     var featList = '';
     for(var f=0; f<p.features.length; f++){ featList += '<li>' + p.features[f] + '</li>'; }
