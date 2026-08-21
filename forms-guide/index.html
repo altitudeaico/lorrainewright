@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creating On-Brand Forms — Diaspora to Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+:root{--navy:#231B4F;--purple:#7170B4;--beige:#F5F1ED;--gold:#C9A961;--line:#E7E3DD;--muted:#6B6880;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',sans-serif;color:var(--navy);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px;}
+header{background:var(--navy);padding:44px 0 36px;}
+header .eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 10px;}
+header h1{font-size:30px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-.02em;}
+header p{font-size:15px;color:rgba(255,255,255,.75);margin:0;}
+section.block{padding:44px 0;border-bottom:1px solid var(--line);}
+section.block:last-child{border-bottom:none;padding-bottom:60px;}
+.snum{display:inline-block;background:var(--beige);color:var(--purple);font-weight:700;font-size:12px;border-radius:8px;padding:3px 11px;margin-bottom:12px;}
+h2{font-size:22px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
+h3{font-size:13.5px;font-weight:700;margin:24px 0 8px;color:var(--purple);text-transform:uppercase;letter-spacing:.6px;}
+p{font-size:14.5px;color:var(--muted);margin:0 0 12px;line-height:1.7;}
+p strong{color:var(--navy);}
+.step{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line);}
+.step:last-child{border-bottom:none;}
+.step .num{width:26px;height:26px;background:var(--navy);color:var(--gold);border-radius:50%;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+.step .txt{font-size:14px;color:var(--navy);line-height:1.6;}
+.step .txt em{color:var(--muted);font-style:normal;}
+.note{background:#FBF7EF;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:#6B6455;line-height:1.6;}
+.note strong{color:var(--navy);}
+
+/* Live form example */
+.form-demo{background:var(--beige);border-radius:16px;padding:28px 24px;margin-top:20px;}
+.form-demo h4{font-size:16px;font-weight:700;margin:0 0 4px;}
+.form-demo p.sub{font-size:13px;color:var(--muted);margin:0 0 22px;}
+.dth-fg{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.dth-fg label{font-size:12.5px;font-weight:600;color:var(--navy);}
+.dth-fg input,.dth-fg select,.dth-fg textarea{font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 14px;border:1.5px solid #D8D4EA;border-radius:10px;color:var(--navy);background:#fff;width:100%;transition:all .2s;}
+.dth-fg input:focus,.dth-fg select:focus,.dth-fg textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px rgba(113,112,180,.15);}
+.dth-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.dth-submit{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;padding:13px 28px;background:var(--navy);color:#fff;border:none;border-radius:4px;cursor:pointer;transition:all .2s;}
+.dth-submit:hover{background:#3A2E73;}
+.req{color:#c0392b;}
+
+/* Spec table */
+.spec{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;}
+.spec th{text-align:left;padding:9px 12px;border-bottom:2px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+.spec td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+.spec td:first-child{font-weight:600;color:var(--navy);white-space:nowrap;}
+code{background:var(--beige);padding:2px 7px;border-radius:6px;font-size:12px;font-family:ui-monospace,Menlo,monospace;color:var(--purple);}
+
+/* Colour chips inline */
+.chip{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:middle;margin-right:4px;border:1px solid rgba(0,0,0,.1);}
+
+footer{background:var(--navy);color:rgba(255,255,255,.5);font-size:12.5px;padding:22px 0;text-align:center;}
+@media(max-width:540px){.dth-2col{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Diaspora to Home &middot; Internal guide</p>
+    <h1>Creating On-Brand Forms in GHL</h1>
+    <p>A step-by-step guide for building forms that match the Diaspora to Home design — so every form on the site looks and feels consistent.</p>
+  </div>
+</header>
+
+<!-- LIVE EXAMPLE -->
+<section class="block"><div class="wrap">
+  <span class="snum">Example</span>
+  <h2>What an on-brand form looks like</h2>
+  <p>Before the how-to, here is what you're aiming for. This is the Diaspora to Home form style — Montserrat, navy/purple palette, 10px radius fields, purple focus ring, navy submit button with 4px radius.</p>
+  <div class="form-demo">
+    <h4>Get in touch</h4>
+    <p class="sub">Fill in your details and we'll be in touch within 24 hours.</p>
+    <div class="dth-2col">
+      <div class="dth-fg"><label>First name <span class="req">*</span></label><input type="text" placeholder="First name"></div>
+      <div class="dth-fg"><label>Last name <span class="req">*</span></label><input type="text" placeholder="Last name"></div>
+    </div>
+    <div class="dth-fg"><label>Email <span class="req">*</span></label><input type="email" placeholder="your@email.com"></div>
+    <div class="dth-fg"><label>What are you interested in?</label>
+      <select><option>Buying property in Ghana</option><option>Renting in Ghana</option><option>Investment advice</option><option>Something else</option></select>
+    </div>
+    <div class="dth-fg"><label>Message</label><textarea rows="3" placeholder="Tell us a bit more..."></textarea></div>
+    <button class="dth-submit">Send message &rarr;</button>
+  </div>
+</div></section>
+
+<!-- GHL FORM SETTINGS -->
+<section class="block"><div class="wrap">
+  <span class="snum">01</span>
+  <h2>GHL form settings to use every time</h2>
+  <p>When you create or edit a form in GHL (Sites &rarr; Forms), apply these settings to every form field and the submit button.</p>
+
+  <h3>Field styling</h3>
+  <table class="spec">
+    <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+    <tr><td>Font</td><td>Montserrat</td><td>The only typeface used across the site</td></tr>
+    <tr><td>Font size</td><td>14px</td><td>Matches body text</td></tr>
+    <tr><td>Border radius</td><td>10px</td><td>Matches the card and input style</td></tr>
+    <tr><td>Border colour</td><td><span class="chip" style="background:#D8D4EA"></span> <code>#D8D4EA</code></td><td>Soft purple-grey — not pure grey</td></tr>
+    <tr><td>Focus colour</td><td><span class="chip" style="background:#7170B4"></span> <code>#7170B4</code> (purple)</td><td>Matches the brand accent</td></tr>
+    <tr><td>Label font weight</td><td>600 (SemiBold)</td><td>Clear label hierarchy</td></tr>
+    <tr><td>Label size</td><td>12–13px</td><td>Slightly smaller than field text</td></tr>
+    <tr><td>Field padding</td><td>12px top/bottom, 14px left/right</td><td>Comfortable, not cramped</td></tr>
+    <tr><td>Background</td><td>White <code>#FFFFFF</code></td><td>On beige sections, white fields stand out cleanly</td></tr>
+  </table>
+
+  <h3>Submit button</h3>
+  <table class="spec">
+    <tr><th>Setting</th><th>Value</th></tr>
+    <tr><td>Background</td><td><span class="chip" style="background:#231B4F"></span> Navy <code>#231B4F</code></td></tr>
+    <tr><td>Text colour</td><td>White <code>#FFFFFF</code></td></tr>
+    <tr><td>Font</td><td>Montserrat, 14–15px, weight 700</td></tr>
+    <tr><td>Border radius</td><td><strong>4px</strong> — always 4px on buttons, never rounded</td></tr>
+    <tr><td>Padding</td><td>13px top/bottom, 28px left/right</td></tr>
+    <tr><td>Hover state</td><td><span class="chip" style="background:#3A2E73"></span> <code>#3A2E73</code></td></tr>
+  </table>
+  <div class="note"><strong>Button radius rule:</strong> Cards and fields use 10–16px radius. Buttons always use 4px. This is a firm rule across the whole site.</div>
+
+  <h3>Form container</h3>
+  <table class="spec">
+    <tr><th>Setting</th><th>Value</th></tr>
+    <tr><td>Background</td><td>White or Beige <code>#F5F1ED</code></td></tr>
+    <tr><td>Border radius</td><td>14–16px</td></tr>
+    <tr><td>Padding</td><td>28–36px</td></tr>
+    <tr><td>Shadow</td><td>Soft: <code>0 8px 32px rgba(35,27,79,0.08)</code></td></tr>
+  </table>
+</div></section>
+
+<!-- HOW TO CREATE A FORM IN GHL -->
+<section class="block"><div class="wrap">
+  <span class="snum">02</span>
+  <h2>How to create a new form in GHL</h2>
+  <div class="step"><div class="num">1</div><div class="txt">Go to <strong>GHL &rarr; Sites &rarr; Forms &rarr; New Form</strong></div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Give it a clear name: <em>e.g. "Contact — Main", "Rental Request Form", "Sell Property — Tier 1"</em></div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Add your fields. Standard fields for most forms: <em>First name (required), Last name (required), Email (required), Phone (optional)</em>. Add any additional fields specific to your use case.</div></div>
+  <div class="step"><div class="num">4</div><div class="txt">For each field: set the font to <strong>Montserrat</strong>, border radius to <strong>10px</strong>, border colour to <strong>#D8D4EA</strong>, label weight to <strong>600</strong>.</div></div>
+  <div class="step"><div class="num">5</div><div class="txt">For the submit button: font <strong>Montserrat 700</strong>, background <strong>#231B4F</strong>, text white, border radius <strong>4px</strong>.</div></div>
+  <div class="step"><div class="num">6</div><div class="txt">Set the <strong>redirect</strong> (on submit): either a Thank You page, or "Stay on page" with a success message. Avoid leaving the default GHL success page — it's off-brand.</div></div>
+  <div class="step"><div class="num">7</div><div class="txt">Set the <strong>notification</strong>: go to the form's Notifications tab &rarr; add an internal email notification to <em>team@lorrainewright.co.uk</em> so Lorraine knows when someone submits.</div></div>
+  <div class="step"><div class="num">8</div><div class="txt">Connect to a <strong>workflow</strong> if needed: in GHL Automations, create or edit the relevant workflow and set the trigger to "Form submitted" &rarr; select your new form. This is how auto-replies and CRM tagging happen.</div></div>
+  <div class="step"><div class="num">9</div><div class="txt">Embed the form on a page: in the GHL page builder, drag in a <strong>Form</strong> element and select your form from the dropdown. Or use the form's embed code in a custom code block.</div></div>
+  <div class="note"><strong>Important:</strong> After creating a form, always test it by submitting a test entry. Check that: (1) the CRM contact is created, (2) the internal notification arrives, (3) any auto-reply sends correctly.</div>
+</div></section>
+
+<!-- FIELD TYPES -->
+<section class="block"><div class="wrap">
+  <span class="snum">03</span>
+  <h2>Which field type to use</h2>
+  <table class="spec">
+    <tr><th>Use case</th><th>Field type</th><th>Notes</th></tr>
+    <tr><td>Name, city, job title</td><td>Text</td><td>Single line</td></tr>
+    <tr><td>Email</td><td>Email</td><td>GHL validates the format automatically</td></tr>
+    <tr><td>Phone number</td><td>Phone</td><td>Shows country code picker — set default to UK flag</td></tr>
+    <tr><td>Property type, budget range</td><td>Dropdown</td><td>Keep options concise — 4–6 max</td></tr>
+    <tr><td>Multiple selections (e.g. services interested in)</td><td>Checkbox group</td><td>Style each checkbox with the purple accent</td></tr>
+    <tr><td>Long message or description</td><td>Textarea</td><td>Set rows to 3–4; placeholder text helps</td></tr>
+    <tr><td>Date (e.g. preferred call time)</td><td>Date</td><td>Use sparingly — prefer a booking link instead</td></tr>
+    <tr><td>Consent / terms agreement</td><td>Checkbox (single)</td><td>Always required; place just above submit button</td></tr>
+  </table>
+</div></section>
+
+<!-- COMMON MISTAKES -->
+<section class="block"><div class="wrap">
+  <span class="snum">04</span>
+  <h2>Common mistakes to avoid</h2>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>Wrong button radius.</strong> GHL defaults to fully rounded buttons. Always change to 4px.</div></div>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>Wrong font.</strong> GHL defaults to its own font. Always change every field and button to Montserrat.</div></div>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>No internal notification.</strong> Without a notification, you won't know someone submitted. Always add a notification to team@lorrainewright.co.uk.</div></div>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>Default GHL success page.</strong> The default redirect after submission is an off-brand GHL page. Always redirect to a custom Thank You page or set a success message on the same page.</div></div>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>Too many fields.</strong> More fields = lower conversion. For lead capture forms, stick to name, email, and one qualifying question. Save the longer forms for when you actually need the data.</div></div>
+  <div class="step"><div class="num">!</div><div class="txt"><strong>No test submission.</strong> Always submit a test entry after creating or changing a form. Check the CRM, the notification, and any auto-reply.</div></div>
+</div></section>
+
+<footer><div class="wrap">Diaspora to Home &middot; Forms Guide &middot; Altitude AI &middot; August 2026</div></footer>
+
+<script>
+(function(){
+  function report(){ try{ if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'dth-forms-height',height:document.documentElement.scrollHeight},'*'); } }catch(e){} }
+  window.addEventListener('load',report); window.addEventListener('resize',report); setTimeout(report,400);
+})();
+</script>
+</body>
+</html>
