@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Guides How-To — Diaspora to Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+:root{--navy:#231B4F;--purple:#7170B4;--beige:#F5F1ED;--gold:#C9A961;--line:#E7E3DD;--muted:#6B6880;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',sans-serif;color:var(--navy);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px;}
+header{background:var(--navy);padding:44px 0 36px;}
+header .eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 10px;}
+header h1{font-size:30px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-.02em;}
+header p{font-size:15px;color:rgba(255,255,255,.75);margin:0;}
+section.block{padding:44px 0;border-bottom:1px solid var(--line);}
+section.block:last-child{border-bottom:none;padding-bottom:60px;}
+.snum{display:inline-block;background:var(--beige);color:var(--purple);font-weight:700;font-size:12px;border-radius:8px;padding:3px 11px;margin-bottom:12px;}
+h2{font-size:22px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
+h3{font-size:13.5px;font-weight:700;margin:24px 0 8px;color:var(--purple);text-transform:uppercase;letter-spacing:.6px;}
+p{font-size:14.5px;color:var(--muted);margin:0 0 12px;line-height:1.7;}
+p strong{color:var(--navy);}
+.step{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line);}
+.step:last-child{border-bottom:none;}
+.step .num{width:26px;height:26px;background:var(--navy);color:var(--gold);border-radius:50%;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;}
+.step .txt{font-size:14px;color:var(--navy);line-height:1.6;}
+.step .txt em{color:var(--muted);font-style:normal;}
+.note{background:#FBF7EF;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:#6B6455;line-height:1.6;}
+.note strong{color:var(--navy);}
+.diagram{background:var(--beige);border-radius:14px;padding:22px;margin:16px 0;}
+.diagram h4{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.5px;}
+.flow{display:flex;align-items:stretch;gap:4px;flex-wrap:wrap;}
+.flow-step{background:#fff;border-radius:8px;padding:12px 14px;flex:1;min-width:110px;text-align:center;border:1px solid var(--line);}
+.flow-step h5{font-size:12px;font-weight:700;margin:0 0 3px;color:var(--navy);}
+.flow-step p{font-size:11px;margin:0;color:var(--muted);}
+.flow-arrow{display:flex;align-items:center;color:var(--gold);font-size:18px;font-weight:700;padding:0 2px;}
+.checklist{list-style:none;padding:0;margin:12px 0;}
+.checklist li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--navy);}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"☐";color:var(--purple);font-size:16px;flex:none;line-height:1.2;}
+code{background:var(--beige);padding:2px 7px;border-radius:6px;font-size:12px;font-family:ui-monospace,Menlo,monospace;color:var(--purple);}
+.tag{display:inline-block;background:#EEF0F8;color:var(--purple);font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:6px;margin:2px;}
+footer{background:var(--navy);color:rgba(255,255,255,.5);font-size:12.5px;padding:22px 0;text-align:center;}
+@media(max-width:540px){.flow{flex-direction:column;}.flow-arrow{transform:rotate(90deg);align-self:center;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Diaspora to Home &middot; Internal guide</p>
+    <h1>Free Guides — How to Add, Update &amp; Manage</h1>
+    <p>A step-by-step guide for updating existing free guides and adding new ones, including the funnel, form, delivery email and Resources page tile.</p>
+  </div>
+</header>
+
+<!-- HOW IT WORKS -->
+<section class="block"><div class="wrap">
+  <span class="snum">Overview</span>
+  <h2>How the free guides system works</h2>
+  <p>Each free guide on the site follows the same pattern. Understanding the pattern makes it easy to add new guides or update existing ones.</p>
+
+  <div class="diagram">
+    <h4>The journey for every free guide</h4>
+    <div class="flow">
+      <div class="flow-step"><h5>Resources page tile</h5><p>Links to the guide's landing page</p></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h5>/choose-your-guide</h5><p>Or a dedicated landing page for the guide</p></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h5>Opt-in form</h5><p>Name + email captures the lead into GHL CRM</p></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h5>Thank you page</h5><p>Confirms the guide is on its way</p></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h5>Delivery email</h5><p>GHL workflow sends the guide PDF link automatically</p></div>
+    </div>
+  </div>
+
+  <p>Each piece connects to the next. When you add a new guide, you need to set up all five pieces. When you update an existing guide, you typically only change the PDF link in the delivery email.</p>
+</div></section>
+
+<!-- UPDATING AN EXISTING GUIDE -->
+<section class="block"><div class="wrap">
+  <span class="snum">01</span>
+  <h2>Updating an existing free guide</h2>
+  <p>If you have a new version of a guide PDF and want to update what subscribers receive:</p>
+
+  <h3>Step 1 — Upload the new PDF</h3>
+  <div class="step"><div class="num">1</div><div class="txt">Go to <strong>GHL &rarr; Sites &rarr; Media Storage</strong></div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Upload the new PDF file. Give it a clear name: <em>e.g. "Buy-Property-Ghana-Guide-v2.pdf"</em></div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Once uploaded, click the file to copy its direct URL. Save this — you'll need it in the next step.</div></div>
+
+  <h3>Step 2 — Update the delivery email</h3>
+  <div class="step"><div class="num">1</div><div class="txt">Go to <strong>GHL &rarr; Automations &rarr; Workflows</strong></div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Find the workflow for this guide. Look for names like <em>"Free Guide — Buy Property", "Lead Magnet — Opt In"</em> etc.</div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Open the workflow and find the <strong>Send Email</strong> step</div></div>
+  <div class="step"><div class="num">4</div><div class="txt">Edit the email — find the download button or link and update the URL to the new PDF link you copied above</div></div>
+  <div class="step"><div class="num">5</div><div class="txt">Save and publish the workflow</div></div>
+  <div class="note"><strong>Test it:</strong> Submit the opt-in form with a personal email address and confirm the new PDF link arrives correctly.</div>
+</div></section>
+
+<!-- ADDING A NEW GUIDE -->
+<section class="block"><div class="wrap">
+  <span class="snum">02</span>
+  <h2>Adding a brand new free guide</h2>
+  <p>Follow these steps in order. Each step builds on the previous one.</p>
+
+  <h3>Step 1 — Upload the guide PDF</h3>
+  <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; Media Storage &rarr; upload the PDF</div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Copy the direct URL — you'll use it in the delivery email</div></div>
+
+  <h3>Step 2 — Create the opt-in form</h3>
+  <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; Forms &rarr; New Form</div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Name it clearly: <em>e.g. "Free Guide — [Guide Name] Opt-in"</em></div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Fields: <strong>First name</strong> (required), <strong>Email</strong> (required). Phone is optional for free guides — keep the form short to maximise signups.</div></div>
+  <div class="step"><div class="num">4</div><div class="txt">Style the form per the <a href="/forms-guide/" style="color:var(--purple);font-weight:600;">Forms Guide</a> — Montserrat, 10px radius fields, navy submit button with 4px radius</div></div>
+  <div class="step"><div class="num">5</div><div class="txt">Set the redirect on submit to your Thank You page (create one if needed — see Step 3)</div></div>
+
+  <h3>Step 3 — Create a Thank You page</h3>
+  <div class="step"><div class="num">1</div><div class="txt">In GHL Sites, create a new page: <em>e.g. /guide-thank-you or /[guide-name]-thank-you</em></div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Keep it simple: headline confirming the guide is on its way, a short note about what to expect, and a CTA back to the main site</div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Add the global nav and footer, publish</div></div>
+
+  <h3>Step 4 — Create the delivery workflow</h3>
+  <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Automations &rarr; New Workflow</div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Name it: <em>"Free Guide — [Guide Name] delivery"</em></div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Trigger: <strong>Form submitted</strong> &rarr; select your new opt-in form</div></div>
+  <div class="step"><div class="num">4</div><div class="txt">Add action: <strong>Add Tag</strong> &rarr; create a tag for this guide: <em>e.g.</em> <span class="tag">guide-buy-property</span> <span class="tag">guide-airbnb</span></div></div>
+  <div class="step"><div class="num">5</div><div class="txt">Add action: <strong>Send Email</strong> &rarr; write the delivery email. Subject: <em>"Your free guide is here, [First Name]!"</em>. Body: short warm message + a clear download button linking to the PDF URL from Step 1.</div></div>
+  <div class="step"><div class="num">6</div><div class="txt">Optional: add a <strong>Wait</strong> (1–2 days) then a follow-up email pointing them to a relevant service or booking link</div></div>
+  <div class="step"><div class="num">7</div><div class="txt">Publish the workflow</div></div>
+
+  <h3>Step 5 — Add a tile on /choose-your-guide</h3>
+  <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; open the /choose-your-guide page</div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Duplicate an existing guide tile in the page builder</div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Update: the guide title, a one-line description, the cover image, and the link (pointing to your new guide landing page or directly to the form)</div></div>
+  <div class="step"><div class="num">4</div><div class="txt">Save and publish</div></div>
+
+  <h3>Step 6 — Update the Resources page tile</h3>
+  <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; open the /resources page</div></div>
+  <div class="step"><div class="num">2</div><div class="txt">Find the "Free Guides" section &rarr; add or update a tile linking to your new guide</div></div>
+  <div class="step"><div class="num">3</div><div class="txt">Save and publish</div></div>
+
+  <div class="note"><strong>Before you go live:</strong> test the full journey. Submit the form with a personal email, confirm you land on the thank you page, and confirm the PDF link arrives in the delivery email within a few minutes.</div>
+</div></section>
+
+<!-- CHECKLIST -->
+<section class="block"><div class="wrap">
+  <span class="snum">03</span>
+  <h2>New guide launch checklist</h2>
+  <p>Use this every time you launch a new guide to make sure nothing is missed.</p>
+  <ul class="checklist">
+    <li>PDF uploaded to GHL Media Storage and URL copied</li>
+    <li>Opt-in form created (Montserrat, correct field and button styling)</li>
+    <li>Form redirect points to the Thank You page</li>
+    <li>Thank You page created, on-brand, nav/footer added, published</li>
+    <li>Delivery workflow created with correct trigger (the form)</li>
+    <li>CRM tag applied in the workflow</li>
+    <li>Delivery email tested — PDF link works, email arrives within 5 minutes</li>
+    <li>Tile added on /choose-your-guide</li>
+    <li>Tile added or updated on /resources page</li>
+    <li>Full journey tested end-to-end with a personal email</li>
+  </ul>
+</div></section>
+
+<!-- TIPS -->
+<section class="block"><div class="wrap">
+  <span class="snum">04</span>
+  <h2>Tips for higher guide conversions</h2>
+  <p><strong>Keep the opt-in form short.</strong> Name and email only. Every extra field reduces signups. You can ask qualifying questions in a follow-up email instead.</p>
+  <p><strong>Name the guide specifically.</strong> "The Ghana Property Buyer's Checklist" converts better than "Free Guide". Specific beats generic every time.</p>
+  <p><strong>Use a real cover image.</strong> A mockup showing the guide as a physical booklet or PDF on a screen increases perceived value significantly.</p>
+  <p><strong>Follow up.</strong> The delivery email is just the start. A 3-email sequence over 7 days — delivery, a related tip, and a soft CTA to book a call — consistently converts guide signups into qualified leads.</p>
+  <p><strong>Tag consistently.</strong> Always apply a specific tag per guide in GHL so you can segment your list and see which guides are most popular. This data is valuable for deciding what content to create next.</p>
+</div></section>
+
+<footer><div class="wrap">Diaspora to Home &middot; Free Guides How-To &middot; Altitude AI &middot; August 2026</div></footer>
+
+<script>
+(function(){
+  function report(){ try{ if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'dth-guides-height',height:document.documentElement.scrollHeight},'*'); } }catch(e){} }
+  window.addEventListener('load',report); window.addEventListener('resize',report); setTimeout(report,400);
+})();
+</script>
+</body>
+</html>
