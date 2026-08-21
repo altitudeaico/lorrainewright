@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diaspora to Home — Handover & Operations Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+:root{--navy:#231B4F;--purple:#7170B4;--beige:#F5F1ED;--gold:#C9A961;--line:#E7E3DD;--muted:#6B6880;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',sans-serif;color:var(--navy);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px;}
+header{background:var(--navy);padding:44px 0 36px;color:#fff;}
+header .eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 10px;}
+header h1{font-size:32px;font-weight:800;margin:0 0 8px;letter-spacing:-.02em;}
+header p{font-size:15px;color:rgba(255,255,255,.75);margin:0;}
+.tab-bar{background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:50;}
+.tab-bar ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto;}
+.tab-bar li a{display:block;padding:14px 20px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;}
+.tab-bar li a:hover{color:var(--navy);}
+.tab-bar li a.active{color:var(--purple);border-bottom-color:var(--purple);}
+section.block{padding:48px 0;border-bottom:1px solid var(--line);}
+section.block:last-child{border-bottom:none;}
+.snum{display:inline-block;background:var(--beige);color:var(--purple);font-weight:700;font-size:12px;border-radius:8px;padding:3px 11px;margin-bottom:12px;}
+h2{font-size:24px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em;}
+h3{font-size:14px;font-weight:700;margin:28px 0 10px;color:var(--purple);text-transform:uppercase;letter-spacing:.6px;}
+p{font-size:14.5px;color:var(--muted);margin:0 0 12px;line-height:1.7;}
+p strong{color:var(--navy);}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px;}
+.card{background:var(--beige);border-radius:12px;padding:16px 18px;}
+.card h4{font-size:13px;font-weight:700;margin:0 0 5px;color:var(--navy);}
+.card p{font-size:12.5px;margin:0;color:var(--muted);}
+.card .val{font-size:11px;font-weight:600;color:var(--purple);margin-top:7px;word-break:break-all;font-family:ui-monospace,Menlo,monospace;}
+.howto{margin-top:16px;}
+.step{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line);}
+.step:last-child{border-bottom:none;}
+.step .num{width:26px;height:26px;background:var(--navy);color:var(--gold);border-radius:50%;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;}
+.step .txt{font-size:13.5px;color:var(--navy);line-height:1.55;}
+.step .txt em{color:var(--muted);font-style:normal;}
+.note{background:#FBF7EF;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:#6B6455;line-height:1.6;}
+.note strong{color:var(--navy);}
+.flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:4px;margin:16px 0;}
+.flow-step{background:var(--beige);border-radius:8px;padding:12px 14px;flex:1;min-width:100px;text-align:center;}
+.flow-step h5{font-size:12px;font-weight:700;margin:0 0 3px;color:var(--navy);}
+.flow-step p{font-size:11px;margin:0;}
+.flow-arrow{display:flex;align-items:center;color:var(--gold);font-size:18px;font-weight:700;padding:0 2px;}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+.swatch{border-radius:10px;overflow:hidden;width:110px;border:1px solid var(--line);}
+.swatch .chip{height:44px;}
+.swatch .lbl{padding:5px 9px;font-size:11px;font-weight:600;color:var(--navy);}
+.swatch .hex{padding:0 9px 7px;font-size:10px;color:var(--muted);font-family:monospace;}
+footer{background:var(--navy);color:rgba(255,255,255,.5);font-size:12.5px;padding:22px 0;text-align:center;}
+@media(max-width:580px){.flow{flex-direction:column;}.flow-arrow{transform:rotate(90deg);align-self:center;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Diaspora to Home &middot; Internal</p>
+    <h1>Handover &amp; Operations Guide</h1>
+    <p>Everything needed to manage the site and listings system independently. Maintained by Altitude AI.</p>
+  </div>
+</header>
+
+<nav class="tab-bar"><div class="wrap"><ul>
+  <li><a href="#accounts" class="active">Accounts</a></li>
+  <li><a href="#howtos">How-Tos</a></li>
+  <li><a href="#architecture">Architecture</a></li>
+  <li><a href="#design">Design System</a></li>
+  <li><a href="#security">Security</a></li>
+  <li><a href="#open">Still Open</a></li>
+</ul></div></nav>
+
+<section class="block" id="accounts"><div class="wrap">
+  <span class="snum">01</span>
+  <h2>Accounts &amp; Credentials</h2>
+  <h3>GoHighLevel (CEO Growth Lab)</h3>
+  <div class="cards">
+    <div class="card"><h4>Platform</h4><p>CEO Growth Lab (white-labelled GHL)</p><div class="val">app.ceogrowthlab.co</div></div>
+    <div class="card"><h4>Location ID</h4><div class="val">MUCiWTChkVoaPw8fdKXQ</div></div>
+    <div class="card"><h4>Domain</h4><div class="val">diasporatohome.com</div></div>
+    <div class="card"><h4>Access</h4><p>Lorraine's existing GHL login</p></div>
+  </div>
+  <h3>Supabase (Database &amp; Storage)</h3>
+  <div class="note"><strong>Free tier:</strong> If the listings or workspace ever goes down, log into Supabase and click Restore — the DB may have auto-paused. Consider Pro (~$25/month) as traffic grows.</div>
+  <div class="cards">
+    <div class="card"><h4>Project ID</h4><div class="val">kxrhzijqyotyrzhpiflv</div></div>
+    <div class="card"><h4>Dashboard</h4><div class="val">supabase.com</div><p style="margin-top:6px;">Log in with the dedicated Gmail</p></div>
+    <div class="card"><h4>Publishable key</h4><div class="val">sb_publishable_sbrP5QdcQ9APlxHx2UagDA_77j3yefb</div></div>
+    <div class="card"><h4>Plan</h4><p>Free tier — sufficient for current traffic</p></div>
+  </div>
+  <h3>GitHub</h3>
+  <div class="cards">
+    <div class="card"><h4>Repository</h4><div class="val">github.com/altitudeaico/lorrainewright</div></div>
+    <div class="card"><h4>Live branch</h4><p>gh-pages — serves all listings/vetting pages</p></div>
+    <div class="card"><h4>Listings live</h4><div class="val">altitudeaico.github.io/lorrainewright/listings/</div></div>
+    <div class="card"><h4>Workspace live</h4><div class="val">altitudeaico.github.io/lorrainewright/vetting/</div></div>
+  </div>
+  <h3>Key GHL IDs</h3>
+  <div class="cards">
+    <div class="card"><h4>Buyer enquiry workflow</h4><div class="val">52668090-e4ad-4a05-a8c6-24e74cfb934e</div></div>
+    <div class="card"><h4>Seller submissions workflow</h4><div class="val">e89a1872-8496-49d4-9eb2-236f1175402d</div></div>
+    <div class="card"><h4>Seller submissions webhook</h4><div class="val">dbf31060-411f-4247-820c-59a95b4faf24</div></div>
+    <div class="card"><h4>Contact form webhook</h4><div class="val">9cf2080a-d386-4016-bb91-27df7bfa0ae9</div></div>
+    <div class="card"><h4>30-min booking calendar</h4><div class="val">1I14JkrbQLuUjn38xnZT</div></div>
+    <div class="card"><h4>60-min booking calendar</h4><div class="val">HDlyqOEcQbVjeLGXRN1g</div></div>
+  </div>
+</div></section>
+
+<section class="block" id="howtos"><div class="wrap">
+  <span class="snum">02</span>
+  <h2>Self-Service How-Tos</h2>
+
+  <h3>Update the Featured Property</h3>
+  <p>The featured property card on the homepage and /featured-property pulls from GHL Custom Values automatically. No code changes needed ever.</p>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Settings &rarr; Custom Values</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Update the "Featured" values: <em>featured_name, featured_tagline, featured_price, featured_location, featured_description, featured_gallery_1 through _6, featured_enquiry_link</em></div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Save &mdash; homepage card and featured page update immediately</div></div>
+  </div>
+
+  <h3>Add a Listing in the Workspace</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">Go to diasporatohome.com/workspace and log in</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Click "Add a listing" at the top</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Fill in title, location, price, type, beds, baths, description, deal type, stage</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Paste photo URLs (upload to GHL Media Storage first, copy the CDN URL). Optionally paste a YouTube or Vimeo link for a video walkthrough.</div></div>
+    <div class="step"><div class="num">5</div><div class="txt">Click Add Listing &rarr; set listing type &rarr; Publish when ready</div></div>
+  </div>
+
+  <h3>Approve a Seller Submission</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">Seller submits via /sellproperty &mdash; appears in the workspace automatically</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Review each check &mdash; tick Pass, Flag, or Missing</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Click "Approve as Verified" or "List as Seller's Listing"</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Listing publishes to the live site automatically. Seller receives a notification email with their listing link.</div></div>
+  </div>
+
+  <h3>Mark a Rental as Let / No Longer Available</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">Workspace &rarr; Listings tab &rarr; find the rental listing</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Click "Mark as let" &mdash; disappears from public listings immediately</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">To re-list: click "Mark available"</div></div>
+  </div>
+
+  <h3>Swap a Page Video</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">Copy the YouTube video ID from the URL (after youtu.be/ or watch?v=)</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">GHL &rarr; open page body &rarr; find the &lt;iframe&gt; tag</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Change src to: https://www.youtube.com/embed/YOUR_VIDEO_ID &rarr; Save &amp; publish</div></div>
+  </div>
+
+  <h3>Update the Global Navigation</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; your website &rarr; open any page</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Click the navigation bar &rarr; Edit Global Section</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Make changes &rarr; Save &mdash; live on every page instantly</div></div>
+  </div>
+
+  <h3>Publish a Blog Post</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">GHL &rarr; Sites &rarr; Blogs &rarr; New Post</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Write post, add images, set category and tags</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Publish &mdash; appears on diasporatohome.com/blog automatically</div></div>
+  </div>
+</div></section>
+
+<section class="block" id="architecture"><div class="wrap">
+  <span class="snum">03</span>
+  <h2>System Architecture</h2>
+
+  <h3>Buyer Enquiry Flow</h3>
+  <div class="flow">
+    <div class="flow-step"><h5>Buyer</h5><p>Clicks Enquire on a listing</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Webhook</h5><p>Fires to GHL</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>GHL CRM</h5><p>Contact created, tagged "property enquiry"</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Workflow</h5><p>Internal notification + buyer auto-reply sent</p></div>
+  </div>
+
+  <h3>Seller Submission Flow</h3>
+  <div class="flow">
+    <div class="flow-step"><h5>Seller</h5><p>Fills /sellproperty form</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Supabase</h5><p>Submission saved to DB</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>GHL</h5><p>Contact created, tagged "property seller"</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Workspace</h5><p>Lorraine reviews &amp; approves</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><h5>Live</h5><p>Published + seller notified</p></div>
+  </div>
+
+  <h3>Pages Built</h3>
+  <div class="cards">
+    <div class="card"><h4>GHL Website</h4><p>Home, About, Contact, Properties, Services, Resources, Sell Your Property, Featured Property, Airbnb, R2R, Course, Developer/Private Seller Partnerships, Style Guide, Workspace</p></div>
+    <div class="card"><h4>Listings System (GitHub)</h4><p>/listings/ (public), /vetting/ (workspace), /submit/ (seller form), /guide/ (system docs), /handover/ (this page), /style-guide/ (brand guide)</p></div>
+    <div class="card"><h4>GHL Chat Widget</h4><p>"Lorraine New Website Chat" &mdash; activated site-wide via Sites &rarr; Settings &rarr; Chat Widget</p></div>
+  </div>
+</div></section>
+
+<section class="block" id="design"><div class="wrap">
+  <span class="snum">04</span>
+  <h2>Design System</h2>
+  <p>All pages use these tokens. Full interactive guide: <a href="/style-guide/" style="color:var(--purple);font-weight:600;">diasporatohome.com/style-guide</a></p>
+
+  <h3>Colours</h3>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#231B4F"></div><div class="lbl">Navy</div><div class="hex">#231B4F</div></div>
+    <div class="swatch"><div class="chip" style="background:#7170B4"></div><div class="lbl">Purple</div><div class="hex">#7170B4</div></div>
+    <div class="swatch"><div class="chip" style="background:#F5F1ED"></div><div class="lbl">Beige</div><div class="hex">#F5F1ED</div></div>
+    <div class="swatch"><div class="chip" style="background:#C9A961"></div><div class="lbl">Gold</div><div class="hex">#C9A961</div></div>
+  </div>
+
+  <h3>Typography &amp; Rules</h3>
+  <div class="cards">
+    <div class="card"><h4>Font</h4><p>Montserrat only. Load via @import &mdash; GHL strips &lt;link&gt; tags</p></div>
+    <div class="card"><h4>JavaScript in GHL</h4><p>ES5 only &mdash; no const/let, no arrow functions, no template literals</p></div>
+    <div class="card"><h4>Button radius</h4><p>Always 4px</p></div>
+    <div class="card"><h4>Content width</h4><p>Max 1200px centred</p></div>
+    <div class="card"><h4>Nav/footer in GHL</h4><p>Never paste in page bodies &mdash; GHL global sections supply them</p></div>
+    <div class="card"><h4>Edits</h4><p>Surgical str_replace only. Always test on a draft page before touching a live one.</p></div>
+  </div>
+</div></section>
+
+<section class="block" id="security"><div class="wrap">
+  <span class="snum">05</span>
+  <h2>Security &amp; Pending Actions</h2>
+
+  <h3>GitHub PAT &mdash; Revoke After Handover</h3>
+  <div class="note"><strong>Action required:</strong> github.com &rarr; Settings &rarr; Developer settings &rarr; Personal access tokens &rarr; Tokens (classic) &rarr; find the project token &rarr; Delete. Generate a new one with repo scope only when next needed.</div>
+
+  <h3>Supabase Account Transfer</h3>
+  <p>Currently under an Altitude AI Gmail. To transfer: invite Lorraine's email as Owner in Supabase project settings &rarr; she accepts &rarr; remove the Altitude AI email.</p>
+
+  <h3>Workspace Login</h3>
+  <p>The workspace uses a passphrase stored in vetting/index.html on GitHub. Keep it secure and change it periodically by updating that file and deploying.</p>
+</div></section>
+
+<section class="block" id="open"><div class="wrap">
+  <span class="snum">06</span>
+  <h2>What Is Still Open</h2>
+
+  <h3>Actions for Lorraine</h3>
+  <div class="howto">
+    <div class="step"><div class="num">1</div><div class="txt">Update GHL Custom Values to switch Featured Property from Villanova to Prestige</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Add Villanova and Prestige as listings directly in the workspace</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Send the Diaspora to Home logo file (SVG or square PNG) for the favicon</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Build GHL email sequences: listing_approved &rarr; seller approval email; partnership_enquiry &rarr; developer and private seller auto-replies</div></div>
+  </div>
+
+  <h3>Out of Scope &mdash; For Commercial Discussion</h3>
+  <div class="cards">
+    <div class="card"><h4>28+ funnel migrations</h4><p>Large standalone project &mdash; old funnels to new template</p></div>
+    <div class="card"><h4>The Roadmap course</h4><p>New course page with new modules and content</p></div>
+    <div class="card"><h4>Webinar discount</h4><p>Per-person rolling 72h deadline mechanics</p></div>
+    <div class="card"><h4>Lawyer introduction form</h4><p>Request an introduction form per listing</p></div>
+    <div class="card"><h4>Admin override</h4><p>Approve listings without payment for Lorraine's own stock</p></div>
+    <div class="card"><h4>URL rename</h4><p>/sellproperty &rarr; /list-your-property with 301 redirect</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">Diaspora to Home &middot; Handover &amp; Operations Guide &middot; Altitude AI &middot; August 2026</div></footer>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.tab-bar a');
+  var sections=document.querySelectorAll('section.block[id]');
+  function activate(id){ links.forEach(function(l){ l.classList.toggle('active',l.getAttribute('href')==='#'+id); }); }
+  window.addEventListener('scroll',function(){
+    var pos=window.scrollY+120;
+    sections.forEach(function(s){ if(s.offsetTop<=pos) activate(s.id); });
+  },{passive:true});
+  // postMessage height for embed
+  function report(){ try{ if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'dth-handover-height',height:document.documentElement.scrollHeight},'*'); } }catch(e){} }
+  window.addEventListener('load',report); window.addEventListener('resize',report); setTimeout(report,400);
+})();
+</script>
+</body>
+</html>
