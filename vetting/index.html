@@ -564,7 +564,7 @@ function notifySellerApproved(sub, listingType){
 function decide(act){
   var sub=current;
   if((act==="v"||act==="s") && !sub.paid){
-    if(!window.confirm("This property is marked UNPAID. Approve and publish it anyway?")) return;
+    if(!window.confirm("This listing has no payment record.\n\nFor your own stock (Villanova, Prestige etc.) click OK to publish without payment.\nFor seller submissions, only proceed if payment has been confirmed offline.")) return;
   }
   var map={
     v:{tier:"v",label:"Verified",db:"verified",lt:"Verified"},
@@ -644,6 +644,7 @@ function render(){
     '<span class="tag">'+(sub.company?'Developer':'Individual')+'</span>'+
     '<span class="tag '+(sub.paid?'paidpill':'unpaidpill')+'">'+(sub.paid?'Paid ✓':'Unpaid')+'</span>'+
     '<button class="markpaid" id="markpaidBtn">'+(sub.paid?'Mark unpaid':'Mark as paid')+'</button>'+
+    '<p style="font-size:12px;color:#8A86A0;margin:6px 0 0;line-height:1.5;">Own stock with no payment? You can still approve &mdash; click Approve and confirm the prompt.</p>'+
     '</div></div>';
 
   if(sub.evidence||sub.seller){
