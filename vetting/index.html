@@ -432,6 +432,7 @@ function rowToSub(row){
     seller: row.seller_name || "",
     contact: row.email || row.phone || "",
     photos: splitPipe(row.photos),
+    videoUrl: row.video_url || "",
     evidence: {
       "Title / deed": row.title_or_deed,
       "Search report": row.search_report,
@@ -516,6 +517,7 @@ function publishListing(sub, listingType, done){
     currency: "USD",
     location: sub.loc,
     map_link: sub.mapLink || null,
+    video_url: sub.videoUrl || null,
     off_plan: sub.offplan,
     stage: sub.stage||"ready",
     deal_type: sub.dealType || "sale",
